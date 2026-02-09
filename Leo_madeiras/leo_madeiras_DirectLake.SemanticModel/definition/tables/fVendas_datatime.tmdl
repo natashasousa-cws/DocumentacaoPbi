@@ -1,0 +1,71 @@
+table fVendas_datatime
+	lineageTag: 3fd6f815-cde9-426e-85f5-73fe02984f6f
+	sourceLineageTag: [leo_madeiras].[fVendas_datatime]
+
+	column partener_order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e4effac9-b8ad-40fa-bf24-12f04c0a9916
+		sourceLineageTag: partener_order_id
+		summarizeBy: sum
+		sourceColumn: partener_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f9559e0b-87ee-44d9-86cd-ac99ed689153
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column datatime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ded61e79-5efe-4a75-85f8-2f086513c40c
+		sourceLineageTag: datatime
+		summarizeBy: none
+		sourceColumn: datatime
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora
+		dataType: int64
+		formatString: 0
+		lineageTag: 02de6e87-1dc9-40c0-bfa7-28c0e515bf42
+		sourceLineageTag: hora
+		summarizeBy: sum
+		sourceColumn: hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column minuto
+		dataType: int64
+		formatString: 0
+		lineageTag: fd9fa26c-5aa7-4546-88c8-43229c536ce2
+		sourceLineageTag: minuto
+		summarizeBy: sum
+		sourceColumn: minuto
+
+		annotation SummarizationSetBy = Automatic
+
+	column TimeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: e50b406d-9296-422f-aa61-4c10042f4c93
+		sourceLineageTag: TimeKey
+		summarizeBy: count
+		sourceColumn: TimeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fVendas_datatime = entity
+		mode: directLake
+		source
+			entityName: fVendas_datatime
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

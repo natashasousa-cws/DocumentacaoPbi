@@ -1,0 +1,96 @@
+table aux_Order_rank
+	isHidden
+	lineageTag: 1db55a03-5fd2-4ced-88e0-47549386263c
+
+	measure 'First order' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( aux_Order_rank[cart_order_id] ),
+			    aux_Order_rank[Rank] = 1
+			)
+		formatString: 0
+		isHidden
+		lineageTag: dedd7881-b7d7-4de9-a012-d1b68ae93eca
+
+	measure 'Recurrent orders' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( aux_Order_rank[cart_order_id] ),
+			    aux_Order_rank[Rank] > 1
+			)
+		formatString: 0
+		isHidden
+		lineageTag: e14fecf4-2980-472a-878d-ed8c393b4f06
+
+	column Rank = ```
+			
+			VAR cliente = 'aux_Order_rank'[client_account_id]
+			RETURN
+			    RANKX(
+			        FILTER('aux_Order_rank', 'aux_Order_rank'[client_account_id] = cliente),
+			        'aux_Order_rank'[cart_order_id],
+			        ,
+			        ASC,
+			        Dense
+			    )
+			
+			```
+		isHidden
+		formatString: 0
+		lineageTag: 9758dcab-cc66-480f-a99f-5665af2760e1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 29328fda-1687-4a80-8fa7-8fad7fd0a966
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fVendas[order_date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column cart_order_id
+		formatString: 0
+		lineageTag: c3c789e3-2869-48d3-b108-67858c7f8271
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: fVendas[cart_order_id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_account_id
+		formatString: 0
+		lineageTag: 7db26404-16af-4958-b2d6-ca28b172f5cc
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: fVendas[client_account_id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_type
+		lineageTag: 64bd4fa9-851f-48c4-9e46-225a1db3e161
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fVendas[order_type]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aux_Order_rank-0e8fbea0-e5c4-4b97-b10e-34f47be64b75 = calculated
+		mode: import
+		source = ```
+				
+				SUMMARIZE(
+				        FILTER(fVendas, 
+				        NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda", "Pagamento no caixa"})
+				        ),
+				        fVendas[cart_order_id], fVendas[order_date],fVendas[client_account_id], fVendas[order_type]
+				    )
+				```
+
+	annotation PBI_Id = b250db46d1ab49cc84c8b5d9209c1bee
+

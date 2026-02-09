@@ -1,0 +1,33 @@
+table 'Tabela Teste'
+	lineageTag: aef6e430-a06b-412b-a7c6-4943d212b4e8
+
+	column cod_pedido
+		formatString: 0
+		lineageTag: 5f205664-0f6f-4e98-b0b1-201c61e98078
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Tabela Análise Desconto[cod_pedido]
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_cabecalho_entrega
+		formatString: 0
+		lineageTag: 131e69dc-ff94-4240-bd95-e19ae7f16f52
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Tabela Análise Desconto[cd_cabecalho_entrega]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tabela Teste' = calculated
+		mode: import
+		source =
+				
+				SUMMARIZE(
+				    'Tabela Análise Desconto',
+				    'Tabela Análise Desconto'[cod_pedido],
+				    'Tabela Análise Desconto'[cd_cabecalho_entrega]
+				)
+
+	annotation PBI_Id = 01e5a47994a04e339b0f422e1571f2a6
+

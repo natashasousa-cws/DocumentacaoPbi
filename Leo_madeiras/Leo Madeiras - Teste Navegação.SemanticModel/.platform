@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Leo Madeiras - Teste Navegação"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "43781ce4-ccb3-9471-45ef-f7e04abf1cb8"
+  }
+}

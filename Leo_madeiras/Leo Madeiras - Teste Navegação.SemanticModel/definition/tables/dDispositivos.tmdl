@@ -1,0 +1,45 @@
+table dDispositivos
+	lineageTag: cadb3234-16a4-4cb7-adfc-739acaeb710e
+
+	column Dispositivo
+		dataType: string
+		lineageTag: 3e36c34b-afcb-4783-a8a0-1db5e7040274
+		summarizeBy: none
+		sourceColumn: Dispositivo
+		sortByColumn: order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column join
+		dataType: string
+		lineageTag: e65a6987-4ca5-4252-96f2-01e85763516b
+		summarizeBy: none
+		sourceColumn: join
+		sortByColumn: order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column order
+		dataType: int64
+		formatString: 0
+		lineageTag: 04d997eb-8c87-46ed-b8c5-2e91fad2d846
+		summarizeBy: sum
+		sourceColumn: order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dDispositivos = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wckktzi7JL1DSUUqBswyVYnWilXzzkzJzUoHcXBjDCCzuWABSkwgmjcEifocX5yukpKZl5mWm5ANF89D4JkqxsQA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Dispositivo = _t, join = _t, order = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Dispositivo", type text}, {"join", type text}, {"order", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

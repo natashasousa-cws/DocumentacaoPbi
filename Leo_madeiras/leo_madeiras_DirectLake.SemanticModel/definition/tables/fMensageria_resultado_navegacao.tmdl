@@ -1,0 +1,235 @@
+table fMensageria_resultado_navegacao
+	lineageTag: 7a48bfa5-e5bb-47e7-a16a-ad54326e0b69
+	sourceLineageTag: [leo_madeiras].[fMensageria_resultado_navegacao]
+
+	column client_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e0244d13-4ce1-44e5-be6c-7a8bf57bd60b
+		sourceLineageTag: client_account_id
+		summarizeBy: sum
+		sourceColumn: client_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4820c3f7-af08-4e1b-bca1-ab9434f63d7c
+		sourceLineageTag: timestamp
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_campanha
+		dataType: int64
+		formatString: 0
+		lineageTag: 182f8056-bafb-40e8-9430-f2ae46b42b0e
+		sourceLineageTag: id_campanha
+		summarizeBy: sum
+		sourceColumn: id_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_campanha
+		dataType: string
+		lineageTag: 24ae4eb3-f7db-4e7c-b24a-b90d7216d8a1
+		sourceLineageTag: nome_campanha
+		summarizeBy: none
+		sourceColumn: nome_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column meio_disparo
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f71570f-8974-473f-aa84-aa95cf9b73a4
+		sourceLineageTag: meio_disparo
+		summarizeBy: sum
+		sourceColumn: meio_disparo
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_sid
+		dataType: string
+		lineageTag: e25061b8-2bf8-4120-9414-ecd4aa16f28e
+		sourceLineageTag: message_sid
+		summarizeBy: none
+		sourceColumn: message_sid
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_id
+		dataType: string
+		lineageTag: 7104ce38-9f5c-44e0-8443-70b87be772ce
+		sourceLineageTag: message_id
+		summarizeBy: none
+		sourceColumn: message_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_mensagem
+		dataType: int64
+		formatString: 0
+		lineageTag: 0087fb85-b54e-4a09-a364-d5225e45a82b
+		sourceLineageTag: status_mensagem
+		summarizeBy: sum
+		sourceColumn: status_mensagem
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b266407-736d-46d1-be90-6d55262d9c7a
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column lista_observacoes
+		dataType: string
+		lineageTag: 03cbb407-ff6c-47a3-bc90-9e7d204ee8cf
+		sourceLineageTag: lista_observacoes
+		summarizeBy: none
+		sourceColumn: lista_observacoes
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: b0786e3a-e453-41a6-968a-59c68c886bff
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column session
+		dataType: string
+		lineageTag: 1e749225-e248-44f9-a061-768097657be4
+		sourceLineageTag: session
+		summarizeBy: none
+		sourceColumn: session
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_time_in_seconds
+		dataType: int64
+		formatString: 0
+		lineageTag: f22c2bea-31d0-4bbc-9623-1ce0dbdbe7df
+		sourceLineageTag: session_time_in_seconds
+		summarizeBy: sum
+		sourceColumn: session_time_in_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_type
+		dataType: string
+		lineageTag: 8eccc1af-9dd8-462a-a8af-0bcf03d94b5b
+		sourceLineageTag: user_type
+		summarizeBy: none
+		sourceColumn: user_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e90f7ea5-2783-4f16-aeae-f8908eef30cf
+		sourceLineageTag: visitor_isloggedin
+		summarizeBy: none
+		sourceColumn: visitor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f043d91b-5f27-4e3b-bf6f-469a0a276179
+		sourceLineageTag: visitor_id
+		summarizeBy: sum
+		sourceColumn: visitor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 797336d8-75e2-4cb2-b5ac-4c0b21c6b004
+		sourceLineageTag: vendor_isloggedin
+		summarizeBy: none
+		sourceColumn: vendor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 79cf6cdd-7f06-4699-8424-9d06f552af5d
+		sourceLineageTag: vendor_id
+		summarizeBy: sum
+		sourceColumn: vendor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 98f59bce-0fb7-4f2d-a3e9-91b52e7e6d83
+		sourceLineageTag: session_date
+		summarizeBy: none
+		sourceColumn: session_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_1dia
+		dataType: int64
+		formatString: 0
+		lineageTag: a60a0f34-8767-4d89-a4a6-3487f2cddda1
+		sourceLineageTag: conversao_1dia
+		summarizeBy: sum
+		sourceColumn: conversao_1dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_2dia
+		dataType: int64
+		formatString: 0
+		lineageTag: eec2dd97-f163-4af2-8f30-93d0e6bfb41a
+		sourceLineageTag: conversao_2dia
+		summarizeBy: sum
+		sourceColumn: conversao_2dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_7dia
+		dataType: int64
+		formatString: 0
+		lineageTag: f2f48931-5e06-4051-b58b-5a96b1fcdd32
+		sourceLineageTag: conversao_7dia
+		summarizeBy: sum
+		sourceColumn: conversao_7dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_14dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 66535e31-789d-4f8e-bbc2-2a90c20f4b31
+		sourceLineageTag: conversao_14dia
+		summarizeBy: sum
+		sourceColumn: conversao_14dia
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMensageria_resultado_navegacao = entity
+		mode: directLake
+		source
+			entityName: fMensageria_resultado_navegacao
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

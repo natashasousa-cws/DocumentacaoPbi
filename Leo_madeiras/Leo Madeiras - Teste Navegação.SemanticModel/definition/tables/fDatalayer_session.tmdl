@@ -1,0 +1,224 @@
+table fDatalayer_session
+	lineageTag: e27b651e-eb50-4fac-8572-a626c9d3c926
+
+	measure 'total_logged_session count' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fDatalayer_session[session] ),
+			    NOT ( ISBLANK ( fDatalayer_session[client_id] ) ),
+			    fDatalayer_session[session_user_type] = "Cliente navegando"
+			)
+		formatString: #,0
+		lineageTag: 297e7eb4-2103-4bfa-8121-2e1c6026c404
+
+	measure total_itens_view =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fDatalayer_session[sku_id] ),
+			    fDatalayer_session[client_id] <> 0,
+			    fDatalayer_session[session_user_type] = "Cliente navegando"
+			)
+		formatString: #,0
+		lineageTag: d90ea22e-b52a-4d9c-b6a2-db5a3dc1a622
+
+	measure total_conversion_rate =
+			
+			VAR soma =
+			    CALCULATE (
+			        [05.01 Orders AA] + [05.02 Orders VA],
+			        FILTER ( dClientes, [total_logged_session count] > 0 )
+			    )
+			VAR resultado =
+			    COALESCE ( CALCULATE ( DIVIDE ( soma, [total_logged_session count] ) ), 0 )
+			RETURN
+			    IF ( resultado > 1, 1, resultado )
+		formatString: #,0%;-#,0%;#,0%
+		lineageTag: 8872adee-95f0-4248-a17f-ee7813652dd3
+
+	measure last_view =
+			
+			CALCULATE ( MAX ( fDatalayer_session[datetime] ) )
+		formatString: General Date
+		lineageTag: 60182b69-850c-45d5-9238-4d5587d9abd0
+
+	measure client_session_count =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fDatalayer_session[session] ),
+			    fDatalayer_session[session_user_type] = "Cliente navegando"
+			)
+		formatString: #,0
+		lineageTag: 92412336-b509-4859-8244-e58fb6e6b30b
+
+	measure salesperson_session_count =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fDatalayer_session[session] ),
+			    fDatalayer_session[session_user_type]
+			        IN { "Vendedor navegando", "Vendedor atuando" }
+			)
+		formatString: #,0
+		lineageTag: f9c6ebc9-6e42-442a-85f2-2a571e26bb97
+
+	measure session_count =
+			
+			COALESCE ( CALCULATE ( DISTINCTCOUNT ( fDatalayer_session[session] ) ), 0 )
+		formatString: #,0
+		lineageTag: f4fd52d2-e086-49b9-b512-4b9f40b3fd91
+
+	measure total_viewed_sku =
+			
+			CALCULATE ( DISTINCTCOUNT ( fDatalayer_session[sku_id] ) )
+		formatString: #,0
+		lineageTag: 9d142a21-7730-4836-905c-aeafd6bab58a
+
+	measure %_catalogue_viewed =
+			
+			CALCULATE ( DIVIDE ( [total_viewed_sku], [catalogue_count], 0 ) )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: db05ea9d-f727-4e34-8a65-e48b44713dae
+
+	measure viewed_and_bought_itens =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( dProdutos[sku_id] ),
+			    FILTER ( dProdutos, [total_conversion_rate] > 0 )
+			)
+		formatString: #,0
+		lineageTag: 7eda7948-67a0-4bd2-b6af-1e00c6f45ba4
+
+	measure client_conversion_rate =
+			
+			VAR soma =
+			    CALCULATE (
+			        [05.01 Orders AA] + [05.02 Orders VA],
+			        CROSSFILTER ( fDatalayer_session[sku_id], dProdutos[sku_id], BOTH ),
+			        FILTER ( dProdutos, [total_logged_session count] > 0 )
+			    )
+			VAR resultado =
+			    COALESCE ( CALCULATE ( DIVIDE ( soma, [total_logged_session count] ) ), 0 )
+			RETURN
+			    IF ( resultado > 1, 1, resultado )
+		formatString: #,0%;-#,0%;#,0%
+		lineageTag: 1b5fe016-3b5f-4e0a-ad85-effbf5cbf764
+
+	measure pageview/session =
+			
+			CALCULATE ( DIVIDE ( [total_viewed_sku], [session_count], 0 ) )
+		lineageTag: 92083a26-13b4-4921-8e2f-16901ab544bd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% logged session' =
+			
+			CALCULATE ( DIVIDE ( [total_logged_session count], [session_count], 0 ) )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 985417d6-7ccb-4331-b9f2-334a47d7c1e5
+
+	measure client_count_pageview =
+			
+			CALCULATE ( DISTINCTCOUNT ( fDatalayer_session[client_id] ) )
+		formatString: 0
+		lineageTag: c76ba5bf-12b5-4040-8dee-726456c644b9
+
+	column datecreated
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 467c540b-27cc-4463-a20f-91445ec559f5
+		summarizeBy: none
+		sourceColumn: datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column session
+		dataType: string
+		lineageTag: 8fdd759b-ae3a-455b-a45f-8074455a5e04
+		summarizeBy: none
+		sourceColumn: session
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4868f1ab-aec6-4137-9833-009b79bd813a
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column origin_store_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2cf61d58-2042-4f3d-bbc4-61018db56498
+		summarizeBy: sum
+		sourceColumn: origin_store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c86d4e7b-7a1c-4290-a7f5-0002340ed6c7
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_user_type
+		dataType: string
+		lineageTag: 1c85939e-0a86-45b1-bb11-34ffb7828ebb
+		summarizeBy: none
+		sourceColumn: session_user_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: string
+		lineageTag: 28f5fcf9-19cc-4ad5-9eed-590c1588e86f
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: string
+		lineageTag: 5ecee69c-b840-429c-9339-03e5c8cca01f
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day
+		dataType: string
+		lineageTag: 876da766-fa80-41e0-aa87-6030c6e8319b
+		summarizeBy: none
+		sourceColumn: day
+
+		annotation SummarizationSetBy = Automatic
+
+	column datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: db84d170-f51d-49c8-af54-1423e24953b2
+		summarizeBy: none
+		sourceColumn: datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_session = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"ae2b9a46-8047-4ca6-975e-24e511768e52" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="ae2b9a46-8047-4ca6-975e-24e511768e52"]}[Data],
+				    fDatalayer_session_ = #"ae2b9a46-8047-4ca6-975e-24e511768e52"{[entity="fDatalayer_session",version=""]}[Data]
+				in
+				    fDatalayer_session_
+
+	annotation PBI_ResultType = Table
+

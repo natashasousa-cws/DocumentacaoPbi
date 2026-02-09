@@ -1,0 +1,73 @@
+table fDatalayer_search
+	lineageTag: 39b373d2-b729-485f-af64-e22db32ef7d5
+
+	measure 'Sessões busca' =
+			
+			DISTINCTCOUNT(fDatalayer_search[session])
+		formatString: #,0
+		lineageTag: 40eca659-7d43-461c-98a0-a1910c8cbdeb
+
+	column session
+		dataType: string
+		lineageTag: 2577017f-0ef8-4d19-b675-56c744be3d0f
+		summarizeBy: none
+		sourceColumn: session
+
+		annotation SummarizationSetBy = Automatic
+
+	column datecreated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 57ccc1c5-27ae-4591-9e80-85b21e10759a
+		summarizeBy: none
+		sourceColumn: datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: 5502f7b9-b45d-4f05-8a68-d52b86314bb2
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column nav_busca
+		dataType: string
+		lineageTag: 45e56871-e797-4efe-8604-ce2c6c6485c9
+		summarizeBy: none
+		sourceColumn: nav_busca
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 46a4246c-6d05-4961-ad5a-edd6c34d9b0e
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column search_type
+		dataType: string
+		lineageTag: 842d3ee8-211a-455f-a40a-bd493b87a3b4
+		summarizeBy: none
+		sourceColumn: search_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_search = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"ae2b9a46-8047-4ca6-975e-24e511768e52" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="ae2b9a46-8047-4ca6-975e-24e511768e52"]}[Data],
+				    fDatalayer_search_ = #"ae2b9a46-8047-4ca6-975e-24e511768e52"{[entity="fDatalayer_search",version=""]}[Data]
+				in
+				    fDatalayer_search_
+
+	annotation PBI_ResultType = Table
+

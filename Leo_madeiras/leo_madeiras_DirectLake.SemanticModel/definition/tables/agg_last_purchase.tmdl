@@ -1,0 +1,50 @@
+table agg_last_purchase
+	lineageTag: 05943de3-e768-4421-a3b7-596031095e2f
+	sourceLineageTag: [leo_madeiras].[agg_last_purchase]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f3088fb7-4b38-4606-97f9-a4b40fb52595
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_purchase
+		dataType: int64
+		formatString: 0
+		lineageTag: eb78c182-a164-4b74-99bc-327aa2ba3442
+		sourceLineageTag: days_since_last_purchase
+		summarizeBy: sum
+		sourceColumn: days_since_last_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataform_status
+		dataType: string
+		lineageTag: c72a6321-706c-4d1d-80a5-8c9fe3704936
+		sourceLineageTag: plataform_status
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f4355db3-2cfa-4523-8c0a-5f28af42418d
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_purchase = entity
+		mode: directLake
+		source
+			entityName: agg_last_purchase
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

@@ -1,0 +1,172 @@
+table dClientes
+	lineageTag: 6a090f42-4e26-45ef-8fa3-ae0b7555e5b7
+
+	measure 'Total Clientes' =
+			
+			CALCULATE(
+			    COUNTROWS(dClientes)
+			)
+		formatString: 0
+		lineageTag: 459ffe5e-7cd5-4f8a-93d3-dfdcba0b3f9f
+
+	column idcliente
+		dataType: int64
+		isKey
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: f0add3a6-4b9e-4f34-998e-acec4b9d4a25
+		summarizeBy: none
+		sourceColumn: idcliente
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nmcliente
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 30295c6e-c1f6-42ce-be92-60543975e6cd
+		summarizeBy: none
+		sourceColumn: nmcliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column cep
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d8539882-2702-43f9-84d5-a53ac7ca486c
+		summarizeBy: none
+		sourceColumn: cep
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: cca4f577-0973-4fdc-a4a0-b10ba00b00cf
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipocliente
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: b1a9dca5-8c4d-4f18-b787-724eda4a6b73
+		summarizeBy: none
+		sourceColumn: tipocliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column dtcadastro
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 21115851-713b-4503-872a-69a583a6dbc7
+		summarizeBy: none
+		sourceColumn: dtcadastro
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Ramo
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 353209da-e49e-4637-be6e-125fbcb504ae
+		summarizeBy: none
+		sourceColumn: Ramo
+
+		annotation SummarizationSetBy = Automatic
+
+	column VendedorCarterizado
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: af95aa70-a5da-4a04-af9b-97b58a9cf2f2
+		summarizeBy: none
+		sourceColumn: VendedorCarterizado
+
+		annotation SummarizationSetBy = Automatic
+
+	column CentroCarterizado
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 70b60af5-ebde-452e-a325-33b53931d61f
+		summarizeBy: sum
+		sourceColumn: CentroCarterizado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nr_cpf_cnpj
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 60a6c78d-b1ac-4b84-bcfd-ca467bc38a58
+		summarizeBy: none
+		sourceColumn: nr_cpf_cnpj
+
+		annotation SummarizationSetBy = Automatic
+
+	column idpenca
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 35c114eb-b82a-453e-a26e-08c61a7cd82f
+		summarizeBy: sum
+		sourceColumn: idpenca
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF =
+			
+			SWITCH(
+			    TRUE(),
+			    LEFT(dClientes[cep], 2) >= "00" && LEFT(dClientes[cep], 2) <= "19", "SP",
+			    LEFT(dClientes[cep], 2) >= "20" && LEFT(dClientes[cep], 2) <= "28", "RJ",
+			    LEFT(dClientes[cep], 2) = "29", "ES",
+			    LEFT(dClientes[cep], 2) >= "30" && LEFT(dClientes[cep], 2) <= "39", "MG",
+			    LEFT(dClientes[cep], 2) >= "40" && LEFT(dClientes[cep], 2) <= "48", "BA",
+			    LEFT(dClientes[cep], 2) = "49", "SE",
+			    LEFT(dClientes[cep], 2) >= "50" && LEFT(dClientes[cep], 2) <= "56", "PE",
+			    LEFT(dClientes[cep], 2) >= "57" && LEFT(dClientes[cep], 2) <= "59", "AL",
+			    LEFT(dClientes[cep], 2) = "59", "RN",
+			    LEFT(dClientes[cep], 2) >= "60" && LEFT(dClientes[cep], 2) <= "64", "CE",
+			    LEFT(dClientes[cep], 2) = "64", "PI",
+			    LEFT(dClientes[cep], 2) = "65", "MA",
+			    LEFT(dClientes[cep], 2) >= "66" && LEFT(dClientes[cep], 2) <= "67", "PA",
+			    LEFT(dClientes[cep], 2) = "68", "AM",
+			    LEFT(dClientes[cep], 2) = "69", "AC",
+			    LEFT(dClientes[cep], 2) = "69", "RO",
+			    LEFT(dClientes[cep], 2) >= "70" && LEFT(dClientes[cep], 2) <= "72", "DF",
+			    LEFT(dClientes[cep], 2) >= "73" && LEFT(dClientes[cep], 2) <= "75", "GO",
+			    LEFT(dClientes[cep], 2) >= "76" && LEFT(dClientes[cep], 2) <= "77", "TO",
+			    LEFT(dClientes[cep], 2) = "77", "TO",
+			    LEFT(dClientes[cep], 2) = "78", "MT",
+			    LEFT(dClientes[cep], 2) = "79", "MS",
+			    LEFT(dClientes[cep], 2) >= "80" && LEFT(dClientes[cep], 2) <= "87", "PR",
+			    LEFT(dClientes[cep], 2) >= "88" && LEFT(dClientes[cep], 2) <= "89", "SC",
+			    LEFT(dClientes[cep], 2) >= "90" && LEFT(dClientes[cep], 2) <= "99", "RS",
+			    "Unknown"
+			)
+		lineageTag: e619ef69-482a-4f9e-8e62-64134b8ea5b5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dClientes = m
+		mode: dual
+		queryGroup: Dim
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"56b0623f-8797-421d-af36-f100afed62ec" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="56b0623f-8797-421d-af36-f100afed62ec"]}[Data],
+				    dClientes_off_ = #"56b0623f-8797-421d-af36-f100afed62ec"{[entity="dClientes_off",version=""]}[Data]
+				in
+				    dClientes_off_
+
+	annotation PBI_ResultType = Table
+

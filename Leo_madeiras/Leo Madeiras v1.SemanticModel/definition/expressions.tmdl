@@ -1,0 +1,15 @@
+expression funil_backup =
+		let
+		    Source = PowerPlatform.Dataflows(null),
+		    Workspaces = Source{[Id="Workspaces"]}[Data],
+		    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+		    #"ae2b9a46-8047-4ca6-975e-24e511768e52" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="ae2b9a46-8047-4ca6-975e-24e511768e52"]}[Data],
+		    fDatalayer_funil_ = #"ae2b9a46-8047-4ca6-975e-24e511768e52"{[entity="fDatalayer_funil",version=""]}[Data]
+		in
+		    fDatalayer_funil_
+	lineageTag: 0e8b71a3-9a29-4639-b652-e1a50a1c1153
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

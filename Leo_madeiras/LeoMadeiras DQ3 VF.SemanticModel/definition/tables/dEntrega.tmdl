@@ -1,0 +1,60 @@
+table dEntrega
+	lineageTag: 5074b513-9355-4eba-a73a-674c41e6168e
+
+	column cpe_id_cabecalho
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 33a9d236-4e4a-4bb5-9d55-c59a796999e0
+		summarizeBy: sum
+		sourceColumn: cpe_id_cabecalho
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpe_cd_cabecalho
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: c31d2e78-f05a-4bd8-be21-1ddb74a1a32a
+		summarizeBy: none
+		sourceColumn: cpe_cd_cabecalho
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpe_ds_cabecalho
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: ddc10637-faeb-4f33-9da0-94a4d536a006
+		summarizeBy: none
+		sourceColumn: cpe_ds_cabecalho
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpe_ds_grupo_cabecalho
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 2df57059-af31-464f-81cc-9e66227b8225
+		summarizeBy: none
+		sourceColumn: cpe_ds_grupo_cabecalho
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dEntrega = m
+		mode: dual
+		queryGroup: Dim
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"56b0623f-8797-421d-af36-f100afed62ec" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="56b0623f-8797-421d-af36-f100afed62ec"]}[Data],
+				    dEntrega_off_ = #"56b0623f-8797-421d-af36-f100afed62ec"{[entity="dEntrega_off",version=""]}[Data]
+				in
+				    dEntrega_off_
+
+	annotation PBI_ResultType = Table
+

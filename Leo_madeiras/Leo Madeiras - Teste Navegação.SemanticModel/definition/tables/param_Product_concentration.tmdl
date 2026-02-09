@@ -1,0 +1,31 @@
+table param_Product_concentration
+	isHidden
+	lineageTag: 7432ebc0-1047-4f97-a24c-fc9dab46dca6
+
+	measure 'param_Product_concentration Valor' =
+			
+			SELECTEDVALUE ( 'param_Product_concentration'[param_Product_concentration], 1 )
+		formatString: 0
+		isHidden
+		lineageTag: 672d99bf-9837-4542-8313-ccb8552321ea
+
+	column param_Product_concentration
+		isHidden
+		formatString: 0
+		lineageTag: e45ace9d-ceb0-477b-a6e7-873d6ae4abcf
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition param_Product_concentration-43b47761-26cd-4e35-8639-00d1cde23ba5 = calculated
+		mode: import
+		source = GENERATESERIES(1, 120, 1)
+
+	annotation PBI_Id = b210c62fab0849478eb42b33bafa29f6
+

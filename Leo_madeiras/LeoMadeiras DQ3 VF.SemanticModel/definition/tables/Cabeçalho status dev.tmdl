@@ -1,0 +1,79 @@
+table 'Cabeçalho status dev'
+	lineageTag: 8cdc5bc8-379e-4c81-bb17-0a6683fdf51c
+
+	column cpe_ds_grupo_cabecalho
+		dataType: string
+		lineageTag: ae3a90b9-2543-497d-b776-b7b30e3b41b5
+		summarizeBy: none
+		sourceColumn: cpe_ds_grupo_cabecalho
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpe_cd_cabecalho
+		dataType: int64
+		formatString: 0
+		lineageTag: 2974eef3-9c46-44db-a2ba-d8312d343e24
+		summarizeBy: none
+		sourceColumn: cpe_cd_cabecalho
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpe_ds_cabecalho
+		dataType: string
+		lineageTag: 85e8ca11-a3d6-4fae-891f-75247a74055f
+		summarizeBy: none
+		sourceColumn: cpe_ds_cabecalho
+
+		annotation SummarizationSetBy = Automatic
+
+	column '%GT Pedidos totais'
+		dataType: double
+		lineageTag: 5ebe87b7-a4ee-48bb-b3f1-202397168b2e
+		summarizeBy: sum
+		sourceColumn: %GT Pedidos totais
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '%GT Venda bruta'
+		dataType: double
+		lineageTag: bce0dfec-cfe1-4ced-b99f-2406a6c4e037
+		summarizeBy: sum
+		sourceColumn: %GT Venda bruta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Status
+		dataType: string
+		lineageTag: 3a317717-24fd-44dc-906f-bc355f6cd876
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Backlog
+		dataType: string
+		lineageTag: 31260992-8493-4826-84ca-71da5146bdbd
+		summarizeBy: none
+		sourceColumn: Backlog
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Cabeçalho status dev' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\CWS\Desktop\Volumetria Leo BI.xlsx"), null, true),
+				    Cabeçalho_Sheet = Fonte{[Item="Cabeçalho",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Cabeçalho_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"cpe_ds_grupo_cabecalho", type text}, {"cpe_cd_cabecalho", Int64.Type}, {"cpe_ds_cabecalho", type text}, {"%GT Pedidos totais", type number}, {"%GT Venda bruta", type number}, {"Status", type text}, {"Backlog", type text}}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado", each true),
+				    #"Linhas em Branco Removidas" = Table.SelectRows(#"Linhas Filtradas", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Linhas em Branco Removidas"
+
+	annotation PBI_ResultType = Table
+

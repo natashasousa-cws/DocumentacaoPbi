@@ -1,0 +1,40 @@
+table dPeriodos
+	lineageTag: 82f1b43b-f5b2-4be8-8926-71112cf83796
+	sourceLineageTag: [leo_madeiras].[dPeriodos]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fb9439f4-8672-480b-9a92-fe4fc80f648b
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo
+		dataType: string
+		lineageTag: 22736977-da99-4bf7-bea3-ed4b24c4e775
+		sourceLineageTag: Periodo
+		summarizeBy: none
+		sourceColumn: Periodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		dataType: int64
+		formatString: 0
+		lineageTag: c5e24c91-68b4-4b03-9e6e-b93271ecbffd
+		sourceLineageTag: Ordem
+		summarizeBy: sum
+		sourceColumn: Ordem
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dPeriodos = entity
+		mode: directLake
+		source
+			entityName: dPeriodos
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

@@ -1,0 +1,29 @@
+table aux_pedidos
+	lineageTag: 07409711-ae34-4a7f-b061-df9e0d4e68f7
+
+	column ped_nr_pedido
+		dataType: int64
+		formatString: 0
+		lineageTag: 4fe82528-5ba8-4fd7-8643-66052511c1e0
+		summarizeBy: none
+		sourceColumn: ped_nr_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aux_pedidos = m
+		mode: import
+		queryGroup: Fact
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"0c160fe1-a9e5-4eff-8bed-a327772ee689" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="0c160fe1-a9e5-4eff-8bed-a327772ee689"]}[Data],
+				    fPedidos_offline_ = #"0c160fe1-a9e5-4eff-8bed-a327772ee689"{[entity="fPedidos_offline",version=""]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(fPedidos_offline_,{"ped_nr_pedido"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_ResultType = Table
+

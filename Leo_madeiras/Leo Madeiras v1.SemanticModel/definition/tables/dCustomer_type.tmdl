@@ -1,0 +1,264 @@
+table dCustomer_type
+	lineageTag: 3c293364-27b0-40ef-9b46-a596513cf261
+
+	measure 'clients customer_type' = DISTINCTCOUNT(dCustomer_type[customer_id])
+		formatString: #,0
+		lineageTag: a52af05a-3c9b-47ec-8d44-ce6b1ec520d7
+
+	measure 'bloqueio v1' =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    NOT(dCustomer_type[bloqueio] = BLANK())
+			)
+		formatString: #,0
+		lineageTag: 73dec931-40de-404c-b815-52ca6e2ba019
+
+	measure amigo_leo =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    NOT(dCustomer_type[categoria_amigoleo] = BLANK())
+			)
+		formatString: #,0
+		lineageTag: 7e91c204-7231-44cb-9532-db4192a573e2
+
+	measure 'classe v1' =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    NOT(dCustomer_type[classe] = BLANK())
+			)
+		formatString: #,0
+		lineageTag: 1cf02ef9-2347-4c9a-95bc-6cd58ed5a889
+
+	measure dias_nca =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    NOT(dCustomer_type[dias_ncaprazo] = BLANK())
+			)
+		formatString: #,0
+		lineageTag: 1ad87d78-abfe-4282-95e5-67580bf75e94
+
+	measure 'ramo v1' =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    NOT(ISBLANK(dCustomer_type[ramo]))
+			)
+		formatString: #,0
+		lineageTag: ee3cfe90-0706-4df6-8b79-0ef3a2cc80fc
+
+	measure 'Resultado por Tipo de Cliente' =
+			
+			SWITCH(
+			    SELECTEDVALUE(aux_customer_type[Categoria]),
+			    "Bloqueio", [bloqueio v1],
+			    "Categoria_amigoleo", [amigo_leo],
+			    "Classe", [classe v1],
+			    "Dias_ncaprazo", [dias_nca],
+			    "ramo", [ramo v1],
+			    2
+			)
+		formatString: #,0
+		lineageTag: ec8007c7-fb9c-4107-8b0c-e818c9fb20df
+
+	measure '% clients customer_type' =
+			
+			DIVIDE(
+			    [Resultado por Tipo de Cliente],
+			    [clients customer_type]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 0f88956b-57c1-4519-acb7-5954b2d42d74
+
+	measure 'bloqueio v1 off' =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    dCustomer_type[bloqueio] = BLANK()
+			)
+		formatString: #,0
+		lineageTag: f8adae57-b5fc-43aa-8d34-a274d4bf2e9d
+
+	measure 'amigo_leo off' =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    dCustomer_type[categoria_amigoleo] = BLANK()
+			)
+		formatString: #,0
+		lineageTag: 592c6779-65dd-4210-b1cc-a0d173edcda2
+
+	measure 'classe v1 off' =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    dCustomer_type[classe] = BLANK()
+			)
+		formatString: #,0
+		lineageTag: d3d81985-dc2c-42a0-9fbb-a1c906671b5f
+
+	measure 'dias_nca off' =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    dCustomer_type[dias_ncaprazo] = BLANK()
+			)
+		formatString: #,0
+		lineageTag: 2422958c-f2b8-42c2-a538-a3d3f7533d45
+
+	measure 'ramo v1 off' =
+			
+			CALCULATE(
+			    [clients customer_type],
+			    ISBLANK(dCustomer_type[ramo])
+			)
+		formatString: #,0
+		lineageTag: bea52e0d-91d3-4052-b3c0-f054e6b8a776
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ba9c0519-cb8f-40c9-971c-0a50e68d8a13
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column bloqueio
+		dataType: string
+		lineageTag: 9ce1d75e-d7c3-4a7f-9f15-9e01732ed234
+		summarizeBy: none
+		sourceColumn: bloqueio
+
+		annotation SummarizationSetBy = Automatic
+
+	column bloqueio_value
+		dataType: string
+		lineageTag: 43227290-060e-4f8d-aea3-d771d72a3634
+		summarizeBy: none
+		sourceColumn: bloqueio_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria_amigoleo
+		dataType: string
+		lineageTag: 12039f05-4b05-4d1c-9950-3046562ee1ea
+		summarizeBy: none
+		sourceColumn: categoria_amigoleo
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria_amigoleo_value
+		dataType: string
+		lineageTag: a67d76c1-1472-4a43-acb2-cc3eff02b38f
+		summarizeBy: none
+		sourceColumn: categoria_amigoleo_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column classe
+		dataType: string
+		lineageTag: ea3c4804-41ee-486c-bfbd-c7987227b429
+		summarizeBy: none
+		sourceColumn: classe
+
+		annotation SummarizationSetBy = Automatic
+
+	column classe_value
+		dataType: string
+		lineageTag: a353c4c8-0e77-40c2-9240-c4095bdd74dd
+		summarizeBy: none
+		sourceColumn: classe_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column dias_ncaprazo
+		dataType: string
+		lineageTag: 639fb5ce-f645-4e9d-9fdb-da2e289aaa3e
+		summarizeBy: none
+		sourceColumn: dias_ncaprazo
+
+		annotation SummarizationSetBy = Automatic
+
+	column ramo
+		dataType: string
+		lineageTag: 2f634394-756d-4dd5-91ac-6256c8d3b585
+		summarizeBy: none
+		sourceColumn: ramo
+
+		annotation SummarizationSetBy = Automatic
+
+	column ramo_value
+		dataType: string
+		lineageTag: bd799a09-0d38-47fc-aa52-df75ba6d8f9a
+		summarizeBy: none
+		sourceColumn: ramo_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column dias_ncaprazo_value
+		dataType: string
+		lineageTag: e5859b99-4b6e-4ee5-9fda-ad6c0df7a952
+		summarizeBy: none
+		sourceColumn: dias_ncaprazo_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column bloqueio_config
+		dataType: string
+		lineageTag: f73c3ed3-6548-4aa5-8086-11fe94f1caca
+		summarizeBy: none
+		sourceColumn: bloqueio_config
+
+		annotation SummarizationSetBy = Automatic
+
+	column amigo_leo_config
+		dataType: string
+		lineageTag: ba97a50c-32f1-467c-a6bc-1cb4865664a5
+		summarizeBy: none
+		sourceColumn: amigo_leo_config
+
+		annotation SummarizationSetBy = Automatic
+
+	column classe_config
+		dataType: string
+		lineageTag: 0f8874dd-6540-414b-9ce4-33e0715f7d63
+		summarizeBy: none
+		sourceColumn: classe_config
+
+		annotation SummarizationSetBy = Automatic
+
+	column dias_nca_config
+		dataType: string
+		lineageTag: d1593628-3119-4817-bcad-e371315ab70d
+		summarizeBy: none
+		sourceColumn: dias_nca_config
+
+		annotation SummarizationSetBy = Automatic
+
+	column ramo_config
+		dataType: string
+		lineageTag: 2d3858b3-69c8-46f6-88e6-4c3b890fae2d
+		summarizeBy: none
+		sourceColumn: ramo_config
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCustomer_type = m
+		mode: import
+		queryGroup: Contas
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"fb99b340-78bd-4098-bb83-8617444004c5" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="fb99b340-78bd-4098-bb83-8617444004c5"]}[Data],
+				    dCustomer_type_ = #"fb99b340-78bd-4098-bb83-8617444004c5"{[entity="dCustomer_type",version=""]}[Data]
+				in
+				    dCustomer_type_
+
+	annotation PBI_ResultType = Table
+

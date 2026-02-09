@@ -1,0 +1,82 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Calendario
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Vendas
+
+	annotation PBI_QueryGroupOrder = 3
+
+/// Tabelas relacionadas aos parceiros
+queryGroup Parceiros
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup Contas
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Analise RFM'
+
+	annotation PBI_QueryGroupOrder = 0
+
+annotation PBI_QueryOrder = ["dFeriados","dPeriodos","dCalendario","fVendas","dProdutos","dAssociados","dOfertas_associados","dClientes","dVendedores","fLogins","Medidas","fLatest_update","aux_RFM_Classificação","dCarterizacao","aux_RFM_Recency","aux_RFM_Frequency","aux_RFM_Monetary","Medidas_RFM","fDatalayer_session","fDatalayer_navegation_exploded","fDatalayer_success","agg_last_purchase","agg_last_login","fCarrinhos_abandonados","fDatalayer_funil","dDispositivos","fDatalayer_search","fDatalayer_multievents","dGrupo_Cliente","fDatalayer_sku_conversion","dCustomer_type","aux_customer_type","funil_backup"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.142.1277.0 (25.04)+014fde450f93691fc9537f0758d73d1c5df153ef
+
+ref table dCalendario
+ref table fVendas
+ref table dAssociados
+ref table dOfertas_associados
+ref table dClientes
+ref table dVendedores
+ref table fLogins
+ref table fLatest_update
+ref table Medidas
+ref table param_ActiveClients
+ref table param_Y_axis
+ref table param_Line_axis
+ref table aux_Order_rank
+ref table param_Concent_project
+ref table aux_RFM_Recency
+ref table aux_RFM_Frequency
+ref table param_RFV_period
+ref table param_Category_concentration
+ref table dFeriados
+ref table aux_RFM_Monetary
+ref table aux_RFM_Classificação
+ref table Medidas_RFM
+ref table param_Product_concentration
+ref table param_Cliente_Y
+ref table param_Vend_Y
+ref table param_Prod_Y
+ref table fDatalayer_session
+ref table fDatalayer_navegation_exploded
+ref table fDatalayer_success
+ref table agg_last_purchase
+ref table agg_last_login
+ref table dPeriodos
+ref table dProdutos
+ref table dCarterizacao
+ref table 'And Product'
+ref table fCarrinhos_abandonados
+ref table fDatalayer_funil
+ref table dDispositivos
+ref table fDatalayer_search
+ref table fDatalayer_multievents
+ref table dGrupo_Cliente
+ref table fDatalayer_sku_conversion
+ref table dCustomer_type
+ref table aux_customer_type
+
+ref cultureInfo pt-BR
+

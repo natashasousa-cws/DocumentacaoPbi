@@ -1,0 +1,187 @@
+table dLojas_venda
+	lineageTag: 06dcbff7-573a-439f-944b-1aa6b154b0fd
+
+	column cen_id_centro
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 2b1a0cfa-d7f6-4398-90a6-0313c5e63f95
+		summarizeBy: sum
+		sourceColumn: cen_id_centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_nu_centro
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: fafdd99f-a6ac-46db-a8f6-ab965c994acf
+		summarizeBy: none
+		sourceColumn: cen_nu_centro
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_no_centro
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 70686075-4c10-47e1-ad7a-9b40ba9b2ff0
+		summarizeBy: none
+		sourceColumn: cen_no_centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_nu_empresa
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 6503635e-6893-48e5-80dd-f02ba6f81f1f
+		summarizeBy: sum
+		sourceColumn: cen_nu_empresa
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_no_empresa
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 5036d4f8-f7c7-4e9e-9b51-f3ec0bc76afd
+		summarizeBy: none
+		sourceColumn: cen_no_empresa
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_fl_estoque
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 87f510c8-8934-4799-ae7e-2a3456dd5372
+		summarizeBy: none
+		sourceColumn: cen_fl_estoque
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_ds_propria
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 892646d1-225e-464b-be78-b122cd2cea98
+		summarizeBy: none
+		sourceColumn: cen_ds_propria
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_ds_grupo_centro
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 7c2cb802-1320-45d1-9cf7-e12bd7c2c940
+		summarizeBy: none
+		sourceColumn: cen_ds_grupo_centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_sg_uf_centro
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 5b598aa5-01ce-4674-ac16-34be572e87ab
+		summarizeBy: none
+		sourceColumn: cen_sg_uf_centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_cd_operacao
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d5e6d04b-9dbd-4b3c-87f8-7672106d7a17
+		summarizeBy: none
+		sourceColumn: cen_cd_operacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_ds_regiao
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 1945fc86-c374-4aba-af4c-906af8b78999
+		summarizeBy: none
+		sourceColumn: cen_ds_regiao
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_m2_metragem
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: b018598c-d45e-4913-969d-ec5c82518ab7
+		summarizeBy: none
+		sourceColumn: cen_m2_metragem
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_tp_centro
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8e5c7b3c-ff3e-4b2d-b3e9-7c239c3b14da
+		summarizeBy: none
+		sourceColumn: cen_tp_centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_fl_cd
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: f0778eef-a936-4190-9eaa-5acecc94dd96
+		summarizeBy: none
+		sourceColumn: cen_fl_cd
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_ds_territorio
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: e8ece3a6-2e84-48c6-8ade-be3687607968
+		summarizeBy: none
+		sourceColumn: cen_ds_territorio
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_ds_sistema
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: fd90b410-0eff-4ce8-bb9d-4b776fed5550
+		summarizeBy: none
+		sourceColumn: cen_ds_sistema
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_ds_grupo_desconto
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8a7e344a-2de9-46eb-b330-dd81221b8052
+		summarizeBy: none
+		sourceColumn: cen_ds_grupo_desconto
+
+		annotation SummarizationSetBy = Automatic
+
+	column cen_ds_tipo
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3d19d91b-b0c4-46d5-bc40-1fda817e3684
+		summarizeBy: none
+		sourceColumn: cen_ds_tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dLojas_venda = m
+		mode: dual
+		queryGroup: Dim
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"56b0623f-8797-421d-af36-f100afed62ec" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="56b0623f-8797-421d-af36-f100afed62ec"]}[Data],
+				    dLojas_off_ = #"56b0623f-8797-421d-af36-f100afed62ec"{[entity="dLojas_off",version=""]}[Data]
+				in
+				    dLojas_off_
+
+	annotation PBI_ResultType = Table
+

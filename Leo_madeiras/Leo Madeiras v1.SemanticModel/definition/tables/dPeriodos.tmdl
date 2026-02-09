@@ -1,0 +1,47 @@
+table dPeriodos
+	lineageTag: 3de217ab-592e-43fa-bac5-ea98443a8ffc
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4567930d-ca0b-4220-b532-353c987e2ade
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Periodo
+		dataType: string
+		lineageTag: 2f5af53d-3c42-4e6a-953d-0b08f80a5c71
+		summarizeBy: none
+		sourceColumn: Periodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		dataType: double
+		lineageTag: efa895f2-5c64-4271-8405-e424177e086b
+		summarizeBy: sum
+		sourceColumn: Ordem
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dPeriodos = m
+		mode: import
+		queryGroup: Calendario
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"2182dd7d-00e0-4f05-9561-1391bfdb444d" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="2182dd7d-00e0-4f05-9561-1391bfdb444d"]}[Data],
+				    dPeriodos_ = #"2182dd7d-00e0-4f05-9561-1391bfdb444d"{[entity="dPeriodos",version=""]}[Data]
+				in
+				    dPeriodos_
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,150 @@
+table 'Tabela Qtd. Saídas'
+	lineageTag: ed535b01-a16c-423b-882b-2f87b85cf94a
+
+	column cod_pedido
+		formatString: 0
+		lineageTag: d028d9a5-82fe-4195-895c-9ab9a112b4d6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fFaturas[cod_pedido]
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_fatura
+		formatString: General Date
+		lineageTag: 5e09b2e2-5587-4eb1-a2f0-8b31ef497548
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fFaturas[dt_fatura]
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuantidadeTiposFrete
+		formatString: 0
+		lineageTag: f784ce08-e02f-4c12-8ca6-8acc858c6b78
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [QuantidadeTiposFrete]
+
+		annotation SummarizationSetBy = Automatic
+
+	column GruposFrete =
+			
+			SWITCH(
+			    TRUE(),
+			    'Tabela Qtd. Saídas'[QuantidadeTiposFrete] = 1, "1 Tipo",
+			    'Tabela Qtd. Saídas'[QuantidadeTiposFrete] = 2, "2 Tipos",
+			    'Tabela Qtd. Saídas'[QuantidadeTiposFrete] = 3, "3 Tipos",
+			    'Tabela Qtd. Saídas'[QuantidadeTiposFrete] = 4, "4 Tipos",
+			    'Tabela Qtd. Saídas'[QuantidadeTiposFrete] >= 5, "5 ou Mais Tipos"
+			)
+		lineageTag: baef8273-72f4-4f8c-be44-e18e377c8cef
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_loja_venda
+		formatString: 0
+		lineageTag: 5ac2d530-cff7-41dd-9220-0b09d4497c92
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fFaturas[cd_loja_venda]
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_canal_venda
+		formatString: 0
+		lineageTag: 21ba711e-b48a-497a-b08b-b07819e5dc24
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: dCanal_vendas[cd_canal_venda]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Venda_bruta
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 08627b5e-ecfb-449d-b657-007311ae4109
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Venda_bruta]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column QuantidadeProdutos
+		formatString: 0
+		lineageTag: 32cfcdbd-35e9-4c3f-8dee-7739762e3c82
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [QuantidadeProdutos]
+
+		annotation SummarizationSetBy = Automatic
+
+	column GruposCondicaoPagamento =
+			
+			SWITCH(
+			    TRUE(),
+			    'Tabela Qtd. Saídas'[QuantidadeCondicaoPagamento] = 1, "1 Tipo",
+			    'Tabela Qtd. Saídas'[QuantidadeCondicaoPagamento] = 2, "2 Tipos",
+			    'Tabela Qtd. Saídas'[QuantidadeCondicaoPagamento] = 3, "3 Tipos",
+			    'Tabela Qtd. Saídas'[QuantidadeCondicaoPagamento] = 4, "4 Tipos",
+			    'Tabela Qtd. Saídas'[QuantidadeCondicaoPagamento] >= 5, "5 ou Mais Tipos"
+			)
+		lineageTag: aa2262bd-4bc7-4fd8-80aa-b5296ad65593
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuantidadeCondicaoPagamento
+		formatString: 0
+		lineageTag: e8df368a-d501-4070-abca-9e0a0f873ca5
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [QuantidadeCondicaoPagamento]
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuantidadeFormaPagamento
+		formatString: 0
+		lineageTag: 735b2feb-c260-4f27-9628-08978157b92e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [QuantidadeFormaPagamento]
+
+		annotation SummarizationSetBy = Automatic
+
+	column GruposFormaPagamento =
+			
+			SWITCH(
+			    TRUE(),
+			    'Tabela Qtd. Saídas'[QuantidadeFormaPagamento] = 1, "1 Tipo",
+			    'Tabela Qtd. Saídas'[QuantidadeFormaPagamento] = 2, "2 Tipos",
+			    'Tabela Qtd. Saídas'[QuantidadeFormaPagamento] = 3, "3 Tipos",
+			    'Tabela Qtd. Saídas'[QuantidadeFormaPagamento] = 4, "4 Tipos",
+			    'Tabela Qtd. Saídas'[QuantidadeFormaPagamento] >= 5, "5 ou Mais Tipos"
+			)
+		lineageTag: cc03dc39-edb5-4da1-9ba1-0ac5bf3839e9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tabela Qtd. Saídas' = calculated
+		mode: import
+		source =
+				
+				SUMMARIZE(
+				    'fFaturas',
+				    'fFaturas'[cod_pedido],
+				    'fFaturas'[dt_fatura],
+				    fFaturas[cd_loja_venda],
+				    dCanal_vendas[cd_canal_venda],
+				    "Venda_bruta", [Venda bruta],
+				    "QuantidadeTiposFrete", COUNTROWS( DISTINCT( 'fFaturas'[cd_cabecalho_entrega] ) ),
+				    "QuantidadeCondicaoPagamento", COUNTROWS( DISTINCT( 'fFaturas'[cd_cond_pgto] ) ),
+				    "QuantidadeFormaPagamento", COUNTROWS( DISTINCT( 'fFaturas'[cd_frm_pgto] ) ),
+				    "QuantidadeProdutos", COUNTROWS( DISTINCT( 'fFaturas'[cod_material] ) )
+				)
+
+	annotation PBI_Id = 796f3444c2204fb5976321d692a4e274
+

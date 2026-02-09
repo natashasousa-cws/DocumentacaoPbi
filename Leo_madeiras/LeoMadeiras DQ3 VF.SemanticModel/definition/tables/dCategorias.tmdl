@@ -1,0 +1,41 @@
+table dCategorias
+	lineageTag: 90407870-ae9a-4f5d-b054-149b39416b53
+
+	column cd_categoria
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 06f92dd3-8dc5-4219-ab98-d4844c79f9ad
+		summarizeBy: none
+		sourceColumn: cd_categoria
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ds_categoria
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d544f236-56d3-4a8b-9438-37a4c58b1ca9
+		summarizeBy: none
+		sourceColumn: ds_categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCategorias = m
+		mode: dual
+		queryGroup: Dim
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"56b0623f-8797-421d-af36-f100afed62ec" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="56b0623f-8797-421d-af36-f100afed62ec"]}[Data],
+				    dCategorias_off_ = #"56b0623f-8797-421d-af36-f100afed62ec"{[entity="dCategorias_off",version=""]}[Data]
+				in
+				    dCategorias_off_
+
+	annotation PBI_ResultType = Table
+

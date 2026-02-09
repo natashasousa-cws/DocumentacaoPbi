@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Leo Madeiras v1"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a06e6bd5-b892-b39d-41ba-5b7a4a6745be"
+  }
+}

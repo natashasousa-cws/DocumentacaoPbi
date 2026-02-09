@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "LeoMadeiras DQ3 VF"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b253bd5a-eb40-aed1-4239-8d12848516b3"
+  }
+}

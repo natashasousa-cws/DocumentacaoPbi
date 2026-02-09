@@ -1,0 +1,107 @@
+table fDatalayer_sku_conversion
+	lineageTag: 039142b9-29c5-4b97-841a-0c6d488d1ac1
+
+	measure Conversion_rate =
+			
+			DIVIDE(
+			    SUM(fDatalayer_sku_conversion[times_bought]),
+			    SUM(fDatalayer_sku_conversion[viewed_sessions])
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 50326961-b713-42b7-bbab-941ee0809264
+
+	measure Times_bought_ =
+			
+			SUM(fDatalayer_sku_conversion[times_bought])
+		formatString: 0
+		lineageTag: b849674c-cdae-42a6-ac97-fb7c7542d9bc
+
+	measure Times_viewed =
+			
+			SUM(fDatalayer_sku_conversion[viewed_sessions])
+		formatString: 0
+		lineageTag: 382a4748-8c49-4f26-98fb-e423caabaa76
+
+	measure '% conversion catalogue' =
+			
+			DIVIDE(
+			    DISTINCTCOUNT(fDatalayer_sku_conversion[sku_id]),
+			    [catalogue_count])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: fc9c71f3-5bcd-4b8e-a7c2-3e54295193c9
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b1d98595-c19e-43d3-ac2a-bf5e1d7ae5ab
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column viewed_sessions
+		dataType: int64
+		formatString: 0
+		lineageTag: 867e45b5-8499-4bd9-b12d-1dcda1b719ba
+		summarizeBy: sum
+		sourceColumn: viewed_sessions
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: 46f05a59-e7de-4599-84de-ff8f0d9cb087
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column datecreated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c39189e4-81f5-44de-b46c-fba1530ea37f
+		summarizeBy: none
+		sourceColumn: datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column times_bought
+		dataType: int64
+		formatString: 0
+		lineageTag: 8dd9da4c-b8da-49fc-8227-9763b2f6cd0d
+		summarizeBy: sum
+		sourceColumn: times_bought
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f739b93c-70e5-4e4f-9c63-8a68142ca1b9
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_type
+		dataType: string
+		lineageTag: 9ebc561f-41c3-4ea0-ad14-f2f2006d8565
+		summarizeBy: none
+		sourceColumn: session_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_sku_conversion = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"ae2b9a46-8047-4ca6-975e-24e511768e52" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="ae2b9a46-8047-4ca6-975e-24e511768e52"]}[Data],
+				    fDatalayer_sku_conversion_ = #"ae2b9a46-8047-4ca6-975e-24e511768e52"{[entity="fDatalayer_sku_conversion",version=""]}[Data]
+				in
+				    fDatalayer_sku_conversion_
+
+	annotation PBI_ResultType = Table
+

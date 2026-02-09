@@ -1,0 +1,78 @@
+table dGrupo_Cliente
+	lineageTag: bcc5065f-ff2e-4909-97e1-8747a9dd825c
+	sourceLineageTag: [leo_madeiras].[dGrupo_Cliente]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c63a262f-e67c-42e7-a6e9-ecadc8fa53e3
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: 1a98adbb-6577-4453-a6fe-26f719ab4c40
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 28128b87-3d6c-49f4-a485-c65d2b826c2b
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_type
+		dataType: string
+		lineageTag: 591673e8-2d1c-4065-bd3f-62b32daa370e
+		sourceLineageTag: customer_type
+		summarizeBy: none
+		sourceColumn: customer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ab4373e-29d6-4fa0-8e3b-22fa4309a383
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column enable_group_display_in_registration
+		dataType: double
+		lineageTag: 93150975-7682-4242-bef1-0e319cca5ba5
+		sourceLineageTag: enable_group_display_in_registration
+		summarizeBy: sum
+		sourceColumn: enable_group_display_in_registration
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column customer_group_type
+		dataType: string
+		lineageTag: 460a6faf-42b0-423d-a630-97b6540db4d0
+		sourceLineageTag: customer_group_type
+		summarizeBy: none
+		sourceColumn: customer_group_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dGrupo_Cliente = entity
+		mode: directLake
+		source
+			entityName: dGrupo_Cliente
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

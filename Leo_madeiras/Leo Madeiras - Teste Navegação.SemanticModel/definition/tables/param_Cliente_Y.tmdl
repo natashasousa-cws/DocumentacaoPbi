@@ -1,0 +1,65 @@
+table param_Cliente_Y
+	isHidden
+	lineageTag: b5bae3a9-6d50-4970-ad42-e38f5169c9eb
+
+	column param_Cliente_Y
+		isHidden
+		lineageTag: 2e4bd911-9c77-4587-b992-02a9781045ca
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'param_Cliente_Y Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'param_Cliente_Y Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'param_Cliente_Y Campos'
+		isHidden
+		lineageTag: fe45dead-3a32-4517-b266-6f202abe5957
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'param_Cliente_Y Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'param_Cliente_Y Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 77276567-befe-4e11-8931-1e272384cbbd
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition param_Cliente_Y-77b10ea9-e9fc-4a06-a663-24e5f52d1f9a = calculated
+		mode: import
+		source =
+				{
+				    ("Total de clientes", NAMEOF('Medidas'[02.00 Clients]), 0),
+				    ("Clientes Autoatendimento", NAMEOF('Medidas'[02.01 Clients AA]), 1),
+				    ("Clientes Venda assistida", NAMEOF('Medidas'[02.02 Clients VA]), 2),
+				    ("Clientes Módulo vendedor", NAMEOF('Medidas'[02.03 Clients MV]), 3),
+				    ("Clientes App", NAMEOF('Medidas'[02.04 Clients App]), 4),
+				    ("Clientes Desktop", NAMEOF('Medidas'[02.05 Clients Desktop]), 5),
+				    ("Clientes Mobile", NAMEOF('Medidas'[02.06 Clients Mobile]), 6),
+				    ("Clientes com compra", NAMEOF('Medidas'[02.15 Clients in fVendas]), 7),
+				    ("Clientes ativos", NAMEOF('Medidas'[02.30 Active Clients]), 8),
+				    ("Clientes acumulados", NAMEOF('Medidas'[02.31 Clients Accum]), 9),
+				    ("Cadastros no período", NAMEOF('Medidas'[02.32 Clients per date]), 10),
+				    ("Clientes com pedidos", NAMEOF('Medidas'[02.33 Clients w orders]), 11),
+				    ("Clientes sem pedidos", NAMEOF('Medidas'[02.33 Clients wo orders]), 12),
+				    ("Clientes com GMV", NAMEOF('Medidas'[02.55 Clients w GMV]), 13),
+				    ("Representatividade do GMV por Clientes", NAMEOF('Medidas'[02.99 % GMV Client]), 14),
+				    ("Ranking de Clientes", NAMEOF('Medidas'[02.99 Client ranking]), 15),
+				    ("Clientes com login", NAMEOF('Medidas'[03.09 Clients w login]), 16)
+				}
+
+	annotation PBI_Id = 982eb1de744f4318ba492f9d1c203d06
+

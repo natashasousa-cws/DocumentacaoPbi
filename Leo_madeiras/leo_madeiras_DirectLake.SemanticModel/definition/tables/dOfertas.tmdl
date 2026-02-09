@@ -1,0 +1,139 @@
+table dOfertas
+	lineageTag: 92178219-cb34-429a-b26d-68890366a966
+	sourceLineageTag: [leo_madeiras].[dOfertas]
+
+	column associate_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d00fa0f0-1a7d-4d94-b4ce-f827ef3fcaae
+		sourceLineageTag: associate_id
+		summarizeBy: sum
+		sourceColumn: associate_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 31a2608f-1868-47f5-b3ec-015bb499afd1
+		sourceLineageTag: partner_id
+		summarizeBy: sum
+		sourceColumn: partner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f598d00a-7cae-4f9b-8515-aa90a83d4a1e
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column company_name
+		dataType: string
+		lineageTag: 0340c7cd-bb43-4ba5-a39b-ad95638ad518
+		sourceLineageTag: company_name
+		summarizeBy: none
+		sourceColumn: company_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: be91a814-c421-4009-88ab-3b02a7bc1e4f
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		lineageTag: 1a38bc79-d13a-446a-acba-b10306f62375
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity_avaliable
+		dataType: int64
+		formatString: 0
+		lineageTag: 05733e86-3d5f-44e6-bd61-9fbd0ac801bd
+		sourceLineageTag: quantity_avaliable
+		summarizeBy: sum
+		sourceColumn: quantity_avaliable
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 07690f25-814a-470d-af5b-9b08bb956918
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column partner_part_code
+		dataType: string
+		lineageTag: b6a3f122-318c-4b5b-a93e-ceb6263b4eb3
+		sourceLineageTag: partner_part_code
+		summarizeBy: none
+		sourceColumn: partner_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_created_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e0a12634-ddcd-4b00-b3d0-67c7187c9592
+		sourceLineageTag: sku_created_date
+		summarizeBy: none
+		sourceColumn: sku_created_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_last_updated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b18527aa-3241-44ae-a0f9-ea07529baec4
+		sourceLineageTag: sku_last_updated
+		summarizeBy: none
+		sourceColumn: sku_last_updated
+
+		annotation SummarizationSetBy = Automatic
+
+	column by_request
+		dataType: int64
+		formatString: 0
+		lineageTag: cd159216-a39a-4f87-a700-4b3d552ebb66
+		sourceLineageTag: by_request
+		summarizeBy: sum
+		sourceColumn: by_request
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 24c49477-75ac-4f18-be32-7502c33d1110
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dOfertas = entity
+		mode: directLake
+		source
+			entityName: dOfertas
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

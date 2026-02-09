@@ -1,0 +1,38 @@
+table dForma_pagamento
+	lineageTag: d122a4be-0895-467e-9898-09a093e59097
+
+	column cd_frm_pgto
+		dataType: int64
+		isKey
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 4becf806-d729-4110-ad36-25b5179c2e76
+		summarizeBy: none
+		sourceColumn: cd_frm_pgto
+
+		annotation SummarizationSetBy = Automatic
+
+	column ds_frm_pgto
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d95ff5b8-e4b4-4c37-80e2-581fc847e27b
+		summarizeBy: none
+		sourceColumn: ds_frm_pgto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dForma_pagamento = m
+		mode: dual
+		queryGroup: Dim
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"56b0623f-8797-421d-af36-f100afed62ec" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="56b0623f-8797-421d-af36-f100afed62ec"]}[Data],
+				    dForma_pagamento_off_ = #"56b0623f-8797-421d-af36-f100afed62ec"{[entity="dForma_pagamento_off",version=""]}[Data]
+				in
+				    dForma_pagamento_off_
+
+	annotation PBI_ResultType = Table
+

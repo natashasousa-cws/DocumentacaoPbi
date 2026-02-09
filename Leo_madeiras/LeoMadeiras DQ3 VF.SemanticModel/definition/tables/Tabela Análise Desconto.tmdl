@@ -1,0 +1,168 @@
+table 'Tabela Análise Desconto'
+	lineageTag: 0082f739-b56c-464f-8271-4da9dd83c738
+
+	measure Medida = ```
+			
+			 SUMX(VALUES('Tabela Análise Desconto'[cod_pedido]),DISTINCTCOUNT('Tabela Análise Desconto'[cd_cabecalho_entrega]))
+			```
+		formatString: 0
+		lineageTag: df2e7f36-997a-4827-9600-08065f62e81e
+
+	column cod_pedido
+		formatString: 0
+		lineageTag: 2b55ed15-676b-4e44-aeae-fe438f42cd00
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: fFaturas[cod_pedido]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Venda_bruta
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 2ccbabbf-18b6-41d7-a386-55b85ac2623e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Venda_bruta]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Desconto
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: f1aa3f44-32a2-455f-8f44-fa6a5793a42f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Desconto]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column '% desconto'
+		lineageTag: 0a5130b0-a8f8-429a-a720-307bf8a4bb8d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [% desconto]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Range_desconto
+		lineageTag: 844d8591-3d31-4d50-acf1-53da7050d1b3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Range_desconto]
+		sortByColumn: Ordem
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_canal_venda
+		formatString: 0
+		lineageTag: 11df3b3b-03c5-43da-ac7f-8abd02814952
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fFaturas[cd_canal_venda]
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_cabecalho_entrega
+		formatString: 0
+		lineageTag: 4025e48c-93ec-4453-ab2e-bd113b58eacb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fFaturas[cd_cabecalho_entrega]
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_loja_venda
+		formatString: 0
+		lineageTag: 26b0e5a0-575d-4c9d-a718-7fc81cdd65c9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fFaturas[cd_loja_venda]
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_fatura
+		formatString: Short Date
+		lineageTag: fab4ed46-d14e-4031-9c7f-fc761a3d2be3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fFaturas[dt_fatura]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		formatString: 0
+		lineageTag: c8bf8b7c-b2ab-4d31-a481-688cf3c03c2b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Ordem]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ped_nr_pedido
+		formatString: 0
+		lineageTag: 41dfdc75-1208-4daf-ac1e-86cbfe168b16
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: fFaturas[ped_nr_pedido]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Validacao =
+			
+			IF('Tabela Análise Desconto'[ped_nr_pedido] = BLANK(), "Não", "Sim")
+		lineageTag: 16b889f9-7498-487c-8f8a-a6c606368fd1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_tipo_doc_fat
+		lineageTag: 09b5729a-f674-4d03-a740-cf95c19f9b7e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fFaturas[cd_tipo_doc_fat]
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_cond_pgto
+		lineageTag: 03e4045a-6fb0-4e9f-8ce8-4495680701dc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fFaturas[cd_cond_pgto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Validacao_desconto = IF('Tabela Análise Desconto'[% desconto] = 0,"S/desconto","C/desconto")
+		lineageTag: 92b346d8-4a59-43b2-be39-b3bbbb96176b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column QtdCabecalho = 'Tabela Análise Desconto'[Medida]
+		formatString: 0
+		lineageTag: 93d1c6bf-3e8e-4440-8746-870e735720bd
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tabela Análise Desconto' = calculated
+		mode: import
+		source =
+				
+				SUMMARIZE(
+				    fFaturas,
+				    fFaturas[cod_pedido],
+				    fFaturas[cd_canal_venda],fFaturas[cd_cabecalho_entrega],fFaturas[cd_loja_venda],fFaturas[dt_fatura],fFaturas[ped_nr_pedido],fFaturas[cd_tipo_doc_fat],fFaturas[cd_cond_pgto],
+				    "Venda_bruta", [Venda bruta],
+				    "Desconto", [Desconto],
+				    "% desconto", [Desconto %],
+				    "Range_desconto", [Range de desconto],
+				    "Ordem", [Range de desconto ordem]
+				)
+
+	annotation PBI_Id = f4def5e8543f4016b57bfc001e1ce730
+

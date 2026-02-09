@@ -1,0 +1,39 @@
+table dFeriados
+	lineageTag: 6ab16531-a598-42ce-89c1-2ea6e1132acc
+	sourceLineageTag: [leo_madeiras].[dFeriados]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4e7fcd1c-5e4f-40b6-9987-b14e435cd60c
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia_Semana
+		dataType: string
+		lineageTag: d8b5e623-9351-450e-b560-dcd6515bbfe9
+		sourceLineageTag: Dia_Semana
+		summarizeBy: none
+		sourceColumn: Dia_Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feriado
+		dataType: string
+		lineageTag: b6f065ec-f795-456d-95e9-3232c20fe5c4
+		sourceLineageTag: Feriado
+		summarizeBy: none
+		sourceColumn: Feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dFeriados = entity
+		mode: directLake
+		source
+			entityName: dFeriados
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

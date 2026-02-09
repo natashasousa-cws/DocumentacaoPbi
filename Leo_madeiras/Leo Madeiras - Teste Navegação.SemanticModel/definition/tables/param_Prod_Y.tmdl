@@ -1,0 +1,52 @@
+table param_Prod_Y
+	isHidden
+	lineageTag: b88f8cb6-b265-482c-b10e-f77526721836
+
+	column param_Prod_Y
+		isHidden
+		lineageTag: a9e54425-22a7-4ef8-b672-f0893640ff73
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'param_Prod_Y Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'param_Prod_Y Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'param_Prod_Y Campos'
+		isHidden
+		lineageTag: be3c4a50-a178-4cb3-9c0f-d5ad19adce84
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'param_Prod_Y Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'param_Prod_Y Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: b1e76b8f-29c1-4a85-b375-3cad7848a56b
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition param_Prod_Y-37df18e1-75b4-41e3-b3f5-1586133a4787 = calculated
+		mode: import
+		source =
+				{
+				    ("SKU Distintos", NAMEOF('Medidas'[06.99 Distinct SKU]), 0),
+				    ("Categorias distintas", NAMEOF('Medidas'[06.99 1st Category count]), 1),
+				    ("Média SKU distintos por pedido", NAMEOF('Medidas'[06.99 Distinct SKU/Order]), 2),
+				    ("Média de itens por pedido", NAMEOF('Medidas'[06.99 Itens/Order]), 3)
+				}
+
+	annotation PBI_Id = 39ccf8fe328c467fa96e3a05c07c3f4d
+

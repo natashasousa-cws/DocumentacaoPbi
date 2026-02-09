@@ -1,0 +1,125 @@
+table dProdutos
+	lineageTag: 6e3c9532-184b-4f18-b2a7-feaf961ca5fe
+
+	measure catalogue_count =
+			
+			CALCULATE ( DISTINCTCOUNT ( dProdutos[sku_id] ) )
+		formatString: 0
+		lineageTag: 482759a5-20cc-462d-bc77-588d604473a8
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5987e822-2781-4fb0-be4f-59931b3048da
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: b1d166cc-4b5d-4380-9960-e210fb6d9d57
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_1
+		dataType: string
+		lineageTag: d285d4cf-c64b-4645-891b-81ec47a46684
+		summarizeBy: none
+		sourceColumn: category_level_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_2
+		dataType: string
+		lineageTag: 8d8179d0-444a-459c-a18b-5abf7af79b6e
+		summarizeBy: none
+		sourceColumn: category_level_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_3
+		dataType: string
+		lineageTag: 7dba7db2-df7e-401f-b0d3-2a2cc7bd7a08
+		summarizeBy: none
+		sourceColumn: category_level_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel
+		dataType: string
+		lineageTag: b4388fd0-a0f0-4f9b-a7ed-c3b0849f3d5f
+		summarizeBy: none
+		sourceColumn: nivel
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		lineageTag: 375f3588-0001-4419-a04b-7406970d065f
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ABC Geral' =
+			
+			VAR gmv_sku = ADDCOLUMNS ( dProdutos, "vd_produto", [01.00 GMV] )
+			VAR gmv_atual = [01.00 GMV]
+			VAR class = FILTER ( gmv_sku, [vd_produto] >= gmv_atual )
+			VAR gmv_acc = SUMX ( class, [vd_produto] )
+			VAR total_venda = CALCULATE ( [01.00 GMV], ALL ( dProdutos ) )
+			VAR pct_acc = DIVIDE ( gmv_acc, total_venda )
+			VAR resultado =
+			SWITCH (
+			    TRUE,
+			    pct_acc <= 0.80, "A",
+			    pct_acc <= 0.95, "B",
+			    "C"
+			)
+			RETURN
+			    resultado
+		lineageTag: fcd16546-03e0-4181-97be-e4e98c3adfe5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ABC AA Geral' =
+			
+			VAR gmv_sku = ADDCOLUMNS ( dProdutos, "vd_produto", [01.01 GMV AA] )
+			VAR gmv_atual = [01.01 GMV AA]
+			VAR class = FILTER ( gmv_sku, [vd_produto] >= gmv_atual )
+			VAR gmv_acc = SUMX ( class, [vd_produto] )
+			VAR total_venda = CALCULATE ( [01.01 GMV AA], ALL ( dProdutos ) )
+			VAR pct_acc = DIVIDE ( gmv_acc, total_venda )
+			VAR resultado =
+			SWITCH (
+			    TRUE,
+			    pct_acc <= 0.80, "A",
+			    pct_acc <= 0.95, "B",
+			    "C"
+			)
+			RETURN
+			    resultado
+		lineageTag: 7fedfc78-2c36-4640-808d-f310f035eb9b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProdutos = m
+		mode: import
+		queryGroup: Parceiros
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"fb99b340-78bd-4098-bb83-8617444004c5" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="fb99b340-78bd-4098-bb83-8617444004c5"]}[Data],
+				    dProdutos_ = #"fb99b340-78bd-4098-bb83-8617444004c5"{[entity="dProdutos",version=""]}[Data]
+				in
+				    dProdutos_
+
+	annotation PBI_ResultType = Table
+

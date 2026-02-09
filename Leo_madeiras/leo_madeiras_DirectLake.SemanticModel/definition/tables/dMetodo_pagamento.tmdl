@@ -1,0 +1,30 @@
+table dMetodo_pagamento
+	lineageTag: 87063d24-5641-4c2c-adc9-ae8a2d0142a3
+	sourceLineageTag: [leo_madeiras].[dMetodo_pagamento]
+
+	column payment_method
+		dataType: string
+		lineageTag: 26535c05-acf3-4fcc-a906-79842aa867af
+		sourceLineageTag: payment_method
+		summarizeBy: none
+		sourceColumn: payment_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_method_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5724abbe-0204-4cea-8e0e-d9bf4f6585b7
+		sourceLineageTag: payment_method_id
+		summarizeBy: sum
+		sourceColumn: payment_method_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dMetodo_pagamento = entity
+		mode: directLake
+		source
+			entityName: dMetodo_pagamento
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

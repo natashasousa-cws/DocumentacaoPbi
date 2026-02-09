@@ -1,0 +1,164 @@
+table dAssociados
+	lineageTag: e6fbfb48-019e-47e0-a6e2-81df15541891
+
+	/// Identificador do parceiro
+	column copartner_id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 6f18a4bb-7ccf-487e-a4ba-c8441d8574f3
+		summarizeBy: none
+		sourceColumn: copartner_id
+
+		annotation SummarizationSetBy = User
+
+	/// Nome fantasia
+	column trading_name
+		dataType: string
+		lineageTag: 00bd3147-b2ce-4369-bf76-819d8b3c5cfd
+		summarizeBy: none
+		sourceColumn: trading_name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Razão social
+	column company_name
+		dataType: string
+		lineageTag: 4dd872ea-d0ad-4d21-82f0-e283b7792fd2
+		summarizeBy: none
+		sourceColumn: company_name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Documento do parceiro
+	column document
+		dataType: string
+		lineageTag: a6d014bc-8435-4f30-9454-60b35c14622a
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Status do parceiro na plataforma
+	column plataform_status
+		dataType: string
+		lineageTag: bdbbb6f0-99bb-40c5-b008-6b2baebea81b
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Data de criação
+	column partnership_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1b51136b-618f-416f-aa84-2e61528c0537
+		summarizeBy: none
+		sourceColumn: partnership_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Data de última alteração
+	column last_update_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a4c4cd55-9f5e-4042-8c03-f953a128b64d
+		summarizeBy: none
+		sourceColumn: last_update_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Endereço
+	column street_address
+		dataType: string
+		isHidden
+		lineageTag: 9c3841a9-9c50-44cd-bba2-4bd5a7f2330f
+		dataCategory: Address
+		summarizeBy: none
+		sourceColumn: street_address
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cidade
+	column city
+		dataType: string
+		isHidden
+		lineageTag: ea6c6dc5-299a-4954-9a9a-901c16efe5d7
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: city
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// UF
+	column state
+		dataType: string
+		isHidden
+		lineageTag: 005a594e-5161-4e9b-b693-d4d5cdcd39e5
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: state
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// CEP
+	column zip_code
+		dataType: string
+		lineageTag: 29d64762-66f0-480e-a506-28d2530407f5
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Tipo de parceiro
+	/// 
+	/// Varejo ou Distribuidor
+	column partner_type
+		dataType: string
+		lineageTag: a157640f-19b3-4355-8c85-1046c16f6d98
+		summarizeBy: none
+		sourceColumn: partner_type
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Endereço
+		lineageTag: aaecee3f-1421-4fb9-8fc1-ee559cd74dd9
+
+		level state
+			lineageTag: a4c6fb44-c9d1-4732-971a-96d2e51245fd
+			column: state
+
+		level city
+			lineageTag: 399ad8dc-bfe3-4f02-abe2-72b54173658c
+			column: city
+
+		level street_address
+			lineageTag: b4dfbaed-6d85-4e9f-8146-8a3c8a1e6682
+			column: street_address
+
+	partition dAssociados-7b7cbe77-e836-4e61-ac1e-556bd16c0a65 = m
+		mode: import
+		queryGroup: Parceiros
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"fb99b340-78bd-4098-bb83-8617444004c5" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="fb99b340-78bd-4098-bb83-8617444004c5"]}[Data],
+				    dAssociados_ = #"fb99b340-78bd-4098-bb83-8617444004c5"{[entity="dAssociados",version=""]}[Data]
+				in
+				    dAssociados_
+
+	annotation PBI_ResultType = Table
+

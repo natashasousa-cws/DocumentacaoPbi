@@ -1,0 +1,249 @@
+table fMensageria_resultado_geral
+	lineageTag: 52fecdd2-bee6-4110-9d44-4c32321a6671
+	sourceLineageTag: [leo_madeiras].[fMensageria_resultado_geral]
+
+	column client_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ba38130c-bb11-486c-bc8d-38f295859336
+		sourceLineageTag: client_account_id
+		summarizeBy: sum
+		sourceColumn: client_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dad81f24-896f-4d6a-a461-53c8b7e5a996
+		sourceLineageTag: timestamp
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_campanha
+		dataType: int64
+		formatString: 0
+		lineageTag: 30eb0417-9f36-4014-8125-1b4083e50fc6
+		sourceLineageTag: id_campanha
+		summarizeBy: sum
+		sourceColumn: id_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_campanha
+		dataType: string
+		lineageTag: 19ce77a4-04d1-4354-bd1a-49e8299b0e03
+		sourceLineageTag: nome_campanha
+		summarizeBy: none
+		sourceColumn: nome_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column meio_disparo
+		dataType: int64
+		formatString: 0
+		lineageTag: f9765cd7-0605-4804-945f-658cbd8934a0
+		sourceLineageTag: meio_disparo
+		summarizeBy: sum
+		sourceColumn: meio_disparo
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_sid
+		dataType: string
+		lineageTag: e89da244-3a50-4dc5-80ae-565e4f9a7055
+		sourceLineageTag: message_sid
+		summarizeBy: none
+		sourceColumn: message_sid
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_id
+		dataType: string
+		lineageTag: 3cf7ed61-0332-45b1-921f-f8a152437ffb
+		sourceLineageTag: message_id
+		summarizeBy: none
+		sourceColumn: message_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_mensagem
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e99ad6f-84fe-4902-89f5-4fae18e9e24c
+		sourceLineageTag: status_mensagem
+		summarizeBy: sum
+		sourceColumn: status_mensagem
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 485f2a20-3a92-44df-9c98-4a21c18a6f17
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column lista_observacoes
+		dataType: string
+		lineageTag: e738d258-7c73-4c9f-8f6b-bb400d45f98f
+		sourceLineageTag: lista_observacoes
+		summarizeBy: none
+		sourceColumn: lista_observacoes
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: a48c7ed6-2845-4c04-8fa1-b9d9aae17247
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_total
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: cb813c9f-6308-422d-af77-09c16cd1b612
+		sourceLineageTag: order_total
+		summarizeBy: sum
+		sourceColumn: order_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column order_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0fb57784-f13b-4d87-9df5-dae7b4e0b04c
+		sourceLineageTag: order_date
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column cart_order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a123ffb-893a-4393-9823-fa5d1e20acda
+		sourceLineageTag: cart_order_id
+		summarizeBy: sum
+		sourceColumn: cart_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_type_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a5e22a4-2fba-4774-bcd3-3aaef440ec4e
+		sourceLineageTag: order_type_id
+		summarizeBy: sum
+		sourceColumn: order_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ae15ee7-1b6c-463a-9841-406940b7bfaf
+		sourceLineageTag: order_status_id
+		summarizeBy: sum
+		sourceColumn: order_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column skus_convertidos
+		dataType: string
+		lineageTag: 34bd7659-125c-4d99-8a55-54b230e4f28e
+		sourceLineageTag: skus_convertidos
+		summarizeBy: none
+		sourceColumn: skus_convertidos
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_1dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 48ff4d58-8d2b-418e-857f-78f787a6320b
+		sourceLineageTag: conversao_1dia
+		summarizeBy: sum
+		sourceColumn: conversao_1dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_2dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 17a1f37b-392e-4c2d-bd12-8415454342ce
+		sourceLineageTag: conversao_2dia
+		summarizeBy: sum
+		sourceColumn: conversao_2dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_7dia
+		dataType: int64
+		formatString: 0
+		lineageTag: de1e424a-7723-4e4d-b1df-7353de115f94
+		sourceLineageTag: conversao_7dia
+		summarizeBy: sum
+		sourceColumn: conversao_7dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_14dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 782bc5ed-68c4-4ce3-b59d-82bbf787dcdf
+		sourceLineageTag: conversao_14dia
+		summarizeBy: sum
+		sourceColumn: conversao_14dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_skus_abandonados
+		dataType: int64
+		formatString: 0
+		lineageTag: 93d5bd8c-933a-4afa-8248-045949721bb5
+		sourceLineageTag: n_skus_abandonados
+		summarizeBy: sum
+		sourceColumn: n_skus_abandonados
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_skus_convertidos
+		dataType: int64
+		formatString: 0
+		lineageTag: 033de715-e417-4a38-9342-9c99be756c3c
+		sourceLineageTag: n_skus_convertidos
+		summarizeBy: sum
+		sourceColumn: n_skus_convertidos
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_conversao_ca
+		dataType: double
+		lineageTag: 8c75c0b8-fcbb-4143-aab1-4c5b2018b0aa
+		sourceLineageTag: pct_conversao_ca
+		summarizeBy: sum
+		sourceColumn: pct_conversao_ca
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fMensageria_resultado_geral = entity
+		mode: directLake
+		source
+			entityName: fMensageria_resultado_geral
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

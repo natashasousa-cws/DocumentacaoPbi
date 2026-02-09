@@ -1,0 +1,51 @@
+table param_Vend_Y
+	isHidden
+	lineageTag: e15e4122-84dc-4668-ab94-9f13b96be606
+
+	column param_Vend_Y
+		isHidden
+		lineageTag: 18d24f09-c526-4d88-ac6d-0ce50ef0c1e8
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'param_Vend_Y Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'param_Vend_Y Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'param_Vend_Y Campos'
+		isHidden
+		lineageTag: 25bef850-ab28-48a7-b413-e43bc219b12b
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'param_Vend_Y Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'param_Vend_Y Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 77a289cb-47ae-42f8-a170-e5e94b017801
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition param_Vend_Y-c8349bc1-824c-4c80-b9fc-67a9c3e371ce = calculated
+		mode: import
+		source =
+				{
+				    ("Vendedores", NAMEOF('Medidas'[07.00 Salesperson]), 0),
+				    ("Vendedores por período", NAMEOF('Medidas'[07.32 Salesperson per date]), 1),
+				    ("Vendedores acumulado", NAMEOF('Medidas'[07.99 Salesperson Accum]), 2)
+				}
+
+	annotation PBI_Id = 0fbd2b0fc58e41298d86ec250f9ed968
+

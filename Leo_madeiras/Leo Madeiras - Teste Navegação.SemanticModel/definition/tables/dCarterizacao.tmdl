@@ -1,0 +1,45 @@
+table dCarterizacao
+	lineageTag: 4bbd1f71-a15b-432c-bcf2-a8ccecaa9e52
+
+	column id_account_seller
+		dataType: int64
+		formatString: 0
+		lineageTag: d8860821-6919-400e-a8d4-23735f81f0f5
+		summarizeBy: sum
+		sourceColumn: id_account_seller
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_account_customer
+		dataType: int64
+		formatString: 0
+		lineageTag: c413ab9a-9e32-435f-bd61-627201cf6267
+		summarizeBy: sum
+		sourceColumn: id_account_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_store
+		dataType: int64
+		formatString: 0
+		lineageTag: a12b39f5-135c-4d83-ae31-d22a01fff661
+		summarizeBy: sum
+		sourceColumn: id_store
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCarterizacao = m
+		mode: import
+		queryGroup: Contas
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"cc84e8f0-dc70-49b3-9ab6-db59566ab538" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="cc84e8f0-dc70-49b3-9ab6-db59566ab538"]}[Data],
+				    dCarteirizacao_ = #"cc84e8f0-dc70-49b3-9ab6-db59566ab538"{[entity="dCarteirizacao",version=""]}[Data]
+				in
+				    dCarteirizacao_
+
+	annotation PBI_ResultType = Table
+

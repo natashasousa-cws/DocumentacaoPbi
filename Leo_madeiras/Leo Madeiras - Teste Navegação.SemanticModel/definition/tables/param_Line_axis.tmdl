@@ -1,0 +1,59 @@
+table param_Line_axis
+	isHidden
+	lineageTag: 79443030-8879-48b7-b9fa-943ebbf402af
+
+	column param_Line_axis
+		isHidden
+		lineageTag: 1e3ba444-0bc2-499c-8beb-977ce367a53c
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'param_Line_axis Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'param_Line_axis Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'param_Line_axis Campos'
+		isHidden
+		lineageTag: 72399757-9704-4513-a484-bf205fa1cea5
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'param_Line_axis Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'param_Line_axis Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 1e186600-248e-4624-ade1-f86d44fef3df
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition param_Line_axis-4b148da3-99f3-4252-a95a-e7b6143f2be1 = calculated
+		mode: import
+		source =
+				{
+				    ("GMV", NAMEOF('Medidas'[01.00 GMV]), 0),
+				    ("Pedidos", NAMEOF('Medidas'[05.00 Orders]), 1),
+				    ("Ticket médio", NAMEOF('Medidas'[04.00 ATP]), 2),
+				    ("Clientes ativos", NAMEOF('Medidas'[02.15 Clients in fVendas]), 3),
+				    ("Quantidade de clientes", NAMEOF('Medidas'[02.00 Clients]), 4),
+				    ("% GMV em AA", NAMEOF('Medidas'[01.01 % GMV AA]), 5),
+				    ("% GMV em MV", NAMEOF('Medidas'[01.03 % GMV MV]), 6),
+				    ("% GMV em VA", NAMEOF('Medidas'[01.02 % GMV VA]), 7),
+				    ("Frete", NAMEOF('Medidas'[05.23 Shipping price]), 8),
+				    ("Taxa de conversão", NAMEOF('Medidas'[05.56 Orders to completion rate]), 9),
+				    ("Taxa de logins pra pedido", NAMEOF('Medidas'[03.56 Login to order conversion rate]), 10)
+				}
+
+	annotation PBI_Id = ae186699cf7742b9a75eee0f8a1e6a25
+

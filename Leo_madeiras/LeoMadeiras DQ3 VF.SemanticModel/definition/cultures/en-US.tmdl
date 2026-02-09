@@ -1,0 +1,287 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "lojas.cen_no_centro": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Lojas",
+			          "ConceptualProperty": "cen_no_centro"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "cabecalho_entrega.cpe_ds_cabecalho": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Cabecalho_entrega",
+			          "ConceptualProperty": "cpe_ds_cabecalho"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "condicao_pagamento.cpa_ds_cond_pagto": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Condicao_pagamento",
+			          "ConceptualProperty": "cpa_ds_cond_pagto"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "dlojas_venda.cen_no_centro": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dLojas_venda",
+			          "ConceptualProperty": "cen_no_centro"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Loja": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "tabela_test.validacao": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Tabela Análise Desconto",
+			          "ConceptualProperty": "Validacao"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Serviço": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dtipo_faturamento.cd_tipo_doc_fat": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dTipo_faturamento",
+			          "ConceptualProperty": "cd_tipo_doc_fat"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Tipo de Ordem": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dcondicao_pagamento.cpa_ds_tipo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dCondicao_pagamento",
+			          "ConceptualProperty": "cpa_ds_tipo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Forma de Pagamento": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Forma Pagamento": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dentrega.cpe_ds_cabecalho": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dEntrega",
+			          "ConceptualProperty": "cpe_ds_cabecalho"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Cabeçalho": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Cabeçalho Entrega": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dlojas_expedicao.cen_no_centro": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dLojas_expedicao",
+			          "ConceptualProperty": "cen_no_centro"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "dentrega.cpe_ds_grupo_cabecalho": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dEntrega",
+			          "ConceptualProperty": "cpe_ds_grupo_cabecalho"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Grupo de Cabeçalho": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Grupo Cabeçalho": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dlojas_expedicao.cen_sg_uf_centro": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dLojas_expedicao",
+			          "ConceptualProperty": "cen_sg_uf_centro"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "UF Loja Expedição": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dclientes.uf": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dClientes",
+			          "ConceptualProperty": "UF"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "UF Cliente": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidas.venda_bruta": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Venda bruta"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Venda": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medidas.pedidos_totais": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Pedidos totais"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Pedidos": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+
