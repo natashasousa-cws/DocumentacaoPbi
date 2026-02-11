@@ -1,0 +1,54 @@
+table agg_last_login
+	lineageTag: d3b54062-8489-4e60-841d-0d4aa34c7b8c
+	sourceLineageTag: [beta_do_brasil].[agg_last_login]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6723e57f-2c26-4679-ad44-9e4d7f747b9a
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_login
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2792d689-6c12-4468-ad20-361fd29cc24f
+		sourceLineageTag: days_since_last_login
+		summarizeBy: sum
+		sourceColumn: days_since_last_login
+
+		annotation SummarizationSetBy = Automatic
+
+	column login_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f2fc4540-bbda-45eb-9210-c72e9dff9a62
+		sourceLineageTag: login_status
+		summarizeBy: none
+		sourceColumn: login_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0fffa04d-aa5f-4cc1-b481-001e020a11fb
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_login = entity
+		mode: directLake
+		source
+			entityName: agg_last_login
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

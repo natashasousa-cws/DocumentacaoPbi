@@ -1,0 +1,92 @@
+table dProdutos
+	lineageTag: ed70037f-9940-4027-9f11-10feb79ca726
+	sourceLineageTag: [beta_do_brasil].[dProdutos]
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f207e3d3-0170-4245-a5aa-579f4cf2367c
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9d5b37a7-b1d6-4894-b30d-ee6e60eb109a
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column manufacturer
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 02b008a0-be15-45e2-986c-de1fd8da6c02
+		sourceLineageTag: manufacturer
+		summarizeBy: none
+		sourceColumn: manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7356331c-8aff-42bb-ac3e-8303515e4472
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_1
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1ac139d7-c386-46cc-974a-a31629023110
+		sourceLineageTag: category_level_1
+		summarizeBy: none
+		sourceColumn: category_level_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_2
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 20025fca-b89f-48b7-874e-c3b9324fd85b
+		sourceLineageTag: category_level_2
+		summarizeBy: none
+		sourceColumn: category_level_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_3
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: af233840-c038-47f2-970b-6ccfacda1fb7
+		sourceLineageTag: category_level_3
+		summarizeBy: none
+		sourceColumn: category_level_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 44ecebdd-cf84-47fc-be11-ca745b2b5534
+		sourceLineageTag: nivel
+		summarizeBy: none
+		sourceColumn: nivel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProdutos = entity
+		mode: directLake
+		source
+			entityName: dProdutos
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

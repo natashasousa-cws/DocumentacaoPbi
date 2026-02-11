@@ -1,0 +1,117 @@
+table fMensageria_parametrized_send_union
+	lineageTag: ffcce047-9a0f-4139-a7e8-5c98ebdf838d
+	sourceLineageTag: [beta_do_brasil].[fMensageria_parametrized_send_union]
+
+	column id_campanha
+		dataType: int64
+		formatString: 0
+		lineageTag: f5ba07c5-98d2-44b4-ab00-8286b56bf77d
+		sourceLineageTag: id_campanha
+		summarizeBy: sum
+		sourceColumn: id_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_campanha
+		dataType: string
+		lineageTag: d9521a94-f546-4878-97ea-8b496c27baa4
+		sourceLineageTag: nome_campanha
+		summarizeBy: none
+		sourceColumn: nome_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column meio_disparo
+		dataType: int64
+		formatString: 0
+		lineageTag: e90da3dd-26d8-4de2-81c3-72f87fcdc839
+		sourceLineageTag: meio_disparo
+		summarizeBy: sum
+		sourceColumn: meio_disparo
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_sid
+		dataType: string
+		lineageTag: 1ad61b1a-6fc8-44ea-978b-6932df00b5a1
+		sourceLineageTag: message_sid
+		summarizeBy: none
+		sourceColumn: message_sid
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_id
+		dataType: string
+		lineageTag: fae7d294-7128-4e08-a17b-53e974d75c1f
+		sourceLineageTag: message_id
+		summarizeBy: none
+		sourceColumn: message_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_mensagem
+		dataType: int64
+		formatString: 0
+		lineageTag: c08a9563-7da1-43c2-993e-cbea02e3add9
+		sourceLineageTag: status_mensagem
+		summarizeBy: sum
+		sourceColumn: status_mensagem
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 04d18fb4-de91-4a8f-b1dd-3bbe25411fbe
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b2e6152-52b6-42f5-bad3-55eb20862479
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column lista_observacoes
+		dataType: string
+		lineageTag: 8a074e9e-c914-4ed0-975b-0a916d4e51b5
+		sourceLineageTag: lista_observacoes
+		summarizeBy: none
+		sourceColumn: lista_observacoes
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e4883dbc-6a60-45c5-97f6-f81e3890cee0
+		sourceLineageTag: timestamp
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: f88b1f51-79b1-4d9e-a5b6-f549aaf094b2
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMensageria_parametrized_send_union = entity
+		mode: directLake
+		source
+			entityName: fMensageria_parametrized_send_union
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

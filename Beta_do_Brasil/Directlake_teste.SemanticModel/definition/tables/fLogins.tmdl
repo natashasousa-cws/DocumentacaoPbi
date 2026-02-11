@@ -1,0 +1,87 @@
+table fLogins
+	lineageTag: 7620d36b-4b09-4e74-97ba-da10213d6ff1
+	sourceLineageTag: [beta_do_brasil].[fLogins]
+
+	column login_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 20851541-cf9c-4af8-96ce-4750b80380e3
+		sourceLineageTag: login_date
+		summarizeBy: none
+		sourceColumn: login_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: 413780c8-41cb-47e8-8297-dfa31286e96e
+		sourceLineageTag: account_user
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2dbfcf06-4271-4e6c-bc9f-430247d8401a
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column login_type
+		dataType: string
+		lineageTag: 5161444b-80c4-45ff-ac83-7c30c3f8f9f8
+		sourceLineageTag: login_type
+		summarizeBy: none
+		sourceColumn: login_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c83ac14-4431-4c01-9e8c-be0f8c9bcc9e
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: b23c760f-6759-4338-a7b8-6d3ff07585fc
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_type
+		dataType: string
+		lineageTag: c43996dc-5212-4c80-b70b-aca3fafc3b20
+		sourceLineageTag: account_type
+		summarizeBy: none
+		sourceColumn: account_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: b57453bd-01f7-460b-b946-d005463d10c2
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fLogins = entity
+		mode: directLake
+		source
+			entityName: fLogins
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

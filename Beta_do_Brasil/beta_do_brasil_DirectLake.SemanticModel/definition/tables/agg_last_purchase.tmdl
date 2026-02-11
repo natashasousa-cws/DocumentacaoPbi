@@ -1,0 +1,54 @@
+table agg_last_purchase
+	lineageTag: 40db7c57-bb95-417a-bf7c-f0fe82068cd6
+	sourceLineageTag: [beta_do_brasil].[agg_last_purchase]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8e39d942-ebe4-4677-9280-30a844cb2012
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_purchase
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a5192fc6-54a8-4593-acd9-baf06039d57c
+		sourceLineageTag: days_since_last_purchase
+		summarizeBy: sum
+		sourceColumn: days_since_last_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataform_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 81a7aa29-8a75-4502-840c-c65104e9bcaa
+		sourceLineageTag: plataform_status
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b051d813-f8ed-4227-9c9b-1c547ab08732
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_purchase = entity
+		mode: directLake
+		source
+			entityName: agg_last_purchase
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

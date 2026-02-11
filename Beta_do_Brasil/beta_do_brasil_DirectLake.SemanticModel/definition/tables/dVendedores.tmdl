@@ -1,0 +1,248 @@
+table dVendedores
+	lineageTag: 47f2a1d9-ab13-41f6-a757-1ea2e84b37f4
+	sourceLineageTag: [beta_do_brasil].[dVendedores]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fbe9722e-bf4f-4794-8c68-8c5487beb11a
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_create_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 3657f6cd-f3cb-4b3e-b066-d9195d79e566
+		sourceLineageTag: account_create_date
+		summarizeBy: none
+		sourceColumn: account_create_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0c113382-3b5e-4530-bad9-0bacd02c98b2
+		sourceLineageTag: client_id
+		summarizeBy: sum
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_create_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 348b469c-9f83-4f29-98f8-7dd377d7c4cf
+		sourceLineageTag: client_create_date
+		summarizeBy: none
+		sourceColumn: client_create_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a46bb9e2-6a9a-40e5-84ba-9e6cc2d3dd57
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3b440969-a268-4528-8731-bfe816bab9d8
+		sourceLineageTag: first_name
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fb609def-3f5b-4120-a07e-20241049a20b
+		sourceLineageTag: last_name
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column contact
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: daf202df-aa36-4129-baf6-256c03b4b8a3
+		sourceLineageTag: contact
+		summarizeBy: none
+		sourceColumn: contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 13d7e105-09d7-471d-ba76-6b336aa33772
+		sourceLineageTag: account_user
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b78ebde4-5c20-494e-8fc0-eb162e737f59
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 44aff857-35cb-42cf-9ff7-143c7a209407
+		sourceLineageTag: gender
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column person_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dd236859-99d0-48c1-ad25-4ce4fa1cab53
+		sourceLineageTag: person_type
+		summarizeBy: none
+		sourceColumn: person_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column age
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 053bc68a-8834-47dc-b625-d073a5dd169c
+		sourceLineageTag: age
+		summarizeBy: sum
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2d42bfaa-0ef8-4517-8193-b9dab16ead86
+		sourceLineageTag: country
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 86048fc3-afcf-4bf3-940f-eba2e5096f63
+		sourceLineageTag: UF
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b8e704c6-ce1f-455c-a0c5-f477665b2938
+		sourceLineageTag: state
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e4566662-0aad-41d2-9768-0f006c5b9466
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e8380968-0074-4d9d-8920-a46c8b410e45
+		sourceLineageTag: city
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 71632275-25be-4e20-870c-6d0251ecf0d9
+		sourceLineageTag: zip_code
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone_number
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 22556728-f869-4415-a1fd-c612310d500d
+		sourceLineageTag: phone_number
+		summarizeBy: none
+		sourceColumn: phone_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 80f58504-497b-483f-90c6-be829777f1bb
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column profile_picture
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0ea30bec-8c13-4f66-9cf5-6b1fa1c76e0e
+		sourceLineageTag: profile_picture
+		summarizeBy: none
+		sourceColumn: profile_picture
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 12ee012b-5971-452e-ae6b-9ff4547e670d
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dVendedores = entity
+		mode: directLake
+		source
+			entityName: dVendedores
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

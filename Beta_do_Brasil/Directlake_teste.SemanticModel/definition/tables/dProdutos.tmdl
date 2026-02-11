@@ -1,0 +1,84 @@
+table dProdutos
+	lineageTag: ff751eff-3136-4475-9cdf-ecbdf5c6da56
+	sourceLineageTag: [beta_do_brasil].[dProdutos]
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1638f42f-3a87-4b67-96cd-4db85d089a36
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		lineageTag: 176b25ee-1336-4a9c-b4d0-8075a13eab76
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column manufacturer
+		dataType: string
+		lineageTag: ff587c64-20e7-4114-a51d-7017b8edbe56
+		sourceLineageTag: manufacturer
+		summarizeBy: none
+		sourceColumn: manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: fea8ec59-8407-4724-95a3-4b3bb41f13ff
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_1
+		dataType: string
+		lineageTag: 186e48a4-572c-452b-b7a0-ecc965ead2c6
+		sourceLineageTag: category_level_1
+		summarizeBy: none
+		sourceColumn: category_level_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_2
+		dataType: string
+		lineageTag: 69ba335d-a030-47cf-86e4-e33dbd466435
+		sourceLineageTag: category_level_2
+		summarizeBy: none
+		sourceColumn: category_level_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_3
+		dataType: string
+		lineageTag: 147a1e80-4bdb-431e-864c-c7d8eaba9345
+		sourceLineageTag: category_level_3
+		summarizeBy: none
+		sourceColumn: category_level_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel
+		dataType: string
+		lineageTag: 6b4f0724-58ab-4643-823a-286e1975e6ea
+		sourceLineageTag: nivel
+		summarizeBy: none
+		sourceColumn: nivel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProdutos = entity
+		mode: directLake
+		source
+			entityName: dProdutos
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

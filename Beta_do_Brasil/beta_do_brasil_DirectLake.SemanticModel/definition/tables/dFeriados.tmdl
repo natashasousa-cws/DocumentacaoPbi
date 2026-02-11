@@ -1,0 +1,42 @@
+table dFeriados
+	lineageTag: ec9c9a00-ba03-4787-b2d5-2f05bb6a4364
+	sourceLineageTag: [beta_do_brasil].[dFeriados]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: df77b868-21a8-4c07-b92e-3c5a39c859bf
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia_Semana
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 86106ea7-587f-4654-9cae-5c637bce9531
+		sourceLineageTag: Dia_Semana
+		summarizeBy: none
+		sourceColumn: Dia_Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feriado
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ba8ffd69-1442-4e3d-8a37-2969ec5b5a20
+		sourceLineageTag: Feriado
+		summarizeBy: none
+		sourceColumn: Feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dFeriados = entity
+		mode: directLake
+		source
+			entityName: dFeriados
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

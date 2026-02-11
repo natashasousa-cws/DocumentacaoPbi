@@ -1,0 +1,2446 @@
+table Medidas
+	lineageTag: d546f35c-0d4a-47b6-a7e7-dd29a5e4b0da
+
+	measure GMV =
+			
+			CALCULATE(
+			    SUMX(fVendas,
+			        (fVendas[quantity] * fVendas[amount_charged]) + fVendas[median_charged_shipping] + fVendas[avg_credit_card_interest] + fVendas[avg_total_tax]
+			    )
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Receita digital\GMV
+		lineageTag: d14aed45-e25d-4067-b213-048e8de7c248
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// GMV somando 100% cliente e venda assistida; GMV com participação do cliente
+	measure 'GMV - Autoatendimento' =
+			
+			CALCULATE ( [GMV], dTipo_pedido[order_type_id] IN { 1, 3 } )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\GMV
+		lineageTag: 52b83aee-af26-4c5e-b53c-1a6128b2dc71
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Quantidade de logins
+	measure 'Quantidade de login' =
+			
+			CALCULATE ( COUNT ( fLogins[login_date] ), VALUES ( fLogins[account_id] ) )
+		formatString: #,0
+		displayFolder: Login
+		lineageTag: 69cadd85-616e-40cc-8547-8e9cd265044c
+
+	/// Quantidade de logins para 1 pedido
+	measure 'Taxa de conversão por login' =
+			
+			DIVIDE ( [Quantidade de login], [Total de pedidos] )
+		formatString: #,0%;-#,0%;#,0%
+		displayFolder: Login
+		lineageTag: b7cd3e96-f737-4130-a07f-4310bb239c46
+
+		changedProperty = FormatString
+
+	/// Quantidade de logins de clientes
+	measure 'Quantidade de logins de cliente' =
+			
+			CALCULATE ( [Quantidade de login], NOT ( ISBLANK ( dClientes[client_id] ) ) )
+		formatString: #,0
+		displayFolder: Login
+		lineageTag: c1496285-5054-430a-9707-985d3230e995
+
+	/// Ticket Médio
+	measure 'Ticket Médio' =
+			
+			DIVIDE ( [GMV], [Pedidos] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\GMV
+		lineageTag: 8ae24fbe-5908-4bee-a826-3c136092f76b
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio ponderado por cliente
+	measure 'Ticket Médio por cliente' =
+			
+			AVERAGEX ( VALUES ( fVendas[client_account_id] ), [Ticket Médio] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Ticket Médio\GMV
+		lineageTag: a53619d1-cbf6-42de-905d-8701902d0267
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio ponderado por estado
+	measure 'Ticket Médio por estado' =
+			
+			AVERAGEX ( VALUES ( dClientes[state] ), [Ticket Médio] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\GMV
+		lineageTag: 4bd4c7e7-15ef-4b60-8aa4-a04c38461c41
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em auto atendimento
+	measure 'Ticket Médio - Autoatendimento' =
+			
+			DIVIDE ( [GMV - Autoatendimento], [Pedidos - Autoatendimento] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Ticket Médio\GMV
+		lineageTag: fa8ccaae-ee8e-406d-981e-deb24e7f4821
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos de venda assistida
+	measure 'Ticket Médio - Venda assistida' =
+			
+			DIVIDE ( [GMV - Venda assistida], [Pedidos - Venda assistida] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Ticket Médio\GMV
+		lineageTag: de069327-c37a-4399-9993-c45be8f0a372
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em módulo vendedor
+	measure 'Ticket Médio - Módulo vendedor' =
+			
+			DIVIDE ( [GMV - Módulo vendedor], [Pedidos - Módulo vendedor] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Ticket Médio\GMV
+		lineageTag: b7ca749a-5a44-487d-9146-5490c18916d5
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Ticket Médio - App' =
+			
+			DIVIDE ( [GMV - App], [Pedidos - App] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Ticket Médio\GMV
+		lineageTag: bbdd4eaf-1e19-4865-9d59-32cf0a3fd592
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Ticket Médio - Desktop' =
+			
+			DIVIDE ( [GMV - Desktop], [Pedidos - Desktop] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Ticket Médio\GMV
+		lineageTag: a579ac18-398b-4f20-b1e0-ae1f1712dfa7
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Ticket Médio - Mobile' =
+			
+			DIVIDE ( [GMV - Mobile], [Pedidos - Mobile] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Ticket Médio\GMV
+		lineageTag: 34e7bc87-4537-483a-98ba-be4417120c65
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Número de pedidos, excluindo pedidos com status:
+	/// 
+	/// - Cancelado
+	/// - Aguardando pagamento
+	/// - Pré-encomenda
+	/// - Pagamento no caixa
+	measure Pedidos =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fVendas[partner_order_id] )
+			)
+		formatString: #,0
+		displayFolder: Pedidos\Geral
+		lineageTag: 087a6806-8028-469a-832a-5f4d821efeb7
+
+		changedProperty = FormatString
+
+	/// Pedidos realizados 100% pelo cliente
+	measure 'Pedidos - 100% cliente' =
+			
+			CALCULATE ( [Pedidos], dTipo_pedido[order_type_id] = 3 )
+		formatString: #,0
+		displayFolder: Pedidos\Geral
+		lineageTag: 3968a02b-a6d1-4fc2-9ff8-1789ccbbfaf2
+
+	/// Pedidos realizados com interação cliente-vendedor
+	measure 'Pedidos - Venda assistida' =
+			
+			CALCULATE ( [Pedidos], dTipo_pedido[order_type_id] = 1 )
+		formatString: #,0
+		displayFolder: Pedidos\Geral
+		lineageTag: 212db723-9961-4102-8398-f7f9be70845b
+
+	/// Pedidos realizado 100% pelo vendedor.
+	measure 'Pedidos - Módulo vendedor' =
+			
+			CALCULATE ( [Pedidos], dTipo_pedido[order_type_id] = 2 )
+		formatString: #,0
+		displayFolder: Pedidos\Geral
+		lineageTag: 2bb5a88c-5917-413e-ba41-a11a52f2e530
+
+	/// Pedidos via app
+	measure 'Pedidos - App' =
+			
+			CALCULATE ( [Pedidos], dDispositivos[device_id] = 3 )
+		formatString: #,0
+		displayFolder: Pedidos\Geral
+		lineageTag: 2e266327-b5a7-4564-b30a-a6baec9d9d6e
+
+	/// Pedidos via desktop
+	measure 'Pedidos - Desktop' =
+			
+			CALCULATE ( [Pedidos], dDispositivos[device_id] = 1 )
+		formatString: #,0
+		displayFolder: Pedidos\Geral
+		lineageTag: 7ec221ce-eaf6-4dbb-8adb-76d9b7d45174
+
+	/// Pedidos via mobile
+	measure 'Pedidos - Mobile' =
+			
+			CALCULATE ( [Pedidos], dDispositivos[device_id] = 2 )
+		formatString: #,0
+		displayFolder: Pedidos\Geral
+		lineageTag: 46c5a705-e4d6-4770-88eb-79c92455697e
+
+	/// Valor de frete
+	measure 'Valor de frete' =
+			
+			CALCULATE (
+			    AVERAGEX (
+			        VALUES ( fVendas[partner_order_id] ),
+			        CALCULATE (
+			            SUM ( fVendas[median_charged_shipping] )
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Pedidos\Geral
+		lineageTag: 49d9f2a1-6fdb-40f8-8744-54befa04a2ca
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Total de pedidos transacionados pela plataforma, engloba todos os status
+	/// 
+	measure 'Total de pedidos' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fVendas[partner_order_id] ),
+			    ALL ( dStatus_pedido[order_status_id] )
+			)
+		formatString: #,0
+		displayFolder: Pedidos\Geral
+		lineageTag: 8287ef67-1a74-4935-877b-2d0415420d1b
+
+	measure 'Frequencia de pedidos' =
+			
+			VAR dtmin =
+			    CALCULATE (
+			        CONVERT ( MIN ( fVendas[datekey] ), DATETIME )
+			    )
+			VAR ciclo =
+			    DATEDIFF ( dtmin, TODAY (), DAY )
+			RETURN
+			    DIVIDE ( ciclo, [Pedidos] )
+		formatString: #,0.0
+		displayFolder: Pedidos\Geral
+		lineageTag: 93252523-7da7-46dd-a215-72e88b886cb0
+
+		changedProperty = FormatString
+
+	measure 'Frequencia de pedidos por cliente' =
+			
+			AVERAGEX ( VALUES ( dClientes[account_id] ), [Frequencia de pedidos] )
+		formatString: #,0.0
+		displayFolder: Pedidos\Geral
+		lineageTag: 6f3bce38-0946-4494-aac3-a26d1bf82b85
+
+	measure 'Frequencia de pedidos - dia útil' =
+			
+			VAR dtmin =
+			    CALCULATE (
+			        CONVERT ( MIN ( fVendas[datekey] ), DATETIME )
+			    )
+			VAR ciclo =
+			    NETWORKDAYS ( dtmin, TODAY (), 1, VALUES ( dFeriados[Data] ) )
+			RETURN
+			    DIVIDE ( ciclo, [Pedidos] )
+		formatString: #,0.0
+		displayFolder: Pedidos\Geral
+		lineageTag: b6ddc0dd-482c-4b1a-a2e9-aa64ac3811f3
+
+	measure 'Frequencia de pedidos - dia útil por cliente' =
+			
+			AVERAGEX (
+			    VALUES ( dClientes[account_id] ),
+			    [Frequencia de pedidos - dia útil]
+			)
+		formatString: #,0.0
+		displayFolder: Pedidos\Geral
+		lineageTag: cc73f5f5-69b2-435d-b478-d95ed44437ad
+
+	/// Quantidade distinta de itens.
+	measure 'Quantidade de produtos distintos vendidos' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fVendas[sku_id] )
+			)
+		formatString: #,0
+		displayFolder: Produtos\Geral
+		lineageTag: c35b5dec-e850-495a-9039-8624f07ca4fc
+
+		changedProperty = FormatString
+
+	measure 'Média de produtos distintos por cliente' =
+			
+			AVERAGEX (
+			    VALUES ( fVendas[client_account_id] ),
+			    [Quantidade de produtos distintos vendidos]
+			)
+		formatString: #,0.0
+		displayFolder: Produtos\Geral
+		lineageTag: 3a83e867-e401-4945-94ad-c17f6a99670a
+
+	measure 'Rank de sku_id por pedidos' =
+			
+			RANKX ( ALL ( fVendas[sku_id] ), [Pedidos],, DESC )
+		formatString: #,0
+		displayFolder: Produtos\Geral
+		lineageTag: ac2b1bcf-505e-49b5-a8ae-a86788753139
+
+	measure 'Quantidade de categoria distintas' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( dProdutos[category_level_1] ),
+			    CROSSFILTER ( dProdutos[sku_id], fVendas[sku_id], BOTH ),
+			    dStatus_pedido[order_status_id] > 3
+			)
+		formatString: #,0
+		displayFolder: Produtos\Categoria
+		lineageTag: 1b6536a2-2704-46e6-aa32-074b73db33c1
+
+	measure 'Quantidade de categoria-2 distintas' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( dProdutos[category_level_2] ),
+			    CROSSFILTER ( dProdutos[sku_id], fVendas[sku_id], BOTH ),
+			    dStatus_pedido[order_status_id] > 3
+			)
+		formatString: #,0
+		displayFolder: Produtos\Categoria
+		lineageTag: 5a651f9c-6537-45d9-b395-f5893a4d07f1
+
+	measure 'Quantidade de categoria-3 distintas' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( dProdutos[category_level_3] ),
+			    CROSSFILTER ( dProdutos[sku_id], fVendas[sku_id], BOTH ),
+			    dStatus_pedido[order_status_id] > 3
+			)
+		formatString: #,0
+		displayFolder: Produtos\Categoria
+		lineageTag: a8572674-aec8-4ed1-a843-ca793cd9880f
+
+	measure 'Média de produtos distintos por pedido' =
+			
+			AVERAGEX (
+			    VALUES ( fVendas[partner_order_id] ),
+			    [Quantidade de produtos distintos vendidos]
+			)
+		formatString: #,0.0
+		displayFolder: Produtos\Geral
+		lineageTag: 25599176-27ae-4e37-9048-733b503c83ee
+
+	measure 'Média da quantidade de itens por cliente' =
+			
+			CALCULATE (
+			    AVERAGEX ( VALUES ( fVendas[client_account_id] ), SUM ( fVendas[quantity] ) )
+			)
+		formatString: #,0.0
+		displayFolder: Produtos\Geral
+		lineageTag: 9653316b-afd4-4527-b914-3b56af997461
+
+	measure 'Média da quantidade de itens por pedido' =
+			
+			CALCULATE (
+			    AVERAGEX (
+			        VALUES ( fVendas[partner_order_id] ),
+			        CALCULATE (
+			            SUM ( fVendas[quantity] ),
+			            CROSSFILTER ( dProdutos[sku_id], fVendas[sku_id], BOTH )
+			        )
+			    )
+			)
+		formatString: #,0.0
+		displayFolder: Produtos\Geral
+		lineageTag: be813aea-8523-4936-a4ec-05bdc5c40f33
+
+	measure 'Faturamento digital' =
+			
+			CALCULATE (
+			    SUMX (
+			        VALUES ( fVendas[partner_order_id] ),
+			        CALCULATE (
+			            AVERAGE ( fVendas[order_total] ),
+			            dStatus_pedido[order_status_id] > 4
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado com imposto
+		lineageTag: 726986a8-24e0-4199-b01b-9991f81ed9a1
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital sem imposto' =
+			
+			CALCULATE (
+			    SUMX (
+			        VALUES ( fVendas[partner_order_id] ),
+			        CALCULATE (
+			            AVERAGE ( fVendas[order_subtotal] ),
+			            dStatus_pedido[order_status_id] > 4
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado sem imposto
+		lineageTag: f52a1a49-b303-4a58-8ec6-2c2a787aa59a
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'GMV - 100% cliente' =
+			
+			CALCULATE ( [GMV], dTipo_pedido[order_type_id] = 3 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\GMV
+		lineageTag: 24e75658-e8f6-4a4e-ae63-43cf94b68850
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'GMV - Venda assistida' =
+			
+			CALCULATE ( [GMV], dTipo_pedido[order_type_id] = 1 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\GMV
+		lineageTag: 719b1b30-6d0e-4ac4-95c8-1d41f479c7bf
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'GMV - Módulo vendedor' =
+			
+			CALCULATE ( [GMV], dTipo_pedido[order_type_id] = 2 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\GMV
+		lineageTag: f6b13c35-ecf4-4043-9aaa-7d9e2f383e89
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// GMV somando 100% cliente e venda assistida; GMV com participação do cliente
+	measure 'Faturamento digital - Autoatendimento' =
+			
+			CALCULATE ( [Faturamento digital], dTipo_pedido[order_type_id] IN { 1, 3 } )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado com imposto
+		lineageTag: 0ede3b5f-b633-4714-a738-bf869dabef6b
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital - 100% cliente' =
+			
+			CALCULATE ( [Faturamento digital], dTipo_pedido[order_type_id] = 3 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado com imposto
+		lineageTag: 16bd8020-5e93-46d8-b3a9-aae0a846cd48
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital - Venda assistida' =
+			
+			CALCULATE ( [Faturamento digital], dTipo_pedido[order_type_id] = 1 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado com imposto
+		lineageTag: 1eca893e-1560-47c2-94af-6b42d5aacb5b
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital - Módulo vendedor' =
+			
+			CALCULATE ( [Faturamento digital], dTipo_pedido[order_type_id] = 2 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado com imposto
+		lineageTag: 0d8f3bc6-a9fa-47d4-a0cd-67d3691543ae
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// GMV somando 100% cliente e venda assistida; GMV com participação do cliente
+	measure 'Faturamento digital sem imposto - Autoatendimento' =
+			
+			CALCULATE (
+			    [Faturamento digital sem imposto],
+			    dTipo_pedido[order_type_id] IN { 1, 3 }
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado sem imposto
+		lineageTag: 036dc221-b510-44c0-8cd2-adf16dd87ba6
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital sem imposto - 100% cliente' =
+			
+			CALCULATE ( [Faturamento digital sem imposto], dTipo_pedido[order_type_id] = 3 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado sem imposto
+		lineageTag: c3517aa6-6ad6-4edb-a99b-e641d3ab461a
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital sem imposto - Venda assistida' =
+			
+			CALCULATE ( [Faturamento digital sem imposto], dTipo_pedido[order_type_id] = 1 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado sem imposto
+		lineageTag: ec01e557-c497-41d4-aa83-1c77d6467243
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital sem imposto - Módulo vendedor' =
+			
+			CALCULATE ( [Faturamento digital sem imposto], dTipo_pedido[order_type_id] = 2 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado sem imposto
+		lineageTag: 43857cf5-45bc-4ca2-80d2-418373f55978
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em auto atendimento
+	measure 'Ticket Médio - 100% cliente' =
+			
+			DIVIDE ( [GMV - 100% cliente], [Pedidos - 100% cliente] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Ticket Médio\GMV
+		lineageTag: 07814f10-ca48-4aab-b06e-b07812526948
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'GMV - App' =
+			
+			CALCULATE ( [GMV], dDispositivos[device_id] = 3 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\GMV
+		lineageTag: 6e7a5324-1185-49fd-8951-3aacf2d0ff1b
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'GMV - Desktop' =
+			
+			CALCULATE ( [GMV], dDispositivos[device_id] = 1 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\GMV
+		lineageTag: 4972d193-94da-4dc5-b479-e9799543729b
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'GMV - Mobile' =
+			
+			CALCULATE ( [GMV], dDispositivos[device_id] = 2 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\GMV
+		lineageTag: 8e9b404e-254d-4448-b458-7f28f2c8b469
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital - App' =
+			
+			CALCULATE ( [Faturamento digital], dDispositivos[device_id] = 3 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado com imposto
+		lineageTag: ef261193-d11d-4d49-97aa-5848fc0fedd4
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital - Desktop' =
+			
+			CALCULATE ( [Faturamento digital], dDispositivos[device_id] = 1 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado com imposto
+		lineageTag: 175690b4-abdf-42cc-9118-ca229f1e730f
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital - Mobile' =
+			
+			CALCULATE ( [Faturamento digital], dDispositivos[device_id] = 2 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado com imposto
+		lineageTag: ec3b27e1-8e33-4f53-b08a-cfdf85b75f30
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital sem imposto - App' =
+			
+			CALCULATE ( [Faturamento digital sem imposto], dDispositivos[device_id] = 3 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado sem imposto
+		lineageTag: 905bba15-fe79-47ae-ae8e-83ddf3609419
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital sem imposto - Desktop' =
+			
+			CALCULATE ( [Faturamento digital sem imposto], dDispositivos[device_id] = 1 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado sem imposto
+		lineageTag: df26eeeb-6032-478a-827d-c89380e5fd1f
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital sem imposto - Mobile' =
+			
+			CALCULATE ( [Faturamento digital sem imposto], dDispositivos[device_id] = 2 )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado sem imposto
+		lineageTag: 651e2a4d-6f05-4030-8357-653c426ac481
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket Médio
+	measure 'Ticket Médio faturado sem imposto' =
+			
+			DIVIDE ( [Faturamento digital sem imposto], [Pedidos faturados] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: a25ce509-579f-4904-a952-f8923bd385a2
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio ponderado por cliente
+	measure 'Ticket Médio faturado sem imposto por cliente' =
+			
+			AVERAGEX (
+			    VALUES ( fVendas[client_account_id] ),
+			    [Ticket Médio faturado sem imposto]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: fb2ebb48-969d-4676-8a65-d45457d1a2a4
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio ponderado por estado
+	measure 'Ticket Médio faturado sem imposto por estado' =
+			
+			AVERAGEX ( VALUES ( dClientes[state] ), [Ticket Médio faturado sem imposto] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: b7db78c6-35f2-469d-9f93-cf63aac0807e
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em auto atendimento
+	measure 'Ticket Médio faturado sem imposto - Autoatendimento' =
+			
+			DIVIDE (
+			    [Faturamento digital sem imposto - Autoatendimento],
+			    [Pedidos faturados - Autoatendimento]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: 26823f0d-163b-4d94-9146-877763c6a186
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos de venda assistida
+	measure 'Ticket Médio faturado sem imposto - Venda assistida' =
+			
+			DIVIDE (
+			    [Faturamento digital sem imposto - Venda assistida],
+			    [Pedidos faturados - Venda assistida]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: 426291c9-5e54-49a7-b2a0-57df51956649
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em módulo vendedor
+	measure 'Ticket Médio faturado sem imposto - Módulo vendedor' =
+			
+			DIVIDE (
+			    [Faturamento digital sem imposto - Módulo vendedor],
+			    [Pedidos faturados - Módulo vendedor]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: 3910b3d1-597d-47f5-a0bc-14c71ade220a
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Ticket Médio faturado sem imposto - App' =
+			
+			DIVIDE ( [Faturamento digital sem imposto - App], [Pedidos faturados - App] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: 6e41fbb7-b08b-4534-8955-49f19b42cdc3
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Ticket Médio faturado sem imposto - Desktop' =
+			
+			DIVIDE (
+			    [Faturamento digital sem imposto - Desktop],
+			    [Pedidos faturados - Desktop]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: 864e16e1-3afd-4eb2-b957-dd34e41e7833
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Ticket Médio faturado sem imposto - Mobile' =
+			
+			DIVIDE (
+			    [Faturamento digital sem imposto - Mobile],
+			    [Pedidos faturados - Mobile]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: 9c375465-0760-4627-8e1f-b9bd663dda4d
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em auto atendimento
+	measure 'Ticket Médio faturado sem imposto - 100% cliente' =
+			
+			DIVIDE (
+			    [Faturamento digital sem imposto - 100% cliente],
+			    [Pedidos faturados - 100% cliente]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado sem imposto
+		lineageTag: aa25042d-7f5a-4a67-b897-9d3c8fc0162e
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Pedidos realizado 100% ou parcialmente pelo cliente.
+	measure 'Pedidos - Autoatendimento' =
+			
+			CALCULATE ( [Pedidos], dTipo_pedido[order_type_id] IN { 1, 3 } )
+		formatString: #,0
+		displayFolder: Pedidos\Geral
+		lineageTag: 93298eb4-8cda-4571-8458-3593c385cd18
+
+	/// Número de pedidos, excluindo pedidos com status:
+	/// 
+	/// - Cancelado
+	/// - Aguardando pagamento
+	/// - Pré-encomenda
+	/// - Pagamento no caixa
+	measure 'Pedidos faturados' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fVendas[partner_order_id] ),
+			    dStatus_pedido[order_status_id] > 4
+			)
+		formatString: #,0
+		displayFolder: Pedidos\Faturado
+		lineageTag: be3dba7a-3511-4641-a488-9372c310d51f
+
+		changedProperty = FormatString
+
+	/// Pedidos realizados 100% pelo cliente
+	measure 'Pedidos faturados - 100% cliente' =
+			
+			CALCULATE ( [Pedidos faturados], dTipo_pedido[order_type_id] = 3 )
+		formatString: #,0
+		displayFolder: Pedidos\Faturado
+		lineageTag: 296e46d0-6862-4401-9272-03744dbdfacb
+
+	/// Pedidos realizados com interação cliente-vendedor
+	measure 'Pedidos faturados - Venda assistida' =
+			
+			CALCULATE ( [Pedidos faturados], dTipo_pedido[order_type_id] = 1 )
+		formatString: #,0
+		displayFolder: Pedidos\Faturado
+		lineageTag: 96e87ae7-1158-4eb0-8fa3-8568cb269b35
+
+	/// Pedidos realizado 100% pelo vendedor.
+	measure 'Pedidos faturados - Módulo vendedor' =
+			
+			CALCULATE ( [Pedidos faturados], dTipo_pedido[order_type_id] = 2 )
+		formatString: #,0
+		displayFolder: Pedidos\Faturado
+		lineageTag: aaa4cd9f-cc2f-4153-a58b-3d0e466d9f85
+
+	/// Pedidos via app
+	measure 'Pedidos faturados - App' =
+			
+			CALCULATE ( [Pedidos faturados], dDispositivos[device_id] = 3 )
+		formatString: #,0
+		displayFolder: Pedidos\Faturado
+		lineageTag: 6d844ad6-05af-420f-bb2c-df3b018b7017
+
+	/// Pedidos via desktop
+	measure 'Pedidos faturados - Desktop' =
+			
+			CALCULATE ( [Pedidos faturados], dDispositivos[device_id] = 1 )
+		formatString: #,0
+		displayFolder: Pedidos\Faturado
+		lineageTag: 17ffa0c7-4dcd-47a8-ab2e-961fac7d2e52
+
+	/// Pedidos via mobile
+	measure 'Pedidos faturados - Mobile' =
+			
+			CALCULATE ( [Pedidos faturados], dDispositivos[device_id] = 2 )
+		formatString: #,0
+		displayFolder: Pedidos\Faturado
+		lineageTag: 436c30e6-7da0-4311-b374-d6ef544fc4c4
+
+	/// Valor de frete
+	measure 'Valor de frete faturado' =
+			
+			CALCULATE (
+			    AVERAGEX (
+			        VALUES ( fVendas[partner_order_id] ),
+			        CALCULATE (
+			            SUM ( fVendas[median_charged_shipping] ),
+			            dStatus_pedido[order_status_id] > 4
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Pedidos\Faturado
+		lineageTag: 2eeb87c7-4222-43ac-abed-e652539611f8
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Frequencia de pedidos faturados' =
+			
+			VAR dtmin =
+			    CALCULATE (
+			        CONVERT ( MIN ( fVendas[datekey] ), DATETIME ),
+			        dStatus_pedido[order_status_id] > 4
+			    )
+			VAR ciclo =
+			    DATEDIFF ( dtmin, TODAY (), DAY )
+			RETURN
+			    DIVIDE ( ciclo, [Pedidos] )
+		formatString: #,0.0
+		displayFolder: Pedidos\Faturado
+		lineageTag: e9f40fb6-19c4-4eea-a8f0-6098f15dbc2e
+
+		changedProperty = FormatString
+
+	measure 'Frequencia de pedidos faturados por cliente' =
+			
+			AVERAGEX ( VALUES ( dClientes[account_id] ), [Frequencia de pedidos] )
+		formatString: #,0.0
+		displayFolder: Pedidos\Faturado
+		lineageTag: 288cd0e8-1c06-4c88-8c2f-df6b72c6494b
+
+	measure 'Frequencia de pedidos faturados - dia útil' =
+			
+			VAR dtmin =
+			    CALCULATE (
+			        CONVERT ( MIN ( fVendas[datekey] ), DATETIME ),
+			        dStatus_pedido[order_status_id] > 4
+			    )
+			VAR ciclo =
+			    NETWORKDAYS ( dtmin, TODAY (), 1, VALUES ( dFeriados[Data] ) )
+			RETURN
+			    DIVIDE ( ciclo, [Pedidos] )
+		formatString: #,0.0
+		displayFolder: Pedidos\Faturado
+		lineageTag: 1fd012de-548b-4247-926e-2a735e9376cf
+
+	measure 'Frequencia de pedidos faturados - dia útil por cliente' =
+			
+			AVERAGEX (
+			    VALUES ( dClientes[account_id] ),
+			    [Frequencia de pedidos - dia útil]
+			)
+		formatString: #,0.0
+		displayFolder: Pedidos\Faturado
+		lineageTag: 983daa38-5a46-4cad-8d8e-b2f39945cc2d
+
+	/// Pedidos realizado 100% pelo vendedor.
+	measure 'Pedidos faturados - Autoatendimento' =
+			
+			CALCULATE ( [Pedidos faturados], dTipo_pedido[order_type_id] IN { 1, 3 } )
+		formatString: #,0
+		displayFolder: Pedidos\Faturado
+		lineageTag: 0a5bb177-68d3-4bfc-b025-139bf35f5323
+
+	/// Ticket Médio
+	measure 'Ticket Médio faturado' =
+			
+			DIVIDE ( [Faturamento digital], [Pedidos faturados] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: 03955274-bce4-4014-93c2-1b13dbf48708
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio ponderado por cliente
+	measure 'Ticket Médio faturado por cliente' =
+			
+			AVERAGEX (
+			    VALUES ( fVendas[client_account_id] ),
+			    [Ticket Médio faturado sem imposto]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: 1aac57fc-b5fb-4e29-9547-b1de9d398215
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio ponderado por estado
+	measure 'Ticket Médio faturado por estado' =
+			
+			AVERAGEX ( VALUES ( dClientes[state] ), [Ticket Médio faturado sem imposto] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: 7f934c9a-c6a9-48ff-b656-ccc0b13e4f56
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em auto atendimento
+	measure 'Ticket Médio faturado - Autoatendimento' =
+			
+			DIVIDE (
+			    [Faturamento digital - Autoatendimento],
+			    [Pedidos faturados - Autoatendimento]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: 17153142-7b34-473f-becf-a47b2378e14d
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos de venda assistida
+	measure 'Ticket Médio faturado - Venda assistida' =
+			
+			DIVIDE (
+			    [Faturamento digital - Venda assistida],
+			    [Pedidos faturados - Venda assistida]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: 046852ce-acf6-4801-97b1-040841e87943
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em módulo vendedor
+	measure 'Ticket Médio faturado - Módulo vendedor' =
+			
+			DIVIDE (
+			    [Faturamento digital - Módulo vendedor],
+			    [Pedidos faturados - Módulo vendedor]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: d105e787-837a-479a-9df2-effbd4088a25
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Ticket Médio faturado - App' =
+			
+			DIVIDE ( [Faturamento digital - App], [Pedidos faturados - App] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: 904b880b-a389-4837-a156-6673855b2548
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Ticket Médio faturado - Desktop' =
+			
+			DIVIDE ( [Faturamento digital - Desktop], [Pedidos faturados - Desktop] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: 876dee3d-ebe5-475a-8970-b8c0ab73b7eb
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Ticket Médio faturado - Mobile' =
+			
+			DIVIDE ( [Faturamento digital - Mobile], [Pedidos faturados - Mobile] )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: e145ce7a-aeac-4017-9cf5-0243c93df386
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em auto atendimento
+	measure 'Ticket Médio faturado - 100% cliente' =
+			
+			DIVIDE (
+			    [Faturamento digital - 100% cliente],
+			    [Pedidos faturados - 100% cliente]
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ticket Médio\Faturado com imposto
+		lineageTag: bf7662ed-5050-4b58-860d-4c60b2ebeb60
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Quantidade distinta de itens.
+	measure 'Quantidade de produtos distintos faturados' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fVendas[sku_id] ),
+			    dStatus_pedido[order_status_id] > 4
+			)
+		formatString: #,0
+		displayFolder: Produtos\Faturado
+		lineageTag: ac1b5bb8-04cb-4ecc-ba9c-de8a4baf98f8
+
+		changedProperty = FormatString
+
+	measure 'Média de produtos faturado distintos por cliente' =
+			
+			AVERAGEX (
+			    VALUES ( fVendas[client_account_id] ),
+			    [Quantidade de produtos distintos faturados]
+			)
+		formatString: #,0.0
+		displayFolder: Produtos\Faturado
+		lineageTag: 7b55bcf3-03ee-4d66-8b0a-44b06a50baf3
+
+	measure 'Rank de sku_id por pedidos faturados' =
+			
+			RANKX ( ALL ( fVendas[sku_id] ), [Pedidos faturados],, DESC )
+		formatString: 0
+		displayFolder: Produtos\Faturado
+		lineageTag: 3f64392f-3282-40a0-8e0d-ba2edc1c038c
+
+	measure 'Média de produtos distintos por pedido faturados' =
+			
+			AVERAGEX (
+			    VALUES ( fVendas[partner_order_id] ),
+			    [Quantidade de produtos distintos faturados]
+			)
+		formatString: #,0.0
+		displayFolder: Produtos\Faturado
+		lineageTag: a0b150b1-908f-4af7-8f40-388befc3498a
+
+	measure 'Média da quantidade de itens faturados por cliente' =
+			
+			CALCULATE (
+			    AVERAGEX ( VALUES ( fVendas[client_account_id] ), SUM ( fVendas[quantity] ) ),
+			    dStatus_pedido[order_status_id] > 4
+			)
+		formatString: #,0.0
+		displayFolder: Produtos\Faturado
+		lineageTag: fcfb33cc-2d04-487a-945e-a909e178800d
+
+	measure 'Média da quantidade de itens faturados por pedido' =
+			
+			CALCULATE (
+			    AVERAGEX (
+			        VALUES ( fVendas[partner_order_id] ),
+			        CALCULATE (
+			            SUM ( fVendas[quantity] ),
+			            CROSSFILTER ( dProdutos[sku_id], fVendas[sku_id], BOTH ),
+			            dStatus_pedido[order_status_id] > 4
+			        )
+			    )
+			)
+		formatString: #,0.0
+		displayFolder: Produtos\Faturado
+		lineageTag: bfe8f4f7-bcb6-4b7d-ad77-a2b776de09f7
+
+	measure 'GMV - Produto linha-a-linha' =
+			
+			CALCULATE(
+			    SUMX(fVendas,
+			    fVendas[quantity] * fVendas[amount_charged])
+			    )
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Receita digital\GMV
+		lineageTag: e67e4387-9949-4aeb-a6ea-7877059ef005
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital - Produto linha-a-linha' = ```
+			CALCULATE(
+			    SUMX(fVendas,
+			    (fVendas[quantity] * fVendas[amount_charged]) + fVendas[median_charged_shipping] + fVendas[avg_credit_card_interest] + fVendas[avg_total_tax]),
+			    dStatus_pedido[order_status_id] > 4
+			)
+			
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado com imposto
+		lineageTag: 9862439d-5fa9-43b5-a3ca-4657aabab256
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Faturamento digital sem imposto - Produto linha-a-linha' = ```
+			CALCULATE(
+			    SUMX(fVendas,
+			    fVendas[quantity] * fVendas[amount_charged]),
+			    dStatus_pedido[order_status_id] > 4
+			)
+			
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Receita digital\Faturado sem imposto
+		lineageTag: 9bd09c09-db71-4704-a05a-670c3f9e1fed
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Total de clientes.
+	/// 
+	/// Clientes é definido como conta com client_id.
+	/// 
+	/// Podem existir mais contas que clientes.
+	/// 
+	/// As informações de clientes se encontram em dClientes
+	measure 'Quantidade de clientes' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( dClientes[client_id] ),
+			    NOT(ISBLANK(dClientes[client_id]))
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: 11b8bcb9-f724-4172-a92a-f01446d1672b
+
+		changedProperty = FormatString
+
+	/// Total de clientes.
+	/// 
+	/// Clientes é definido como conta com client_id.
+	/// 
+	/// Podem existir mais contas que clientes.
+	/// 
+	/// As informações de clientes se encontram em dClientes
+	measure 'Quantidade de documentos distintos' =
+			CALCULATE (
+			    DISTINCTCOUNT ( dClientes[document] )
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: 9d7fc7ee-8f98-4d5d-9e05-12da0ac1d047
+
+		changedProperty = FormatString
+
+	/// Total de clientes.
+	/// 
+	/// Clientes é definido como conta com client_id.
+	/// 
+	/// Podem existir mais contas que clientes.
+	/// 
+	/// As informações de clientes se encontram em dClientes
+	measure 'Quantidade de contas' =
+			CALCULATE (
+			    DISTINCTCOUNT ( dClientes[account_id] )
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: 08dd1c43-eb9c-4999-8a3b-a14349ba9d9c
+
+		changedProperty = FormatString
+
+	measure 'Quantidade de clientes - 100% cliente' =
+			
+			CALCULATE(
+			    [Quantidade de clientes com pedidos],
+			    FILTER(dClientes,
+			    [Pedidos faturados - 100% cliente])
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: 1a39b77b-6f97-4217-86f2-ae7d054a3149
+
+	measure 'Quantidade de clientes com pedidos' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fVendas[client_account_id] )
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: 508bbf91-6453-46a7-9efe-a0dfddf43511
+
+	measure 'Quantidade de clientes - Venda assistida' =
+			
+			CALCULATE(
+			    [Quantidade de clientes com pedidos],
+			    FILTER(dClientes,
+			    [Pedidos faturados - Venda assistida])
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: dd5e57e0-1b13-4332-9a8a-dcb6a993c59d
+
+	measure 'Quantidade de clientes - Modulo vendedor' =
+			
+			CALCULATE(
+			    [Quantidade de clientes com pedidos],
+			    FILTER(dClientes,
+			    [Pedidos faturados - Módulo vendedor])
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: ca931785-5a5d-481b-a46a-4a2a446d0a61
+
+	measure 'Quantidade de clientes - App' =
+			
+			CALCULATE(
+			    [Quantidade de clientes com pedidos],
+			    FILTER(dClientes,
+			    [Pedidos faturados - App])
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: df78bbf5-923e-41bf-9426-e47d0349c328
+
+	measure 'Quantidade de clientes - Mobile' =
+			
+			CALCULATE(
+			    [Quantidade de clientes com pedidos],
+			    FILTER(dClientes,
+			    [Pedidos faturados - Mobile])
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: 7ffcc6e6-0272-4ad5-be7e-e82e7db89573
+
+	measure 'Quantidade de clientes - Desktop' =
+			
+			CALCULATE(
+			    [Quantidade de clientes com pedidos],
+			    FILTER(dClientes,
+			    [Pedidos faturados - Desktop])
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: a1c4bef7-814c-43ab-b235-d99aac507cf6
+
+	measure 'Quantidade de clientes acumulado' =
+			
+			CALCULATE(
+			    [Quantidade de clientes],
+			    dClientes[account_create_date] <= MAX(dCalendario[Data])
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: 080bca7f-6a18-47c9-abbc-c45991d66e5d
+
+	measure 'Quantidade de carrinhos abandonados' =
+			
+			DISTINCTCOUNT(
+			    fCarrinhos_abandonados[session_id]
+			)
+		formatString: #,0
+		displayFolder: Carrinhos abandonados
+		lineageTag: bb968257-7f6b-4f16-ae6f-fd07e39e8a85
+
+	measure 'Quantidade de carrinhos abandonados via desktop' =
+			
+			CALCULATE(
+			    [Quantidade de carrinhos abandonados],
+			    dDispositivos[device_id] = 1
+			)
+		formatString: #,0
+		displayFolder: Carrinhos abandonados
+		lineageTag: 94a85c87-90a8-45c7-aecd-aeebe41f9d4a
+
+	measure 'Quantidade de carrinhos abandonados via mobile' =
+			
+			CALCULATE(
+			    [Quantidade de carrinhos abandonados],
+			    dDispositivos[device_id] = 2
+			)
+		formatString: #,0
+		displayFolder: Carrinhos abandonados
+		lineageTag: c6a5f13c-f3ea-4447-be1b-b442b6626f7b
+
+	measure 'Quantidade de carrinhos abandonados via app' =
+			
+			CALCULATE(
+			    [Quantidade de carrinhos abandonados],
+			    dDispositivos[device_id] = 3
+			)
+		formatString: #,0
+		displayFolder: Carrinhos abandonados
+		lineageTag: ddb21b1c-7834-4791-97c5-c59a1a18eb1a
+
+	measure 'Data ultimo pedido faturado' =
+			
+			CALCULATE(
+			    CONVERT( MAX(fVendas[datekey]), DATETIME),
+			    dStatus_pedido[order_status_id] > 4
+			)
+		formatString: dd/mm/yyyy
+		displayFolder: Pedidos\Faturado
+		lineageTag: 64b38f99-8ab7-4916-82b5-2dfc7ad082d3
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	measure 'Data ultimo pedido' =
+			
+			VAR UltimaData = MAX(fVendas[datekey])
+			
+			VAR UltimaDataReal =
+			DATE(
+			    INT(UltimaData / 10000),                            -- Ano
+			    INT(MOD(UltimaData, 10000) / 100),                  -- Mês
+			    MOD(UltimaData, 100)                                -- Dia
+			)
+			
+			RETURN
+			UltimaDataReal
+		formatString: dd/mm/yyyy
+		displayFolder: Pedidos\Geral
+		lineageTag: 65279795-62c1-4727-a298-2d00755b8339
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	measure 'Funil - sessoes distintas' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fDatalayer_funil[session])
+			)
+		formatString: #,0
+		displayFolder: Datalayer - Funil
+		lineageTag: 25f20708-2dd6-4a22-ba4c-3e5545d1284e
+
+	measure 'Funil - sessoes' =
+			
+			CALCULATE(
+			    COUNT(fDatalayer_funil[session])
+			)
+		formatString: #,0
+		displayFolder: Datalayer - Funil
+		lineageTag: a8015e12-6019-44af-80f5-1963fb19bd68
+
+	measure 'Funil - sessoes distintas de produtos visualizados' =
+			
+			CALCULATE(
+			    [Funil - sessoes distintas],
+			    (fDatalayer_funil[event] IN { "pageView", "add-to-cart" } && fDatalayer_funil[sku_id] <> 0 )
+			)
+		formatString: #,0
+		displayFolder: Datalayer - Funil
+		lineageTag: 4626741f-f936-4526-ac5a-c0bbe91b6190
+
+	measure 'Funil - sessoes distintas de carrinhos' =
+			
+			CALCULATE (
+			    [Funil - sessoes distintas],
+			    fDatalayer_funil[event] = "view_cart"
+			)
+		formatString: #,0
+		displayFolder: Datalayer - Funil
+		lineageTag: ac3d42ba-6981-46c6-b720-73d99c89490b
+
+	measure 'Funil - sessoes distintas de frete' =
+			
+			CALCULATE (
+			    [Funil - sessoes distintas],
+			    fDatalayer_funil[pagepath] = "/escolha-frete"
+			)
+		formatString: #,0
+		displayFolder: Datalayer - Funil
+		lineageTag: 1d6120a2-51fa-4b64-9f41-be5643e70c0c
+
+	measure 'Funil - sessoes distintas de compra' =
+			
+			CALCULATE (
+			    [Funil - sessoes distintas],
+			    fDatalayer_funil[event] = "purchase"
+			)
+		formatString: #,0
+		displayFolder: Datalayer - Funil
+		lineageTag: 927f80a6-c5d1-4242-a307-264570da6045
+
+	measure 'Funil - paginas por sessoes distintas' =
+			
+			CALCULATE(
+			    DIVIDE(
+			        [Funil - paginas],
+			        [Funil - sessoes distintas],
+			        0
+			    )
+			)
+		formatString: 0
+		displayFolder: Datalayer - Funil
+		lineageTag: aa6ee26e-dca0-4b13-9bbb-faa5d93a928e
+
+	measure 'Funil - paginas' =
+			
+			CALCULATE(
+			        COUNT( fDatalayer_funil[pagepath] ),
+			        fDatalayer_funil[event] = "pageView"
+			    )
+		formatString: #,0
+		displayFolder: Datalayer - Funil
+		lineageTag: 20cce1bc-4224-4d28-8522-83e892bfa66b
+
+	measure 'Funil - clientes distintos' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fDatalayer_funil[client_id]),
+			    NOT ISBLANK(fDatalayer_funil[client_id])
+			)
+		formatString: #,0
+		displayFolder: Datalayer - Funil
+		lineageTag: c833a8d5-e24d-4b67-9376-dea69c7eacee
+
+	measure 'Funil - tempo medio por sessao' =
+			
+			VAR tempo =
+			    CALCULATE (
+			        AVERAGEX (
+			            VALUES ( fDatalayer_funil[session] ),
+			            AVERAGE ( fDatalayer_funil[session_time_total] )
+			        )
+			    )
+			VAR hora =
+			    INT ( tempo / 3600 )
+			VAR modhora =
+			    MOD ( tempo, 3600 )
+			VAR minutos =
+			    INT ( modhora / 60 )
+			VAR segundos =
+			    INT ( MOD ( tempo, 60 ) )
+			RETURN
+			    hora * 10000 + minutos * 100 + segundos
+		formatString: 00:00:00
+		displayFolder: Datalayer - Funil
+		lineageTag: e3f082ba-6947-4c58-a0d2-c2babfff68c1
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Funil - conversao de sessoes' = ```
+			
+			CALCULATE (
+			    DIVIDE ( 
+			        [Pedidos],
+			        [Funil - sessoes distintas],
+			        0 )
+			)
+			```
+		formatString: 0%;-0%;0%
+		displayFolder: Datalayer - Funil
+		lineageTag: 09eb476e-24a0-4fbc-a818-a44184f889f6
+
+	measure 'Funil - ultima sessao' =
+			
+			CALCULATE(
+			    MAX(fDatalayer_funil[data])
+			)
+		formatString: dd/mm/yyyy
+		displayFolder: Datalayer - Funil
+		lineageTag: 974495fb-31b3-4539-aa9b-5955ac51e159
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	measure 'Sessao_agg - sessoes distintas' =
+			CALCULATE(
+			    DISTINCTCOUNT(fDatalayer_session_summary[session])
+			)
+		formatString: #,0
+		displayFolder: Sessao_agg
+		lineageTag: 3d56e912-30a6-4820-bc0d-38fba14b2f0e
+
+	measure 'Sessao_agg - sessoes' =
+			
+			CALCULATE(
+			    COUNT(fDatalayer_session_summary[session])
+			)
+		formatString: #,0
+		displayFolder: Sessao_agg
+		lineageTag: 547f6957-004e-424b-81a7-975198325c6f
+
+	measure 'Sessao_agg - clientes distintos' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fDatalayer_session_summary[account_id]),
+			    NOT ISBLANK(fDatalayer_session_summary[account_id])
+			)
+		formatString: #,0
+		displayFolder: Sessao_agg
+		lineageTag: 60ab85fd-9312-4478-b985-3b7ec003d684
+
+	measure 'Sessao_agg - tempo medio por sessao' =
+			
+			VAR tempo =
+			    CALCULATE (
+			        AVERAGEX (
+			            VALUES ( fDatalayer_session_summary[session] ),
+			            AVERAGE ( fDatalayer_session_summary[session_time_in_seconds] )
+			        )
+			    )
+			VAR hora =
+			    INT ( tempo / 3600 )
+			VAR modhora =
+			    MOD ( tempo, 3600 )
+			VAR minutos =
+			    INT ( modhora / 60 )
+			VAR segundos =
+			    INT ( MOD ( tempo, 60 ) )
+			RETURN
+			    hora * 10000 + minutos * 100 + segundos
+		formatString: 00:00:00
+		displayFolder: Sessao_agg
+		lineageTag: 93031175-4f4f-4076-9445-b582ea40f2d6
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Sessao_agg - sessoes distintas por cliente' =
+			
+			CALCULATE(
+			    DIVIDE(
+			        [Sessao_agg - sessoes distintas de clientes logados],
+			        [Sessao_agg - clientes distintos],
+			        0
+			    )
+			)
+		formatString: #,0
+		displayFolder: Sessao_agg
+		lineageTag: 3cb7355d-249e-4a79-a082-d610ed9ad467
+
+	measure 'Sessao_agg - ultima sessao' =
+			
+			VAR AnoMesDia = MAX(fDatalayer_session_summary[datekey]) -- exemplo: 20250703
+			VAR Ano = INT(AnoMesDia / 10000)
+			VAR Mes = INT(MOD(AnoMesDia, 10000) / 100)
+			VAR Dia = MOD(AnoMesDia, 100)
+			RETURN
+			    DATE(Ano, Mes, Dia)
+		formatString: dd/mm/yyyy
+		displayFolder: Sessao_agg
+		lineageTag: 17475489-f268-4790-b320-07273bb8b7fb
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	measure 'GMV YoY' = ```
+			
+			VAR UltimaData = 
+			CALCULATE(
+			    MAX(fVendas[datekey]),
+			    REMOVEFILTERS(dCalendario)
+			)
+			
+			VAR UltimaDataReal =
+			DATE(
+			    INT(UltimaData / 10000),                            -- Ano
+			    INT(MOD(UltimaData, 10000) / 100),                  -- Mês
+			    MOD(UltimaData, 100)                                -- Dia
+			)
+			
+			VAR DataLimite =
+			EDATE(UltimaDataReal, -12)
+			
+			VAR YoY =
+			CALCULATE(
+			    [GMV],
+			    DATEADD(dCalendario[Data], -12,MONTH),
+			    FILTER(
+			        ALL(dCalendario), dCalendario[Data] <= DataLimite
+			    )
+			)
+			
+			RETURN
+			YoY
+			```
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Inteligencia_temporal
+		lineageTag: b4f5b010-ff8b-4fda-96cb-2546570541ae
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'GMV MoM' = ```
+			
+			VAR UltimaData = 
+			CALCULATE(
+			    MAX(fVendas[datekey]),
+			    REMOVEFILTERS(dCalendario)
+			)
+			
+			VAR UltimaDataReal =
+			DATE(
+			    INT(UltimaData / 10000),                            -- Ano
+			    INT(MOD(UltimaData, 10000) / 100),                  -- Mês
+			    MOD(UltimaData, 100)                                -- Dia
+			)
+			
+			VAR DataLimite =
+			EDATE(UltimaDataReal, -1)
+			
+			VAR MoM =
+			CALCULATE(
+			    [GMV],
+			    DATEADD(dCalendario[Data], -1,MONTH),
+			    FILTER(
+			        ALL(dCalendario), dCalendario[Data] <= DataLimite
+			    )
+			)
+			
+			RETURN
+			MoM
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Inteligencia_temporal
+		lineageTag: 7825d022-bbbb-4db1-8efc-e5232b41a6e3
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Pedidos YoY' = ```
+			
+			VAR UltimaData = 
+			CALCULATE(
+			    MAX(fVendas[datekey]),
+			    REMOVEFILTERS(dCalendario)
+			)
+			
+			VAR UltimaDataReal =
+			DATE(
+			    INT(UltimaData / 10000),                            -- Ano
+			    INT(MOD(UltimaData, 10000) / 100),                  -- Mês
+			    MOD(UltimaData, 100)                                -- Dia
+			)
+			
+			VAR DataLimite =
+			EDATE(UltimaDataReal, -12)
+			
+			VAR YoY =
+			CALCULATE(
+			    [Pedidos],
+			    DATEADD(dCalendario[Data], -12,MONTH),
+			    FILTER(
+			        ALL(dCalendario), dCalendario[Data] <= DataLimite
+			    )
+			)
+			
+			RETURN
+			YoY
+			```
+		formatString: #,0
+		displayFolder: Inteligencia_temporal
+		lineageTag: 91aac8df-f0ac-4fb1-a48f-fd901f091cc2
+
+	measure 'Pedidos MoM' = ```
+			
+			VAR UltimaData = 
+			CALCULATE(
+			    MAX(fVendas[datekey]),
+			    REMOVEFILTERS(dCalendario)
+			)
+			
+			VAR UltimaDataReal =
+			DATE(
+			    INT(UltimaData / 10000),                            -- Ano
+			    INT(MOD(UltimaData, 10000) / 100),                  -- Mês
+			    MOD(UltimaData, 100)                                -- Dia
+			)
+			
+			VAR DataLimite =
+			EDATE(UltimaDataReal, -1)
+			
+			VAR MoM =
+			CALCULATE(
+			    [Pedidos],
+			    DATEADD(dCalendario[Data], -1,MONTH),
+			    FILTER(
+			        ALL(dCalendario), dCalendario[Data] <= DataLimite
+			    )
+			)
+			
+			RETURN
+			MoM
+			```
+		formatString: #,0
+		displayFolder: Inteligencia_temporal
+		lineageTag: 3ed36e5f-47e7-46ce-8d9e-1e8d456365d0
+
+	measure 'Variação de pedidos MoM (c/ icone)' =
+			
+			VAR Porcentagem = [Variacao de pedidos MoM]
+			
+			VAR Icone =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(Porcentagem), "➖",
+			        Porcentagem > 0, "🡅",
+			        Porcentagem < 0, "🡇",
+			        "➖"
+			    )
+			
+			RETURN
+			    Icone & " " & FORMAT(Porcentagem, "#,##0%")
+		displayFolder: Texto
+		lineageTag: 14a49143-10cb-4f44-802b-4f395e30dc63
+
+	measure 'Variacao de pedidos YoY' =
+			
+			VAR variacao = [Pedidos] - [Pedidos YoY]
+			
+			RETURN
+			DIVIDE(
+			    variacao,
+			    [Pedidos YoY]
+			)
+		formatString: 0%;-0%;0%
+		displayFolder: Inteligencia_temporal
+		lineageTag: 255b7a42-d5ee-4e5e-8f4b-3209f5529426
+
+	measure 'Variacao de GMV MoM' =
+			
+			VAR ValorAtual = [GMV]
+			VAR ValorAnterior = [GMV MoM]
+			VAR Variacao = ValorAtual - ValorAnterior
+			
+			RETURN
+			DIVIDE(Variacao, ValorAnterior)
+		formatString: 0%;-0%;0%
+		displayFolder: Inteligencia_temporal
+		lineageTag: f424f1db-c2e0-4152-b58a-31cb9260e245
+
+	measure 'Variacao de GMV YoY' =
+			
+			VAR variacao = [GMV] - [GMV YoY]
+			
+			RETURN
+			DIVIDE(
+			    variacao,
+			    [GMV YoY]
+			)
+		formatString: 0%;-0%;0%
+		displayFolder: Inteligencia_temporal
+		lineageTag: 80a98524-104c-4431-856e-83c9338aa501
+
+	measure 'Periodo selecionado MoM' = ```
+			
+			VAR DataMin = 
+			    FORMAT(MIN(dCalendario[Data]), "MMM yy")
+			
+			VAR DataMax = 
+			    FORMAT(MAX(dCalendario[Data]), "MMM yy")
+			
+			VAR DataMinMoM =
+			    FORMAT(EDATE(DataMin, -1), "MMM yy")
+			
+			VAR DataMaxMoM =
+			    FORMAT(EDATE(DataMax, -1), "MMM yy")
+			
+			RETURN
+			    IF(
+			        DataMin = DataMax,
+			        "MoM% | ( " & DataMin & " ) vs ( " & DataMinMoM & " )",
+			        "MoM% | ( " & DataMin & " - " &DataMax & " ) vs ( " & DataMinMoM & " - " &DataMaxMoM & " )"
+			    )
+			```
+		displayFolder: Texto
+		lineageTag: b73fbb48-0b3c-4d5c-85b2-e170a47377f8
+
+	measure 'Dias uteis' =
+			
+			CALCULATE(
+			    COUNTROWS(dCalendario),
+			    FILTER(
+			        dCalendario,
+			        dCalendario[DiaÚtil] = TRUE()
+			    ),
+			    FILTER(
+			        dCalendario,
+			        dCalendario[Futuro] = FALSE()
+			    )
+			)
+		formatString: #,0
+		displayFolder: Inteligencia_temporal
+		lineageTag: d3a20f35-0d9e-492e-a0f2-a9eecb762eec
+
+	measure 'Media de pedidos por data' =
+			
+			FORMAT(
+			    AVERAGEX(
+			        ADDCOLUMNS(
+			            VALUES(dCalendario[Data]),
+			            "Pedidos", [Pedidos]
+			        ),
+			        [Pedidos]
+			    ),
+			    "#,#" & " média diária"
+			)
+		displayFolder: Inteligencia_temporal
+		lineageTag: a7040067-1d44-4bf2-8931-04d7df9e3d3e
+
+	measure 'Media de GMV por data' =
+			
+			FORMAT(
+			    AVERAGEX(
+			        ADDCOLUMNS(
+			            VALUES(dCalendario[Data]),
+			            "GMV", [GMV]
+			        ),
+			        [GMV]
+			    ),
+			    "R$ #,#" & " média diária"
+			)
+		displayFolder: Inteligencia_temporal
+		lineageTag: 9245d896-b577-4860-9c48-de6ad8ca74a8
+
+	measure 'Meta de pedidos' =
+			
+			CALCULATE(
+			    [Pedidos] * 1.5
+			)
+		formatString: #,0
+		displayFolder: Metas
+		lineageTag: 8578baee-d431-4c97-a724-5b0469978b5c
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Meta de GMV' =
+			
+			CALCULATE(
+			    [GMV] * 1.5
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Metas
+		lineageTag: c7bd09a8-2647-42ef-926d-c9059be8e1c5
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Quantidade de itens no carrinho' =
+			
+			SUM(fCarrinhos_abandonados[quantity])
+		formatString: #,0
+		displayFolder: Carrinhos abandonados
+		lineageTag: f71c5ae6-10a2-4bc2-98c9-9678b123b15f
+
+	measure 'Valor potencial do carrinho' =
+			
+			SUMX(fCarrinhos_abandonados, fCarrinhos_abandonados[quantity] * fCarrinhos_abandonados[unit_price])
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Carrinhos abandonados
+		lineageTag: 0b370207-d13d-444d-baa6-6f928a870c36
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Taxa de abandono por item' =
+			
+			VAR carrinhos_total =
+			    CALCULATE (
+			        [Quantidade de carrinhos abandonados],
+			        ALL ( fCarrinhos_abandonados[sku_name] )
+			    )
+			VAR divs =
+			    CALCULATE (
+			        DIVIDE ( [Quantidade de carrinhos abandonados], carrinhos_total, 0 )
+			    )
+			RETURN
+			    divs
+		formatString: 0%;-0%;0%
+		displayFolder: Carrinhos abandonados
+		lineageTag: ad966bb3-cc74-40bc-9720-34af1541652b
+
+	measure 'Variacao de pedidos MoM' =
+			
+			VAR ValorAtual = [Pedidos]
+			VAR ValorAnterior = [Pedidos MoM]
+			VAR Variacao = ValorAtual - ValorAnterior
+			
+			RETURN
+			DIVIDE(Variacao, ValorAnterior)
+		formatString: 0%;-0%;0%
+		displayFolder: Inteligencia_temporal
+		lineageTag: ebd0fba8-b6cc-4064-9b1a-7e3917669399
+
+	measure 'Variação de GMV MoM (c/ icone)' =
+			
+			VAR Porcentagem = [Variacao de GMV MoM]
+			
+			VAR Icone =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(Porcentagem), "➖",
+			        Porcentagem > 0, "🡅",
+			        Porcentagem < 0, "🡇",
+			        "➖"
+			    )
+			
+			RETURN
+			    Icone & " " & FORMAT(Porcentagem, "#,##0%")
+		displayFolder: Texto
+		lineageTag: 92f079fd-1491-4e77-85ba-6f8cf20d06d0
+
+	measure 'Quantidade de clientes com pedidos MoM' = ```
+			
+			VAR UltimaData = 
+			CALCULATE(
+			    MAX(fVendas[datekey]),
+			    REMOVEFILTERS(dCalendario)
+			)
+			
+			VAR UltimaDataReal =
+			DATE(
+			    INT(UltimaData / 10000),                            -- Ano
+			    INT(MOD(UltimaData, 10000) / 100),                  -- Mês
+			    MOD(UltimaData, 100)                                -- Dia
+			)
+			
+			VAR DataLimite =
+			EDATE(UltimaDataReal, -1)
+			
+			VAR MoM =
+			CALCULATE(
+			    [Quantidade de clientes com pedidos],
+			    DATEADD(dCalendario[Data], -1,MONTH),
+			    FILTER(
+			        ALL(dCalendario), dCalendario[Data] <= DataLimite
+			    )
+			)
+			
+			RETURN
+			MoM
+			```
+		formatString: #,0
+		displayFolder: Inteligencia_temporal
+		lineageTag: ed1b2e18-4e5b-4818-82fa-b78c8654175c
+
+	measure 'Ticket Medio MoM' = ```
+			
+			VAR UltimaData = 
+			CALCULATE(
+			    MAX(fVendas[datekey]),
+			    REMOVEFILTERS(dCalendario)
+			)
+			
+			VAR UltimaDataReal =
+			DATE(
+			    INT(UltimaData / 10000),                            -- Ano
+			    INT(MOD(UltimaData, 10000) / 100),                  -- Mês
+			    MOD(UltimaData, 100)                                -- Dia
+			)
+			
+			VAR DataLimite =
+			EDATE(UltimaDataReal, -1)
+			
+			VAR MoM =
+			CALCULATE(
+			    [Ticket Médio],
+			    DATEADD(dCalendario[Data], -1,MONTH),
+			    FILTER(
+			        ALL(dCalendario), dCalendario[Data] <= DataLimite
+			    )
+			)
+			
+			RETURN
+			MoM
+			```
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Inteligencia_temporal
+		lineageTag: 8578dd29-83b5-40e5-aabf-503632786230
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Variacao de ticket medio MoM' =
+			
+			VAR ValorAtual = [Ticket Médio]
+			VAR ValorAnterior = [Ticket Medio MoM]
+			VAR Variacao = ValorAtual - ValorAnterior
+			
+			RETURN
+			DIVIDE(Variacao, ValorAnterior)
+		formatString: 0%;-0%;0%
+		displayFolder: Inteligencia_temporal
+		lineageTag: 923cbb5a-dc5c-45db-b97e-e79918ad4220
+
+	measure 'Variacao de quantidade de clientes com pedidos MoM' =
+			
+			VAR ValorAtual = [Quantidade de clientes com pedidos]
+			VAR ValorAnterior = [Quantidade de clientes com pedidos MoM]
+			VAR Variacao = ValorAtual - ValorAnterior
+			
+			RETURN
+			DIVIDE(Variacao, ValorAnterior)
+		formatString: 0%;-0%;0%
+		displayFolder: Inteligencia_temporal
+		lineageTag: 4d1e91d1-fcb4-4a02-be58-89ff64ecf84e
+
+	measure 'Variacao de quantidade de clientes com pedidos MoM (c/ icone)' =
+			
+			VAR Porcentagem = [Variacao de quantidade de clientes com pedidos MoM]
+			
+			VAR Icone =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(Porcentagem), "➖",
+			        Porcentagem > 0, "🡅",
+			        Porcentagem < 0, "🡇",
+			        "➖"
+			    )
+			
+			RETURN
+			    Icone & " " & FORMAT(Porcentagem, "#,##0%")
+		displayFolder: Texto
+		lineageTag: 3a416c44-84e0-439f-a16a-cc8e35d6c032
+
+	measure 'Variacao de ticket medio MoM (c/ icone)' =
+			
+			VAR Porcentagem = [Variacao de ticket medio MoM]
+			
+			VAR Icone =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(Porcentagem), "➖",
+			        Porcentagem > 0, "🡅",
+			        Porcentagem < 0, "🡇",
+			        "➖"
+			    )
+			
+			RETURN
+			    Icone & " " & FORMAT(Porcentagem, "#,##0%")
+		displayFolder: Texto
+		lineageTag: 5aee1624-e7a5-4516-b6f8-978574695c0a
+
+	measure 'Quantidade de clientes por data' =
+			
+			CALCULATE(
+			    [Quantidade de clientes],
+			    USERELATIONSHIP(dClientes[datekey],dCalendario[datekey])
+			)
+		formatString: #,0
+		displayFolder: Clientes
+		lineageTag: 1a0f8345-2197-4c8b-8c6d-fa8190dc1432
+
+	measure 'Taxa de abandono' =
+			
+			VAR pedidos_geral =
+			    CALCULATE ( DISTINCTCOUNT ( fVendas[partner_order_id] ) )
+			VAR carrinhos_geral =
+			    CALCULATE (
+			        DISTINCTCOUNT ( fCarrinhos_abandonados[session_id] ),
+			        fCarrinhos_abandonados[cart_type] = "Carrinho abandonado"
+			    )
+			VAR carrinhos =
+			    CALCULATE ( DISTINCTCOUNT ( fCarrinhos_abandonados[session_id] ) )
+			VAR total = pedidos_geral + carrinhos_geral
+			VAR taxa =
+			    CALCULATE ( DIVIDE ( carrinhos, total, 0 ) )
+			RETURN
+			    taxa
+		formatString: 0%;-0%;0%
+		displayFolder: Carrinhos abandonados
+		lineageTag: 6e9c7290-0e50-4194-b6a3-ce2bdfa2850e
+
+	measure 'Sessao_agg - sessoes distintas de clientes logados' =
+			
+			CALCULATE(
+			    [Sessao_agg - sessoes distintas],
+			    NOT ISBLANK(fDatalayer_session_summary[account_id])
+			)
+		formatString: #,0
+		displayFolder: Sessao_agg
+		lineageTag: 80f6022b-a38c-4803-8b08-2d1714c39d56
+
+	measure 'Quantidade de associados' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dAssociados[partner])
+			)
+		formatString: #,0
+		displayFolder: Associados
+		lineageTag: 24bc35cb-81c2-45d3-8ce1-941f045613b6
+
+	measure 'Quantidade de associados acumulado' =
+			
+			CALCULATE(
+			    [Quantidade de associados],
+			    dAssociados[partnership_date] <= MAX(dCalendario[Data])
+			)
+		formatString: #,0
+		displayFolder: Associados
+		lineageTag: e6e07cfb-27d0-4646-a61c-e19bdc42b050
+
+	measure 'Quantidade de associados com pedidos' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( fVendas[partner_id] )
+			)
+		formatString: #,0
+		displayFolder: Associados
+		lineageTag: edbb705e-0ba0-48b4-ab70-309dc244ae34
+
+	measure 'Quantidade de associados por periodo' =
+			
+			CALCULATE(
+			    [Quantidade de associados],
+			    USERELATIONSHIP(dAssociados[datekey],dCalendario[datekey])
+			)
+		formatString: #,0
+		displayFolder: Associados
+		lineageTag: 4194e553-1f4b-420b-a45a-823e4de731e2
+
+	measure 'Estoque de ofertas' =
+			
+			CALCULATE(
+			    SUM(dOfertas[quantity_avaliable])
+			)
+		formatString: #,0
+		displayFolder: Ofertas
+		lineageTag: df9fc510-27a6-4438-bb7b-b0dbd17bea13
+
+	measure 'Menor Preço SKU' =
+			
+			CALCULATE(
+			    MIN(dOfertas[unit_price]),
+			    ALLEXCEPT(dOfertas, dOfertas[sku_id])
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Ofertas
+		lineageTag: d8a3c5fe-2879-423f-bd57-53814dd93772
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure Ofertas =
+			
+			CALCULATE(
+			    COUNT(dOfertas[sku_id])
+			)
+		formatString: #,0
+		displayFolder: Ofertas
+		lineageTag: 5e90ceed-7638-4de3-af9e-000d296d36d1
+
+	measure 'Ofertas distinta' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dOfertas[sku_id])
+			)
+		formatString: #,0
+		displayFolder: Ofertas
+		lineageTag: 93352dd2-a0ca-486c-85b3-e761560da77c
+
+	measure 'Preco maximo vendido' =
+			
+			CALCULATE(
+			    MAX(fVendas[amount_charged]),
+			    ALLEXCEPT(fVendas,fVendas[sku_id],dAssociados[trading_name])
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Produtos\Geral
+		lineageTag: 044be161-7120-4b70-afcb-d2b1add83e61
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Preco minimo vendido' =
+			
+			CALCULATE(
+			    MIN(fVendas[amount_charged]),
+			    ALLEXCEPT(fVendas,fVendas[sku_id],dAssociados[trading_name])
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Produtos\Geral
+		lineageTag: 189cd3e4-9124-40fa-ba83-661b8d1cc1bc
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Produtos com ofertas' =
+			
+			CALCULATE(
+			    [Quantidade de produtos cadastrados],
+			    FILTER(dOfertas, [Ofertas distinta] > 0)
+			)
+		formatString: #,0
+		displayFolder: Produtos\Geral
+		lineageTag: 42d4a1a5-d134-4fa0-a9c8-90aab161defa
+
+	measure 'Quantidade de produtos cadastrados' = DISTINCTCOUNT(dProdutos[sku_id])
+		formatString: #,0
+		displayFolder: Produtos\Geral
+		lineageTag: 1d8393b5-c810-4c6d-af08-14ea1417a0ee
+
+	measure 'Pareto de categoria 1 por vendas' = ```
+			
+			VAR TotalVendas = CALCULATE([GMV], ALLSELECTED(dProdutos))
+			VAR TotalAtual = [GMV]
+			VAR tbResumo = 
+			    SUMMARIZE(
+			        ALLSELECTED(dProdutos),
+			        dProdutos[category_level_1],
+			        "Total", [GMV]
+			    )
+			VAR TotalAcumulado = 
+			    SUMX(
+			        FILTER(
+			            tbResumo,
+			            [Total] >= TotalAtual
+			        ),
+			        [Total]
+			    )
+			RETURN
+			TotalAcumulado / TotalVendas
+			```
+		formatString: 0%;-0%;0%
+		displayFolder: Produtos\Categoria
+		lineageTag: 6cf0812b-b431-4643-894b-a5c2653955d7
+
+	measure 'Rank vendas por categoria 1' =
+			
+			RANKX(
+			    ALLSELECTED(dProdutos[category_level_1]),
+			    CALCULATE(
+			        SUMX(fVendas,
+			            (fVendas[quantity] * fVendas[amount_charged]) + fVendas[median_charged_shipping] + fVendas[avg_credit_card_interest] + fVendas[avg_total_tax]
+			        )
+			    ),,
+			    DESC,
+			    Dense
+			)
+		formatString: 0
+		displayFolder: Produtos\Categoria
+		lineageTag: 5695b17e-3b60-4472-a773-71e327880090
+
+	measure 'Quantidade de produtos sem venda' =
+			
+			[Quantidade de produtos cadastrados] - [Quantidade de produtos distintos vendidos]
+		formatString: #,0
+		displayFolder: Produtos\Geral
+		lineageTag: eaca13d9-1739-4052-afa8-8e64631ab67b
+
+	measure 'Preco medio vendido' =
+			
+			AVERAGEX(fVendas, fVendas[unit_price])
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Produtos\Geral
+		lineageTag: 8dfcf5f5-99ae-40dc-a80b-a38d39a0fb4d
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Pedidos convertido' =
+			
+			DIVIDE(
+			    [Pedidos - Autoatendimento],
+			    [Pedidos]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pedidos\Geral
+		lineageTag: 45652cc6-a6d4-4672-b1d2-ace9edaaa8fd
+
+	measure 'Limite de valor GMV' = [GMV] * 1.1
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Formatação
+		lineageTag: fe22de70-6770-4a4d-b3e8-59171dab32e4
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Limite de valor Pedidos' = [Pedidos] * 1.2
+		displayFolder: Formatação
+		lineageTag: cfb33919-9f58-475a-8b69-f9bd7b5cfd70
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vendedores cadastrados' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dVendedores[account_id])
+			)
+		formatString: #,0
+		displayFolder: Vendedores
+		lineageTag: 038ebe2d-2892-41f0-a847-e2b419b072e2
+
+	measure 'Vendedores com pedidos' =
+			
+			CALCULATE(
+			    [Vendedores cadastrados],
+			    FILTER(
+			        fVendas,
+			        [Pedidos] > 0
+			    )
+			)
+		formatString: #,0
+		displayFolder: Vendedores
+		lineageTag: c2791e6b-647f-4bd8-b01d-c46ab7dfb994
+
+	measure 'Rank vendas por associados' =
+			
+			RANKX(
+			    ALLSELECTED(dAssociados[trading_name]),
+			    CALCULATE(
+			        SUMX(fVendas,
+			            (fVendas[quantity] * fVendas[amount_charged]) + fVendas[median_charged_shipping] + fVendas[avg_credit_card_interest] + fVendas[avg_total_tax]
+			        )
+			    ),,
+			    DESC,
+			    Dense
+			)
+		formatString: 0
+		displayFolder: Associados
+		lineageTag: 415ec268-ab4b-49ce-b74c-9aecc28726c4
+
+	measure 'Rank de sku_id por GMV' =
+			
+			RANKX(
+			    ALLSELECTED(dProdutos[sku_name]),
+			    CALCULATE(
+			        SUMX(fVendas,
+			            (fVendas[quantity] * fVendas[amount_charged]) + fVendas[median_charged_shipping] + fVendas[avg_credit_card_interest] + fVendas[avg_total_tax]
+			        )
+			    ),,
+			    DESC,
+			    Dense
+			)
+		formatString: 0
+		displayFolder: Produtos\Geral
+		lineageTag: 540a23fc-1c46-4a68-a173-a939d00b57a2
+
+	measure Cupons = DISTINCTCOUNT(dCupons[coupon_id])
+		formatString: #,0
+		displayFolder: Cupons
+		lineageTag: 1cd226fe-5738-40f9-90f9-50fe2b94c21d
+
+	measure 'Cupons com pedido' =
+			
+			DISTINCTCOUNT(
+			    fVendas[coupon_id]
+			)
+		formatString: #,0
+		displayFolder: Cupons
+		lineageTag: 84903f1e-d676-4ba6-a29a-48982e6675b1
+
+	measure 'GMV - Cupom' =
+			
+			CALCULATE(
+			    [GMV],
+			    NOT ISBLANK(fVendas[coupon_id])
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: Receita digital\GMV
+		lineageTag: 669b2252-295e-4b19-bee9-970429af67bd
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Rank vendas por cupom' =
+			
+			RANKX(
+			    ALLSELECTED(dCupons[campaign]),
+			    CALCULATE(
+			        SUMX(fVendas,
+			            (fVendas[quantity] * fVendas[amount_charged]) + fVendas[median_charged_shipping] + fVendas[avg_credit_card_interest] + fVendas[avg_total_tax]
+			        )
+			    ),,
+			    DESC,
+			    Dense
+			)
+		formatString: 0
+		displayFolder: Cupons
+		lineageTag: 67984521-2d21-4910-984d-ba64cdd8438c
+
+	measure 'Conversao de ofertas' =
+			
+			DIVIDE(
+			    [Pedidos],
+			    [Ofertas]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Ofertas
+		lineageTag: 25d99373-b245-44bd-b033-121eb264d6fa
+
+	measure 'Data minima' = MIN(dCalendario[Data])
+		formatString: dd/mm/yyyy
+		displayFolder: Inteligencia_temporal
+		lineageTag: 9e7fb2d9-b5ea-496e-9e7b-10e3ce12ad61
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	measure 'Data maxima' = MAX(dCalendario[Data])
+		formatString: dd/mm/yyyy
+		displayFolder: Inteligencia_temporal
+		lineageTag: db1bea1b-dd94-47dc-ba41-81ab12cc2cf5
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	measure 'Periodo selecionado segmentador' =
+			
+			VAR dt_min = [Data minima]
+			VAR dt_max = [Data maxima]
+			
+			RETURN
+			"Período selecionado: "& dt_min &" a "& dt_max
+		displayFolder: Texto
+		lineageTag: 9d50c407-7682-493e-a0c2-1af5d7afc11f
+
+	column _
+		isHidden
+		formatString: 0
+		lineageTag: 3ecc4be6-5ff5-4179-ae22-435e9aba9748
+		summarizeBy: sum
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medidas = calculated
+		mode: import
+		source = ROW ( "Column", BLANK () )
+
+	annotation PBI_Id = 5e114c18271b4f2582bd09238c5643c8
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

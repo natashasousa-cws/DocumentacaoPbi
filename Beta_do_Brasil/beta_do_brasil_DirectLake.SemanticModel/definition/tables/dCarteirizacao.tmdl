@@ -1,0 +1,44 @@
+table dCarteirizacao
+	lineageTag: 0d5a2526-705c-401f-824c-2f1cd36cc110
+	sourceLineageTag: [beta_do_brasil].[dCarteirizacao]
+
+	column id_account_seller
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 45153230-272f-498a-995f-2c4dd0560f9f
+		sourceLineageTag: id_account_seller
+		summarizeBy: sum
+		sourceColumn: id_account_seller
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_account_customer
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 330e6b50-4785-4b2f-a878-ab104c16e42d
+		sourceLineageTag: id_account_customer
+		summarizeBy: sum
+		sourceColumn: id_account_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_store
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: be0a395b-1b3f-41ab-b67e-60c7d7e0067e
+		sourceLineageTag: id_store
+		summarizeBy: sum
+		sourceColumn: id_store
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCarteirizacao = entity
+		mode: directLake
+		source
+			entityName: dCarteirizacao
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

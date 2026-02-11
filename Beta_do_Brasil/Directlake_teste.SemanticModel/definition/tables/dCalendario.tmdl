@@ -1,0 +1,381 @@
+table dCalendario
+	lineageTag: 9d6ca94b-559c-49a5-8df0-066f15fc9951
+	sourceLineageTag: [beta_do_brasil].[dCalendario]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6a7c046c-b3a9-4bf5-b36d-6dabf41b6e42
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: d60993e5-13ad-41c8-9802-592068372c1c
+		sourceLineageTag: Ano
+		summarizeBy: sum
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: a5c00b07-6dc6-44fb-92eb-58e3e20f5561
+		sourceLineageTag: Trimestre
+		summarizeBy: sum
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNo
+		dataType: int64
+		formatString: 0
+		lineageTag: d87ab6d4-0267-42d7-85c3-42b601365d41
+		sourceLineageTag: MesNo
+		summarizeBy: sum
+		sourceColumn: MesNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 456c08ba-c128-4787-a29f-8729918b4516
+		sourceLineageTag: Dia
+		summarizeBy: sum
+		sourceColumn: Dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoMesDia
+		dataType: int64
+		formatString: 0
+		lineageTag: 8970a558-779c-44fd-a836-6cc5fa476308
+		sourceLineageTag: AnoMesDia
+		summarizeBy: sum
+		sourceColumn: AnoMesDia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês
+		dataType: string
+		lineageTag: 3b4d1a01-d2cc-427c-8c39-c8da1cc821f4
+		sourceLineageTag: Mês
+		summarizeBy: none
+		sourceColumn: Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês/Ano
+		dataType: string
+		lineageTag: b9699f8b-8ac1-4484-8fc1-6cdeca1ba261
+		sourceLineageTag: Mês/Ano
+		summarizeBy: none
+		sourceColumn: Mês/Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre/Ano
+		dataType: string
+		lineageTag: 15190b15-307c-4072-ac6b-d65423d435fa
+		sourceLineageTag: Trimestre/Ano
+		summarizeBy: none
+		sourceColumn: Trimestre/Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia_Semana
+		dataType: int64
+		formatString: 0
+		lineageTag: a14d13f3-ca2e-405b-bbba-c0ead840cff1
+		sourceLineageTag: Dia_Semana
+		summarizeBy: sum
+		sourceColumn: Dia_Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome_Dia
+		dataType: string
+		lineageTag: 926719a9-c3b7-4960-93e8-c3ad2f7f2db3
+		sourceLineageTag: Nome_Dia
+		summarizeBy: none
+		sourceColumn: Nome_Dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome_Dia_abv
+		dataType: string
+		lineageTag: f58ba75c-35c9-4398-bd4f-02953d00e43d
+		sourceLineageTag: Nome_Dia_abv
+		summarizeBy: none
+		sourceColumn: Nome_Dia_abv
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana_Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 18749bbf-5fe0-499f-9078-e08e5c652566
+		sourceLineageTag: Semana_Ano
+		summarizeBy: sum
+		sourceColumn: Semana_Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana/Ano
+		dataType: string
+		lineageTag: 1ae259dd-c821-4833-8272-8ea3d32ef651
+		sourceLineageTag: Semana/Ano
+		summarizeBy: none
+		sourceColumn: Semana/Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoSemana
+		dataType: int64
+		formatString: 0
+		lineageTag: c1a593ca-434e-47c5-a604-054854c9a6c3
+		sourceLineageTag: AnoSemana
+		summarizeBy: sum
+		sourceColumn: AnoSemana
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoMes
+		dataType: int64
+		formatString: 0
+		lineageTag: e3e8ec31-0896-4541-befe-bfbe7841edd8
+		sourceLineageTag: AnoMes
+		summarizeBy: sum
+		sourceColumn: AnoMes
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoTrimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 35169682-f2ec-4ca2-bcbb-6e8d8d94d3c6
+		sourceLineageTag: AnoTrimestre
+		summarizeBy: sum
+		sourceColumn: AnoTrimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoFiscal
+		dataType: string
+		lineageTag: 7077d4d3-ce18-469a-ade0-6a36f2563259
+		sourceLineageTag: AnoFiscal
+		summarizeBy: none
+		sourceColumn: AnoFiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre_Fiscal
+		dataType: string
+		lineageTag: 411744fc-63a5-4074-9981-44585cf81c3c
+		sourceLineageTag: Trimestre_Fiscal
+		summarizeBy: none
+		sourceColumn: Trimestre_Fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês_Fiscal
+		dataType: int64
+		formatString: 0
+		lineageTag: 41ada12d-a7a6-47d9-aaba-2ef208b30634
+		sourceLineageTag: Mês_Fiscal
+		summarizeBy: sum
+		sourceColumn: Mês_Fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Futuro
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e7357d45-e635-402e-8d41-2fec0508cb29
+		sourceLineageTag: Futuro
+		summarizeBy: none
+		sourceColumn: Futuro
+
+		annotation SummarizationSetBy = Automatic
+
+	column Offset_Dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 08d1ec0e-2adf-478d-80d1-b39f2adfe0fa
+		sourceLineageTag: Offset_Dia
+		summarizeBy: sum
+		sourceColumn: Offset_Dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Offset_Semana
+		dataType: int64
+		formatString: 0
+		lineageTag: d5cec527-b8ce-4265-9fec-dd6b633fa1df
+		sourceLineageTag: Offset_Semana
+		summarizeBy: sum
+		sourceColumn: Offset_Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Offset_Mês
+		dataType: int64
+		formatString: 0
+		lineageTag: 013d1e1e-3e16-44ba-9a47-407c6850286a
+		sourceLineageTag: Offset_Mês
+		summarizeBy: sum
+		sourceColumn: Offset_Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column Offset_Trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 35f9ea7f-b926-46cb-83a8-a36f80e8dd16
+		sourceLineageTag: Offset_Trimestre
+		summarizeBy: sum
+		sourceColumn: Offset_Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Offset_Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: bb1cfe52-9b19-4e9b-a466-5d2d0aa64196
+		sourceLineageTag: Offset_Ano
+		summarizeBy: sum
+		sourceColumn: Offset_Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana_Completa
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b2e80396-3a25-4ff4-9949-cf64441f5398
+		sourceLineageTag: Semana_Completa
+		summarizeBy: none
+		sourceColumn: Semana_Completa
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês_Completo
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8e5ce5fa-3498-468d-a2da-fb46f5c73e48
+		sourceLineageTag: Mês_Completo
+		summarizeBy: none
+		sourceColumn: Mês_Completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre_Completo
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 22149f83-3675-407d-b288-7b98ed49e3cd
+		sourceLineageTag: Trimestre_Completo
+		summarizeBy: none
+		sourceColumn: Trimestre_Completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês/Ano_Fechamento
+		dataType: string
+		lineageTag: 043e68f5-e8bc-4927-8990-55834d79da77
+		sourceLineageTag: Mês/Ano_Fechamento
+		summarizeBy: none
+		sourceColumn: Mês/Ano_Fechamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoMes_Fechamento
+		dataType: int64
+		formatString: 0
+		lineageTag: f5813f84-1994-4ae2-a192-8cce34b6dbdf
+		sourceLineageTag: AnoMes_Fechamento
+		summarizeBy: sum
+		sourceColumn: AnoMes_Fechamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feriado
+		dataType: string
+		lineageTag: 829b285d-ab67-4597-bd16-af3c4d420fbb
+		sourceLineageTag: Feriado
+		summarizeBy: none
+		sourceColumn: Feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaÚtil
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2b8812ee-2c83-4976-91e2-762476af47e9
+		sourceLineageTag: DiaÚtil
+		summarizeBy: none
+		sourceColumn: DiaÚtil
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana_Mês
+		dataType: int64
+		formatString: 0
+		lineageTag: d9566987-6a52-4824-a35e-5e5afb86d0d5
+		sourceLineageTag: Semana_Mês
+		summarizeBy: sum
+		sourceColumn: Semana_Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês_Atual
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ff37efa7-4031-49a4-ab75-52f94406ae27
+		sourceLineageTag: Mês_Atual
+		summarizeBy: none
+		sourceColumn: Mês_Atual
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana_Atual
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 09fc1e57-6e75-4796-997b-93bc11a97d36
+		sourceLineageTag: Semana_Atual
+		summarizeBy: none
+		sourceColumn: Semana_Atual
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hoje
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d012c864-f7f4-4f28-9f01-e87859901425
+		sourceLineageTag: Hoje
+		summarizeBy: none
+		sourceColumn: Hoje
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 0644f35e-c4e3-4e87-b98a-5a22efc5194c
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendario = entity
+		mode: directLake
+		source
+			entityName: dCalendario
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

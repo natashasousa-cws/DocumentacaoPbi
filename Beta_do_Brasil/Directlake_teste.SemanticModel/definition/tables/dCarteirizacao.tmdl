@@ -1,0 +1,41 @@
+table dCarteirizacao
+	lineageTag: 9115c257-b64d-46b8-8f01-40e7216ff0d8
+	sourceLineageTag: [beta_do_brasil].[dCarteirizacao]
+
+	column id_account_seller
+		dataType: int64
+		formatString: 0
+		lineageTag: 93d351fc-163e-42db-ab1c-b1ee9789689f
+		sourceLineageTag: id_account_seller
+		summarizeBy: sum
+		sourceColumn: id_account_seller
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_account_customer
+		dataType: int64
+		formatString: 0
+		lineageTag: 1057443e-ca87-4483-af48-8e1fc654eb02
+		sourceLineageTag: id_account_customer
+		summarizeBy: sum
+		sourceColumn: id_account_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_store
+		dataType: int64
+		formatString: 0
+		lineageTag: 7d5ba2de-44d1-4bbd-93ab-c0b45ed2a800
+		sourceLineageTag: id_store
+		summarizeBy: sum
+		sourceColumn: id_store
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCarteirizacao = entity
+		mode: directLake
+		source
+			entityName: dCarteirizacao
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

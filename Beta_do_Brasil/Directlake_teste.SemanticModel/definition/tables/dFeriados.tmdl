@@ -1,0 +1,39 @@
+table dFeriados
+	lineageTag: 5507869f-5ae6-49a1-82f5-d4b181c0985b
+	sourceLineageTag: [beta_do_brasil].[dFeriados]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: da563848-7726-4047-8040-1d9a31b8d68b
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia_Semana
+		dataType: string
+		lineageTag: 5535edef-d288-4f03-9d58-51edc05e44e6
+		sourceLineageTag: Dia_Semana
+		summarizeBy: none
+		sourceColumn: Dia_Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feriado
+		dataType: string
+		lineageTag: bef1790c-ff58-4573-bcc2-97263f5fb28a
+		sourceLineageTag: Feriado
+		summarizeBy: none
+		sourceColumn: Feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dFeriados = entity
+		mode: directLake
+		source
+			entityName: dFeriados
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

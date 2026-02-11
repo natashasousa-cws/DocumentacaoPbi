@@ -1,0 +1,30 @@
+table dStatus_pedido
+	lineageTag: 094bd31b-8a74-4d5a-84c9-e41c9d8c98bf
+	sourceLineageTag: [beta_do_brasil].[dStatus_pedido]
+
+	column order_status
+		dataType: string
+		lineageTag: 17268e06-3400-464f-9216-ae6d292cb22b
+		sourceLineageTag: order_status
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ddf520a0-5c5f-43e9-bafb-b03d6865df11
+		sourceLineageTag: order_status_id
+		summarizeBy: sum
+		sourceColumn: order_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dStatus_pedido = entity
+		mode: directLake
+		source
+			entityName: dStatus_pedido
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

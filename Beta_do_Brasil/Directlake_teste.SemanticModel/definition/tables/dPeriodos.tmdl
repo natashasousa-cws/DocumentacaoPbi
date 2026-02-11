@@ -1,0 +1,40 @@
+table dPeriodos
+	lineageTag: 32182f79-d8e6-4454-a051-441dd9f65226
+	sourceLineageTag: [beta_do_brasil].[dPeriodos]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 664e07b2-b841-4a96-b2de-c2db45ac9312
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo
+		dataType: string
+		lineageTag: 101d4bd8-b273-42b4-8e19-e04c1639ca28
+		sourceLineageTag: Periodo
+		summarizeBy: none
+		sourceColumn: Periodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		dataType: int64
+		formatString: 0
+		lineageTag: f1321f97-b137-4b8f-98af-eac7b1d6a047
+		sourceLineageTag: Ordem
+		summarizeBy: sum
+		sourceColumn: Ordem
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dPeriodos = entity
+		mode: directLake
+		source
+			entityName: dPeriodos
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

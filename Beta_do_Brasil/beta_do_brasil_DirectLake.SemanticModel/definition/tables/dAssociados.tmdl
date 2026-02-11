@@ -1,0 +1,316 @@
+table dAssociados
+	lineageTag: f6177200-edea-4a20-bfc9-9dc96760b80f
+	sourceLineageTag: [beta_do_brasil].[dAssociados]
+
+	column copartner_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ffa6b6f3-169d-4df0-bd8d-3566992d6083
+		sourceLineageTag: copartner_id
+		summarizeBy: sum
+		sourceColumn: copartner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column trading_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fdaef7ea-0d2f-48a2-a0af-aa60afdc9d94
+		sourceLineageTag: trading_name
+		summarizeBy: none
+		sourceColumn: trading_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column trading_name_cut1
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6a77e97d-596e-482e-b37d-730346024a30
+		sourceLineageTag: trading_name_cut1
+		summarizeBy: none
+		sourceColumn: trading_name_cut1
+
+		annotation SummarizationSetBy = Automatic
+
+	column company_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cc0c553e-54d3-42bc-89c2-f3c24ad9570d
+		sourceLineageTag: company_name
+		summarizeBy: none
+		sourceColumn: company_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b8174898-32ab-4a2d-a2d9-b97291f9b291
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataform_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 370c9bb0-876a-42bc-9304-2acd1b4d0e9a
+		sourceLineageTag: plataform_status
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column partnership_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: c4643d15-5e3b-43f9-86fa-3c0a71c7003d
+		sourceLineageTag: partnership_date
+		summarizeBy: none
+		sourceColumn: partnership_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_update_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 04863e7c-78ad-4bf5-bcc0-af540be02b10
+		sourceLineageTag: last_update_date
+		summarizeBy: none
+		sourceColumn: last_update_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column street_address
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8b14beb9-3624-45f6-bc06-71b84901b845
+		sourceLineageTag: street_address
+		summarizeBy: none
+		sourceColumn: street_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b37bfa70-2039-4078-8dd6-77d8dc3839c1
+		sourceLineageTag: city
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a843418e-0116-4db1-8a09-36d28400a574
+		sourceLineageTag: uf
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 559e2a34-b865-40f2-9200-a966e14e210f
+		sourceLineageTag: country
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9fe78d08-67e5-4576-9d83-4afdad91f55b
+		sourceLineageTag: zip_code
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 185ee9af-075d-494c-b7ef-b1e7f1fd74d9
+		sourceLineageTag: partner_type
+		summarizeBy: none
+		sourceColumn: partner_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7c51ed70-0afa-47d0-83b8-ac5e573b9c68
+		sourceLineageTag: partner
+		summarizeBy: sum
+		sourceColumn: partner
+
+		annotation SummarizationSetBy = Automatic
+
+	column loja_configurada
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2054e50e-df81-42a9-a692-6d4754692f94
+		sourceLineageTag: loja_configurada
+		summarizeBy: none
+		sourceColumn: loja_configurada
+
+		annotation SummarizationSetBy = Automatic
+
+	column ecommerce_habilitado
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c613f9bd-c3ab-46ba-b741-35a36666f314
+		sourceLineageTag: ecommerce_habilitado
+		summarizeBy: none
+		sourceColumn: ecommerce_habilitado
+
+		annotation SummarizationSetBy = Automatic
+
+	column wirecard
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7270f378-4880-46fc-a74c-9ca1dbe3076d
+		sourceLineageTag: wirecard
+		summarizeBy: none
+		sourceColumn: wirecard
+
+		annotation SummarizationSetBy = Automatic
+
+	column retirada_loja
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dec794d0-dd30-426e-a106-537b5f18a96c
+		sourceLineageTag: retirada_loja
+		summarizeBy: none
+		sourceColumn: retirada_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column frota_propria
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 79a3b93f-32f7-45aa-8a14-6e215f637511
+		sourceLineageTag: frota_propria
+		summarizeBy: none
+		sourceColumn: frota_propria
+
+		annotation SummarizationSetBy = Automatic
+
+	column correios
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1c2219fd-6737-4ba0-a818-6585cbd0719f
+		sourceLineageTag: correios
+		summarizeBy: none
+		sourceColumn: correios
+
+		annotation SummarizationSetBy = Automatic
+
+	column entrega_economica
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9ed63304-80e1-4bd1-b349-c89811b60305
+		sourceLineageTag: entrega_economica
+		summarizeBy: none
+		sourceColumn: entrega_economica
+
+		annotation SummarizationSetBy = Automatic
+
+	column loggi
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 681c2a5b-6e3f-40d6-928b-03df74152b4b
+		sourceLineageTag: loggi
+		summarizeBy: none
+		sourceColumn: loggi
+
+		annotation SummarizationSetBy = Automatic
+
+	column cupom_habilitado
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f5a07224-3f05-4eb3-b271-6c14d46cf170
+		sourceLineageTag: cupom_habilitado
+		summarizeBy: none
+		sourceColumn: cupom_habilitado
+
+		annotation SummarizationSetBy = Automatic
+
+	column melhor_envio
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1f94d46e-e8f3-4429-acf1-d4032f2bcc4f
+		sourceLineageTag: melhor_envio
+		summarizeBy: none
+		sourceColumn: melhor_envio
+
+		annotation SummarizationSetBy = Automatic
+
+	column estados_b2b
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f2cec0ee-0230-4efc-9694-ccb536cbebab
+		sourceLineageTag: estados_b2b
+		summarizeBy: none
+		sourceColumn: estados_b2b
+
+		annotation SummarizationSetBy = Automatic
+
+	column estados_b2c
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 00263695-5531-43b5-a15a-b73790b4ec12
+		sourceLineageTag: estados_b2c
+		summarizeBy: none
+		sourceColumn: estados_b2c
+
+		annotation SummarizationSetBy = Automatic
+
+	column transportadoras
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 49ae058b-0208-45c2-ab8c-38ccd792c558
+		sourceLineageTag: transportadoras
+		summarizeBy: none
+		sourceColumn: transportadoras
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f1893c89-fb59-4053-9536-f48984e006f6
+		sourceLineageTag: state
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5bd8d96a-61b7-495b-b938-89cd92b7bc36
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dAssociados = entity
+		mode: directLake
+		source
+			entityName: dAssociados
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

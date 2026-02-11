@@ -1,0 +1,172 @@
+table fDatalayer_product_pageviews
+	lineageTag: 9469cd34-dc88-4aa1-9aec-755df992ac88
+	sourceLineageTag: [beta_do_brasil].[fDatalayer_product_pageviews]
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8a7a6bf1-c9cb-415e-bd3b-e7a6896d413e
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6cf3b1a0-0698-4c4a-a7e7-cbb2776219d5
+		sourceLineageTag: visitor_id
+		summarizeBy: sum
+		sourceColumn: visitor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_email
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8876848b-005a-496c-85b2-54e05e3d13ea
+		sourceLineageTag: visitor_email
+		summarizeBy: none
+		sourceColumn: visitor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: e675db3f-f9ab-4dc4-b7b6-bd03cdbfc247
+		sourceLineageTag: visitor_isloggedin
+		summarizeBy: none
+		sourceColumn: visitor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 90a4f214-e664-4339-bd29-af7479110c17
+		sourceLineageTag: vendor_id
+		summarizeBy: sum
+		sourceColumn: vendor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_email
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8ac79c20-daea-4207-a008-bccb2142143f
+		sourceLineageTag: vendor_email
+		summarizeBy: none
+		sourceColumn: vendor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: eff4a63d-1d65-4ac9-b026-2c9d4f989362
+		sourceLineageTag: vendor_isloggedin
+		summarizeBy: none
+		sourceColumn: vendor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 96a2c7c9-99f7-494c-8f96-10dcb2e75e06
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column distinct_count_session
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: aaddbb83-8e0d-4667-8747-839d5c76be19
+		sourceLineageTag: distinct_count_session
+		summarizeBy: sum
+		sourceColumn: distinct_count_session
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_max_datecreated
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 49a4b5cf-b787-4471-a943-9de902c39d3f
+		sourceLineageTag: datekey_max_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_max_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_datecreated_time
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: da14faba-35ea-4783-81d4-868d45c89700
+		sourceLineageTag: max_datecreated_time
+		summarizeBy: none
+		sourceColumn: max_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_min_datecreated
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e52961c4-615c-480a-aa89-42974097dff3
+		sourceLineageTag: datekey_min_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_min_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_datecreated_time
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4959d79f-c715-49dc-8784-99c4fbf0d920
+		sourceLineageTag: min_datecreated_time
+		summarizeBy: none
+		sourceColumn: min_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5d1b7525-b54f-4884-82ec-cd2b5be06a21
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 96968527-01fc-42ec-9172-03766b1d8406
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_product_pageviews = entity
+		mode: directLake
+		source
+			entityName: fDatalayer_product_pageviews
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

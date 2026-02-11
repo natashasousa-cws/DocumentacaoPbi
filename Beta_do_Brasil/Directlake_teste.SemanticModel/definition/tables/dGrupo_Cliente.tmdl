@@ -1,0 +1,77 @@
+table dGrupo_Cliente
+	lineageTag: f7564e8e-575f-4262-bd9a-11f40f4d267f
+	sourceLineageTag: [beta_do_brasil].[dGrupo_Cliente]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f0172a7f-c9dc-4ca6-9d6e-8fca31786699
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: 335162e8-f625-4086-afaa-9894bb2b8282
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: e66344e0-5fab-4ade-a8f5-a2fed97a1be2
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_type
+		dataType: string
+		lineageTag: 773572ae-43c4-4dbb-84d9-a71e083c5d09
+		sourceLineageTag: customer_type
+		summarizeBy: none
+		sourceColumn: customer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 13541e69-e689-4ea9-9927-e1f06e4e8aaa
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_group_type
+		dataType: string
+		lineageTag: cefbf1f2-7799-46cb-91d9-ac46652c9567
+		sourceLineageTag: customer_group_type
+		summarizeBy: none
+		sourceColumn: customer_group_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column enable_group_display_in_registration
+		dataType: int64
+		formatString: 0
+		lineageTag: b13e7c48-c48c-4ed5-99ed-1b19d6ee1224
+		sourceLineageTag: enable_group_display_in_registration
+		summarizeBy: sum
+		sourceColumn: enable_group_display_in_registration
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dGrupo_Cliente = entity
+		mode: directLake
+		source
+			entityName: dGrupo_Cliente
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

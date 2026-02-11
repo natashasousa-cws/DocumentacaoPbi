@@ -1,0 +1,87 @@
+table fMensageria_aux
+	lineageTag: d4d3c783-0208-4585-821e-bbc925bbc2f3
+	sourceLineageTag: [beta_do_brasil].[fMensageria_aux]
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 637098e5-79ce-48c8-8ac5-1fa53d650bb4
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_id
+		dataType: string
+		lineageTag: 4f4dace7-36fb-4859-9323-47ab894df435
+		sourceLineageTag: message_id
+		summarizeBy: none
+		sourceColumn: message_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: e46fa6c2-949e-4ccc-911e-1e42ec97fa5d
+		sourceLineageTag: status
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bb845134-0d47-4140-bd4f-70c84438ee59
+		sourceLineageTag: action_id
+		summarizeBy: sum
+		sourceColumn: action_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column identificador
+		dataType: string
+		lineageTag: dacafe61-18c6-4a6e-af7b-4653600f3e5e
+		sourceLineageTag: identificador
+		summarizeBy: none
+		sourceColumn: identificador
+
+		annotation SummarizationSetBy = Automatic
+
+	column projeto
+		dataType: string
+		lineageTag: d606f229-8e68-47ed-9d2b-7689d0180154
+		sourceLineageTag: projeto
+		summarizeBy: none
+		sourceColumn: projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: e80995f9-ffe0-4c68-8c09-8702520a77f0
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TTR
+		dataType: int64
+		formatString: 0
+		lineageTag: be6abb66-13e5-4cc0-ad80-2d4fc817bd05
+		sourceLineageTag: TTR
+		summarizeBy: sum
+		sourceColumn: TTR
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMensageria_aux = entity
+		mode: directLake
+		source
+			entityName: fMensageria_aux
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

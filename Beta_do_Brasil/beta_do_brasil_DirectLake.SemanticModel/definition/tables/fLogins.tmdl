@@ -1,0 +1,95 @@
+table fLogins
+	lineageTag: 5d8078da-86f1-4c3b-9b6d-a30afaccbeb1
+	sourceLineageTag: [beta_do_brasil].[fLogins]
+
+	column login_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 1a91cafd-49e5-461e-9494-71b142746818
+		sourceLineageTag: login_date
+		summarizeBy: none
+		sourceColumn: login_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0cf0b963-4974-4de1-83de-7d290d4aa25b
+		sourceLineageTag: account_user
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d65ce38a-b644-41fb-8e0a-7e0fd441d098
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column login_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a240c80e-fb27-4c1d-8883-39cd468d131b
+		sourceLineageTag: login_type
+		summarizeBy: none
+		sourceColumn: login_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 97c66c88-97c4-40d3-8648-d0a053537a43
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d2b0ac57-0c6a-4cab-910a-062f2939792e
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2c33e408-aa32-4651-ac90-3dab83ef506a
+		sourceLineageTag: account_type
+		summarizeBy: none
+		sourceColumn: account_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ba7fc168-0803-4f1a-af19-12d6b535ee73
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fLogins = entity
+		mode: directLake
+		source
+			entityName: fLogins
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

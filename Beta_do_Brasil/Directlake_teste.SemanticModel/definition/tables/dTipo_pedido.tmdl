@@ -1,0 +1,30 @@
+table dTipo_pedido
+	lineageTag: d9966ffc-4e2a-4584-83f7-0c627b1410dc
+	sourceLineageTag: [beta_do_brasil].[dTipo_pedido]
+
+	column order_type
+		dataType: string
+		lineageTag: 702204b8-483c-44ea-ada1-879740f62ea7
+		sourceLineageTag: order_type
+		summarizeBy: none
+		sourceColumn: order_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_type_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a3618a08-7af8-4d88-9402-9eb26071d2af
+		sourceLineageTag: order_type_id
+		summarizeBy: sum
+		sourceColumn: order_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dTipo_pedido = entity
+		mode: directLake
+		source
+			entityName: dTipo_pedido
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

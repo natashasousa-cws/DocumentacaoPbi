@@ -1,0 +1,157 @@
+table fDatalayer_product_pageviews
+	lineageTag: 97ae2fcb-ad73-4683-89dd-0c633f33876e
+	sourceLineageTag: [beta_do_brasil].[fDatalayer_product_pageviews]
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3da6b297-6972-4315-b449-83a360f15644
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: aa0b54ec-62b0-454f-b987-a834f07b1f79
+		sourceLineageTag: visitor_id
+		summarizeBy: sum
+		sourceColumn: visitor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_email
+		dataType: string
+		lineageTag: 6e33e001-b2cb-4c69-b19e-e48486e9d157
+		sourceLineageTag: visitor_email
+		summarizeBy: none
+		sourceColumn: visitor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: af7be5c2-34b2-4496-af3e-5937595f292a
+		sourceLineageTag: visitor_isloggedin
+		summarizeBy: none
+		sourceColumn: visitor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: feff6cfc-7700-490c-b6dd-12ab561923eb
+		sourceLineageTag: vendor_id
+		summarizeBy: sum
+		sourceColumn: vendor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_email
+		dataType: string
+		lineageTag: ed772b74-eb6d-4ee3-aa36-314aad3e8947
+		sourceLineageTag: vendor_email
+		summarizeBy: none
+		sourceColumn: vendor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ead086f1-005c-482b-9073-b4583f145242
+		sourceLineageTag: vendor_isloggedin
+		summarizeBy: none
+		sourceColumn: vendor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b99473a6-6008-4fc8-a1ce-bd4ba1183267
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column distinct_count_session
+		dataType: int64
+		formatString: 0
+		lineageTag: 9d83b235-b438-4255-bdba-1b4efa8ef9aa
+		sourceLineageTag: distinct_count_session
+		summarizeBy: sum
+		sourceColumn: distinct_count_session
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_max_datecreated
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e05e1e7-1dbf-4d33-a882-2033325596e4
+		sourceLineageTag: datekey_max_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_max_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_datecreated_time
+		dataType: string
+		lineageTag: 1ede31c7-e8f0-41f6-b0b2-36ec0295297c
+		sourceLineageTag: max_datecreated_time
+		summarizeBy: none
+		sourceColumn: max_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_min_datecreated
+		dataType: int64
+		formatString: 0
+		lineageTag: 85123321-e14d-4685-a3b8-440e791ec4ae
+		sourceLineageTag: datekey_min_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_min_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_datecreated_time
+		dataType: string
+		lineageTag: 61178538-1898-49c5-93d3-917438323bcc
+		sourceLineageTag: min_datecreated_time
+		summarizeBy: none
+		sourceColumn: min_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 70155c45-4779-4c31-904e-3efb0945e34f
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 21379489-4fb0-4147-a77e-64608d0bfc8e
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_product_pageviews = entity
+		mode: directLake
+		source
+			entityName: fDatalayer_product_pageviews
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

@@ -1,0 +1,32 @@
+table dDispositivos
+	lineageTag: 81f037a7-0c43-410b-8766-ea5e0b588a85
+	sourceLineageTag: [beta_do_brasil].[dDispositivos]
+
+	column device
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 08211912-0aca-41be-8e79-fc0dda4ca5c0
+		sourceLineageTag: device
+		summarizeBy: none
+		sourceColumn: device
+
+		annotation SummarizationSetBy = Automatic
+
+	column device_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3b890561-4edf-42ce-950f-36e5126bfa43
+		sourceLineageTag: device_id
+		summarizeBy: sum
+		sourceColumn: device_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dDispositivos = entity
+		mode: directLake
+		source
+			entityName: dDispositivos
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

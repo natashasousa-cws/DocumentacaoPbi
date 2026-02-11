@@ -1,0 +1,152 @@
+table dOfertas
+	lineageTag: 32bbaa61-2216-4cd5-97c0-956464fab944
+	sourceLineageTag: [beta_do_brasil].[dOfertas]
+
+	column associate_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ac76c199-7302-4642-8cfd-1ec5091474a5
+		sourceLineageTag: associate_id
+		summarizeBy: sum
+		sourceColumn: associate_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 897698b9-1e09-4a08-8e5e-42aa91d91df2
+		sourceLineageTag: partner_id
+		summarizeBy: sum
+		sourceColumn: partner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 75bcb517-a915-4c9a-97cc-f706d9530951
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column company_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6f1d209e-31be-4989-a17b-2f60d3db206a
+		sourceLineageTag: company_name
+		summarizeBy: none
+		sourceColumn: company_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 69dbc739-01b9-43ea-b20a-caea2512ce3a
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e9488593-3135-4054-9882-0d99271d8b98
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity_avaliable
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 13349cea-686e-4f55-b086-f039e06729aa
+		sourceLineageTag: quantity_avaliable
+		summarizeBy: sum
+		sourceColumn: quantity_avaliable
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(13, 2)
+		lineageTag: 7802fcba-5798-4d6c-a967-f86391132883
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column partner_part_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c6c2b128-826e-4d3e-8823-674c52c039b4
+		sourceLineageTag: partner_part_code
+		summarizeBy: none
+		sourceColumn: partner_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_created_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 0da9b654-3347-4a82-a670-351d28e3dc6e
+		sourceLineageTag: sku_created_date
+		summarizeBy: none
+		sourceColumn: sku_created_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_last_updated
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: bbee7d17-e57c-445a-b31e-98ec7de766dc
+		sourceLineageTag: sku_last_updated
+		summarizeBy: none
+		sourceColumn: sku_last_updated
+
+		annotation SummarizationSetBy = Automatic
+
+	column by_request
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 8755431c-6d55-467d-a50f-b14de732e580
+		sourceLineageTag: by_request
+		summarizeBy: sum
+		sourceColumn: by_request
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 85bbb32e-37fa-4579-9f49-235c33250c34
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dOfertas = entity
+		mode: directLake
+		source
+			entityName: dOfertas
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

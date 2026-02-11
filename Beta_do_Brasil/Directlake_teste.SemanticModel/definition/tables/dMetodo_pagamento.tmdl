@@ -1,0 +1,30 @@
+table dMetodo_pagamento
+	lineageTag: a14f06ae-4e0d-4455-b74e-a698f43d0281
+	sourceLineageTag: [beta_do_brasil].[dMetodo_pagamento]
+
+	column payment_method
+		dataType: string
+		lineageTag: bdfd96c9-7c6d-4f2c-b39d-2f455210b4dc
+		sourceLineageTag: payment_method
+		summarizeBy: none
+		sourceColumn: payment_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_method_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8aa9707d-ba09-4290-b81a-68dd695daaad
+		sourceLineageTag: payment_method_id
+		summarizeBy: sum
+		sourceColumn: payment_method_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dMetodo_pagamento = entity
+		mode: directLake
+		source
+			entityName: dMetodo_pagamento
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

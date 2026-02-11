@@ -1,0 +1,71 @@
+table fVendas_datatime
+	lineageTag: 3bd4a50d-e10f-4e1c-95b7-320bae083587
+	sourceLineageTag: [beta_do_brasil].[fVendas_datatime]
+
+	column partener_order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 344583b1-45ed-495b-9786-263ebc0aa782
+		sourceLineageTag: partener_order_id
+		summarizeBy: sum
+		sourceColumn: partener_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 24caa673-d612-42fa-866b-b5d178eec61e
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column datatime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 80f26824-395e-4897-afca-2aadcd303f54
+		sourceLineageTag: datatime
+		summarizeBy: none
+		sourceColumn: datatime
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora
+		dataType: int64
+		formatString: 0
+		lineageTag: 39a7e169-0230-41cc-90ba-f32a2045b0d3
+		sourceLineageTag: hora
+		summarizeBy: sum
+		sourceColumn: hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column minuto
+		dataType: int64
+		formatString: 0
+		lineageTag: 418e9a62-88a4-4b15-8839-1c4f6c3fa464
+		sourceLineageTag: minuto
+		summarizeBy: sum
+		sourceColumn: minuto
+
+		annotation SummarizationSetBy = Automatic
+
+	column TimeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: c4e10778-bc2b-41b3-b10d-87fa63ea5519
+		sourceLineageTag: TimeKey
+		summarizeBy: count
+		sourceColumn: TimeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fVendas_datatime = entity
+		mode: directLake
+		source
+			entityName: fVendas_datatime
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

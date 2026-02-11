@@ -1,0 +1,50 @@
+table agg_last_purchase
+	lineageTag: ec8b463b-8166-4c5a-9b55-a2b533c92b99
+	sourceLineageTag: [beta_do_brasil].[agg_last_purchase]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bd989b78-9d35-4cf4-bcc5-3f936397185f
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_purchase
+		dataType: int64
+		formatString: 0
+		lineageTag: 07fd5cd5-d5d7-434d-b5fd-b262cfe75335
+		sourceLineageTag: days_since_last_purchase
+		summarizeBy: sum
+		sourceColumn: days_since_last_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataform_status
+		dataType: string
+		lineageTag: 29e9fa23-f7b4-46c5-919d-ad6d06c948c3
+		sourceLineageTag: plataform_status
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 231d3815-18f4-47e0-ad1d-9f0a26ca83c7
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_purchase = entity
+		mode: directLake
+		source
+			entityName: agg_last_purchase
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

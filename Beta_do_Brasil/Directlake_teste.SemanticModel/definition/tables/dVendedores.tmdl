@@ -1,0 +1,225 @@
+table dVendedores
+	lineageTag: 6a974ed8-20f1-4e57-a844-de03e2b0920d
+	sourceLineageTag: [beta_do_brasil].[dVendedores]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4d5cd9a3-2bbc-4686-b293-0e3e1a8cd0c8
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_create_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4a1923dd-4914-4afd-8b31-f1ca32dd402e
+		sourceLineageTag: account_create_date
+		summarizeBy: none
+		sourceColumn: account_create_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e4c7817f-15df-4df7-b73a-5a7ead3090d2
+		sourceLineageTag: client_id
+		summarizeBy: sum
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_create_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 296c2ab7-0891-4fca-963b-a308dd9ff857
+		sourceLineageTag: client_create_date
+		summarizeBy: none
+		sourceColumn: client_create_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 9ac5d7cc-9a01-4c10-aa9d-aac521c84fb7
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		lineageTag: 7e921d08-aa42-4827-9631-fb1f66a13f1e
+		sourceLineageTag: first_name
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		lineageTag: 1449225e-7bd7-45ef-8f9d-530e4b95b40b
+		sourceLineageTag: last_name
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column contact
+		dataType: string
+		lineageTag: 28bfabce-2886-40ae-8860-bc7ff2ca297d
+		sourceLineageTag: contact
+		summarizeBy: none
+		sourceColumn: contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: c9598f82-29d7-4c01-a886-50e31559e2ba
+		sourceLineageTag: account_user
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: 8c3148a0-1b5c-492f-a1b0-b294bd295733
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 4b5c7acd-64f4-4b0a-8f21-fcb6a18194e4
+		sourceLineageTag: gender
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column person_type
+		dataType: string
+		lineageTag: a36b9dac-220e-45a1-826b-9f925c49ad35
+		sourceLineageTag: person_type
+		summarizeBy: none
+		sourceColumn: person_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column age
+		dataType: int64
+		formatString: 0
+		lineageTag: 405c53a0-f24d-4b02-b6d9-d9444ecaa09a
+		sourceLineageTag: age
+		summarizeBy: sum
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: c184a7b7-6c8c-4e87-98ec-27d28d3e8a28
+		sourceLineageTag: country
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF
+		dataType: string
+		lineageTag: 58671441-ca88-465b-9b14-7325e43175e1
+		sourceLineageTag: UF
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 6bfdaaf4-2f16-4b7b-af14-a5e504cbd6a9
+		sourceLineageTag: state
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 8f440fb0-eb5f-4a93-a51f-1441bfa9e92a
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 02a2f721-fb14-4989-84af-7dc1fdae0326
+		sourceLineageTag: city
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		lineageTag: 96a7d559-55ce-4000-88a9-95f5a30af7d1
+		sourceLineageTag: zip_code
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone_number
+		dataType: string
+		lineageTag: ad3026ca-e397-4a62-8b9e-1a368c0481ff
+		sourceLineageTag: phone_number
+		summarizeBy: none
+		sourceColumn: phone_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 496bd7bf-c491-4b11-adc4-740a9ea213b9
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column profile_picture
+		dataType: string
+		lineageTag: 8c8cfea2-669d-4f4e-b5e2-d848bf281131
+		sourceLineageTag: profile_picture
+		summarizeBy: none
+		sourceColumn: profile_picture
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 50cf0384-eead-4ec1-90c0-6efdacd3503c
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dVendedores = entity
+		mode: directLake
+		source
+			entityName: dVendedores
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

@@ -1,0 +1,32 @@
+table dTipo_envio
+	lineageTag: fc04524e-f8f6-4c61-8fbd-24ce5c1d2c07
+	sourceLineageTag: [beta_do_brasil].[dTipo_envio]
+
+	column shipping_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e133b35f-baf4-421a-b89a-780c0a462e08
+		sourceLineageTag: shipping_type
+		summarizeBy: none
+		sourceColumn: shipping_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_type_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9f5b29e0-9940-4898-a31b-b436d68e4fbb
+		sourceLineageTag: shipping_type_id
+		summarizeBy: sum
+		sourceColumn: shipping_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dTipo_envio = entity
+		mode: directLake
+		source
+			entityName: dTipo_envio
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

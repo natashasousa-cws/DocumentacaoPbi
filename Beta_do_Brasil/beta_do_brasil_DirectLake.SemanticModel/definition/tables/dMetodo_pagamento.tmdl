@@ -1,0 +1,32 @@
+table dMetodo_pagamento
+	lineageTag: 628d58d8-302d-4481-90e8-38c7767cbfac
+	sourceLineageTag: [beta_do_brasil].[dMetodo_pagamento]
+
+	column payment_method
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f3c95cd4-72ae-4ae9-8950-8261144c9b46
+		sourceLineageTag: payment_method
+		summarizeBy: none
+		sourceColumn: payment_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_method_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f776e608-7906-4f4c-9b35-15c2562a8f17
+		sourceLineageTag: payment_method_id
+		summarizeBy: sum
+		sourceColumn: payment_method_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dMetodo_pagamento = entity
+		mode: directLake
+		source
+			entityName: dMetodo_pagamento
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

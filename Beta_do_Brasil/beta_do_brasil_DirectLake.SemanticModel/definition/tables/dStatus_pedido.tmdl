@@ -1,0 +1,32 @@
+table dStatus_pedido
+	lineageTag: be682bbe-9822-4d94-a806-df19ff50a26d
+	sourceLineageTag: [beta_do_brasil].[dStatus_pedido]
+
+	column order_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6951bb8e-fbce-456e-8bad-957577774f16
+		sourceLineageTag: order_status
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1fc94ff2-fe4c-4539-bc69-bc25838d6eef
+		sourceLineageTag: order_status_id
+		summarizeBy: sum
+		sourceColumn: order_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dStatus_pedido = entity
+		mode: directLake
+		source
+			entityName: dStatus_pedido
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+

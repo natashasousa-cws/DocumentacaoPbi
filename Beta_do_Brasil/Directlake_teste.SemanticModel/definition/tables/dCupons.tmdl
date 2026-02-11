@@ -1,0 +1,70 @@
+table dCupons
+	lineageTag: 5b34990a-17d8-4fe9-89fc-74c77960bb1b
+	sourceLineageTag: [beta_do_brasil].[dCupons]
+
+	column coupon_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 04833b7b-a2f5-4351-b885-60f7a4a6fa00
+		sourceLineageTag: coupon_id
+		summarizeBy: sum
+		sourceColumn: coupon_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 146ead6e-cb4c-48ca-94ca-c81b2d111398
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: int64
+		formatString: 0
+		lineageTag: 05505cfd-2f71-45e4-b428-9a5c98eb56a1
+		sourceLineageTag: code
+		summarizeBy: sum
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign
+		dataType: string
+		lineageTag: 8c2ab165-b83b-433e-a9f8-66947092ebe6
+		sourceLineageTag: campaign
+		summarizeBy: none
+		sourceColumn: campaign
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_begin
+		dataType: int64
+		formatString: 0
+		lineageTag: ca89b487-79d8-4f85-8cfb-fb3939e42a62
+		sourceLineageTag: datekey_begin
+		summarizeBy: sum
+		sourceColumn: datekey_begin
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_end
+		dataType: int64
+		formatString: 0
+		lineageTag: 5833170d-0739-4505-a029-d48084585946
+		sourceLineageTag: datekey_end
+		summarizeBy: sum
+		sourceColumn: datekey_end
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCupons = entity
+		mode: directLake
+		source
+			entityName: dCupons
+			schemaName: beta_do_brasil
+			expressionSource: 'DirectLake - beta_do_brasil_gold_lake'
+

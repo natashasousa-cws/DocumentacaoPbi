@@ -1,0 +1,63 @@
+table dGrupo_Cliente
+	lineageTag: da9fb605-3278-4b2b-9fcd-10d795fa9b4b
+	sourceLineageTag: [beta_do_brasil].[dGrupo_Cliente]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 58bd6b95-14b2-4ecf-b8a0-7400fa8e03c7
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d7f72de7-c5bf-4c43-95f2-d818cff61d47
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4a13cc27-befe-47f7-ab66-5820fcd36f32
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b0ee28ca-b00c-4473-a98a-b371464bcc81
+		sourceLineageTag: customer_type
+		summarizeBy: none
+		sourceColumn: customer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5889d9b6-2f0e-46ca-a774-d91d5ba82cb4
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dGrupo_Cliente = entity
+		mode: directLake
+		source
+			entityName: dGrupo_Cliente
+			schemaName: beta_do_brasil
+			expressionSource: DatabaseQuery
+
