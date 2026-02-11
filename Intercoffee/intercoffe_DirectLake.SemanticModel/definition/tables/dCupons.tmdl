@@ -1,0 +1,70 @@
+table dCupons
+	lineageTag: 7251c5cd-a000-449a-9b61-5b1467e31c52
+	sourceLineageTag: [intercoffee].[dCupons]
+
+	column coupon_id
+		dataType: int64
+		formatString: 0
+		lineageTag: aa3069a0-e6ca-4807-8675-a557f2c58e61
+		sourceLineageTag: coupon_id
+		summarizeBy: sum
+		sourceColumn: coupon_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1adf41ec-134f-4e95-931a-cd9c7ddc2455
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: int64
+		formatString: 0
+		lineageTag: f91c9720-2a1f-4338-b5f4-479b98dd437f
+		sourceLineageTag: code
+		summarizeBy: sum
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign
+		dataType: string
+		lineageTag: b6d71361-bd20-4c08-8b9b-8d064ce867d7
+		sourceLineageTag: campaign
+		summarizeBy: none
+		sourceColumn: campaign
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_begin
+		dataType: int64
+		formatString: 0
+		lineageTag: 15104feb-9a4d-413b-83cb-cff1424d053b
+		sourceLineageTag: datekey_begin
+		summarizeBy: sum
+		sourceColumn: datekey_begin
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_end
+		dataType: int64
+		formatString: 0
+		lineageTag: b9dd9678-4c62-4d8c-bd7b-72e27ffdb735
+		sourceLineageTag: datekey_end
+		summarizeBy: sum
+		sourceColumn: datekey_end
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCupons = entity
+		mode: directLake
+		source
+			entityName: dCupons
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

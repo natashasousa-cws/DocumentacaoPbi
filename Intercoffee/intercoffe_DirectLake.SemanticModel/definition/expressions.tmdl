@@ -1,0 +1,9 @@
+expression 'DirectLake - intercoffee_gold_lake' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/25cba242-03e1-4baf-bafc-72617a7dc187/40dcfc23-e8dc-49a7-8bcf-ed3c9ae8e091", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: cbc95df5-cafb-4e5b-b9d5-e17a1e2b9903
+
+	annotation PBI_IncludeFutureArtifacts = False
+

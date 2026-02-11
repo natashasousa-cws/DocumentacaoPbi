@@ -1,0 +1,294 @@
+table fVendas
+	lineageTag: 7c357f10-6861-4ee2-a147-9399476082b8
+	sourceLineageTag: [intercoffee].[fVendas]
+
+	column partner_order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d6586173-8c15-4538-a1d2-2d2ebad988e4
+		sourceLineageTag: partner_order_id
+		summarizeBy: sum
+		sourceColumn: partner_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cart_order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: abd7a856-bcde-4468-96f1-c09f817d0fbe
+		sourceLineageTag: cart_order_id
+		summarizeBy: sum
+		sourceColumn: cart_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_subtotal
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 74dca8e2-8012-4f07-a5bf-6f1c3efbc340
+		sourceLineageTag: order_subtotal
+		summarizeBy: sum
+		sourceColumn: order_subtotal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column order_total
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: d08cf320-8c25-4fab-a98e-e2e9b2fd8760
+		sourceLineageTag: order_total
+		summarizeBy: sum
+		sourceColumn: order_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column discount_value
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 478b9f38-b1c4-4416-ba6a-9601575ba9ba
+		sourceLineageTag: discount_value
+		summarizeBy: sum
+		sourceColumn: discount_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column order_status_id
+		dataType: int64
+		formatString: 0
+		lineageTag: fc07de91-4d5b-4427-9995-c105873b715c
+		sourceLineageTag: order_status_id
+		summarizeBy: sum
+		sourceColumn: order_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_type_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 815b1820-0f9a-4ff8-8a4f-e75d61bb9b35
+		sourceLineageTag: order_type_id
+		summarizeBy: sum
+		sourceColumn: order_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column device_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 262c612b-21f4-4598-887c-e4c4df800629
+		sourceLineageTag: device_id
+		summarizeBy: sum
+		sourceColumn: device_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_method_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ade48b7-cee5-4625-9204-a68363294dbf
+		sourceLineageTag: payment_method_id
+		summarizeBy: sum
+		sourceColumn: payment_method_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_type_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c44bd9ab-9a1e-423b-8cbe-dccb592b7dc4
+		sourceLineageTag: shipping_type_id
+		summarizeBy: sum
+		sourceColumn: shipping_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b719fbae-4035-45e1-bc55-bf1d5232a1a7
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: d1e05510-2e3a-48da-b96e-bfa206a0e3b6
+		sourceLineageTag: quantity
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount_charged
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 0377a5e2-0f0b-4be7-a895-2ffa3aec59c8
+		sourceLineageTag: amount_charged
+		summarizeBy: sum
+		sourceColumn: amount_charged
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column unit_price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 579eedf6-49a2-46b6-8e4d-f9f258eed968
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column median_charged_shipping
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: adc3bf8c-4780-4a63-b047-43d9b9376f6f
+		sourceLineageTag: median_charged_shipping
+		summarizeBy: sum
+		sourceColumn: median_charged_shipping
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column avg_credit_card_interest
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 87509c6d-d61a-491e-ab8b-943d6705ed25
+		sourceLineageTag: avg_credit_card_interest
+		summarizeBy: sum
+		sourceColumn: avg_credit_card_interest
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column avg_total_tax
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: cbe6f3bc-8def-4cd8-bd36-86492d44c1a9
+		sourceLineageTag: avg_total_tax
+		summarizeBy: sum
+		sourceColumn: avg_total_tax
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column coupon_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b5d12099-f642-4dfe-bbdc-cf323279b3dc
+		sourceLineageTag: coupon_id
+		summarizeBy: sum
+		sourceColumn: coupon_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column invoice
+		dataType: string
+		lineageTag: c46f49e3-fbc5-44c4-a8e1-d0af43878cf7
+		sourceLineageTag: invoice
+		summarizeBy: none
+		sourceColumn: invoice
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 76bc5863-5743-416f-81be-c037800cdf5b
+		sourceLineageTag: client_account_id
+		summarizeBy: sum
+		sourceColumn: client_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 21311342-6382-4509-a71c-44289c4f7399
+		sourceLineageTag: salesperson_account_id
+		summarizeBy: sum
+		sourceColumn: salesperson_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_document
+		dataType: string
+		lineageTag: 67cfa568-ec68-4c06-800d-7d354b7b463c
+		sourceLineageTag: salesperson_document
+		summarizeBy: none
+		sourceColumn: salesperson_document
+
+		annotation SummarizationSetBy = Automatic
+
+	column marketplace
+		dataType: string
+		lineageTag: 80cd9ea8-f481-4f66-8321-0584fa1b2f56
+		sourceLineageTag: marketplace
+		summarizeBy: none
+		sourceColumn: marketplace
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f004f4a8-12f8-4d05-9753-b87da7459974
+		sourceLineageTag: partner_id
+		summarizeBy: sum
+		sourceColumn: partner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 87cb8908-c84b-4bf1-bc84-35d0634895b6
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 99b21268-d337-48a1-9bdc-f8a2eccde1b8
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_faturamento
+		dataType: int64
+		formatString: 0
+		lineageTag: 9cf7ba90-85f3-412c-bf82-ec6d7cc14bfe
+		sourceLineageTag: datekey_faturamento
+		summarizeBy: sum
+		sourceColumn: datekey_faturamento
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fVendas = entity
+		mode: directLake
+		source
+			entityName: fVendas
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

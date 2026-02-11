@@ -1,0 +1,30 @@
+table dStatus_pedido
+	lineageTag: 2d7e74f1-ddc0-420b-a644-56c45341a71e
+	sourceLineageTag: [intercoffee].[dStatus_pedido]
+
+	column order_status
+		dataType: string
+		lineageTag: ca3a8d21-3379-4b31-a180-d9147a2ce5df
+		sourceLineageTag: order_status
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c6b5dff-021c-4c2c-9a50-29ae52767940
+		sourceLineageTag: order_status_id
+		summarizeBy: sum
+		sourceColumn: order_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dStatus_pedido = entity
+		mode: directLake
+		source
+			entityName: dStatus_pedido
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

@@ -1,0 +1,26 @@
+table param_Category_concentration
+	lineageTag: 7b257a3c-48f0-44e0-b30f-f4750052f6ef
+
+	measure 'param_Category_concentration Valor' = SELECTEDVALUE('param_Category_concentration'[param_Category_concentration], 1)
+		formatString: 0
+		lineageTag: 604b3306-0635-4faf-a48b-a8850474b4d0
+
+	column param_Category_concentration
+		formatString: 0
+		lineageTag: 20550ad1-512c-4793-8af0-5b49c1d1d88a
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition param_Category_concentration-b40b722c-6995-48f1-aa9b-0863677ee3c2 = calculated
+		mode: import
+		source = GENERATESERIES(1, 120, 1)
+
+	annotation PBI_Id = 00574643ecdb4f1cbfe427c9da324a5a
+

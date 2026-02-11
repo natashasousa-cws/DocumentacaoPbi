@@ -1,0 +1,157 @@
+table fDatalayer_product_pageviews
+	lineageTag: 319d302e-5f47-42fa-9619-a72670a43186
+	sourceLineageTag: [intercoffee].[fDatalayer_product_pageviews]
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 06869664-3d5b-4868-9249-306abf124300
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4eefcb83-87bb-41b1-83d4-c1777205b2b1
+		sourceLineageTag: visitor_id
+		summarizeBy: sum
+		sourceColumn: visitor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_email
+		dataType: string
+		lineageTag: 62aa1a0a-4b85-44d3-93dc-dcee436f3d37
+		sourceLineageTag: visitor_email
+		summarizeBy: none
+		sourceColumn: visitor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2d0813f7-f200-442c-8655-e77b6696a64d
+		sourceLineageTag: visitor_isloggedin
+		summarizeBy: none
+		sourceColumn: visitor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b0146478-e7f7-4cbd-8327-7dd77ecb001c
+		sourceLineageTag: vendor_id
+		summarizeBy: sum
+		sourceColumn: vendor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_email
+		dataType: string
+		lineageTag: ab8fbdfc-1e88-4cf4-8765-25bd31f4ea92
+		sourceLineageTag: vendor_email
+		summarizeBy: none
+		sourceColumn: vendor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0c84ae5b-210c-4083-8f65-91347e1835ce
+		sourceLineageTag: vendor_isloggedin
+		summarizeBy: none
+		sourceColumn: vendor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ef3df118-9ba2-44ab-b20a-c36b41ee6f4a
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column distinct_count_session
+		dataType: int64
+		formatString: 0
+		lineageTag: 2479d692-48f6-4288-84ea-611aba72787d
+		sourceLineageTag: distinct_count_session
+		summarizeBy: sum
+		sourceColumn: distinct_count_session
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_max_datecreated
+		dataType: int64
+		formatString: 0
+		lineageTag: 13e27e87-aeab-46d9-9be3-ffb81ac0cc89
+		sourceLineageTag: datekey_max_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_max_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_datecreated_time
+		dataType: string
+		lineageTag: 68728f7b-900c-46ee-a67c-aa0408ae2b5e
+		sourceLineageTag: max_datecreated_time
+		summarizeBy: none
+		sourceColumn: max_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_min_datecreated
+		dataType: int64
+		formatString: 0
+		lineageTag: a667c021-5e7f-4f72-b3a5-32c0d6a3a7b9
+		sourceLineageTag: datekey_min_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_min_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_datecreated_time
+		dataType: string
+		lineageTag: 1b588449-ebef-40f0-a383-ce24467753f8
+		sourceLineageTag: min_datecreated_time
+		summarizeBy: none
+		sourceColumn: min_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 84d5b114-2d24-4cfe-abc0-226e710ce86c
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d3bdacb-8dc6-4bdd-a914-d5971b7cc33f
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_product_pageviews = entity
+		mode: directLake
+		source
+			entityName: fDatalayer_product_pageviews
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

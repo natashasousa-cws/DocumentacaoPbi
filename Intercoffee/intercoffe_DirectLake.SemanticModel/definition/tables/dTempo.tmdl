@@ -1,0 +1,77 @@
+table dTempo
+	lineageTag: b85e1e8d-4978-4e2d-a87e-193a569a61f5
+	sourceLineageTag: [intercoffee].[dTempo]
+
+	column Hora
+		dataType: int64
+		formatString: 0
+		lineageTag: 841e8c81-c35d-4834-97e1-b37dc836d8e4
+		sourceLineageTag: Hora
+		summarizeBy: sum
+		sourceColumn: Hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column Minuto
+		dataType: int64
+		formatString: 0
+		lineageTag: 47c38c72-21b0-4de9-bda1-9dc6d9d38a31
+		sourceLineageTag: Minuto
+		summarizeBy: sum
+		sourceColumn: Minuto
+
+		annotation SummarizationSetBy = Automatic
+
+	column TimeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 493a93e7-a0ed-4de0-a24d-5d86a3f30c14
+		sourceLineageTag: TimeKey
+		summarizeBy: count
+		sourceColumn: TimeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descricao_Tempo
+		dataType: string
+		lineageTag: 1200e7bc-2549-4b00-bfef-a89cbf513549
+		sourceLineageTag: Descricao_Tempo
+		summarizeBy: none
+		sourceColumn: Descricao_Tempo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hora_Curta
+		dataType: string
+		lineageTag: 3fa3b983-fbfa-4ee5-8bf0-fbd8d21aa08b
+		sourceLineageTag: Hora_Curta
+		summarizeBy: none
+		sourceColumn: Hora_Curta
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo_do_Dia
+		dataType: string
+		lineageTag: 6b82a369-9dcb-458e-a515-a41dc5cf00b7
+		sourceLineageTag: Periodo_do_Dia
+		summarizeBy: none
+		sourceColumn: Periodo_do_Dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column AM_PM
+		dataType: string
+		lineageTag: 09967910-d1ff-4527-ae72-f7ee91192a63
+		sourceLineageTag: AM_PM
+		summarizeBy: none
+		sourceColumn: AM_PM
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dTempo = entity
+		mode: directLake
+		source
+			entityName: dTempo
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

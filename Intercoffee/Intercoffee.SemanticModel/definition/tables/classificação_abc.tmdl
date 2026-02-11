@@ -1,0 +1,72 @@
+table classificação_abc
+	lineageTag: f1453678-8ceb-4861-9213-57945818619e
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 82e09a48-302d-412f-8c1b-0afa1732db86
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vd_produto
+		dataType: double
+		lineageTag: 6c5a8ada-a6f8-478f-8ae1-dd8cf2ebd586
+		summarizeBy: sum
+		sourceColumn: vd_produto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column venda_acc
+		dataType: double
+		lineageTag: 92221846-a180-4f91-8082-fdad0de8f0e7
+		summarizeBy: sum
+		sourceColumn: venda_acc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column venda_total
+		dataType: double
+		lineageTag: 506cfc19-a6e6-457d-b137-b2298c2d55eb
+		summarizeBy: sum
+		sourceColumn: venda_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pct_acc
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 153f1db5-b5dd-435f-9d3a-1caf784b9afa
+		summarizeBy: sum
+		sourceColumn: pct_acc
+
+		annotation SummarizationSetBy = Automatic
+
+	column class_abc
+		dataType: string
+		lineageTag: aae01878-9304-4707-9713-ea7d9bcb2ce3
+		summarizeBy: none
+		sourceColumn: class_abc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition classificação_abc = m
+		mode: import
+		queryGroup: Calendario\Parametros
+		source =
+				let
+				    Fonte = Odbc.Query("dsn=Athena", "with vd_produto as (#(lf)select#(lf)#(tab)v.""id do produto"" sku_id, #(lf)#(tab)SUM( cast( replace( replace(""preço cobrado item"" , '.', ''), ',', '.') AS decimal(11, 2)) * ""quantidade de itens"") vd_produto#(lf)from bi.venda v#(lf)where #(lf)#(tab)v.""id site"" in (8638) and#(lf)#(tab)v.""status do pedido"" not in ('Cancelado', 'Aguardando pagamento', 'Pré-encomenda')#(lf)GROUP BY #(lf)#(tab)v.""id do produto""#(lf)#(tab))#(lf)select #(lf)#(tab)vdp.sku_id,#(lf)#(tab)vdp.vd_produto,#(lf)#(tab)sum(vdp.vd_produto) over (order by vdp.vd_produto desc) venda_acc,#(lf)#(tab)sum(vdp.vd_produto) over () venda_total,#(lf)#(tab)sum(vdp.vd_produto) over (order by vdp.vd_produto desc) / sum(vdp.vd_produto) over () pct_acc,#(lf)#(tab)case #(lf)#(tab)#(tab)when sum(vdp.vd_produto) over (order by vdp.vd_produto desc) / sum(vdp.vd_produto) over () <= 0.80 then 'A'#(lf)#(tab)#(tab)when sum(vdp.vd_produto) over (order by vdp.vd_produto desc) / sum(vdp.vd_produto) over () <= 0.95 then 'B'#(lf)#(tab)#(tab)else 'C'#(lf)#(tab)end class_abc#(lf)from vd_produto vdp")
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

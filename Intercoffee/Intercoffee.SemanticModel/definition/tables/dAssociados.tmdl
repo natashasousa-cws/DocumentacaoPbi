@@ -1,0 +1,224 @@
+table dAssociados
+	lineageTag: e6fbfb48-019e-47e0-a6e2-81df15541891
+
+	/// Identificador do parceiro
+	column copartner_id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 6f18a4bb-7ccf-487e-a4ba-c8441d8574f3
+		summarizeBy: none
+		sourceColumn: copartner_id
+
+		annotation SummarizationSetBy = User
+
+	/// Nome fantasia
+	column trading_name
+		dataType: string
+		lineageTag: 00bd3147-b2ce-4369-bf76-819d8b3c5cfd
+		summarizeBy: none
+		sourceColumn: trading_name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Razão social
+	column company_name
+		dataType: string
+		lineageTag: 4dd872ea-d0ad-4d21-82f0-e283b7792fd2
+		summarizeBy: none
+		sourceColumn: company_name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Documento do parceiro
+	column document
+		dataType: string
+		lineageTag: a6d014bc-8435-4f30-9454-60b35c14622a
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Tipo do documento do parceiro
+	/// 
+	/// PF ou PJ
+	column document_type
+		dataType: string
+		lineageTag: 573b55d8-82e4-4ffd-8d8d-71416d397ccc
+		summarizeBy: none
+		sourceColumn: document_type
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Status do parceiro na plataforma
+	column plataform_status
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bdbbb6f0-99bb-40c5-b008-6b2baebea81b
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Data de criação
+	column partnership_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1b51136b-618f-416f-aa84-2e61528c0537
+		summarizeBy: none
+		sourceColumn: partnership_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Data de última alteração
+	column last_update_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a4c4cd55-9f5e-4042-8c03-f953a128b64d
+		summarizeBy: none
+		sourceColumn: last_update_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Endereço
+	column street_address
+		dataType: string
+		lineageTag: 9c3841a9-9c50-44cd-bba2-4bd5a7f2330f
+		summarizeBy: none
+		sourceColumn: street_address
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Número do endereço
+	column street_number
+		dataType: string
+		lineageTag: 8d0e2c0f-22d0-489e-b0a2-70a0863fd013
+		summarizeBy: none
+		sourceColumn: street_number
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Complemento
+	column complement
+		dataType: string
+		lineageTag: 1e480ce2-2bb5-413a-9a44-a7f955c41297
+		summarizeBy: none
+		sourceColumn: complement
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cidade
+	column city
+		dataType: string
+		lineageTag: ea6c6dc5-299a-4954-9a9a-901c16efe5d7
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	/// UF
+	column state
+		dataType: string
+		lineageTag: 005a594e-5161-4e9b-b693-d4d5cdcd39e5
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	/// CEP
+	column zip_code
+		dataType: string
+		lineageTag: 29d64762-66f0-480e-a506-28d2530407f5
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Identificador do portal
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c988625d-9c7e-4129-a78a-5d1b6f3e92e3
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Tipo de parceiro
+	/// 
+	/// Varejo ou Distribuidor
+	column partner_type
+		dataType: string
+		lineageTag: a157640f-19b3-4355-8c85-1046c16f6d98
+		summarizeBy: none
+		sourceColumn: partner_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 820dbd06-b668-417f-9902-1fe7f93ff1a7
+		summarizeBy: sum
+		sourceColumn: partner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: 27b83352-6021-4c18-8557-af66fcf58afe
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 3f575401-32d8-4536-afde-2436a68cbc6a
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column partner_status
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 37cd0b81-ef76-4938-9cc4-8fb871ac648f
+		summarizeBy: none
+		sourceColumn: partner_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column partnership_status
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 35efc2b6-fba5-4276-90c3-29fe89068bf9
+		summarizeBy: none
+		sourceColumn: partnership_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dAssociados-7b7cbe77-e836-4e61-ac1e-556bd16c0a65 = m
+		mode: import
+		queryGroup: Parceiros
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"bb33815e-8a0c-4500-8b94-c3ab986a469f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="bb33815e-8a0c-4500-8b94-c3ab986a469f"]}[Data],
+				    dAssociados_ = #"bb33815e-8a0c-4500-8b94-c3ab986a469f"{[entity="dAssociados",version=""]}[Data],
+				    #"Linhas Filtradas" = Table.SelectRows(dAssociados_, each [partner_id] = 7014)
+				in
+				    #"Linhas Filtradas"
+
+	annotation PBI_ResultType = Table
+

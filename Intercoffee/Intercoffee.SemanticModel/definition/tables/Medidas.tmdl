@@ -1,0 +1,2296 @@
+table Medidas
+	lineageTag: 4a7822b7-4d35-4e13-9856-4681ba3aba83
+
+	/// Soma dos totais de pedidos, excluindo pedidos com status:
+	/// 
+	/// - Cancelado
+	/// - Aguardando pagamento
+	/// - Pré-encomenda
+	/// - Pagamento no caixa
+	/// 
+	/// As informações dos pedidos, encontram-se na tabela fVendas
+	measure '01.00 GMV' =
+			
+			CALCULATE(
+			    SUMX(
+			        VALUES(fVendas[partner_order_id]),
+			        CALCULATE(
+			            AVERAGE(fVendas[order_total]),
+			            NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda", "Pagamento no caixa"})
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: 970bac14-638d-4e33-bfdb-8f16c0d09fd9
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// GMV realizado 100% pelo cliente
+	measure '01.01 GMV AA' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    fVendas[class_AA_MV] in {"100% cliente"}
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: 3917b055-815f-4183-8b68-3c22ce29cfd9
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '01.01 % GMV AA' =
+			
+			DIVIDE(
+			    [01.01 GMV AA], [01.00 GMV]
+			)
+		formatString: #,0%;-#,0%;#,0%
+		displayFolder: 20. GT%
+		lineageTag: 342d7342-66c1-45d9-b73e-db1e1328a5fb
+
+		changedProperty = FormatString
+
+	/// GMV realizado por interação cliente-vendedor
+	measure '01.02 GMV VA' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    fVendas[class_AA_MV] in {"Venda assistida"}
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: dcab3e3b-eecb-41c2-bee6-b326032031d7
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '01.02 % GMV VA' =
+			
+			DIVIDE(
+			    [01.02 GMV VA], [01.00 GMV]
+			)
+		formatString: #,0%;-#,0%;#,0%
+		displayFolder: 20. GT%
+		lineageTag: 6f325507-75d2-43d0-a03b-591d684049fb
+
+		changedProperty = FormatString
+
+	/// GMV realizado 100% pelo vendedor
+	measure '01.03 GMV MV' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    fVendas[class_AA_MV] in {"100% vendedor"}
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: 705d2c6d-1db0-4c96-bbc8-b832982b4d94
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '01.03 % GMV MV' =
+			
+			DIVIDE(
+			    [01.03 GMV MV], [01.00 GMV]
+			)
+		formatString: #,0%;-#,0%;#,0%
+		displayFolder: 20. GT%
+		lineageTag: d7a00883-4f20-40d2-9bea-30a2f01f8d7d
+
+		changedProperty = FormatString
+
+	/// GMV via APP.
+	/// Adicionado ao modelo após 05/07/2022.
+	measure '01.04 GMV App' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    fVendas[order_device] = "App"
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: 53b7e726-c296-4547-b2ea-9f5327b52603
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// GMV via desktop.
+	/// Adicionado ao modelo após 05/07/2022.
+	measure '01.05 GMV Desktop' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    fVendas[order_device] = "Desktop"
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: c9f7c5aa-b48a-47eb-80c4-a7726178858d
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// GMV via mobile.
+	/// Adicionado ao modelo após 05/07/2022.
+	measure '01.06 GMV Mobile' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    fVendas[order_device] = "Mobile"
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: fae21709-d615-4fcc-9cde-c92d0f123401
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '01.04 % GMV App' =
+			
+			DIVIDE(
+			    [01.04 GMV App], [01.00 GMV]
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 20. GT%
+		lineageTag: 6d28eae7-57b4-45da-b5e0-ff694700ff6c
+
+		changedProperty = FormatString
+
+	measure '01.05 % GMV Desktop' =
+			
+			DIVIDE(
+			    [01.05 GMV Desktop], [01.00 GMV]
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 20. GT%
+		lineageTag: d14d4506-5994-48d3-8149-bf97f340bf67
+
+		changedProperty = FormatString
+
+	measure '01.06 % GMV Mobile' =
+			
+			DIVIDE(
+			    [01.06 GMV Mobile], [01.00 GMV]
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 20. GT%
+		lineageTag: 74fa13cc-73b7-4b55-bcc3-84c9e4f17e7a
+
+		changedProperty = FormatString
+
+	/// Soma dos totais de pedidos, excluindo pedidos com status:
+	/// 
+	/// - Cancelado
+	/// - Aguardando pagamento
+	/// - Pré-encomenda
+	/// 
+	/// É utilizado pelo financeiro para a criação de reports.
+	measure '01.07 GMV Finance' =
+			
+			CALCULATE(
+			    SUMX(
+			        VALUES(fVendas[partner_order_id]),
+			        CALCULATE(
+			            AVERAGE(fVendas[order_total]),
+			            NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda"})
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: 14ee0981-cac9-4010-ac05-b0de51571f5d
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Total de GMV transacionado pela plataforma, engloba todos os status.
+	measure '01.09 GMV Potential' =
+			
+			CALCULATE(
+			    SUMX(
+			        VALUES(fVendas[partner_order_id]),
+			        CALCULATE(
+			            AVERAGE(fVendas[order_total]),
+			            ALL(fVendas[order_status])
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: 120e5f34-9b4c-4405-9eda-00c816e7fc3c
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Quantidade acumulada de clientes até a data máxima selecionada.
+	measure '02.31 Clients Accum' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dClientes[account_id]),
+			    dClientes[Vendedor?] = FALSE(),
+			    dClientes[client_id] <> BLANK(),
+			    dClientes[account_create_date] <= MAX(dCalendario[Data])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: 6ec0397e-3f8b-4a4c-82e5-287f412ff5c5
+
+		changedProperty = FormatString
+
+	/// Valor do GMV que teve algum tipo desconto aplicado.
+	measure '01.08 GMV Coupons' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    fVendas[coupon_id] <> BLANK()
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: 3f448624-f2be-46bd-8787-049e690c3aa7
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Número de pedidos, excluindo pedidos com status:
+	/// 
+	/// - Cancelado
+	/// - Aguardando pagamento
+	/// - Pré-encomenda
+	/// - Pagamento no caixa
+	measure '05.00 Orders' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fVendas[partner_order_id]),
+			    NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda", "Pagamento no caixa"})
+			)
+		formatString: #,0
+		displayFolder: 05. Orders
+		lineageTag: 0a6a4aac-8871-454a-9a5a-5561df4ba9a1
+
+		changedProperty = FormatString
+
+	/// Pedidos realizados 100% pelo cliente
+	measure '05.01 Orders AA' =
+			
+			CALCULATE(
+			    [05.00 Orders],
+			    fVendas[class_AA_MV] in {"100% cliente"}
+			)
+		formatString: 0
+		displayFolder: 05. Orders
+		lineageTag: 0159c74f-fd0c-443e-9194-b643e6fb185e
+
+	/// Pedidos realizados com interação cliente-vendedor
+	measure '05.02 Orders VA' =
+			
+			CALCULATE(
+			    [05.00 Orders],
+			    fVendas[class_AA_MV] in {"Venda assistida"}
+			)
+		formatString: 0
+		displayFolder: 05. Orders
+		lineageTag: 4418b725-df23-4852-99dc-94e710078402
+
+	/// Pedidos realizado 100% pelo vendedor.
+	measure '05.03 Orders MV' =
+			
+			CALCULATE(
+			    [05.00 Orders],
+			    fVendas[class_AA_MV] in {"100% vendedor"}
+			)
+		formatString: 0
+		displayFolder: 05. Orders
+		lineageTag: 55746355-4f2e-440b-bbbf-a4e71528aa8b
+
+	/// Pedidos via app
+	measure '05.04 Orders App' =
+			
+			CALCULATE(
+			    [05.00 Orders],
+			    fVendas[order_device] = "App"
+			)
+		formatString: 0
+		displayFolder: 05. Orders
+		lineageTag: 7b963d14-4dac-4629-8c14-026f295c2ead
+
+	/// Pedidos via desktop
+	measure '05.05 Orders Desktop' =
+			
+			CALCULATE(
+			    [05.00 Orders],
+			    fVendas[order_device] = "Desktop"
+			)
+		formatString: 0
+		displayFolder: 05. Orders
+		lineageTag: c8f4563d-8b47-4514-bfc0-2906b508b808
+
+	/// Pedidos via mobile
+	measure '05.06 Orders Mobile' =
+			
+			CALCULATE(
+			    [05.00 Orders],
+			    fVendas[order_device] = "Mobile"
+			)
+		formatString: 0
+		displayFolder: 05. Orders
+		lineageTag: 23f3f7f3-2b34-494e-8cf5-1e334ddc2f3b
+
+	/// Pedidos com cupom
+	measure '05.16 Orders Coupons' =
+			
+			CALCULATE(
+			    [05.00 Orders],
+			    fVendas[coupon_id] <> BLANK()
+			)
+		formatString: 0
+		displayFolder: 05. Orders
+		lineageTag: 47270c74-3c33-4289-b77a-042ab75f554d
+
+	/// Quantidade de clientes entre os periodos selecionados.
+	measure '02.32 Clients per date' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dClientes[account_id]),
+			    dClientes[client_id] <> BLANK(),
+			    dClientes[Vendedor?] = FALSE(),
+			    dClientes[account_create_date] <= MAX(dCalendario[Data]),
+			    USERELATIONSHIP(dCalendario[Data], dClientes[account_create_date])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: dc636f83-0d98-4d36-a96e-b0ccd3296568
+
+		changedProperty = FormatString
+
+	/// Total de clientes.
+	/// 
+	/// Clientes é definido como conta com client_id.
+	/// 
+	/// Podem existir mais contas que clientes.
+	/// 
+	/// As informações de clientes se encontram em dClientes
+	measure '02.00 Clients' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dClientes[account_id]),
+			    dClientes[client_id] <> BLANK(),
+			    dClientes[Vendedor?] = FALSE(),
+			    USERELATIONSHIP(dClientes[client_create_date], dCalendario[Data])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: a03279e8-ea83-472a-96fd-7c915e4d4176
+
+		changedProperty = FormatString
+
+	/// Clientes com compras em autoatendimento.
+	measure '02.01 Clients AA' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    [05.01 Orders AA])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: 24b2b1bd-4a50-49ea-80ac-bcae786d2ae9
+
+		changedProperty = FormatString
+
+	/// Clientes com compras assistida.
+	measure '02.02 Clients VA' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    [05.02 Orders VA])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: a3a30c0f-16ac-4313-be64-ffee64c0dd36
+
+		changedProperty = FormatString
+
+	/// Clientes com compras em módulo vendedor
+	measure '02.03 Clients MV' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    [05.03 Orders MV])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: 4dca2642-d158-4420-9de3-21bda81130ac
+
+		changedProperty = FormatString
+
+	/// Clientes com compras via APP
+	measure '02.04 Clients App' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    [05.04 Orders App])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: cdeb3568-6c0b-48e4-abd8-191bc28a21ad
+
+		changedProperty = FormatString
+
+	/// Clientes com compras via Desktop
+	measure '02.05 Clients Desktop' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    [05.05 Orders Desktop])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: 8d1709b8-5968-4fdb-83f2-d30a382023ed
+
+		changedProperty = FormatString
+
+	/// Clientes com compras via celular
+	measure '02.06 Clients Mobile' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    [05.06 Orders Mobile])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: c10c7aca-3c13-4824-a991-743bf5c3e96d
+
+		changedProperty = FormatString
+
+	/// Clientes com algum pedido
+	measure '02.33 Clients w orders' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    [05.00 Orders])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: 21154579-dbe4-4941-b684-c6ef3cb11645
+
+		changedProperty = FormatString
+
+	/// Quantidade distinta de itens.
+	measure '06.99 Distinct SKU' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fVendas[sku_id]),
+			    NOT(fVendas[order_status] IN {"Aguardando pagamento", "Cancelado", "Pré-encomenda"})
+			)
+		formatString: #,0
+		displayFolder: 06. Products
+		lineageTag: 6ff5219e-16eb-459e-af4d-b0339191b63a
+
+		changedProperty = FormatString
+
+	/// Ticket Médio
+	measure '04.00 ATP' =
+			
+			DIVIDE(
+			    [01.00 GMV],
+			    [05.00 Orders]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: 124b07b2-9c4c-40cb-9f5e-d3c470b0f7fd
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Quantidade de clientes ativos no periodo selecionado. 
+	/// 
+	/// É necessário utilizar junto das medidas [XX.30]
+	/// 
+	/// O parametro que controla essa medida, por padrão, é [Data máxima] - 1 Mês
+	/// 
+	/// Usar a coluna param_ActiveClients para modificar
+	measure '02.30 Active Clients' =
+			
+			VAR Seletor     =   [param_ActiveClients Valor]
+			VAR dtFinal     =   MAX(dCalendario[Data])
+			VAR dtInicio    =   EDATE(dtFinal, -Seletor)
+			RETURN
+			CALCULATE(
+			    DISTINCTCOUNT(fVendas[client_account_id]),
+			    NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda"}),
+			    dClientes[Vendedor?] = FALSE(),
+			    USERELATIONSHIP(dClientes[account_create_date], dCalendario[Data]),
+			    DATESBETWEEN(
+			        dCalendario[Data],
+			        dtInicio,
+			        dtFinal)
+			)
+		formatString: 0
+		displayFolder: 02. Clients
+		lineageTag: b50ff75f-09b7-48cc-91ef-0bdcde4d291a
+
+		changedProperty = FormatString
+
+	/// GMV dos clientes ativos no periodo selecionado.
+	/// É necessário utilizar junto da medida [02.30]
+	/// 
+	/// O parametro que controla essa medida, por padrão, é [Data máxima] - 1 Mês
+	/// 
+	/// Usar a coluna param_ActiveClients para modificar
+	measure '01.30 GMV - Active Clients' =
+			
+			/// Usar em conjunto com a medida 02.15 ///
+			VAR Seletor     =   [param_ActiveClients Valor]
+			VAR dtFinal     =   MAX(dCalendario[Data])
+			VAR dtInicio    =   EDATE(dtFinal, -Seletor)
+			RETURN
+			CALCULATE(
+			    [01.00 GMV],
+			    NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda","Pagamento no caixa"}),
+			    DATESBETWEEN(
+			        dCalendario[Data],
+			        dtInicio,
+			        dtFinal)
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: 17f4de30-6500-4eda-a018-606950836ee1
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Pedidos dos clientes ativos no periodo selecionado.
+	/// É necessário utilizar junto da medida [02.30]
+	/// 
+	/// O parametro que controla essa medida, por padrão, é [Data máxima] - 1 Mês
+	/// 
+	/// Usar a coluna param_ActiveClients para modificar
+	measure '05.30 Orders - Active Clients' =
+			
+			/// Usar em conjunto com a medida 02.15 ///
+			VAR Seletor     =   [param_ActiveClients Valor]
+			VAR dtFinal     =   MAX(dCalendario[Data])
+			VAR dtInicio    =   EDATE(dtFinal, -Seletor)
+			RETURN
+			CALCULATE(
+			    [05.00 Orders],
+			    fVendas[order_status] IN {"Pronto","Enviado","Completo"},
+			    DATESBETWEEN(
+			        dCalendario[Data],
+			        dtInicio,
+			        dtFinal)
+			)
+		formatString: 0
+		displayFolder: 05. Orders
+		lineageTag: 17e6cfd9-c6b8-4f54-93f6-4e6d8a61e763
+
+	/// Ticket médio ponderado por cliente
+	measure '04.21 ATP/Client' =
+			
+			AVERAGEX(
+			    VALUES(fVendas[client_account_id]),
+			    [04.00 ATP]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: c2f0c5f4-c5e9-4671-9d61-5647ee995037
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos clientes ativos no periodo selecionado.
+	/// É necessário utilizar junto da medida [02.30]
+	/// 
+	/// O parametro que controla essa medida, por padrão, é [Data máxima] - 1 Mês
+	/// 
+	/// Usar a coluna param_ActiveClients para modificar
+	measure '04.30 ATP - Active Clients' =
+			
+			VAR TKM = DIVIDE([01.30 GMV - Active Clients],[05.30 Orders - Active Clients])
+			RETURN
+			AVERAGEX(
+			    VALUES(fVendas[client_account_id]),
+			    TKM
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: b26b7e92-e5ad-4adc-804c-b4dbc35a8beb
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '05.01 % Orders AA' =
+			
+			DIVIDE(
+			    [05.01 Orders AA],
+			    [05.00 Orders]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: 8b8ff3ad-36cc-4f22-9dec-452f9456f35e
+
+		changedProperty = FormatString
+
+	measure '05.02 % Orders VA' =
+			
+			DIVIDE(
+			    [05.02 Orders VA],
+			    [05.00 Orders]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: b9aadd73-cdd4-416e-89b2-1bc9019a9569
+
+		changedProperty = FormatString
+
+	measure '05.03 % Orders MV' =
+			
+			DIVIDE(
+			    [05.03 Orders MV],
+			    [05.00 Orders]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: bec6b5c3-b7b7-4e00-aa14-cc4db6f45d0e
+
+		changedProperty = FormatString
+
+	/// Valor de frete
+	measure '05.23 Shipping price' =
+			
+			CALCULATE(
+			    AVERAGEX(
+			        VALUES(fVendas[partner_order_id]),
+			        CALCULATE(
+			            SUM(fVendas[median_charged_shipping]),
+			            NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda", "Pagamento no caixa"})
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 05. Orders
+		lineageTag: 4d99ce21-7903-4727-897c-1d09463c3718
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Total de pedidos transacionados pela plataforma, engloba todos os status
+	/// 
+	measure '05.55 Orders potential' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fVendas[partner_order_id]),
+			    ALL(fVendas[order_status])
+			)
+		formatString: 0
+		displayFolder: 05. Orders
+		lineageTag: 69569196-7dba-4051-b66a-00c1e5ff0857
+
+	/// % de pedidos que são finalizados com sucesso
+	measure '05.56 Orders to completion rate' =
+			
+			DIVIDE(
+			    [05.00 Orders],
+			    [05.55 Orders potential]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 05. Orders
+		lineageTag: 4550236a-0dc9-4f4d-bb26-5d25f12e74cd
+
+		changedProperty = FormatString
+
+	/// Quantidade de logins
+	measure '03.00 Logins' =
+			
+			CALCULATE(
+			    COUNT(fLogins[login_date]),
+			    VALUES(fLogins[account_id]))
+		formatString: 0
+		displayFolder: 03. Logins
+		lineageTag: ed209fcc-0356-4eb1-88e4-9d548a29880e
+
+	/// Quantidade de logins para 1 pedido
+	measure '03.56 Login to order conversion rate' =
+			
+			DIVIDE(
+			    [03.00 Logins],
+			    [05.55 Orders potential]
+			)
+		formatString: #,0.00
+		displayFolder: 03. Logins
+		lineageTag: 8ba7059d-a9e0-4d0e-8c1f-6de87d38f996
+
+		changedProperty = FormatString
+
+	/// Valor de desconto aplicado.
+	measure '01.50 Discount value' =
+			
+			CALCULATE(
+			    SUM(fVendas[discount_value]),
+			                NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda", "Pagamento no caixa"})
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: 426e2a6b-3ef1-48f8-8a2d-5a389dc96708
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Clientes com GMV.
+	measure '02.55 Clients w GMV' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    [01.00 GMV])
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: 3d1b5105-badc-47e7-8d0c-8e2c510726e5
+
+		changedProperty = FormatString
+
+	measure '02.01 % Clients AA' =
+			
+			DIVIDE(
+			    [02.01 Clients AA],
+			    [02.55 Clients w GMV]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: 54e45e55-e217-49aa-9eed-cfb70756289a
+
+		changedProperty = FormatString
+
+	measure '02.02 % Clients VA' =
+			
+			DIVIDE(
+			    [02.02 Clients VA],
+			    [02.55 Clients w GMV]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: 46d01ae5-ce97-4435-a235-54fd7a2447d9
+
+		changedProperty = FormatString
+
+	measure '02.03 % Clients MA' =
+			
+			DIVIDE(
+			    [02.03 Clients MV],
+			    [02.55 Clients w GMV]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: 2914daf8-67de-4377-9ec8-4e9d110cfc9b
+
+		changedProperty = FormatString
+
+	measure '02.04 % Clients App' =
+			
+			DIVIDE(
+			    [02.04 Clients App],
+			    [02.55 Clients w GMV]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: 15fc8856-9aa1-4e21-9894-561636ccea4d
+
+		changedProperty = FormatString
+
+	measure '02.05 % Clients Desktop' =
+			
+			DIVIDE(
+			    [02.05 Clients Desktop],
+			    [02.55 Clients w GMV]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: 067a1e02-8f46-46dd-a968-4f998e7cf986
+
+		changedProperty = FormatString
+
+	measure '02.06 % Clients Mobile' =
+			
+			DIVIDE(
+			    [02.06 Clients Mobile],
+			    [02.55 Clients w GMV]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: 374b87c7-57f1-48d2-8622-c1c0642cbd1e
+
+		changedProperty = FormatString
+
+	/// Quantidade de logins de clientes
+	measure '03.01 Client login' =
+			
+			CALCULATE(
+			    [03.00 Logins],
+			    dClientes[client_id] <> BLANK(),
+			    dClientes[Vendedor?] = FALSE()
+			)
+		formatString: 0
+		displayFolder: 03. Logins
+		lineageTag: 46833811-d898-4334-b6fb-98284d654562
+
+	/// Quantidade de login de vendedores
+	measure '03.02 Seller login' =
+			
+			CALCULATE(
+			    [03.00 Logins],
+			    dVendedores[account_id] <> BLANK(),
+			    USERELATIONSHIP(dVendedores[account_id],fLogins[account_id])
+			)
+		formatString: 0
+		displayFolder: 03. Logins
+		lineageTag: 4d548ccb-a378-4eed-a7c3-92b60e307656
+
+	measure '03.01 % Logins client' = ```
+			
+			VAR Client_login_count = 
+			CALCULATE(
+			    DISTINCTCOUNT(fLogins[account_id]),
+			    dClientes[account_id] <> BLANK ()
+			)
+			RETURN
+			DIVIDE(
+			    Client_login_count,
+			    [02.00 Clients]
+			)
+			```
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 20. GT%
+		lineageTag: 546b9b63-dd51-46a6-b467-873e6241d78b
+
+		changedProperty = FormatString
+
+	measure '03.02 % Logins seller' = ```
+			
+			VAR Seller_login_count = 
+			CALCULATE(
+			    DISTINCTCOUNT(fLogins[account_id]),
+			    dVendedores[account_id] <> BLANK (),
+			    USERELATIONSHIP(dVendedores[account_id],fLogins[account_id])
+			)
+			RETURN
+			DIVIDE(
+			    Seller_login_count,
+			    [07.00 Salesperson]
+			)
+			```
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 20. GT%
+		lineageTag: cafc6c1e-47e4-4b79-ad6f-c17709582a84
+
+		changedProperty = FormatString
+
+	/// Total de vendedores.
+	/// 
+	/// Vendedor é definido como conta com client_id.
+	/// 
+	/// As informações de vendedores se encontram em dVendedores
+	measure '07.00 Salesperson' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dVendedores[account_id]),
+			    dVendedores[client_id] <> BLANK(),
+			    USERELATIONSHIP(dVendedores[account_create_date],dCalendario[Data])
+			)
+		formatString: #,0
+		displayFolder: 07. Salesperson
+		lineageTag: 2a3fb272-1324-4251-b31b-e3a3d1eae199
+
+	/// Ticket médio ponderado por estado
+	measure '04.22 ATP/State' =
+			
+			AVERAGEX(
+			    VALUES(fVendas[client_state]),
+			    [04.00 ATP]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: 3cc4d07e-77e4-4dac-b0c3-1d4a9a3b6938
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em auto atendimento
+	measure '04.01 ATP AA' =
+			
+			DIVIDE(
+			    [01.01 GMV AA],
+			    [05.01 Orders AA]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: bb372a29-f750-4f10-9ddc-4119d09b2845
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos de venda assistida
+	measure '04.02 ATP VA' =
+			
+			DIVIDE(
+			    [01.02 GMV VA],
+			    [05.02 Orders VA]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: 1929737a-6f9a-4027-ac50-0ed21c0120b8
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Ticket médio dos pedidos em módulo vendedor
+	measure '04.03 ATP MV' =
+			
+			DIVIDE(
+			    [01.03 GMV MV],
+			    [05.03 Orders MV]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: 24a04373-12db-4194-a071-648b17c1a9d7
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '02.15 Clients in fVendas' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fVendas[client_account_id]),
+			    NOT(fVendas[order_status] IN {"Aguardando pagamento","Pré-encomenda","Cancelado"})
+			)
+		formatString: #,0
+		displayFolder: 02. Clients
+		lineageTag: 0cd8e511-0c33-49e0-8003-4b119016e5d4
+
+		changedProperty = FormatString
+
+	/// Calculo do GMV por item, excluindo pedidos com status:
+	/// 
+	/// - Cancelado
+	/// - Aguardando pagamento
+	/// - Pré-encomenda
+	/// - Pagamento no caixa
+	/// 
+	/// Utilizar para informar valores de GMV por categoria
+	measure '01.40 GMV by line' =
+			
+			CALCULATE(
+			    SUMX(fVendas,
+			        fVendas[quantity]*fVendas[amount_charged]
+			    ),
+			    NOT(fVendas[order_status] IN {"Aguardando pagamento", "Cancelado", "Pré-encomenda", "Pagamento no caixa"})
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01. GMV
+		lineageTag: ecaaadf5-2537-4fda-ae82-ee956254f060
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '01.00 GMV LY' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    SAMEPERIODLASTYEAR(dCalendario[Data])
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 95. Temporais
+		lineageTag: 20e5db37-9e25-49c0-b241-547a774bfdef
+
+		changedProperty = FormatString
+
+	measure '01.00 YoY% GMV' =
+			
+			DIVIDE(
+			    [01.00 GMV]-[01.00 GMV LY],
+			    [01.00 GMV LY],
+			    0
+			)
+		formatString: 0%;-0%;0%
+		displayFolder: 22. YoY%
+		lineageTag: 1f2baad7-adea-4daf-a4ab-f8f5bbe26d39
+
+		changedProperty = FormatString
+
+	measure '01.00 GMV LM' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    DATEADD(
+			        dCalendario[Data],
+			        -1,
+			        MONTH
+			    )
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: 95. Temporais
+		lineageTag: 495fd795-183b-489e-8e99-17d5b9e5ae8e
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '01.00 MoM% GMV' =
+			
+			DIVIDE(
+			    [01.00 GMV]-[01.00 GMV LM],
+			    [01.00 GMV LM],
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 21. MoM%
+		lineageTag: 2d895ffc-0e63-46d1-9dd9-b20a4a8d8769
+
+		changedProperty = FormatString
+
+	measure '01.00 GMV Acumulado' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    FILTER(
+			        ALL(dCalendario[Data]),
+			        dCalendario[Data] <= MAX(dCalendario[Data])
+			    )
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: 95. Temporais
+		lineageTag: bb432247-c5ad-465e-be28-d2294e6d1e7b
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '01.00 GMV MTD' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    DATESMTD(dCalendario[Data])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: 95. Temporais
+		lineageTag: 279bf5df-8ab4-4c51-bfd2-57149904150c
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '01.00 GMV YTD' =
+			
+			CALCULATE(
+			    [01.00 GMV],
+			    DATESYTD(dCalendario[Data])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: 95. Temporais
+		lineageTag: 36016d75-3b1a-4c00-aba9-0bb61e49b483
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Quantidade de pedidos dos clientes carteirizados
+	measure '07.01 Portfolio Orders AA' =
+			
+			CALCULATE(
+			    [05.01 Orders AA],
+			    USERELATIONSHIP(dVendedores[account_id],dClientes[salesperson_account_id]),
+			    USERELATIONSHIP(dClientes[account_id],fVendas[client_account_id])
+			)
+		formatString: #,0
+		displayFolder: 07. Salesperson
+		lineageTag: d3d079da-20ce-49b7-b1bc-4f30e851d256
+
+		changedProperty = FormatString
+
+	/// GMV dos clientes carteirizados
+	/// 
+	measure '07.02 Portfolio GMV AA' =
+			
+			CALCULATE(
+			    [01.01 GMV AA],
+			    USERELATIONSHIP(dVendedores[account_id],dClientes[salesperson_account_id]),
+			    USERELATIONSHIP(dClientes[account_id],fVendas[client_account_id])
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 07. Salesperson
+		lineageTag: 905bb23a-2ba6-43d0-a8c8-e97cfd5b5ae2
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// GMV do vendedor via módulo vendedor
+	measure '07.03 GMV MV' =
+			
+			CALCULATE(
+			    [01.03 GMV MV],
+			    USERELATIONSHIP(dVendedores[account_id],fVendas[salesperson_account_id])
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 07. Salesperson
+		lineageTag: bf58a069-446d-4196-bb06-10bc3db3e139
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// GMV onde houve interação vendedor-cliente
+	measure '07.04 GMV VA' =
+			
+			CALCULATE(
+			    [01.02 GMV VA],
+			    USERELATIONSHIP(dVendedores[account_id],dClientes[salesperson_account_id]),
+			    USERELATIONSHIP(dClientes[account_id],fVendas[client_account_id])
+			)
+		displayFolder: 07. Salesperson
+		lineageTag: 4c499fb5-8292-4a32-b59f-a59ec5bde2b6
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Quantidade de logins dos clientes carteirizados
+	/// 
+	measure '07.05 Portfolio logins' =
+			
+			CALCULATE(
+			    [03.01 Client login],
+			    USERELATIONSHIP(dVendedores[account_id],dClientes[salesperson_account_id])
+			)
+		formatString: #,0
+		displayFolder: 07. Salesperson
+		lineageTag: b6c5eb27-0f02-49ce-af21-0fe7b103683e
+
+		changedProperty = FormatString
+
+	/// Quantidade de clientes carteirizados
+	measure '07.06 Client portfolio count' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dClientes[account_id]),
+			    USERELATIONSHIP(dVendedores[account_id],dClientes[salesperson_account_id]),
+			    USERELATIONSHIP(dClientes[account_create_date], dCalendario[Data])
+			)
+		formatString: #,0
+		displayFolder: 07. Salesperson
+		lineageTag: 3069fcc0-2496-49cc-93b0-d14a315dc637
+
+		changedProperty = FormatString
+
+	/// Quantidade de clientes atendidos
+	measure '07.07 Served clients' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fVendas[client_account_id]),
+			    USERELATIONSHIP(dVendedores[account_id], fVendas[salesperson_account_id])
+			)
+		formatString: #,0
+		displayFolder: 07. Salesperson
+		lineageTag: 4ba54c7e-bf55-4fd3-87a8-ae0eb8b6a648
+
+		changedProperty = FormatString
+
+	measure '07.02 MoM% Portifolio GMV' =
+			
+			VAR LM =
+			CALCULATE(
+			    [07.02 Portfolio GMV AA],
+			    DATEADD(dCalendario[Data],-1,MONTH)
+			)
+			RETURN
+			DIVIDE(
+			    [07.02 Portfolio GMV AA]-LM,
+			    LM
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 21. MoM%
+		lineageTag: cdbe4b9b-07aa-4cab-88a0-2e32c5ab32d1
+
+		changedProperty = FormatString
+
+	measure '07.03 MoM% GMV MV' =
+			
+			VAR LM =
+			CALCULATE(
+			    [07.03 GMV MV],
+			    DATEADD(dCalendario[Data],-1,MONTH)
+			)
+			RETURN
+			DIVIDE(
+			    [07.03 GMV MV]-LM,
+			    LM
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 21. MoM%
+		lineageTag: 2764b0b9-5453-4e2b-abb3-32de3f7b0cd3
+
+		changedProperty = FormatString
+
+	measure '07.04 MoM% GMV VA' =
+			
+			VAR LM =
+			CALCULATE(
+			    [07.04 GMV VA],
+			    DATEADD(dCalendario[Data],-1,MONTH)
+			)
+			RETURN
+			DIVIDE(
+			    [07.04 GMV VA]-LM,
+			    LM
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 21. MoM%
+		lineageTag: 60664981-ff77-4d63-aa4b-85bc00496a01
+
+		changedProperty = FormatString
+
+	measure '07.05 MoM% Portfolio logins' =
+			
+			VAR LM =
+			CALCULATE(
+			    [07.05 Portfolio logins],
+			    DATEADD(dCalendario[Data],-1,MONTH)
+			)
+			RETURN
+			DIVIDE(
+			    [07.05 Portfolio logins]-LM,
+			    LM
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 21. MoM%
+		lineageTag: 656b957b-857c-4a26-957d-2e2c5d7defaa
+
+		changedProperty = FormatString
+
+	measure '07.06 MoM% Client portifolio count' =
+			
+			VAR LM =
+			CALCULATE(
+			    [07.06 Client portfolio count],
+			    DATEADD(dCalendario[Data],-1,MONTH)
+			)
+			RETURN
+			DIVIDE(
+			    [07.06 Client portfolio count]-LM,
+			    LM
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 21. MoM%
+		lineageTag: ae6ab7a0-9d06-4aae-8da5-7e166ba6b846
+
+		changedProperty = FormatString
+
+	measure '07.07 MoM% Served clients' =
+			
+			VAR LM =
+			CALCULATE(
+			    [07.07 Served clients],
+			    DATEADD(dCalendario[Data],-1,MONTH)
+			)
+			RETURN
+			DIVIDE(
+			    [07.07 Served clients]-LM,
+			    LM
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 21. MoM%
+		lineageTag: 138f2c88-f4dc-409e-bcc8-1ed3a187a5a7
+
+		changedProperty = FormatString
+
+	measure '07.02 YoY% Portifolio GMV' =
+			
+			VAR LY =
+			CALCULATE(
+			    [07.02 Portfolio GMV AA],
+			    SAMEPERIODLASTYEAR(dCalendario[Data])
+			)
+			RETURN
+			DIVIDE(
+			    [07.02 Portfolio GMV AA]-LY,
+			    LY
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 22. YoY%
+		lineageTag: 3a8d14be-3981-4f22-b44c-258d5f8e9939
+
+		changedProperty = FormatString
+
+	measure '07.03 YoY% GMV MV' =
+			
+			VAR LY =
+			CALCULATE(
+			    [07.03 GMV MV],
+			    SAMEPERIODLASTYEAR(dCalendario[Data])
+			)
+			RETURN
+			DIVIDE(
+			    [07.03 GMV MV]-LY,
+			    LY
+			)
+		displayFolder: 22. YoY%
+		lineageTag: 84d3016e-852b-4aeb-a568-75013234bc21
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '07.04 YoY% GMV VA' =
+			
+			VAR LY =
+			CALCULATE(
+			    [07.04 GMV VA],
+			    SAMEPERIODLASTYEAR(dCalendario[Data])
+			)
+			RETURN
+			DIVIDE(
+			    [07.04 GMV VA]-LY,
+			    LY
+			)
+		displayFolder: 22. YoY%
+		lineageTag: 47b5117e-9335-419e-95cd-00c063a2669c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '07.05 YoY% Portifolio logins' =
+			
+			VAR LY =
+			CALCULATE(
+			    [07.05 Portfolio logins],
+			    SAMEPERIODLASTYEAR(dCalendario[Data])
+			)
+			RETURN
+			DIVIDE(
+			    [07.05 Portfolio logins]-LY,
+			    LY
+			)
+		displayFolder: 22. YoY%
+		lineageTag: 93a261aa-d6e1-43a1-b766-2ad919abc56f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '07.06 YoY% Client portifolio count' =
+			
+			VAR LY =
+			CALCULATE(
+			    [07.06 Client portfolio count],
+			    SAMEPERIODLASTYEAR(dCalendario[Data])
+			)
+			RETURN
+			DIVIDE(
+			    [07.06 Client portfolio count]-LY,
+			    LY
+			)
+		displayFolder: 22. YoY%
+		lineageTag: 879d04b1-c8c7-4779-97cb-29b48635c673
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '07.07 YoY% Served clients' =
+			
+			VAR LY =
+			CALCULATE(
+			    [07.07 Served clients],
+			    SAMEPERIODLASTYEAR(dCalendario[Data])
+			)
+			RETURN
+			DIVIDE(
+			    [07.07 Served clients]-LY,
+			    LY
+			)
+		displayFolder: 22. YoY%
+		lineageTag: c7c1e4a8-e4be-4613-911e-a2772d66f865
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '04.04 ATP App' =
+			
+			DIVIDE(
+			    [01.04 GMV App],
+			    [05.04 Orders App]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: 4e040184-1b18-4922-bc6a-108f8ecd6bda
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '04.05 ATP Desktop' =
+			
+			DIVIDE(
+			    [01.05 GMV Desktop],
+			    [05.05 Orders Desktop]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: fc31bdfe-d647-42ec-b4a1-6d46ef9f6613
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '04.06 ATP Mobile' =
+			
+			DIVIDE(
+			    [01.06 GMV Mobile],
+			    [05.06 Orders Mobile]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 04. Average Ticket Price
+		lineageTag: 27d1045c-d6a2-4f9b-a1cf-82b400a62a59
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '05.04 % Orders App' =
+			
+			DIVIDE(
+			    [05.04 Orders App],
+			    [05.00 Orders]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: 76680746-8bc0-4d89-adea-671622a6ad17
+
+		changedProperty = FormatString
+
+	measure '05.05 % Orders Desktop' =
+			
+			DIVIDE(
+			    [05.05 Orders Desktop],
+			    [05.00 Orders]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: b4f4c93f-d6af-4367-95f5-02e4422348ef
+
+		changedProperty = FormatString
+
+	measure '05.06 % Orders Mobile' =
+			
+			DIVIDE(
+			    [05.06 Orders Mobile],
+			    [05.00 Orders]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: 20. GT%
+		lineageTag: 070abf66-1ee2-48da-b470-cda420655570
+
+		changedProperty = FormatString
+
+	measure '03.09 Clients w login' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fLogins[account_id]),
+			    fLogins[Vendedor?] = FALSE()
+			)
+		formatString: 0
+		displayFolder: 03. Logins
+		lineageTag: 1d695559-c0fe-4231-9f3e-64e6cb916d04
+
+		changedProperty = FormatString
+
+	measure '03.09 Clients wo login' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    [03.00 Logins] = 0)
+			)+0
+		formatString: #,0
+		displayFolder: 03. Logins
+		lineageTag: bf60c65d-7b77-42ca-b905-437c6c25eb7c
+
+		changedProperty = FormatString
+
+	measure '03.10 Seller wo logins' =
+			
+			CALCULATE(
+			    [07.00 Salesperson],
+			    FILTER(dVendedores,
+			    [03.00 Logins] = 0),
+			    USERELATIONSHIP(dVendedores[account_id],fLogins[account_id])
+			)+0
+		formatString: #,0
+		displayFolder: 03. Logins
+		lineageTag: c21a36d5-52ef-4fa8-bfbe-ab8137f10890
+
+		changedProperty = FormatString
+
+	measure '03.10 Seller w logins' =
+			
+			CALCULATE(
+			    [07.00 Salesperson],
+			    FILTER(dVendedores,
+			    [03.00 Logins] <> 0),
+			    USERELATIONSHIP(dVendedores[account_id],fLogins[account_id])
+			)+0
+		formatString: #,0
+		displayFolder: 03. Logins
+		lineageTag: 5d8b59d1-6ac8-496e-bcc3-d0acf5d97838
+
+		changedProperty = FormatString
+
+	/// Clientes sem pedido algum
+	measure '02.33 Clients wo orders' =
+			
+			CALCULATE(
+			    [02.00 Clients],
+			    FILTER(dClientes,
+			    NOT([05.00 Orders]))
+			)
+		formatString: 0
+		displayFolder: 02. Clients
+		lineageTag: 1149c2a2-6268-4ee8-9eea-7d446db2cf66
+
+	measure '02.99 Client ranking' =
+			
+			RANKX(
+			    ALL(dClientes[account_id]),
+			    [01.00 GMV],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		displayFolder: 02. Clients
+		lineageTag: c6b21a2b-15f5-4e68-8004-39356ec4f18a
+
+	measure '07.99 Salesperson rank by portfolio' =
+			
+			RANKX(
+			    ALL(dVendedores[account_id]),
+			    [07.02 Portfolio GMV AA],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		displayFolder: 07. Salesperson
+		lineageTag: d1009989-3225-4bfb-961e-cf2ee7964268
+
+	measure '07.99 Salesperson rank by MV' =
+			
+			RANKX(
+			    ALL(dVendedores[account_id]),
+			    [07.03 GMV MV],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		displayFolder: 07. Salesperson
+		lineageTag: 7ed469a1-8e28-4f84-b8b9-4451b126337c
+
+	measure '02.99 % GMV Client' =
+			
+			VAR GMV_GERAL =
+			CALCULATE(
+			    [01.00 GMV],
+			    ALL(dClientes[account_id])
+			)
+			RETURN
+			DIVIDE(
+			    [01.00 GMV],
+			    GMV_GERAL
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 02. Clients
+		lineageTag: 594b7528-ede0-4568-b6c1-808a260b06b1
+
+		changedProperty = FormatString
+
+	measure '06.99 Distinct SKU/Client' = ```
+			
+			    AVERAGEX(
+			        VALUES(fVendas[client_account_id]),
+			        [06.99 Distinct SKU]
+			    )
+			```
+		displayFolder: 06. Products
+		lineageTag: 97ea6c4b-195a-4b3f-a9c2-4c0d1237fcf5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '06.99 SKU Category count' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dProdutos[category_level_1]),
+			    fVendas[order_status] IN {"Pronto","Enviado","Completo"}
+			)
+		formatString: 0
+		displayFolder: 06. Products
+		lineageTag: 4cb2127a-5379-4180-9ad1-73059a6ba84a
+
+	measure '06.99 Category_1 ranking' =
+			
+			RANKX(
+			    ALL(dProdutos[category_level_1]),
+			    [01.40 GMV by line],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		isHidden
+		displayFolder: 06. Products
+		lineageTag: 42778041-696a-4546-b671-6426bcf1baae
+
+		changedProperty = IsHidden
+
+	measure '06.99 Category_2 ranking' =
+			
+			RANKX(
+			    ALL(dProdutos[category_level_2]),
+			    [01.40 GMV by line],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		isHidden
+		displayFolder: 06. Products
+		lineageTag: 438d1779-3231-42aa-8fae-a2af63a86b7c
+
+		changedProperty = IsHidden
+
+	measure '06.99 Category_3 ranking' =
+			
+			RANKX(
+			    ALL(dProdutos[L3_category]),
+			    [01.40 GMV by line],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		isHidden
+		displayFolder: 06. Products
+		lineageTag: fb8e34f7-3502-4573-b051-47c21be63b2f
+
+		changedProperty = IsHidden
+
+	measure '06.99 Category_4 ranking' =
+			
+			RANKX(
+			    ALL(dProdutos[L4_category]),
+			    [01.40 GMV by line],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		isHidden
+		displayFolder: 06. Products
+		lineageTag: 8189feed-131f-4457-bc32-4526781791b1
+
+		changedProperty = IsHidden
+
+	measure '06.99 Top X Product concentration by GMV' =
+			
+			CALCULATE(
+			    [01.40 GMV by line],
+			    TOPN(
+			        [param_Product_concentration Valor],
+			        VALUES(fVendas[sku_id]),
+			        [01.40 GMV by line]
+			    )
+			)
+		displayFolder: 06. Products
+		lineageTag: 8133b0cc-2eab-42e8-80c7-61c78466a79e
+
+	measure '05.99 Order frequency' = ```
+			
+			VAR dtmin =
+			CALCULATE(
+			    MIN(fVendas[order_date]),
+			    fVendas[order_status] IN {"Pronto","Enviado","Completo"}
+			)
+			VAR ciclo = 
+			DATEDIFF(
+			    dtmin,
+			    TODAY(),
+			    DAY
+			)
+			RETURN
+			DIVIDE(
+			    ciclo,
+			    [05.00 Orders]
+			)
+			```
+		displayFolder: 05. Orders
+		lineageTag: 1c305130-f76c-4cfd-8dbc-13582507ea6a
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '05.99 Order frequency by client' =
+			
+			AVERAGEX(
+			    VALUES(dClientes[account_id]),
+			    [05.99 Order frequency]
+			)
+		displayFolder: 05. Orders
+		lineageTag: 1bc216a0-7dfa-4107-abc2-f705cbf6640a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '05.99 Order frequency networkdays' = ```
+			
+			VAR dtmin =
+			CALCULATE(
+			    MIN(fVendas[order_date]),
+			    fVendas[order_status] IN {"Pronto","Enviado","Completo"}
+			)
+			VAR ciclo = 
+			NETWORKDAYS(
+			    dtmin,
+			    TODAY(),
+			    1,
+			    VALUES(dFeriados[Data])
+			)
+			RETURN
+			DIVIDE(
+			    ciclo,
+			    [05.00 Orders]
+			)
+			```
+		displayFolder: 05. Orders
+		lineageTag: 67339ee4-28e4-4427-9dc3-c9eb94daef0c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '05.99 Order frequency networkdays by client' =
+			
+			AVERAGEX(
+			    VALUES(dClientes[account_id]),
+			    [05.99 Order frequency networkdays]
+			)
+		displayFolder: 05. Orders
+		lineageTag: 7695ba42-e520-4b31-9cd9-f187077eb2a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '06.99 Others Product concentration by GMV' =
+			
+			[01.00 GMV]-[06.99 Top X Product concentration by GMV]
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: 06. Products
+		lineageTag: b57c0152-c9d2-4647-befd-6dcfd55a029b
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '06.99 SKU ranking by orders' =
+			
+			RANKX(
+			    ALL(fVendas[sku_id]),
+			    [05.00 Orders],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		displayFolder: 06. Products
+		lineageTag: c8eb2e4d-8464-485e-8610-332cfd064e7b
+
+	measure 'Dias com compra' = ```
+			
+			VAR dtAtual = 
+			    MAX (dCalendario[Data])
+			VAR Datas = 
+			    ALL(dCalendario[Data])
+			VAR DataComVenda =
+			    CALCULATETABLE(
+			        VALUES( fVendas[order_date]),
+			        fVendas[order_status] IN {"Pronto","Enviado","Completo"},
+			        ALLSELECTED()
+			        )
+			VAR DataSemVendas =
+			    EXCEPT( Datas, DataComVenda )
+			VAR UltimodiaSemvenda = 
+			    MAXX(
+			        FILTER(DataSemVendas, dCalendario[Data] <= dtAtual),
+			        dCalendario[Data]
+			    )
+			VAR Resultado =
+			    INT(dtAtual-UltimodiaSemvenda)
+			RETURN
+			    Resultado
+			```
+		formatString: 0
+		displayFolder: 95. Temporais
+		lineageTag: 7cfd674d-5eb1-4b0d-96e3-49c512fb422c
+
+	measure 'Dias sem compra' = ```
+			
+			VAR dtAtual = 
+			    MAX (dCalendario[Data])
+			VAR mindt = 
+			    CALCULATE(
+			        MIN(dCalendario[Data]), REMOVEFILTERS())
+			VAR mindt2 =
+			    MIN(dClientes[account_create_date])
+			VAR UltimaCompra =
+			    CALCULATE(
+			        MAX(fVendas[order_date]),
+			        fVendas[order_status] IN {"Pronto","Enviado","Completo"},
+			        dCalendario[Data] <= dtAtual
+			    )
+			VAR dtanterior = 
+			    COALESCE(UltimaCompra,mindt2)
+			VAR Resultado = 
+			    DATEDIFF(dtAtual,dtanterior,DAY)*-1
+			RETURN
+			    IF(
+			        HASONEVALUE(dClientes[account_id]),
+			            SWITCH(
+			                TRUE(),
+			                Resultado = 0 && [01.00 GMV] >0, "Comprou",
+			                Resultado > 0, Resultado,
+			                Resultado < 0, "Cliente não criado",
+			                "Cliente criado"),
+			        "Selecione um cliente"
+			        )
+			```
+		displayFolder: 95. Temporais
+		lineageTag: 15c94c14-e44e-4ceb-a4b6-6fd6c9393b01
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '01.41 GMV by line Finance' =
+			
+			CALCULATE(
+			    SUMX(fVendas,
+			        (fVendas[quantity]*fVendas[amount_charged])+fVendas[median_charged_shipping]+fVendas[avg_credit_card_interest]+fVendas[avg_total_tax]
+			    ),
+			    NOT(fVendas[order_status] IN {"Aguardando pagamento", "Cancelado", "Pré-encomenda"})
+			)
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: 01. GMV
+		lineageTag: 6dc4e150-c707-465f-9b8a-30d921b21029
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '06.99 1st Category count' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( dProdutos[category_level_1] ),
+			    CROSSFILTER ( dProdutos[sku_id], fVendas[sku_id], BOTH ),
+			    NOT ( fVendas[order_status]
+			        IN { "Aguardando pagamento", "Cancelado", "Pré-encomenda", "Pagamento no caixa" } )
+			)
+		formatString: 0
+		displayFolder: 06. Products
+		lineageTag: 24599614-3906-48db-b7b9-6479eaf3915c
+
+	measure '06.99 2nd Category count' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( dProdutos[category_level_2] ),
+			    CROSSFILTER ( dProdutos[sku_id], fVendas[sku_id], BOTH ),
+			    NOT ( fVendas[order_status]
+			        IN { "Aguardando pagamento", "Cancelado", "Pré-encomenda", "Pagamento no caixa" } )
+			)
+		formatString: 0
+		displayFolder: 06. Products
+		lineageTag: e4c9a9b5-4bca-4898-b8c5-f69d1871db46
+
+	measure '06.99 3rd Category count' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( dProdutos[L3_category] ),
+			    CROSSFILTER ( dProdutos[sku_id], fVendas[sku_id], BOTH ),
+			    NOT ( fVendas[order_status]
+			        IN { "Aguardando pagamento", "Cancelado", "Pré-encomenda", "Pagamento no caixa" } )
+			)
+		formatString: 0
+		displayFolder: 06. Products
+		lineageTag: 6d7847be-231c-402a-abb3-049cb950462c
+
+	measure '06.99 4th Category count' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT ( dProdutos[L4_category] ),
+			    CROSSFILTER ( dProdutos[sku_id], fVendas[sku_id], BOTH ),
+			    NOT ( fVendas[order_status]
+			        IN { "Aguardando pagamento", "Cancelado", "Pré-encomenda", "Pagamento no caixa" } )
+			)
+		formatString: 0
+		displayFolder: 06. Products
+		lineageTag: 5b9fd37d-0871-4719-b2a0-3839496c2232
+
+	measure '06.99 Distinct SKU/Order' =
+			
+			AVERAGEX(
+			    VALUES(fVendas[partner_order_id]),
+			    [06.99 Distinct SKU]
+			)
+		displayFolder: 06. Products
+		lineageTag: b9a7e653-ee05-41d9-ad89-17467318ec5f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '06.99 Dynamic SKU rank' =
+			
+			SWITCH(
+			    TRUE(),
+			    ISINSCOPE(dProdutos[sku_name]),                   [06.99 SKU_name ranking by GMV],
+			    ISINSCOPE(fVendas[sku_id]),                     [06.99 SKU_ID ranking by GMV],
+			    ISINSCOPE(dProdutos[category_level_2]),    [06.99 Category_2 ranking],
+			    ISINSCOPE(dProdutos[category_level_1]),       [06.99 Category_1 ranking]
+			)
+		formatString: 0
+		displayFolder: 06. Products
+		lineageTag: 37d0df3d-2204-4914-8144-72a063016e74
+
+	measure '06.99 Itens/Client' =
+			
+			CALCULATE(
+			        AVERAGEX(
+			            VALUES(fVendas[client_account_id]),
+			            SUM(fVendas[quantity])
+			        ),
+			    NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda", "Pagamento no caixa"})
+			)
+		displayFolder: 06. Products
+		lineageTag: 38d7012d-5ede-4cdb-8808-0b0025ec1133
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '06.99 Itens/Order' =
+			
+			CALCULATE(
+			        AVERAGEX(
+			            VALUES(fVendas[partner_order_id]),
+			            CALCULATE(
+			                SUM(fVendas[quantity]),
+			                NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda", "Pagamento no caixa"})
+			            )
+			        )
+			)
+		displayFolder: 06. Products
+		lineageTag: 384423a1-65d8-4aca-ad57-8d61420e8e02
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '06.99 Other Category concentration by GMV' =
+			
+			[01.40 GMV by line]-[06.99 Top X Category concentration by GMV]
+		displayFolder: 06. Products
+		lineageTag: cb560ae1-7968-4e8e-9769-6bc946ef8193
+
+	measure '06.99 Other Product concentration by GMV' =
+			
+			[01.40 GMV by line]-[06.99 Top X Product concentration by GMV]
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: 06. Products
+		lineageTag: 96a69faa-8a1f-4c3d-bb12-d4245e337169
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '06.99 SKU_ID ranking by GMV' =
+			
+			RANKX(
+			    ALL(fVendas[sku_id]),
+			    [01.40 GMV by line],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		displayFolder: 06. Products
+		lineageTag: 0be605ec-1bbf-409e-acfd-46bd5cc086c5
+
+	measure '06.99 SKU_name ranking by GMV' =
+			
+			RANKX(
+			    ALL(dProdutos[sku_name]),
+			    [01.40 GMV by line],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		displayFolder: 06. Products
+		lineageTag: b0072de7-ecd2-4573-8607-c1f29d98fd32
+
+	measure '06.99 Top X Category concentration by GMV' =
+			
+			CALCULATE(
+			    [01.40 GMV by line],
+			    TOPN(
+			        [param_Category_concentration Valor],
+			        VALUES(dProdutos[category_level_1]),
+			        [01.40 GMV by line]
+			    )
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: 06. Products
+		lineageTag: c49d7d48-662b-4325-85a4-6ec0a8bf5b0c
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '07.03 Salesperson orders MV' =
+			
+			CALCULATE(
+			    [05.03 Orders MV],
+			    USERELATIONSHIP(dVendedores[account_id],fVendas[salesperson_account_id])
+			)
+		formatString: #,0
+		displayFolder: 07. Salesperson
+		lineageTag: 444f67cd-39d0-45ee-b45f-ada086ddcda5
+
+	measure '07.04 Salesperson orders VA' =
+			
+			CALCULATE(
+			    [05.02 Orders VA],
+			    USERELATIONSHIP(dVendedores[account_id],dClientes[salesperson_account_id]),
+			    USERELATIONSHIP(dClientes[account_id],fVendas[client_account_id])
+			)
+		formatString: #,0
+		displayFolder: 07. Salesperson
+		lineageTag: c9efa665-3df3-45ff-ae58-cea6c237f8d6
+
+	measure '07.99 Salesperson Accum' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dVendedores[account_id]),
+			    dVendedores[client_id] <> BLANK(),
+			    dVendedores[account_create_date] <= MAX(dCalendario[Data])
+			)
+		formatString: #,0
+		displayFolder: 07. Salesperson
+		lineageTag: 5e5e1c1d-0194-4944-9976-b1aa51b543e6
+
+	measure '07.99 Salesperson result GMV' =
+			
+			[07.03 GMV MV]+[07.04 GMV VA]
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		displayFolder: 07. Salesperson
+		lineageTag: 90b8506f-a8b2-4a8c-ad2d-49b7b5c7ab9b
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '07.99 Salesperson rank by result' =
+			
+			RANKX(
+			    ALL(dVendedores[account_id]),
+			    [07.99 Salesperson result GMV],
+			    ,
+			    DESC
+			    )
+		formatString: 0
+		displayFolder: 07. Salesperson
+		lineageTag: bd59eb07-34b6-40b0-bfac-e15d29e177ca
+
+	measure '07.99 % GMV Salesperson by result' =
+			
+			VAR GT = CALCULATE(
+			    [01.00 GMV],
+			    ALL(fVendas[client_account_id], fVendas[salesperson_account_id])
+			)
+			RETURN
+			DIVIDE(
+			    [07.99 Salesperson result GMV],
+			    GT
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 20. GT%
+		lineageTag: 3e4efed8-143b-4d7b-9521-dde6c78afd82
+
+	measure '07.99 Salesperson result + portfolio' =
+			
+			[07.99 Salesperson result GMV] + [07.02 Portfolio GMV AA]
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		displayFolder: 07. Salesperson
+		lineageTag: de23fb62-a158-47c2-968c-82afda6d0148
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '07.32 Salesperson per date' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dVendedores[account_id]),
+			    dVendedores[client_id] <> BLANK(),
+			    dVendedores[account_create_date] <= MAX(dCalendario[Data]),
+			    USERELATIONSHIP(dCalendario[Data], dVendedores[account_create_date])
+			)
+		formatString: #,0
+		displayFolder: 07. Salesperson
+		lineageTag: c11de157-d0e5-4665-a6d4-b5b0df38754f
+
+	measure '07.99 Concentration GMV' =
+			
+			[01.00 GMV]-[07.99 Salesperson result GMV]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: e1686d83-3f3e-4761-90d2-a057eeebf8ed
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Cliente fez login?' =
+			
+			IF(
+			    [03.01 Client login] > 0, "Sim", "Não"
+			)
+		lineageTag: e0fae9cc-0864-4175-8eff-95fd7bcaa152
+
+	measure '05.00 Orders LM' =
+			
+			CALCULATE(
+			    [05.00 Orders],
+			    DATEADD(
+			        dCalendario[Data],
+			        -1,
+			        MONTH
+			    )
+			)
+		formatString: 0
+		displayFolder: 95. Temporais
+		lineageTag: 411ff61c-c826-4cd3-8831-65ca0c735b6d
+
+	measure '06.99 1st Category LM' =
+			
+			CALCULATE(
+			    [06.99 1st Category count],
+			    DATEADD(
+			        dCalendario[Data],
+			        -1,
+			        MONTH
+			    )
+			)
+		formatString: 0
+		displayFolder: 95. Temporais
+		lineageTag: de1bd50f-c584-4fbe-ad34-86c5d722702d
+
+	measure '06.99 Distinct SKU LM' =
+			
+			CALCULATE(
+			    [06.99 Distinct SKU],
+			    DATEADD(
+			        dCalendario[Data],
+			        -1,
+			        MONTH
+			    )
+			)
+		formatString: 0
+		displayFolder: 95. Temporais
+		lineageTag: 2b7d83af-99c0-42e2-a617-e06873b28707
+
+	measure '05.00 MoM% Orders' =
+			
+			DIVIDE(
+			    [05.00 Orders]-[05.00 Orders LM],
+			    [05.00 Orders LM],
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 21. MoM%
+		lineageTag: acb4d925-839a-44f7-a572-c32f171eec4f
+
+	measure '06.99 MoM% 1st Category' =
+			
+			DIVIDE(
+			    [06.99 1st Category count]-[06.99 1st Category LM],
+			    [06.99 1st Category LM],
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 21. MoM%
+		lineageTag: 954ca92d-cd77-45c4-8c8b-62f999b59850
+
+	measure '06.99 MoM% SKU' =
+			
+			DIVIDE(
+			    [06.99 Distinct SKU]-[06.99 Distinct SKU LM],
+			    [06.99 Distinct SKU LM],
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 21. MoM%
+		lineageTag: f4f060e7-bc23-4593-9b1b-97be102771a0
+
+	measure vd_produto = ```
+			
+			CALCULATE(
+			    SUMX(
+			        'fVendas',
+			        'fVendas'[amount_charged] * 'fVendas'[quantity]
+			    ),
+			    'fVendas'[site_id] = 8638,
+			    NOT('fVendas'[order_status] IN {"Cancelado", "Aguardando pagamento", "Pré-encomenda"})
+			)
+			
+			```
+		displayFolder: Curva ABC
+		lineageTag: e0943361-6f5d-4352-8d19-fe614a3387ac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure venda_acc = ```
+			
+			CALCULATE(
+			    SUMX(
+			        FILTER(
+			            'fVendas',
+			            RANKX(ALL('fVendas'), 'fVendas'[vd_produto], , DESC) <= RANKX(ALL('fVendas'), 'fVendas'[vd_produto], , DESC)
+			        ),
+			        'fVendas'[vd_produto]
+			    )
+			)
+			
+			```
+		displayFolder: Curva ABC
+		lineageTag: 76a8bb35-1a0d-4296-b4eb-29655605d67f
+
+	measure percent_meta = ```
+			
+			
+			//VAR meta = AVERAGEX(Meta, Meta[Meta])
+			
+			DIVIDE([01.00 GMV], AVERAGEX(Meta, Meta[Meta]))
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: cf671e9a-11be-4255-8966-0eee4a0f9a9f
+
+	measure 'MoM% meta' =
+			
+			DIVIDE(
+			    //[01.00 GMV]-[01.00 GMV LM],
+			    //[01.00 GMV LM],
+			    0
+			)
+		displayFolder: Curva ABC
+		lineageTag: f99f802f-38f6-4602-b7c0-b15b9f2cc6c9
+
+	partition Medidas-65b15f14-7ecc-473e-a354-1c0287a81e84 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Colunas Removidas" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

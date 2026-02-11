@@ -1,0 +1,292 @@
+table fVendas
+	lineageTag: 7ed39197-5bf9-4d79-bde8-5a68450bd223
+
+	/// número do pedido, pelo amor
+	/// 
+	/// 
+	/// ai ai, viu
+	column partner_order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e72f6c14-7b95-448c-8e96-27dd5bdbd974
+		summarizeBy: none
+		sourceColumn: partner_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Tem que fazer?
+	column order_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ad6fe0e3-fe8d-49f1-b33f-b06d9c14ebd9
+		summarizeBy: none
+		sourceColumn: order_date
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Identificador do produto
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 27b0d66d-5a7c-4c52-bb42-985b461a46ae
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = User
+
+	/// O valor de desconto é aplicado sobre o pedido.
+	/// 
+	/// Necessário somar linha a linha.
+	column discount_value
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 22cff4d1-5f2a-4b2c-9897-f3598f1afced
+		summarizeBy: none
+		sourceColumn: discount_value
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 83af90cb-aedd-4da5-bdc7-77417396ca35
+		summarizeBy: none
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = User
+
+	/// Valor médio cobrado de frete.
+	/// 
+	/// Necessário somar linha a linha
+	column median_charged_shipping
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: ccd12527-b31f-45ca-b2c0-3e1486062ee5
+		summarizeBy: none
+		sourceColumn: median_charged_shipping
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Média do juros do cartão
+	/// 
+	/// Necessário somar linha a linha
+	column avg_credit_card_interest
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 6b02d817-e098-40e1-9ef8-0da0b998ac93
+		summarizeBy: none
+		sourceColumn: avg_credit_card_interest
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Média das taxas do pedido
+	/// 
+	/// Necessário somar linha a linha
+	column avg_total_tax
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: e671b06c-9541-49cb-9b3d-cf40880d1c4f
+		summarizeBy: none
+		sourceColumn: avg_total_tax
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Total do pedido
+	column order_total
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: ca074e97-445a-4931-9e1c-dfba5491d106
+		summarizeBy: none
+		sourceColumn: order_total
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	/// Status do pedido
+	column order_status
+		dataType: string
+		lineageTag: 7915112d-15d7-4113-8848-3e80832d03ba
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Tipo de frete
+	column shipping_type
+		dataType: string
+		lineageTag: 46534a79-5216-4876-b203-2d4bae6e9c7d
+		summarizeBy: none
+		sourceColumn: shipping_type
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Nome portal
+	column marketplace
+		dataType: string
+		lineageTag: 971b0114-bded-4087-baa2-a2e4d89bb736
+		summarizeBy: none
+		sourceColumn: marketplace
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Identificador do portal
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c9f44796-cf47-47e3-9e65-9d720a9f4744
+		summarizeBy: none
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = User
+
+	/// Identificador do parceiro
+	column partner_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a64e994e-023a-445e-92a6-12bd2a025630
+		summarizeBy: none
+		sourceColumn: partner_id
+
+		annotation SummarizationSetBy = User
+
+	/// Identificador do vendedor
+	column salesperson_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a0eb066-6036-4847-aa44-7355c322d099
+		summarizeBy: none
+		sourceColumn: salesperson_account_id
+
+		annotation SummarizationSetBy = User
+
+	/// Informação sobre o dispositivo que realizou a compra.
+	/// 
+	/// Adicionado ao modelo após 05/07/2022
+	column order_device
+		dataType: string
+		lineageTag: 222e6c7a-f954-4a71-b0e6-5d050f7f4af1
+		summarizeBy: none
+		sourceColumn: order_device
+
+		annotation SummarizationSetBy = Automatic
+
+	column coupon_id = RELATED(dCupons[coupon_id])
+		lineageTag: 9b9ccb48-fe3d-48ef-beec-6fa2ec6bb6d2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Classificação de nivel de atendimento
+	/// 
+	/// -100% cliente
+	/// -Venda assistida
+	/// -100% vendedor
+	column class_AA_MV =
+			
+			RELATED(dFunil[Class_AA])
+		lineageTag: a9a29223-84ca-4254-8cef-c437e42c87f3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_state = RELATED(dClientes[state])
+		lineageTag: d7c088e4-99db-4c6e-b629-a000ff0bd104
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Class_AA
+		dataType: string
+		lineageTag: 778dbf9b-69ed-48f6-b144-09b8f1d04d94
+		summarizeBy: none
+		sourceColumn: Class_AA
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_subtotal
+		dataType: double
+		lineageTag: a7ff3351-e760-4e93-9936-22fd6d0e1ecb
+		summarizeBy: sum
+		sourceColumn: order_subtotal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column amount_charged
+		dataType: double
+		lineageTag: 23126057-a3e3-46bf-bd3a-dce808cd01f7
+		summarizeBy: sum
+		sourceColumn: amount_charged
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column coupon_id_
+		dataType: double
+		lineageTag: 81cbab31-d8ab-4b4b-a78f-6bdf8ff6dc49
+		summarizeBy: sum
+		sourceColumn: coupon_id_
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column client_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c98bf37d-6e9c-4abd-91ca-9be7c520977e
+		summarizeBy: none
+		sourceColumn: client_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Categoria do produto'
+		lineageTag: f8b3b895-4d34-4f4d-ab82-0b27ad653490
+
+		level sku_id
+			lineageTag: c11836b2-fdf4-4f64-b477-eb35c97bcd6b
+			column: sku_id
+
+	partition fVendas-4423888f-1686-4fb9-aa88-100da60a3580 = m
+		mode: import
+		queryGroup: Vendas
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"b058979e-d5dd-4d00-87d4-7fd89d92e17f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="b058979e-d5dd-4d00-87d4-7fd89d92e17f"]}[Data],
+				    fVendas_ = #"b058979e-d5dd-4d00-87d4-7fd89d92e17f"{[entity="fVendas",version=""]}[Data],
+				    #"Linhas Filtradas" = Table.SelectRows(fVendas_, each [site_id] = 8638),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Linhas Filtradas",{{"coupon_id", "coupon_id_"}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Colunas Renomeadas",null,0,Replacer.ReplaceValue,{"coupon_id_"})
+				in
+				    #"Valor Substituído"
+
+	annotation PBI_ResultType = Table
+

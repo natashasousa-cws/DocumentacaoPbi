@@ -1,0 +1,48 @@
+table dFeriados
+	isHidden
+	lineageTag: 265b89b8-769e-42f4-8e3b-dffbb46e1a9f
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 359c00bb-75e0-4420-855b-d2359f4b0dae
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Dia da Semana'
+		dataType: string
+		lineageTag: d4be47f9-b932-4322-8f03-3b7836181f4e
+		summarizeBy: none
+		sourceColumn: Dia da Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feriado
+		dataType: string
+		lineageTag: 8af731fb-207b-4078-bf9b-d273b9b746e1
+		summarizeBy: none
+		sourceColumn: Feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dFeriados-1d24a1af-49ab-4709-9d97-474f381259e8 = m
+		mode: import
+		queryGroup: 'Calendario\Inteligência de Tempo'
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"2182dd7d-00e0-4f05-9561-1391bfdb444d" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="2182dd7d-00e0-4f05-9561-1391bfdb444d"]}[Data],
+				    dFeriados_ = #"2182dd7d-00e0-4f05-9561-1391bfdb444d"{[entity="dFeriados",version=""]}[Data]
+				in
+				    dFeriados_
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

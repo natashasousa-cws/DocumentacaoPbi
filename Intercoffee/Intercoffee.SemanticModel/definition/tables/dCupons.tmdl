@@ -1,0 +1,81 @@
+table dCupons
+	lineageTag: e6752958-41ea-4532-afb6-2a590f348d2c
+
+	column campaign
+		dataType: string
+		lineageTag: 7560cc8c-2dbd-48a6-9ec4-eadb60373d65
+		summarizeBy: none
+		sourceColumn: campaign
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b648f0c-129c-444f-9a8c-d2c8c2f54906
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column coupon_code
+		dataType: string
+		lineageTag: 02da191f-1626-426d-a9ee-9be806169604
+		summarizeBy: none
+		sourceColumn: coupon_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column coupon_id
+		dataType: int64
+		formatString: 0
+		lineageTag: da0b08f3-3652-4a06-87cd-2eec840fb3d5
+		summarizeBy: sum
+		sourceColumn: coupon_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: double
+		lineageTag: da950216-c85a-4993-9952-517829517e1f
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column date_begin
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5c0a1b53-550f-4bc9-84d2-2eeea3258f6d
+		summarizeBy: none
+		sourceColumn: date_begin
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_end
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: db6fba5d-0e75-43cd-9237-f6b25ea72656
+		summarizeBy: none
+		sourceColumn: date_end
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCupons = m
+		mode: import
+		queryGroup: Vendas\Apoio
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"b058979e-d5dd-4d00-87d4-7fd89d92e17f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="b058979e-d5dd-4d00-87d4-7fd89d92e17f"]}[Data],
+				    dCupons_ = #"b058979e-d5dd-4d00-87d4-7fd89d92e17f"{[entity="dCupons",version=""]}[Data],
+				    #"Linhas Filtradas" = Table.SelectRows(dCupons_, each [site_id] = 8638)
+				in
+				    #"Linhas Filtradas"
+
+	annotation PBI_ResultType = Table
+

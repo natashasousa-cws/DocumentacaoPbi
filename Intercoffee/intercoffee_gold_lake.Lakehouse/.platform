@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "intercoffee_gold_lake"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9ae8e091-ed3c-8bcf-49a7-e8dc40dcfc23"
+  }
+}

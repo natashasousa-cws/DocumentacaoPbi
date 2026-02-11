@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Intercoffee"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e5258c3c-4e50-be75-4787-f644dd4eecba"
+  }
+}

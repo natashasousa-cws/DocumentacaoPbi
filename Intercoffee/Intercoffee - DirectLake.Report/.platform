@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Intercoffee - DirectLake"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d8d8326d-98ed-b890-4db0-2994bb1c7698"
+  }
+}

@@ -1,0 +1,87 @@
+table fLogins
+	lineageTag: 7a1d5ddb-fddd-4805-949e-000509fe30e4
+	sourceLineageTag: [intercoffee].[fLogins]
+
+	column login_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d77f99d8-4897-4dc7-a8c8-4adb18a57e86
+		sourceLineageTag: login_date
+		summarizeBy: none
+		sourceColumn: login_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: 5e798b1c-5342-4598-8a47-4295347bbca2
+		sourceLineageTag: account_user
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3bb7762b-35f5-4907-9d36-c76e7d9b4a84
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column login_type
+		dataType: string
+		lineageTag: 7656abcc-b78a-4b70-afca-25c308f6e9c8
+		sourceLineageTag: login_type
+		summarizeBy: none
+		sourceColumn: login_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b94b89d8-647e-431e-8b0c-8fb6a0e1118a
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: 8eb89961-973c-4d5c-87aa-a2d8e4b80a17
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_type
+		dataType: string
+		lineageTag: baebf778-eb1a-4ee8-9213-32abe02f5f11
+		sourceLineageTag: account_type
+		summarizeBy: none
+		sourceColumn: account_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c4a2fa8-cd5c-4141-962f-47978fb6ef7d
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fLogins = entity
+		mode: directLake
+		source
+			entityName: fLogins
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

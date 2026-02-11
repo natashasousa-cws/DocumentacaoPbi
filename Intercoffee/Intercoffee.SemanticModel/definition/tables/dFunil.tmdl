@@ -1,0 +1,75 @@
+table dFunil
+	lineageTag: bae02571-084e-459e-81f9-718b10049f9c
+
+	column partner_order_id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: f5d9c200-be46-456a-bc23-cc831aa25e8e
+		summarizeBy: none
+		sourceColumn: partner_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Class_AA
+		dataType: string
+		lineageTag: be04d717-980c-4f1b-9b3f-ba7cef8b20d3
+		summarizeBy: none
+		sourceColumn: Class_AA
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Class AA ponderado'
+		dataType: double
+		lineageTag: fa72dc2f-3439-40f0-a6c1-a84b9c02c5ff
+		summarizeBy: none
+		sourceColumn: Class AA ponderado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9beedd29-6066-4264-ba99-59eea328700f
+		summarizeBy: none
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9d2ce033-e722-47d1-a2c4-1f1db11ee99d
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Class_AA_legacy
+		dataType: string
+		lineageTag: 9a180d18-ad88-473f-9cf5-8bef2904d388
+		summarizeBy: none
+		sourceColumn: Class_AA_legacy
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dFunil-91826cd8-63b7-410f-b437-5e8596f6eb25 = m
+		mode: import
+		queryGroup: Vendas\Apoio
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"b058979e-d5dd-4d00-87d4-7fd89d92e17f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="b058979e-d5dd-4d00-87d4-7fd89d92e17f"]}[Data],
+				    dFunil_ = #"b058979e-d5dd-4d00-87d4-7fd89d92e17f"{[entity="dFunil",version=""]}[Data],
+				    #"Linhas Filtradas" = Table.SelectRows(dFunil_, each [site_id] = 8638)
+				in
+				    #"Linhas Filtradas"
+
+	annotation PBI_ResultType = Table
+

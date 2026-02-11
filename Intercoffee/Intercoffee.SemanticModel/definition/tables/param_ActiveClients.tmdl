@@ -1,0 +1,36 @@
+table param_ActiveClients
+	lineageTag: 4373f107-af71-47d3-83f5-346af74352d4
+
+	measure 'param_ActiveClients Valor' = SELECTEDVALUE('param_ActiveClients'[param_ActiveClients], 1)
+		formatString: 0
+		lineageTag: 5af9973d-cbd2-416a-8c10-c3e9b1365cbd
+
+	/// Texto dinâmico para clientes ativos
+	measure 'Titulo active clients' =
+			
+			VAR Seletor     =   [param_ActiveClients Valor]
+			VAR dtFinal     =   MAX(dCalendario[Data])
+			VAR dtInicio    =   EDATE(dtFinal, -Seletor)
+			RETURN
+			"Clientes ativos no periodo de "&Seletor&" mês(es), periodo entre "&dtInicio&" à "&dtFinal&"."
+		lineageTag: 8104e37d-36e7-4e0d-a257-d067cd2e6a4c
+
+	column param_ActiveClients
+		formatString: 0
+		lineageTag: 5a8f87cb-af98-4b89-a098-9987b95f8d5b
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition param_ActiveClients-24a4e720-707a-421e-85c9-935f0fa49a13 = calculated
+		mode: import
+		source = GENERATESERIES(1, 120, 1)
+
+	annotation PBI_Id = 76204b0612394179bdc36958eb052f9d
+

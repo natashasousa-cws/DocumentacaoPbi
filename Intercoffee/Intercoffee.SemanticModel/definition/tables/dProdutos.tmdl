@@ -1,0 +1,77 @@
+table dProdutos
+	lineageTag: 2f4569df-67b5-48be-a92b-aad8f38ac33d
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 96c38fa0-18c1-49bb-9f8f-7a0ec0da4840
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		lineageTag: b76aad8b-a17d-40d0-b5e3-02a7f94ecd75
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: 621fc042-82ee-4d77-9972-010a5fefab70
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_1
+		dataType: string
+		lineageTag: e61716c2-8f64-4bee-8515-30edaac857d3
+		summarizeBy: none
+		sourceColumn: category_level_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_2
+		dataType: string
+		lineageTag: 7d639939-8a23-4b59-8977-616ef8d3fa22
+		summarizeBy: none
+		sourceColumn: category_level_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column tier
+		dataType: string
+		lineageTag: c1abcf75-46b1-4c99-aa6d-c5dab685def8
+		summarizeBy: none
+		sourceColumn: tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column abc_classification
+		dataType: string
+		lineageTag: b0c0b990-e70e-41f0-b9c9-091cc1b99a4f
+		summarizeBy: none
+		sourceColumn: abc_classification
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProdutos = m
+		mode: import
+		queryGroup: Vendas\Apoio
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"8b8e82a4-e15b-494e-94b1-80092d26ec55" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="8b8e82a4-e15b-494e-94b1-80092d26ec55"]}[Data],
+				    dProdutos_ = #"8b8e82a4-e15b-494e-94b1-80092d26ec55"{[entity="dProdutos",version=""]}[Data]
+				in
+				    dProdutos_
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

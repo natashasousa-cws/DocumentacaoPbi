@@ -1,0 +1,78 @@
+table dGrupo_Cliente
+	lineageTag: da1c508c-bd29-4cda-947d-4c2883d67d76
+	sourceLineageTag: [intercoffee].[dGrupo_Cliente]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d4aca8ea-c4a6-472f-9d3b-53904e5ddceb
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: 65732a51-bf1d-4643-9085-9b5f48db89f2
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 0a06ee5f-b3be-4309-b2f1-80b6194d5d27
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_type
+		dataType: string
+		lineageTag: 1d692b13-a3c2-4b0c-bf95-f4e9a930f8a7
+		sourceLineageTag: customer_type
+		summarizeBy: none
+		sourceColumn: customer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 93a46e34-03a1-43c1-958d-8d7120a4230d
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column enable_group_display_in_registration
+		dataType: double
+		lineageTag: 7aaf2a0d-2667-4548-84b4-8260a469e5c1
+		sourceLineageTag: enable_group_display_in_registration
+		summarizeBy: sum
+		sourceColumn: enable_group_display_in_registration
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column customer_group_type
+		dataType: string
+		lineageTag: 060d51fd-fb9b-4a54-b241-cde89f15e69a
+		sourceLineageTag: customer_group_type
+		summarizeBy: none
+		sourceColumn: customer_group_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dGrupo_Cliente = entity
+		mode: directLake
+		source
+			entityName: dGrupo_Cliente
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

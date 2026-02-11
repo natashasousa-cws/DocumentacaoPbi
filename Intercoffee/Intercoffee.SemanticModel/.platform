@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Intercoffee"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7048ee6a-318d-a0fc-4670-5618b5cc3092"
+  }
+}

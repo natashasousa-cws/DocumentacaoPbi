@@ -1,0 +1,40 @@
+table dPeriodos
+	lineageTag: eba5d576-79dd-4f29-941e-2cda19956191
+	sourceLineageTag: [intercoffee].[dPeriodos]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0361f248-a1d5-4dbb-929a-5bd9e0dff2cf
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo
+		dataType: string
+		lineageTag: 0cdd4f94-b4af-447a-a91a-2831274d1cde
+		sourceLineageTag: Periodo
+		summarizeBy: none
+		sourceColumn: Periodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		dataType: int64
+		formatString: 0
+		lineageTag: dc420998-2c28-4fa5-b89d-684304d4d908
+		sourceLineageTag: Ordem
+		summarizeBy: sum
+		sourceColumn: Ordem
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dPeriodos = entity
+		mode: directLake
+		source
+			entityName: dPeriodos
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

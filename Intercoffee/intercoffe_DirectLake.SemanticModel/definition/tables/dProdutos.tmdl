@@ -1,0 +1,84 @@
+table dProdutos
+	lineageTag: 439e359e-ab4d-46d1-9071-602ec93225a3
+	sourceLineageTag: [intercoffee].[dProdutos]
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f9ae2d5c-dbd5-4138-82ec-541bd5533bb4
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		lineageTag: dae7bb5c-6dbe-4a6f-bcde-1ac003d01014
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column manufacturer
+		dataType: string
+		lineageTag: e041a122-24b4-40b3-a512-751140dd3283
+		sourceLineageTag: manufacturer
+		summarizeBy: none
+		sourceColumn: manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: f75800c5-aae0-4c63-b0c2-fd44ee57a8f2
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_1
+		dataType: string
+		lineageTag: fd3f7f61-cb14-4a8e-b90d-ef8c50ab8dfe
+		sourceLineageTag: category_level_1
+		summarizeBy: none
+		sourceColumn: category_level_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_2
+		dataType: string
+		lineageTag: 71cc830d-6cee-4ef0-b375-af390082e3d3
+		sourceLineageTag: category_level_2
+		summarizeBy: none
+		sourceColumn: category_level_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_3
+		dataType: string
+		lineageTag: 21bfbbaf-3083-4d61-8e21-8589d16905b0
+		sourceLineageTag: category_level_3
+		summarizeBy: none
+		sourceColumn: category_level_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel
+		dataType: string
+		lineageTag: b51a9822-33d4-48c2-9de9-be7032d54a4d
+		sourceLineageTag: nivel
+		summarizeBy: none
+		sourceColumn: nivel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProdutos = entity
+		mode: directLake
+		source
+			entityName: dProdutos
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

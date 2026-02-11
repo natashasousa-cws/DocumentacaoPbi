@@ -1,0 +1,87 @@
+table fMensageria_aux
+	lineageTag: 54b940da-1b07-454f-afa0-38d3f4652550
+	sourceLineageTag: [intercoffee].[fMensageria_aux]
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 050ceac0-589a-4e51-9a40-5e3d8a2ba1b7
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_id
+		dataType: string
+		lineageTag: a7e59191-54bc-4a69-ab45-21025ee1d6d8
+		sourceLineageTag: message_id
+		summarizeBy: none
+		sourceColumn: message_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 4c363afc-8cc4-46ff-aeb7-e1fc205047fa
+		sourceLineageTag: status
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f3a25be8-e688-4475-95ff-d83ed97849f0
+		sourceLineageTag: action_id
+		summarizeBy: sum
+		sourceColumn: action_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column identificador
+		dataType: string
+		lineageTag: 8d93a377-dc11-484c-8994-4a9d324d767c
+		sourceLineageTag: identificador
+		summarizeBy: none
+		sourceColumn: identificador
+
+		annotation SummarizationSetBy = Automatic
+
+	column projeto
+		dataType: string
+		lineageTag: c29fd556-1d1d-48ca-a74d-7c537c34adbb
+		sourceLineageTag: projeto
+		summarizeBy: none
+		sourceColumn: projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: b7bcf51e-3c05-43e2-aea5-995e0305a0e2
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TTR
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ad6d654-2e9f-4694-87d0-7f4a90402f91
+		sourceLineageTag: TTR
+		summarizeBy: sum
+		sourceColumn: TTR
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMensageria_aux = entity
+		mode: directLake
+		source
+			entityName: fMensageria_aux
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

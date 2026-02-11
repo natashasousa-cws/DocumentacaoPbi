@@ -1,0 +1,73 @@
+table dCancelamento
+	lineageTag: 3caf2e16-e541-43b8-9161-c92b82875c47
+
+	/// número do pedido
+	column partner_order_id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 1599f958-4155-4884-bbed-516d14d7e70f
+		summarizeBy: none
+		sourceColumn: partner_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Razão de cancelamento
+	column reason_for_order_cancelled
+		dataType: string
+		lineageTag: f248a790-8dd4-4438-8b7e-18c331450344
+		summarizeBy: none
+		sourceColumn: reason_for_order_cancelled
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ea6b690-fa22-4fa0-9a99-cce41e86bca0
+		summarizeBy: none
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 50725b8c-f32f-450c-ad21-dd3475a5923d
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_status
+		dataType: string
+		lineageTag: fd2d60ee-7b47-46a2-8286-8b33edc3d04e
+		summarizeBy: none
+		sourceColumn: payment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status
+		dataType: string
+		lineageTag: 8971c34d-51f8-412f-b774-0f9d17d1ef8a
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCancelamento-788802c0-e1da-425c-af71-992573d7cf62 = m
+		mode: import
+		queryGroup: Vendas\Apoio
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"b058979e-d5dd-4d00-87d4-7fd89d92e17f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="b058979e-d5dd-4d00-87d4-7fd89d92e17f"]}[Data],
+				    dCancelamento_ = #"b058979e-d5dd-4d00-87d4-7fd89d92e17f"{[entity="dCancelamento",version=""]}[Data],
+				    #"Linhas Filtradas" = Table.SelectRows(dCancelamento_, each [site_id] = 8638)
+				in
+				    #"Linhas Filtradas"
+
+	annotation PBI_ResultType = Table
+

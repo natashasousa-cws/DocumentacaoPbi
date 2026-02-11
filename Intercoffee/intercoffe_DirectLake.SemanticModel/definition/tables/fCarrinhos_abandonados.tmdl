@@ -1,0 +1,208 @@
+table fCarrinhos_abandonados
+	lineageTag: 9368bb4e-871a-4085-a481-96684e6558a4
+	sourceLineageTag: [intercoffee].[fCarrinhos_abandonados]
+
+	measure '% Resgatado' = ```
+			
+			DIVIDE(
+			    [GMV Resgatado],
+			    [Valor potencial do carrinho],
+			    0
+			)
+			
+			```
+		lineageTag: edf8a76d-e04e-4ddf-b62b-925137c63c63
+
+	measure 'GMV Abandonado Real' =
+			
+			[Valor potencial do carrinho] - [GMV Resgatado]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 31102d15-380e-477c-9ee6-a435491d01e5
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'GMV Resgatado' = ```
+			
+			SUMX(
+			    FILTER(
+			        fCarrinhos_abandonados,
+			        fCarrinhos_abandonados[cart_type] = "Carrinho abandonado"
+			    ),
+			    VAR curClient = fCarrinhos_abandonados[client_account_id]
+			    VAR curSKU    = fCarrinhos_abandonados[sku_id]
+			    VAR curDate   = fCarrinhos_abandonados[datekey]
+			    VAR existeVendaPosterior =
+			        CALCULATE(
+			            COUNTROWS( fVendas ),
+			            FILTER(
+			                ALL( fVendas ),
+			                fVendas[client_account_id] = curClient &&
+			                fVendas[sku_id] = curSKU &&
+			                fVendas[datekey] >= curDate
+			            )
+			        ) > 0
+			    RETURN
+			        IF( existeVendaPosterior,
+			            fCarrinhos_abandonados[quantity] * fCarrinhos_abandonados[unit_price],
+			            0
+			        )
+			)
+			
+			```
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		lineageTag: 2321dc13-945e-421d-9837-4fce585e9614
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column session_id
+		dataType: string
+		lineageTag: 425e8b43-7a36-46dd-8f73-335c70f05a15
+		sourceLineageTag: session_id
+		summarizeBy: none
+		sourceColumn: session_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column device_id
+		dataType: int64
+		formatString: 0
+		lineageTag: db404860-8f0e-496d-b28f-e2bc7ee89eea
+		sourceLineageTag: device_id
+		summarizeBy: sum
+		sourceColumn: device_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f41c676-41f3-4005-ac87-763b6b0f818a
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f85561c8-bde0-422a-a1cc-54c6586f2113
+		sourceLineageTag: client_account_id
+		summarizeBy: sum
+		sourceColumn: client_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 47656097-9cdd-45c3-a6bb-62e1f8262613
+		sourceLineageTag: data
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_created
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 38e2d41c-09c7-4316-9087-4c63d733bf38
+		sourceLineageTag: date_created
+		summarizeBy: none
+		sourceColumn: date_created
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 6bf34803-a5c1-4a97-b8f8-08382f51d79d
+		sourceLineageTag: quantity
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 529096a2-8167-4351-94d7-cb898280bfe3
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column sku_name
+		dataType: string
+		lineageTag: 87f268a0-7f2c-40b4-af8e-aad78494a49b
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: dcdd19e3-5686-4acf-9a68-73dc0e79c254
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: cee55f81-fa33-4a81-801e-eb63ce455842
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner
+		dataType: string
+		lineageTag: aed83d8a-c5cb-4465-862a-03ac0d2e988b
+		sourceLineageTag: partner
+		summarizeBy: none
+		sourceColumn: partner
+
+		annotation SummarizationSetBy = Automatic
+
+	column cart_type
+		dataType: string
+		lineageTag: eaa5d548-773a-4836-9c64-f55b1b88c638
+		sourceLineageTag: cart_type
+		summarizeBy: none
+		sourceColumn: cart_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: ad368367-219b-4558-be3f-4102abc98549
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fCarrinhos_abandonados = entity
+		mode: directLake
+		source
+			entityName: fCarrinhos_abandonados
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

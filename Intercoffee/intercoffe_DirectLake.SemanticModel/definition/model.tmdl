@@ -1,0 +1,48 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DirectLake - intercoffee_gold_lake"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","RemoteModeling","WebModelingEdit"]
+
+annotation __TEdtr = 1
+
+ref table fMensageria_resultado_geral
+ref table dMetodo_pagamento
+ref table fMensageria_resultado_navegacao
+ref table fCarrinhos_abandonados
+ref table dOfertas
+ref table dTipo_pedido
+ref table fVendas_datatime
+ref table fDatalayer_product_pageviews
+ref table dFeriados
+ref table dAssociados
+ref table agg_last_purchase
+ref table dStatus_pedido
+ref table dPeriodos
+ref table dTipo_envio
+ref table dVendedores
+ref table fMensageria_aux
+ref table dCalendario
+ref table dDispositivos
+ref table fDatalayer_session_summary
+ref table dTempo
+ref table fDatalayer_agg_pageviews
+ref table dGrupo_Cliente
+ref table dCarteirizacao
+ref table agg_last_login
+ref table dCupons
+ref table fLogins
+ref table fMensageria_parametrized_send_union
+ref table dClientes
+ref table fVendas
+ref table dProdutos
+ref table Medidas
+

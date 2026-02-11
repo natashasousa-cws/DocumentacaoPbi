@@ -1,0 +1,117 @@
+table fMensageria_parametrized_send_union
+	lineageTag: 6814ff16-6055-454d-8085-555b3a73d909
+	sourceLineageTag: [intercoffee].[fMensageria_parametrized_send_union]
+
+	column id_campanha
+		dataType: int64
+		formatString: 0
+		lineageTag: 8cc65648-8706-4b62-96e0-83b062e2eddf
+		sourceLineageTag: id_campanha
+		summarizeBy: sum
+		sourceColumn: id_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_campanha
+		dataType: string
+		lineageTag: 5e64a566-ab57-41ba-b742-ef36aa9cc43c
+		sourceLineageTag: nome_campanha
+		summarizeBy: none
+		sourceColumn: nome_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column meio_disparo
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f5bf558-4886-45cb-b576-07c2eff71252
+		sourceLineageTag: meio_disparo
+		summarizeBy: sum
+		sourceColumn: meio_disparo
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_sid
+		dataType: string
+		lineageTag: cedc3924-3d0d-44b9-b204-5d935cd67bf7
+		sourceLineageTag: message_sid
+		summarizeBy: none
+		sourceColumn: message_sid
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_id
+		dataType: string
+		lineageTag: 6b7a3225-71a0-400b-8086-2c39ceaf7f82
+		sourceLineageTag: message_id
+		summarizeBy: none
+		sourceColumn: message_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_mensagem
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ce4c02c-880a-439d-b870-de91686c6567
+		sourceLineageTag: status_mensagem
+		summarizeBy: sum
+		sourceColumn: status_mensagem
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a5c8422-b73b-4d05-a5e6-1fcfe86374a9
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1061f1aa-7c30-4765-b58e-450e04c147e3
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column lista_observacoes
+		dataType: string
+		lineageTag: b1f5430a-1570-4c9d-9421-6e6dfcdc8df1
+		sourceLineageTag: lista_observacoes
+		summarizeBy: none
+		sourceColumn: lista_observacoes
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1ca49cf5-8c60-48c3-bc77-d3686d4be142
+		sourceLineageTag: timestamp
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: ae9364e3-650b-4d7a-b3aa-781d28da8107
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMensageria_parametrized_send_union = entity
+		mode: directLake
+		source
+			entityName: fMensageria_parametrized_send_union
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

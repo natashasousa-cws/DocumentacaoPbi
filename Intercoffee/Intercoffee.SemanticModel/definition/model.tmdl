@@ -1,0 +1,92 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Calendario
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Calendario\Parametros
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Vendas
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup Vendas\Apoio
+
+	annotation PBI_QueryGroupOrder = 0
+
+/// Tabelas relacionadas aos parceiros
+queryGroup Parceiros
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup Contas
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Vendas\Parametros
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Analise RFM'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Calendario\Inteligência de Tempo'
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation PBI_QueryOrder = ["AnoMin","AnoMax","MesInicioAnoFiscal","DiaInicioMes","dCalendario","dFeriados","dEstados","dLog_pedido","dFunil","dCupons","dPagamento","dCancelamento","fVendas","RangeStart","RangeEnd","dAssociados","dOfertas_associados","dClientes","dVendedores","fLogins","Medidas","fLatest_update","aux_RFM_Classificação","dCarterizacao","DateKey","aux_RFM_Recency","aux_RFM_Frequency","aux_RFM_Monetary","Medidas_RFM","partner_id","site_id","dProdutos","classificação_abc","Meta"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.145.7692.4 (Main)+9e218fec77c33043950f105df46e999400bc0cc4
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["WebModelingEdit"]
+
+ref table dCalendario
+ref table dPagamento
+ref table fVendas
+ref table dAssociados
+ref table dOfertas_associados
+ref table dClientes
+ref table dVendedores
+ref table fLogins
+ref table fLatest_update
+ref table Medidas
+ref table dFunil
+ref table param_ActiveClients
+ref table dCancelamento
+ref table param_Y_axis
+ref table param_Line_axis
+ref table aux_Order_rank
+ref table param_Concent_project
+ref table aux_RFM_Recency
+ref table aux_RFM_Frequency
+ref table param_RFV_period
+ref table param_Category_concentration
+ref table dFeriados
+ref table aux_RFM_Monetary
+ref table aux_RFM_Classificação
+ref table Medidas_RFM
+ref table param_Product_concentration
+ref table param_Cliente_Y
+ref table param_Vend_Y
+ref table param_Prod_Y
+ref table dCupons
+ref table dEstados
+ref table dProdutos
+ref table classificação_abc
+ref table Meta
+
+ref cultureInfo pt-BR
+

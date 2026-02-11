@@ -1,0 +1,41 @@
+table dCarteirizacao
+	lineageTag: 42c8da03-45ab-467e-bce6-18e12ae6c72e
+	sourceLineageTag: [intercoffee].[dCarteirizacao]
+
+	column id_account_seller
+		dataType: int64
+		formatString: 0
+		lineageTag: 2677ac06-2d3b-4fc1-a754-536cde43d3dc
+		sourceLineageTag: id_account_seller
+		summarizeBy: sum
+		sourceColumn: id_account_seller
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_account_customer
+		dataType: int64
+		formatString: 0
+		lineageTag: eda449e2-6fed-46a7-8665-16e27a484a33
+		sourceLineageTag: id_account_customer
+		summarizeBy: sum
+		sourceColumn: id_account_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_store
+		dataType: int64
+		formatString: 0
+		lineageTag: f8ea88ab-e246-4cac-b8d5-f583dc1f4dbf
+		sourceLineageTag: id_store
+		summarizeBy: sum
+		sourceColumn: id_store
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCarteirizacao = entity
+		mode: directLake
+		source
+			entityName: dCarteirizacao
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

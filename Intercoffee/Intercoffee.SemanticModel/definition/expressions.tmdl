@@ -1,0 +1,95 @@
+expression AnoMin = 2022 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+	lineageTag: c1ac8f65-ead5-474a-8301-7a93adb21bd6
+	queryGroup: Calendario\Parametros
+
+	annotation PBI_ResultType = Number
+
+	annotation PBI_NavigationStepName = Navegação
+
+expression AnoMax = 2025 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+	lineageTag: f0cf074b-d6ad-4f89-a882-19dcb02c459b
+	queryGroup: Calendario\Parametros
+
+	annotation PBI_ResultType = Number
+
+expression MesInicioAnoFiscal = 1 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+	lineageTag: ecb756ff-a64c-4df0-bc47-fe3c65a73b23
+	queryGroup: Calendario\Parametros
+
+	annotation PBI_ResultType = Number
+
+expression DiaInicioMes = 1 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+	lineageTag: f61479a9-4e15-4005-86d9-f9d15ad38290
+	queryGroup: Calendario\Parametros
+
+	annotation PBI_ResultType = Number
+
+expression dCarterizacao =
+		let
+		    Fonte = PowerPlatform.Dataflows(null),
+		    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+		    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+		    #"bb33815e-8a0c-4500-8b94-c3ab986a469f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="bb33815e-8a0c-4500-8b94-c3ab986a469f"]}[Data],
+		    dCarteirizacao_ = #"bb33815e-8a0c-4500-8b94-c3ab986a469f"{[entity="dCarteirizacao",version=""]}[Data],
+		    #"Linhas Filtradas" = Table.SelectRows(dCarteirizacao_, each [site_id] = 8638)
+		in
+		    #"Linhas Filtradas"
+	lineageTag: dee58a95-238a-44cc-b4b4-37d0c076f9c6
+	queryGroup: Contas
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
+expression RangeStart = #datetime(2022, 12, 31, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: 12cccd50-f4d2-48cc-a8d5-4b81100ee47a
+	queryGroup: Vendas\Parametros
+
+	annotation PBI_ResultType = DateTime
+
+expression RangeEnd = #datetime(2030, 12, 31, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: cc024565-4f3f-4f86-be6d-8c0a31dea904
+	queryGroup: Vendas\Parametros
+
+	annotation PBI_ResultType = DateTime
+
+expression DateKey =
+		let
+		    Fonte = (x as datetime) => Date.Year(x)*10000 + Date.Month(x)*100 + Date.Day(x)
+		in
+		    Fonte
+	lineageTag: b9edc7f6-7d2d-463d-bf72-b20c89ec3f17
+	queryGroup: Vendas\Parametros
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Function
+
+expression partner_id = "6318" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 241637e1-ba99-49a9-9ef3-320400032c34
+	queryGroup: Calendario\Parametros
+
+	annotation PBI_ResultType = Text
+
+expression site_id = "7945" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: ee254d73-ef2f-4c51-b413-cbd8681ff6c8
+	queryGroup: Calendario\Parametros
+
+	annotation PBI_ResultType = Text
+
+expression dLog_pedido =
+		let
+		    Fonte = PowerPlatform.Dataflows(null),
+		    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+		    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+		    #"b058979e-d5dd-4d00-87d4-7fd89d92e17f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="b058979e-d5dd-4d00-87d4-7fd89d92e17f"]}[Data],
+		    dLog_pedido_ = #"b058979e-d5dd-4d00-87d4-7fd89d92e17f"{[entity="dLog_pedido",version=""]}[Data]
+		in
+		    dLog_pedido_
+	lineageTag: 655ec7e1-685c-4628-a2ec-3b1e4c983fc3
+	queryGroup: Vendas\Apoio
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

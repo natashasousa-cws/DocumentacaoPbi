@@ -1,0 +1,249 @@
+table fMensageria_resultado_geral
+	lineageTag: 2948b603-0ffb-4083-b633-678460cecd57
+	sourceLineageTag: [intercoffee].[fMensageria_resultado_geral]
+
+	column client_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 29d49e44-f53d-43e5-9732-4f682c5bddf1
+		sourceLineageTag: client_account_id
+		summarizeBy: sum
+		sourceColumn: client_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 23fa8025-6cf9-4dc3-a75d-2ee1d94cee75
+		sourceLineageTag: timestamp
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_campanha
+		dataType: int64
+		formatString: 0
+		lineageTag: 5b2c14df-f799-4d6a-a3d0-3dd4ffc5babc
+		sourceLineageTag: id_campanha
+		summarizeBy: sum
+		sourceColumn: id_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_campanha
+		dataType: string
+		lineageTag: 3c1aed06-6361-4932-87d0-4b11c90cb1a4
+		sourceLineageTag: nome_campanha
+		summarizeBy: none
+		sourceColumn: nome_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column meio_disparo
+		dataType: int64
+		formatString: 0
+		lineageTag: 05dcef85-497d-466f-9c8f-0bbab6f07d9d
+		sourceLineageTag: meio_disparo
+		summarizeBy: sum
+		sourceColumn: meio_disparo
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_sid
+		dataType: string
+		lineageTag: d093ea2a-b148-45e2-80d2-2bff75bca29b
+		sourceLineageTag: message_sid
+		summarizeBy: none
+		sourceColumn: message_sid
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_id
+		dataType: string
+		lineageTag: 7d423765-a6f7-4fa1-b6a7-faceea71429b
+		sourceLineageTag: message_id
+		summarizeBy: none
+		sourceColumn: message_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_mensagem
+		dataType: int64
+		formatString: 0
+		lineageTag: a162452e-363b-43bb-9f1f-693fb69c98b7
+		sourceLineageTag: status_mensagem
+		summarizeBy: sum
+		sourceColumn: status_mensagem
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 35470dcc-7e4b-491d-a64e-12c503c7fde8
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column lista_observacoes
+		dataType: string
+		lineageTag: a9cfc999-3013-4396-8210-5b71d43450ff
+		sourceLineageTag: lista_observacoes
+		summarizeBy: none
+		sourceColumn: lista_observacoes
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 0078284b-3802-483f-94b6-f65805fe338e
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_total
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 6cc7b23b-06f2-4469-b5c4-fe41386688fe
+		sourceLineageTag: order_total
+		summarizeBy: sum
+		sourceColumn: order_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column order_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e2b3f13f-ae1e-48ab-a3bf-1aa98cac9a0f
+		sourceLineageTag: order_date
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column cart_order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c6d60e2-ab67-4540-b1be-4308936b9495
+		sourceLineageTag: cart_order_id
+		summarizeBy: sum
+		sourceColumn: cart_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_type_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5f3d4ccf-85a5-4380-aa47-313ea93fbc69
+		sourceLineageTag: order_type_id
+		summarizeBy: sum
+		sourceColumn: order_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4d3e4c48-1be7-448f-8d7e-3be66c36e8f2
+		sourceLineageTag: order_status_id
+		summarizeBy: sum
+		sourceColumn: order_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column skus_convertidos
+		dataType: string
+		lineageTag: 66378400-d3c8-4513-be94-6e264bcd0898
+		sourceLineageTag: skus_convertidos
+		summarizeBy: none
+		sourceColumn: skus_convertidos
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_1dia
+		dataType: int64
+		formatString: 0
+		lineageTag: a2ea4a06-fc2c-467f-ae4a-f9baabb752d6
+		sourceLineageTag: conversao_1dia
+		summarizeBy: sum
+		sourceColumn: conversao_1dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_2dia
+		dataType: int64
+		formatString: 0
+		lineageTag: e50bf3a2-f007-4643-9569-17624ad0e275
+		sourceLineageTag: conversao_2dia
+		summarizeBy: sum
+		sourceColumn: conversao_2dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_7dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b90f113-f9e4-4a3f-91a8-f3dc058eaaed
+		sourceLineageTag: conversao_7dia
+		summarizeBy: sum
+		sourceColumn: conversao_7dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversao_14dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e7a5d4d-1824-4865-8fd7-90792882aa9e
+		sourceLineageTag: conversao_14dia
+		summarizeBy: sum
+		sourceColumn: conversao_14dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_skus_abandonados
+		dataType: int64
+		formatString: 0
+		lineageTag: 4bb5f1ec-72f6-4a2a-b10a-bc94e0191928
+		sourceLineageTag: n_skus_abandonados
+		summarizeBy: sum
+		sourceColumn: n_skus_abandonados
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_skus_convertidos
+		dataType: int64
+		formatString: 0
+		lineageTag: efdb38bc-be0a-4c24-b828-2ff67bdc2968
+		sourceLineageTag: n_skus_convertidos
+		summarizeBy: sum
+		sourceColumn: n_skus_convertidos
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_conversao_ca
+		dataType: double
+		lineageTag: 990db0cd-83e9-4721-b8cf-3151f5262dd6
+		sourceLineageTag: pct_conversao_ca
+		summarizeBy: sum
+		sourceColumn: pct_conversao_ca
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fMensageria_resultado_geral = entity
+		mode: directLake
+		source
+			entityName: fMensageria_resultado_geral
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

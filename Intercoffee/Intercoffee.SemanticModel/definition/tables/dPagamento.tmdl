@@ -1,0 +1,109 @@
+table dPagamento
+	lineageTag: de5179eb-f698-492a-8dd9-5731c5a4ca2d
+
+	column partner_order_id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: a660199c-b409-4ae8-b3ff-a3a47e42986b
+		summarizeBy: none
+		sourceColumn: partner_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_method
+		dataType: string
+		lineageTag: 7959943f-a4b1-4e0f-8a7c-aa3ddbf1f87b
+		summarizeBy: none
+		sourceColumn: payment_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column instances
+		dataType: double
+		lineageTag: c610cdea-1234-485e-9738-330460004392
+		summarizeBy: sum
+		sourceColumn: instances
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column instance_value
+		dataType: double
+		lineageTag: 092cdeb6-8622-4b76-8be9-0595d2ce813f
+		summarizeBy: sum
+		sourceColumn: instance_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 92f0bf3d-d9d1-497d-bb29-32850f030737
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 18fe7587-a9ca-4599-ae6e-ca2e4e84cb6b
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount_charged_by_provider
+		dataType: double
+		lineageTag: 5de504ff-c696-431b-844c-a063a752caf6
+		summarizeBy: sum
+		sourceColumn: amount_charged_by_provider
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gateway
+		dataType: string
+		lineageTag: f87d6f90-8666-46e1-b543-a0663ad6bdab
+		summarizeBy: none
+		sourceColumn: gateway
+
+		annotation SummarizationSetBy = Automatic
+
+	column card_brand
+		dataType: string
+		lineageTag: 54aa7a42-baa2-419d-91f2-2bd3ed61caf4
+		summarizeBy: none
+		sourceColumn: card_brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_status
+		dataType: string
+		lineageTag: 8e3152b1-ce57-4c8d-ab97-b54351cf978b
+		summarizeBy: none
+		sourceColumn: payment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dPagamento-3bc7e95a-0ec6-4079-a43c-47312bf5aa68 = m
+		mode: import
+		queryGroup: Vendas\Apoio
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"b058979e-d5dd-4d00-87d4-7fd89d92e17f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="b058979e-d5dd-4d00-87d4-7fd89d92e17f"]}[Data],
+				    dPagamento_ = #"b058979e-d5dd-4d00-87d4-7fd89d92e17f"{[entity="dPagamento",version=""]}[Data],
+				    #"Linhas Filtradas" = Table.SelectRows(dPagamento_, each [site_id] = 8638)
+				in
+				    #"Linhas Filtradas"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,286 @@
+table dClientes
+	lineageTag: 262eef39-96a8-4752-a148-93d89947bff0
+
+	/// Identificador da conta
+	column account_id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: db06e71e-0948-4b28-9e4b-7f05cb12797b
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = User
+
+	column account_create_date
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 2b2736bb-af07-44e5-be57-9ab49b90aeb8
+		summarizeBy: none
+		sourceColumn: account_create_date
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	/// Identificador do cliente
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ad801ef-1b8e-4210-8c61-e18ca1ff1e10
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = User
+
+	column client_status
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 97df49c9-3081-4c6e-af24-94dca91611c1
+		summarizeBy: none
+		sourceColumn: client_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_create_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6c8e373c-e394-4eef-9275-5e9160c3fb7d
+		summarizeBy: none
+		sourceColumn: client_create_date
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column name
+		dataType: string
+		lineageTag: 92656ed6-482c-4bd8-896c-2f9dc8e83174
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: f0204661-659e-43ce-9db2-a5693d7e36a5
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: de66239a-7850-4d4a-8079-83c06c701f6f
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 4d185b87-1d59-42a6-af7d-29d71ae21f6a
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Classificação de Pessoa fisica ou juridica
+	column person_type
+		dataType: string
+		lineageTag: ef3871f2-c4f8-4c89-8ca1-1c05502844fb
+		summarizeBy: none
+		sourceColumn: person_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		lineageTag: 5bf30068-f22a-4b61-8a72-f29fcb0e9f78
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone_number
+		dataType: string
+		lineageTag: 836bab2b-c344-4c28-8afd-94c0a69939d9
+		summarizeBy: none
+		sourceColumn: phone_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e3e9a96a-f978-4d2b-9e83-e4a959c7d16c
+		summarizeBy: none
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = User
+
+	column UF
+		dataType: string
+		lineageTag: 2f288a00-5baf-40ba-8042-f00d5c3f9e6b
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendedor? =
+			
+			IF(
+			    LOOKUPVALUE(dVendedores[account_id],dVendedores[account_id],dClientes[account_id]) = BLANK(),
+			    FALSE(),
+			    TRUE()
+			)
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 77e9a1eb-3f73-4d7a-ace2-905e7db10959
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column contact
+		dataType: string
+		lineageTag: 1540aec2-ca7d-4c72-8a4c-26fdcfb2081f
+		summarizeBy: none
+		sourceColumn: contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_origin
+		dataType: string
+		lineageTag: ccb4fba7-348d-40cd-8154-88b85f604d3e
+		summarizeBy: none
+		sourceColumn: account_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column age
+		dataType: int64
+		formatString: 0
+		lineageTag: 2bbf7cd2-e66f-422e-9f47-3caa94c7b160
+		summarizeBy: sum
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: a8c88f9f-6ecb-460e-9969-66c3e787fad0
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 12e40421-a3e5-42a8-87d4-54c9798b7eec
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column CNAE
+		dataType: string
+		lineageTag: 206ad4bb-1b61-48a8-91b2-b7d7bd03d01d
+		summarizeBy: none
+		sourceColumn: CNAE
+
+		annotation SummarizationSetBy = Automatic
+
+	column wpp_opt_in
+		dataType: int64
+		formatString: 0
+		lineageTag: d76d02a0-3152-4e3c-a272-18c2effd7453
+		summarizeBy: sum
+		sourceColumn: wpp_opt_in
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 41dcec0e-6069-4d17-a28a-32a80f0d166f
+		summarizeBy: sum
+		sourceColumn: salesperson_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_document
+		dataType: string
+		lineageTag: 64c05eda-dd07-4438-bb09-fa312d4f2302
+		summarizeBy: none
+		sourceColumn: salesperson_document
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_last_updated
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 447f5471-a045-48da-941d-d1cd40c824a3
+		summarizeBy: none
+		sourceColumn: client_last_updated
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column profile_picture
+		dataType: string
+		lineageTag: bd1a96ef-ce8a-4db4-b869-053ade79227e
+		summarizeBy: none
+		sourceColumn: profile_picture
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_age_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 8262dcef-27ce-4b62-9208-1fb9a78bdf27
+		summarizeBy: sum
+		sourceColumn: account_age_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: dc30abf5-7d90-4e0f-b5b2-cac60557f806
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: f9706758-4bee-498e-8e64-accbf6d22b92
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dClientes-1bbe7c5a-1a30-4b76-b286-259d6c6c5b8c = m
+		mode: import
+		queryGroup: Contas
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"6bcce023-2749-46d4-8c35-8e7302d78fd8" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="6bcce023-2749-46d4-8c35-8e7302d78fd8"]}[Data],
+				    dClientes_ = #"6bcce023-2749-46d4-8c35-8e7302d78fd8"{[entity="dClientes",version=""]}[Data]
+				in
+				    dClientes_
+
+	annotation PBI_ResultType = Table
+

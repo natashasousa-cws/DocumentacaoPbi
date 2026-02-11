@@ -1,0 +1,38 @@
+table Meta
+	lineageTag: 1945ec34-ebba-43a6-8434-ebb525a6478c
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 33f9b63a-2ff7-49fb-9a93-dc768385dba0
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Meta
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 35976f27-9772-4d5c-ba36-bc7f6ea0b7f8
+		summarizeBy: sum
+		sourceColumn: Meta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition Meta = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("ZdDBDcMwDEPRXXw2FFESY3eWIPuv0TaFBds9PxAg/nUVxQEcphalFnQVVa2q5a4/szTups+OX/OQvpqlkaK2mKe1LtZ8thhm+tlhMaY5BY7ZzrSG3dowB/afPY1d2Jbda1jAxHnOXTSthRiWZtmFQfHAX89nZ8ye9xs=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Data = _t, Meta = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Data", type date}, {"Meta", Currency.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

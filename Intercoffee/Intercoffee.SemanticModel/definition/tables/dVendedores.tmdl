@@ -1,0 +1,235 @@
+table dVendedores
+	lineageTag: 1ef3359e-4259-4570-aea2-3590c91b1a12
+
+	column account_id
+		dataType: int64
+		isKey
+		isNullable: false
+		formatString: 0
+		lineageTag: a6c1cd63-e715-4c67-88cf-b244ec11ac95
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_create_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e58f00a8-b719-4443-a48c-287d662664df
+		summarizeBy: none
+		sourceColumn: account_create_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 35816c6d-6d7e-4956-8497-9beb3c451f18
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = User
+
+	column client_create_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 97c22a79-4a3b-4559-b2e1-c6ca8c11edf6
+		summarizeBy: none
+		sourceColumn: client_create_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column name
+		dataType: string
+		lineageTag: 77f24321-ebce-4bc2-bac1-f6bd594f6df7
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: fca82491-117c-452d-bf83-470cbb2200ec
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: a62e65e7-5a9c-4f6c-a628-e2803504929d
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: f3719e17-0b25-4b4c-8618-bcd4c7e88770
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column person_type
+		dataType: string
+		lineageTag: 584419a9-acba-42e9-80b5-a50dcb10256a
+		summarizeBy: none
+		sourceColumn: person_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 5bc31d92-25be-4366-ad96-537d10374fba
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column street_address
+		dataType: string
+		lineageTag: 8fbd49b7-b8fd-4d85-83ed-545318bc7443
+		dataCategory: Address
+		summarizeBy: none
+		sourceColumn: street_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column address_number
+		dataType: string
+		lineageTag: e33054a5-50fc-4856-8507-73d5b1bc9396
+		summarizeBy: none
+		sourceColumn: address_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		lineageTag: 62ab74ad-8e3d-489e-8f9a-2eb55d7cbe4d
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone_number
+		dataType: string
+		lineageTag: 0e9ca85c-f3fc-4dc0-8c88-eba2274aa104
+		summarizeBy: none
+		sourceColumn: phone_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: b10a4724-0c96-4a00-8a65-486f3e370c7b
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 57606c19-0911-4a84-b2de-4400ce5ff1a6
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f2729b22-6c4e-456f-9bc1-0e64a133c97f
+		summarizeBy: none
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = User
+
+	column client_status
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9ac61f1d-e751-420e-9c5d-c5f905e2c829
+		summarizeBy: none
+		sourceColumn: client_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column birthday
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 30a7d9c6-1c15-46be-bb5e-efad409eee84
+		summarizeBy: none
+		sourceColumn: birthday
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column UF
+		dataType: string
+		lineageTag: 1d4fe30c-98be-4dcf-8675-c91db743dff3
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column contact
+		dataType: string
+		lineageTag: 891569a5-e73e-4247-b831-3e5a63ff41a5
+		summarizeBy: none
+		sourceColumn: contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado
+		dataType: string
+		lineageTag: 598d3823-bee5-4901-adfc-42fd6aaadd34
+		summarizeBy: none
+		sourceColumn: estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column state_registration
+		dataType: string
+		lineageTag: b3e6c7e0-f06c-4763-8bc1-d786672ea469
+		summarizeBy: none
+		sourceColumn: state_registration
+
+		annotation SummarizationSetBy = Automatic
+
+	column cnae
+		dataType: string
+		lineageTag: 706c7375-c40d-4a8e-a920-f176d5a3ed45
+		summarizeBy: none
+		sourceColumn: cnae
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dVendedores-319d2d25-a3e1-4965-b452-604e4df3e8df = m
+		mode: import
+		queryGroup: Contas
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"bb33815e-8a0c-4500-8b94-c3ab986a469f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="bb33815e-8a0c-4500-8b94-c3ab986a469f"]}[Data],
+				    dVendedores_ = #"bb33815e-8a0c-4500-8b94-c3ab986a469f"{[entity="dVendedores",version=""]}[Data],
+				    #"Linhas Filtradas" = Table.SelectRows(dVendedores_, each [site_id] = 8638)
+				in
+				    #"Linhas Filtradas"
+
+	annotation PBI_ResultType = Table
+

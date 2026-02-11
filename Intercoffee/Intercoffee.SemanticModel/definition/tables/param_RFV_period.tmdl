@@ -1,0 +1,26 @@
+table param_RFV_period
+	lineageTag: 008a62aa-3943-4702-9910-b3cea8e1aac0
+
+	measure 'param_RFV_period Valor' = SELECTEDVALUE('param_RFV_period'[param_RFV_period], 12)
+		formatString: 0
+		lineageTag: 11ef285e-af58-4cb1-bc0b-5e6376436e9f
+
+	column param_RFV_period
+		formatString: 0
+		lineageTag: de5fe5d7-a331-489b-9508-1a62e745a8c4
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition param_RFV_period-a9bd15b6-3f34-4121-83ab-1730ff9e103a = calculated
+		mode: import
+		source = GENERATESERIES(1, 12, 1)
+
+	annotation PBI_Id = ef696f74c4264cb79e84934d96f914cb
+

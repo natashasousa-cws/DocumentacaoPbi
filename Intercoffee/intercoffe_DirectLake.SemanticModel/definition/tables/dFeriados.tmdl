@@ -1,0 +1,39 @@
+table dFeriados
+	lineageTag: b68603f0-ab96-4a20-887f-a00a2a559e66
+	sourceLineageTag: [intercoffee].[dFeriados]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e9ebaeb6-5f5a-4e81-acc7-8e04dc47c538
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia_Semana
+		dataType: string
+		lineageTag: faa258a8-e46a-4c22-b7ef-d2c91d52da96
+		sourceLineageTag: Dia_Semana
+		summarizeBy: none
+		sourceColumn: Dia_Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feriado
+		dataType: string
+		lineageTag: febf5045-3153-4e99-853a-4a5d78800b73
+		sourceLineageTag: Feriado
+		summarizeBy: none
+		sourceColumn: Feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dFeriados = entity
+		mode: directLake
+		source
+			entityName: dFeriados
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

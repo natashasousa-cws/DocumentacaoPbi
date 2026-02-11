@@ -1,0 +1,50 @@
+table agg_last_purchase
+	lineageTag: ed9334d9-d127-4aa6-916b-45e3906a2094
+	sourceLineageTag: [intercoffee].[agg_last_purchase]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 80d7b6a5-a656-4017-b25e-ce916556c864
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_purchase
+		dataType: int64
+		formatString: 0
+		lineageTag: b2135257-d9cb-47cd-a774-cae99d19ff94
+		sourceLineageTag: days_since_last_purchase
+		summarizeBy: sum
+		sourceColumn: days_since_last_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataform_status
+		dataType: string
+		lineageTag: 463fffb2-6e60-4033-ae0f-1ec19842b031
+		sourceLineageTag: plataform_status
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: fd2e65db-2ad7-4827-b0e6-4452cad03fb3
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_purchase = entity
+		mode: directLake
+		source
+			entityName: agg_last_purchase
+			schemaName: intercoffee
+			expressionSource: 'DirectLake - intercoffee_gold_lake'
+

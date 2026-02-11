@@ -1,0 +1,76 @@
+table dOfertas_associados
+	lineageTag: f8ce536b-2414-4b73-8e62-6348e585b3f5
+
+	column partner_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 32ac6d33-960a-40da-be62-7471b19d4b16
+		summarizeBy: none
+		sourceColumn: partner_id
+
+		annotation SummarizationSetBy = User
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6613ac2e-ce9e-451e-949f-1fd7e6e921b2
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = User
+
+	column quantity_avaliable
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e3a4829-afcc-4da2-9541-6b42fe9ae808
+		summarizeBy: none
+		sourceColumn: quantity_avaliable
+
+		annotation SummarizationSetBy = User
+
+	column unit_price
+		dataType: string
+		lineageTag: dfcc1a27-176c-43ff-b515-a77febe4837a
+		summarizeBy: none
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_created_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8a28ece1-7911-4f6c-9041-ed5733f484bb
+		summarizeBy: none
+		sourceColumn: sku_created_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column sku_last_updated
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8964ebad-5b8f-4e84-a433-0a56b38d566d
+		summarizeBy: none
+		sourceColumn: sku_last_updated
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dOfertas_associados-7595629f-ac46-43bd-a432-4dc97b146621 = m
+		mode: import
+		queryGroup: Parceiros
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"bb33815e-8a0c-4500-8b94-c3ab986a469f" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="bb33815e-8a0c-4500-8b94-c3ab986a469f"]}[Data],
+				    dOfertas_associados_ = #"bb33815e-8a0c-4500-8b94-c3ab986a469f"{[entity="dOfertas_associados",version=""]}[Data],
+				    #"Linhas Filtradas" = Table.SelectRows(dOfertas_associados_, each [partner_id] = 7014)
+				in
+				    #"Linhas Filtradas"
+
+	annotation PBI_ResultType = Table
+

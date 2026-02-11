@@ -1,0 +1,26 @@
+{
+  "name": "Intercoffee",
+  "textClasses": {
+    "callout": {
+      "fontFace": "'Segoe UI Semibold', wf_segoe-ui_semibold, helvetica, arial, sans-serif",
+      "fontSize": 15
+    },
+    "title": {
+      "fontFace": "'Segoe UI Semibold', wf_segoe-ui_semibold, helvetica, arial, sans-serif"
+    }
+  },
+  "minimum": "#FD625E",
+  "dataColors": [
+    "#8C593B",
+    "#D1A87E",
+    "#8C8C8C",
+    "#2E1C10",
+    "#5F6B6D",
+    "#5C3A25",
+    "#FE9666",
+    "#813027"
+  ],
+  "bad": "#FF001A",
+  "center": "#F5D33F",
+  "maximum": "#01B8AA"
+}

@@ -1,0 +1,73 @@
+table dEstados
+	lineageTag: acc96033-8519-47f7-bdb2-e802ce08ecdc
+
+	column Country_Code
+		dataType: string
+		lineageTag: 3abc07af-6b8a-45cd-b456-e6cbc974204a
+		summarizeBy: none
+		sourceColumn: Country_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Parent_ID
+		dataType: string
+		lineageTag: ef69b914-432d-4f77-b679-79c224af845c
+		summarizeBy: none
+		sourceColumn: Parent_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name_EN
+		dataType: string
+		lineageTag: 50b80097-0c76-4e3a-9788-27dbec16f570
+		summarizeBy: none
+		sourceColumn: Name_EN
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: f4f5b2fd-3e08-423e-8f8d-6bb68ef904a2
+		summarizeBy: none
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome_BR
+		dataType: string
+		lineageTag: 59b36071-f0a6-42ea-b9bc-828f2713ddff
+		summarizeBy: none
+		sourceColumn: Nome_BR
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF
+		dataType: string
+		lineageTag: f8275816-cf38-486c-b11d-84e486cd8480
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column IBGE_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 957b76c3-8268-4abb-92ad-caae72d9dace
+		summarizeBy: none
+		sourceColumn: IBGE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dEstados = m
+		mode: import
+		queryGroup: Vendas\Apoio
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("jVXBbqMwEP0VlHMPGEhCjiSboq1KF0FuVQ9u4m0tJTgCcunfVHvObf+AH9t5xk4asVi9MPgN7zGeeYbn58mymNxNAn8+o1C2vBWe+u0le/6meKMzfozUFUkeAc8nL3dj5AP/UNWFPQfnCiUZXVg4Tl/yd8kNN6Zo18sE4GKcuBK8tsQFRay7T9ysgQ5feS92ouZ774ds2lpu25678Cn2UKs88wyge7pMHYWvm6PUnJJXrTJijCIluvM1gy6sS7qEwbhYqqTt4CKgSOvuE0D6C2U4mBl1oXrntoCQYg91f4Bluo3MwZc0KC+lXUtbQATeLZyl2IBLhtN+01o1jfJ2tPPT3ohNdUH/SWboydT/lqTRmt1qYbWBiKOu/GKSBZyZG4/kaAubunny1VLjnsq7s4byJXAXW9QVP7yetrZyGPQGzLVJZw4JyU9S48yHRbHuzrj5CdThCBRacUNlpvKq3zaejxztKiRNSHgPvBKyVkYDhhwkigc4wnE+wEjpxcSimT+puhVGLzR6w2zxhEei74palzE/Gkj2uQImixxV4ohyb8VbXstL0+DZQaJcQcrR95Ir6v1pb9umk3QKL2CZo2UO29B386hrYEEw67+jRz23BEzmcEuhqp2qpCXD6oC6vz1W4CvCXHNXZPeDpceabpECBOYYSinqN3kUhgyrX5FS+zweJ2/Uljotq6anh/D6V2yjS3f9f7a1eXUIo5plgmkxmtbLPw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Country_Code = _t, Parent_ID = _t, Name_EN = _t, ID = _t, Nome_BR = _t, UF = _t, IBGE_ID = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"IBGE_ID", Int64.Type}, {"ID", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

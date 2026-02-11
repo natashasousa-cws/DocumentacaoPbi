@@ -1,0 +1,111 @@
+table aux_Order_rank
+	lineageTag: 1db55a03-5fd2-4ced-88e0-47549386263c
+
+	measure 'First order' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(aux_Order_rank[partner_order_id]),
+			    aux_Order_rank[Rank] = 1
+			)
+		formatString: 0
+		lineageTag: dedd7881-b7d7-4de9-a012-d1b68ae93eca
+
+	measure 'Recurrent orders' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(aux_Order_rank[partner_order_id]),
+			   aux_Order_rank[Rank] > 1
+			)
+		formatString: 0
+		lineageTag: e14fecf4-2980-472a-878d-ed8c393b4f06
+
+	measure 'First order client' = ```
+			
+			VAR first = 
+			DISTINCTCOUNT(aux_Order_rank[client_account_id])
+			
+			RETURN
+			first - [Recurrent orders client]
+			```
+		formatString: 0
+		lineageTag: 80fb8da9-b591-447e-bdb4-c0b67484572d
+
+	measure 'Recurrent orders client' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(aux_Order_rank[client_account_id]),
+			   aux_Order_rank[Rank] > 1
+			)
+		formatString: 0
+		lineageTag: 0aee84b3-7e5c-4a19-a927-df3c29960669
+
+	column partner_order_id
+		formatString: 0
+		lineageTag: 43774765-e573-42c4-8600-b8da3fd1ba83
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: fVendas[partner_order_id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		formatString: dd/mm/yyyy
+		lineageTag: 990b64fa-dbf3-40ff-9b39-19940d49ad7e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fVendas[order_date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column client_account_id
+		formatString: 0
+		lineageTag: 53215822-a51b-44bb-8e20-9831cd9bc96e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fVendas[client_account_id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column class_AA_MV
+		lineageTag: 9e4f7662-cdbd-426f-853d-f1ec41e1a7bb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: fVendas[class_AA_MV]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rank = ```
+			
+			VAR cliente = 'aux_Order_rank'[client_account_id]
+			RETURN
+			    RANKX(
+			        FILTER('aux_Order_rank', 'aux_Order_rank'[client_account_id] = cliente),
+			        'aux_Order_rank'[partner_order_id],
+			        ,
+			        ASC,
+			        Dense
+			    )
+			
+			```
+		formatString: 0
+		lineageTag: 2bb43816-2bfe-452c-9361-c56265501b66
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aux_Order_rank-0e8fbea0-e5c4-4b97-b10e-34f47be64b75 = calculated
+		mode: import
+		source = ```
+				
+				SUMMARIZE(
+				        FILTER(fVendas, 
+				        NOT(fVendas[order_status] IN {"Aguardando pagamento","Cancelado","Pré-encomenda", "Pagamento no caixa"})
+				        ),
+				        fVendas[partner_order_id], fVendas[order_date],fVendas[client_account_id], fVendas[class_AA_MV]
+				    )
+				```
+
+	annotation PBI_Id = b250db46d1ab49cc84c8b5d9209c1bee
+
