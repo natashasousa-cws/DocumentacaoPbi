@@ -1,0 +1,152 @@
+table fCarrinhos_abandonados
+	lineageTag: e881adec-2351-4dfb-9b2c-bddf8229d338
+	sourceLineageTag: [mahle].[fCarrinhos_abandonados]
+
+	column session_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 097714cf-fb1a-4952-8b43-be0643f22a50
+		sourceLineageTag: session_id
+		summarizeBy: none
+		sourceColumn: session_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column device_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 29ad8f54-5e09-4682-a89a-63f08391567d
+		sourceLineageTag: device_id
+		summarizeBy: sum
+		sourceColumn: device_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3193524d-6ec5-4bfb-871a-9b4c3f49e0e5
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 66504f86-86b3-4936-9f64-0ddc807b8196
+		sourceLineageTag: client_account_id
+		summarizeBy: none
+		sourceColumn: client_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 94a70363-9144-461a-a0b7-bffaf7860eca
+		sourceLineageTag: data
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2fc50bf4-47c8-48a1-b638-a3add892e33e
+		sourceLineageTag: quantity
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(11, 2)
+		lineageTag: df19bc24-781b-4cc7-8047-d38a49863443
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column sku_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7f2b6b3e-125c-41f4-99c1-7c2790360876
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 07e26746-8605-4bfe-a332-8b35162f85b1
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8e304cc2-45db-4cfa-a52f-41af06ab1d59
+		sourceLineageTag: partner
+		summarizeBy: none
+		sourceColumn: partner
+
+		annotation SummarizationSetBy = Automatic
+
+	column cart_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 91eecb46-bb8f-474c-a31d-0fca1f9e5463
+		sourceLineageTag: cart_type
+		summarizeBy: none
+		sourceColumn: cart_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b91ba356-a99e-4935-88d5-f96485e67e88
+		sourceLineageTag: datekey
+		summarizeBy: none
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bffdda55-489d-4f18-b8c9-9dcd8b961470
+		sourceLineageTag: sku_id
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fCarrinhos_abandonados = entity
+		mode: directLake
+		source
+			entityName: fCarrinhos_abandonados
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

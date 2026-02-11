@@ -1,0 +1,34 @@
+table dDispositivos
+	lineageTag: f3912bc6-78a3-4c40-aaff-4aaa38c6fac1
+	sourceLineageTag: [mahle].[dDispositivos]
+
+	column device
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 432acd13-e18d-49fc-9a33-c1399be8e480
+		sourceLineageTag: device
+		summarizeBy: none
+		sourceColumn: device
+
+		annotation SummarizationSetBy = Automatic
+
+	column device_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9ccd7656-5e0f-4270-a10b-9e5592e54218
+		sourceLineageTag: device_id
+		summarizeBy: none
+		sourceColumn: device_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dDispositivos = entity
+		mode: directLake
+		source
+			entityName: dDispositivos
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

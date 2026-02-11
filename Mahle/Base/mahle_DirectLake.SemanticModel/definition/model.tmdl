@@ -1,0 +1,45 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+annotation PBI_ProTooling = ["WebModelingEdit","RemoteModeling"]
+
+annotation __TEdtr = 1
+
+ref table agg_last_login
+ref table agg_last_purchase
+ref table dAssociados
+ref table dGrupo_Cliente
+ref table dVendedores
+ref table fDatalayer_agg_pageviews
+ref table fDatalayer_product_pageviews
+ref table dClientes
+ref table dCarteirizacao
+ref table fCarrinhos_abandonados
+ref table fLogins
+ref table fDatalayer_session_summary
+ref table fVendas
+ref table dCalendario
+ref table dFeriados
+ref table dPeriodos
+ref table dTipo_envio
+ref table dTipo_pedido
+ref table dMetodo_pagamento
+ref table dDispositivos
+ref table dStatus_pedido
+ref table Medidas
+ref table dCupons
+ref table dOfertas
+ref table dProdutos
+
+ref cultureInfo en-US
+

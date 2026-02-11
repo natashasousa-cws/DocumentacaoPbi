@@ -1,0 +1,45 @@
+table dPeriodos
+	lineageTag: 44c97b49-4266-4054-8dc4-5d96761712bd
+	sourceLineageTag: [mahle].[dPeriodos]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 1ef0b884-9c05-459f-b479-bfb0f2d87450
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 22c0ec3f-d4c1-4e5c-b186-dc50f166a744
+		sourceLineageTag: Periodo
+		summarizeBy: none
+		sourceColumn: Periodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: f339f5d3-0136-4b56-a014-55b56943fa01
+		sourceLineageTag: Ordem
+		summarizeBy: sum
+		sourceColumn: Ordem
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dPeriodos = entity
+		mode: directLake
+		source
+			entityName: dPeriodos
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

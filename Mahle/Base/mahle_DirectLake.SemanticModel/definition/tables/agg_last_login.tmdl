@@ -1,0 +1,56 @@
+table agg_last_login
+	lineageTag: e19e8b8c-ebaf-4186-ac31-6a19f4597b70
+	sourceLineageTag: [mahle].[agg_last_login]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 014f3b98-2a78-4114-a285-71f7c13cf8b9
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_login
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5da9acd4-6502-49ce-accf-d883c89e61fe
+		sourceLineageTag: days_since_last_login
+		summarizeBy: sum
+		sourceColumn: days_since_last_login
+
+		annotation SummarizationSetBy = Automatic
+
+	column login_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: baf5ef0f-977b-47dd-a9f9-9123921be5c9
+		sourceLineageTag: login_status
+		summarizeBy: none
+		sourceColumn: login_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d2756e45-ce75-430c-afdb-64b5473ebd26
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_login = entity
+		mode: directLake
+		source
+			entityName: agg_last_login
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

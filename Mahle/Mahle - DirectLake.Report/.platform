@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Mahle - DirectLake"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f4f73444-4969-b788-431a-6fc3c29bef9c"
+  }
+}

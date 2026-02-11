@@ -1,0 +1,56 @@
+table agg_last_purchase
+	lineageTag: 8ca26cd8-4756-454c-94dd-5be979c47818
+	sourceLineageTag: [mahle].[agg_last_purchase]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 37b1b76e-5a4e-49bc-88da-40a92f58b97d
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_purchase
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 597e9731-55ac-4ff6-b513-af314c13aa32
+		sourceLineageTag: days_since_last_purchase
+		summarizeBy: sum
+		sourceColumn: days_since_last_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataform_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 244a5daf-385c-43c2-a706-21b13a4d402a
+		sourceLineageTag: plataform_status
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2ad6b42e-c38e-486f-8223-242c3be63cd4
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_purchase = entity
+		mode: directLake
+		source
+			entityName: agg_last_purchase
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

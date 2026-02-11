@@ -1,0 +1,46 @@
+table dCarteirizacao
+	lineageTag: 0bfa3a67-aee4-4894-8c47-dab31df2bcbd
+	sourceLineageTag: [mahle].[dCarteirizacao]
+
+	column id_account_seller
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c6558fa9-9df5-4836-b375-c6a80ed5123f
+		sourceLineageTag: id_account_seller
+		summarizeBy: sum
+		sourceColumn: id_account_seller
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_account_customer
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0e06b2c6-55cf-40b4-b985-37e9c252cc7e
+		sourceLineageTag: id_account_customer
+		summarizeBy: sum
+		sourceColumn: id_account_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_store
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1ab8cc65-d355-4476-81b6-fe10a4d797c1
+		sourceLineageTag: id_store
+		summarizeBy: sum
+		sourceColumn: id_store
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCarteirizacao = entity
+		mode: directLake
+		source
+			entityName: dCarteirizacao
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

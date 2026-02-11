@@ -1,0 +1,94 @@
+table dProdutos
+	lineageTag: 75b29e68-5fc6-4a5a-9395-8e8646bd422e
+	sourceLineageTag: [mahle].[dProdutos]
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: c5f1c7f9-8a6f-4f33-afcd-be129a93968a
+		sourceLineageTag: sku_id
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b4b1c2c3-b235-4bb0-ad2e-e720d35eefe8
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column manufacturer
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: af62d0a2-65c4-4a2c-b754-c79c5a6c2f8a
+		sourceLineageTag: manufacturer
+		summarizeBy: none
+		sourceColumn: manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cc56b7b5-0b78-4520-93a4-252f12271423
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_1
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9b90995c-6081-4567-bf5b-fde73e37cf05
+		sourceLineageTag: category_level_1
+		summarizeBy: none
+		sourceColumn: category_level_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_2
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 22af908b-d8dd-4933-b977-f0b8cb15c6d0
+		sourceLineageTag: category_level_2
+		summarizeBy: none
+		sourceColumn: category_level_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_3
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: aa079cf5-1d14-488a-827d-92386a6f360f
+		sourceLineageTag: category_level_3
+		summarizeBy: none
+		sourceColumn: category_level_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 623c37c6-7e0b-4855-8ad6-5c7d12ca155d
+		sourceLineageTag: nivel
+		summarizeBy: none
+		sourceColumn: nivel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProdutos = entity
+		mode: directLake
+		source
+			entityName: dProdutos
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

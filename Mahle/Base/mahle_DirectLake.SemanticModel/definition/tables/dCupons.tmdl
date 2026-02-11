@@ -1,0 +1,78 @@
+table dCupons
+	lineageTag: 26b5d6da-6e29-4998-a0df-f1ae2710985e
+	sourceLineageTag: [mahle].[dCupons]
+
+	column coupon_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6028b2c7-8f05-4a2e-bf1c-aa8cd3f525e6
+		sourceLineageTag: coupon_id
+		summarizeBy: none
+		sourceColumn: coupon_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4549617e-59a2-4be0-8164-9c7cbd46aa82
+		sourceLineageTag: site_id
+		summarizeBy: none
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 369abe83-737b-4e5d-81fc-9a66ec3b5ebb
+		sourceLineageTag: code
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 03bbc17d-d786-4235-821f-ae55eda97c90
+		sourceLineageTag: campaign
+		summarizeBy: none
+		sourceColumn: campaign
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_begin
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: db883131-65e1-46de-a18c-1245a179846a
+		sourceLineageTag: datekey_begin
+		summarizeBy: none
+		sourceColumn: datekey_begin
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_end
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fde44278-4082-418f-b193-a0195cc43f10
+		sourceLineageTag: datekey_end
+		summarizeBy: none
+		sourceColumn: datekey_end
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCupons = entity
+		mode: directLake
+		source
+			entityName: dCupons
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

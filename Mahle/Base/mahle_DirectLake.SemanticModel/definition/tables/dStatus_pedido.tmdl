@@ -1,0 +1,34 @@
+table dStatus_pedido
+	lineageTag: f1b41e02-369a-4430-92a2-16f1aee1e7ed
+	sourceLineageTag: [mahle].[dStatus_pedido]
+
+	column order_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8c96f89f-4505-43e3-8281-195023b10801
+		sourceLineageTag: order_status
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4bb90fc7-c8f1-46ee-9978-20ad0f1dc977
+		sourceLineageTag: order_status_id
+		summarizeBy: none
+		sourceColumn: order_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dStatus_pedido = entity
+		mode: directLake
+		source
+			entityName: dStatus_pedido
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

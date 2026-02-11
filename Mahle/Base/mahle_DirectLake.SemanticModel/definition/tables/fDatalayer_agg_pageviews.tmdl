@@ -1,0 +1,206 @@
+table fDatalayer_agg_pageviews
+	lineageTag: bb2c2d70-e289-4c87-84c0-20d7c4166c8a
+	sourceLineageTag: [mahle].[fDatalayer_agg_pageviews]
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a5c76e31-3277-451d-9454-ee4f5a5d2e6a
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d718487e-ebd5-4424-95c8-faf59689482e
+		sourceLineageTag: account_id
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c4a30c68-0f72-4d85-83dd-121d6a9d3dd0
+		sourceLineageTag: visitor_id
+		summarizeBy: sum
+		sourceColumn: visitor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: acebbe2f-ea93-4ba5-b351-2df17a101599
+		sourceLineageTag: visitor_isloggedin
+		summarizeBy: none
+		sourceColumn: visitor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 35c69362-f4f4-4f3f-bf0f-72d4518875e4
+		sourceLineageTag: vendor_id
+		summarizeBy: sum
+		sourceColumn: vendor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: c8e6c692-0280-47d0-92c3-3ac5c622ed59
+		sourceLineageTag: vendor_isloggedin
+		summarizeBy: none
+		sourceColumn: vendor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 070a6f45-7eb0-4b6c-a4bd-34f479b8abd7
+		sourceLineageTag: user_type
+		summarizeBy: none
+		sourceColumn: user_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column pagepath
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9c1ca9c0-d5b7-44a2-8139-55ff2f794a2e
+		sourceLineageTag: pagepath
+		summarizeBy: none
+		sourceColumn: pagepath
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fc0d9ffd-fd39-4f79-bc9a-2a826ea4a438
+		sourceLineageTag: year
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: cab8353c-8faa-46c5-9490-c93fb4bffb8a
+		sourceLineageTag: month
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column sessoes_distintas
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 91271277-007b-40b3-b04f-542e93cad8ad
+		sourceLineageTag: sessoes_distintas
+		summarizeBy: sum
+		sourceColumn: sessoes_distintas
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_max_datecreated
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0e5ca000-0474-4249-a847-b28b98c9c5d7
+		sourceLineageTag: datekey_max_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_max_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_datecreated_time
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8818e0ed-17a5-46bd-9a73-9d87ca8f0300
+		sourceLineageTag: max_datecreated_time
+		summarizeBy: none
+		sourceColumn: max_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_min_datecreated
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ee481cc1-0068-441e-972e-a67be1749969
+		sourceLineageTag: datekey_min_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_min_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_datecreated_time
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 006aa863-ddc6-4d01-8063-532685ccd8f5
+		sourceLineageTag: min_datecreated_time
+		summarizeBy: none
+		sourceColumn: min_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bfcbda5f-2c2d-4550-aac5-45769edc2eaf
+		sourceLineageTag: datekey
+		summarizeBy: none
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6d5618f8-9173-43ab-b51d-578b0eaf0d52
+		sourceLineageTag: sku_id
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column funil
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3496576f-be85-422d-a84f-1e8a09a6bbc0
+		sourceLineageTag: funil
+		summarizeBy: none
+		sourceColumn: funil
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_agg_pageviews = entity
+		mode: directLake
+		source
+			entityName: fDatalayer_agg_pageviews
+			schemaName: mahle
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
