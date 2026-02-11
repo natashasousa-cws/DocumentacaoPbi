@@ -1,0 +1,278 @@
+table fDatalayer_funil
+	lineageTag: 50b0213b-dddf-4770-a1e9-85916fedcbe0
+
+	measure avg_session_time =
+			
+			VAR tempo =
+			    CALCULATE (
+			        AVERAGEX (
+			            VALUES ( fDatalayer_funil[session] ),
+			            AVERAGE ( fDatalayer_funil[session_time_total] )
+			        )
+			    )
+			VAR hora =
+			    INT ( tempo / 3600 )
+			VAR modhora =
+			    MOD ( tempo, 3600 )
+			VAR minutos =
+			    INT ( modhora / 60 )
+			VAR segundos =
+			    INT ( MOD ( tempo, 60 ) )
+			RETURN
+			    hora * 10000 + minutos * 100 + segundos
+		formatString: 00:00:00
+		lineageTag: 3f8205b4-7e29-4a12-9d0e-b72c67246cf1
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure funnel_session_count =
+			
+			CALCULATE ( DISTINCTCOUNT ( fDatalayer_funil[session] ) )
+		formatString: #,0
+		lineageTag: 84ffc83d-ec9f-4794-b6db-83f085e57553
+
+	measure funnel_pageview_session_count =
+			
+			CALCULATE (
+			    fDatalayer_funil[funnel_session_count],
+			    fDatalayer_funil[event] = "pageView"
+			)
+		formatString: #,0
+		lineageTag: a17652ab-28a1-49e6-b480-629dbd10ed0e
+
+	measure funnel_addtocart_session_count =
+			
+			CALCULATE (
+			    fDatalayer_funil[funnel_session_count],
+			    fDatalayer_funil[event] = "add_to_cart"
+			)
+		formatString: #,0
+		lineageTag: 54214b7a-3206-41c9-8727-031103e2fe75
+
+	measure funnel_viewcart_session_count =
+			
+			CALCULATE (
+			    fDatalayer_funil[funnel_session_count],
+			    fDatalayer_funil[event] = "view_cart"
+			)
+		formatString: #,0
+		lineageTag: c6bf1b3e-9b5d-42cd-b0a4-938700299dfa
+
+	measure funnel_logged_session_count =
+			
+			CALCULATE (
+			    fDatalayer_funil[funnel_session_count],
+			    fDatalayer_funil[client_id] <> 0
+			)
+		formatString: #,0
+		lineageTag: 18fef531-9309-4b2b-a82f-db4c3cb6ea12
+
+	measure funnel_distinct_clients =
+			
+			CALCULATE ( DISTINCTCOUNT ( fDatalayer_funil[client_id] ) )
+		formatString: #,0
+		lineageTag: 1b8c2af0-c330-48bb-b7f2-f92b4d491a9f
+
+	measure funnel_pagepath_count =
+			
+			CALCULATE ( DISTINCTCOUNT ( fDatalayer_funil[pagepath] ) )
+		formatString: #,0
+		lineageTag: f9efab05-346d-4407-8279-962d5251aef7
+
+	measure funnel_freight_session_count =
+			
+			CALCULATE (
+			    fDatalayer_funil[funnel_session_count],
+			    fDatalayer_funil[pagepath] = "/escolha-frete"
+			)
+		formatString: #,0
+		lineageTag: 4ebd6765-a239-4852-97c6-61138c31e62e
+
+	measure funnel_purchase_session_count =
+			
+			CALCULATE (
+			    fDatalayer_funil[funnel_session_count],
+			    fDatalayer_funil[event] = "purchase"
+			)
+		formatString: 0
+		lineageTag: 1dc42cb8-cac4-491f-bb44-7c656ac8abc2
+
+	measure funnel_%purchase_sessions =
+			
+			CALCULATE (
+			    DIVIDE (
+			        [funnel_purchase_session_count],
+			        fDatalayer_funil[funnel_session_count],
+			        0
+			    )
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: d7e9de23-b814-4ee1-9ad7-cc171fa000e2
+
+	measure funnel_%logged_sessions =
+			
+			CALCULATE (
+			    DIVIDE (
+			        [funnel_logged_session_count],
+			        fDatalayer_funil[funnel_session_count],
+			        0
+			    )
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: 4d48b0f0-ded1-4dde-9a69-0457751c2b74
+
+	measure funnel_%order_sessions =
+			
+			CALCULATE (
+			    DIVIDE ( [05.00 Orders], fDatalayer_funil[funnel_session_count], 0 )
+			)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: fe5ed9fe-3fab-4c95-aa38-f556a8fa390e
+
+	measure funnel_pageviewXsession_avg =
+			
+			VAR Pageview =
+			    CALCULATE (
+			        COUNT ( fDatalayer_funil[pagepath] ),
+			        fDatalayer_funil[event] = "pageView"
+			    )
+			RETURN
+			    CALCULATE ( DIVIDE ( Pageview, [funnel_session_count], 0 ) )
+		formatString: #,0.00
+		lineageTag: 9a357631-56a2-436f-8b59-d2ad1a200811
+
+	measure 'Taxa de abandono - explicação' =
+			
+			"(Carrinhos + pré-encomenda)" & UNICHAR ( 13 )
+			    & UNICHAR ( 10 ) & "/ (Pedidos todos status + carrinhos)"
+		lineageTag: 1b85bc61-0dab-42e0-af69-a4baae54f851
+
+	measure 'funnel_pageview_session_count true' =
+			
+			CALCULATE (
+			    fDatalayer_funil[funnel_session_count],
+			    ( fDatalayer_funil[event]
+			        IN { "pageView", "add-to-cart" }
+			            && fDatalayer_funil[sku_id] <> 0 )
+			)
+		formatString: 0
+		lineageTag: 21d90562-1605-498c-9282-9c4cfcc13aa0
+
+	column session
+		dataType: string
+		lineageTag: a4194c22-4807-4aac-b868-0276baf2c227
+		summarizeBy: none
+		sourceColumn: session
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4df56e28-d488-4a77-b1ed-49c1cbca5574
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column event
+		dataType: string
+		lineageTag: 108657fe-34d7-4c7f-909b-1664fc57792f
+		summarizeBy: none
+		sourceColumn: event
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a8bccc4-5824-4519-ade8-72f3523de7ad
+		summarizeBy: sum
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: 679f48c7-744f-4b55-b72f-11da0651d393
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a021fe69-e5e0-4061-8b15-8861623c5e00
+		summarizeBy: sum
+		sourceColumn: salesperson_client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_account_user
+		dataType: string
+		lineageTag: d256a04e-3311-4433-bbe1-3cb5f123809c
+		summarizeBy: none
+		sourceColumn: salesperson_account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_time_total
+		dataType: int64
+		formatString: 0
+		lineageTag: f0ebd75f-d687-4015-8e7f-48ec455be8f6
+		summarizeBy: sum
+		sourceColumn: session_time_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 8c6c2e7c-c273-4717-a1f8-ba04fe32f18f
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column pagepath
+		dataType: string
+		lineageTag: c3adb1ef-a0a0-4ec1-a9b7-3d14a6189b75
+		summarizeBy: none
+		sourceColumn: pagepath
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7640377e-28f5-4b6b-87ce-1753d76a99a7
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column nav_search
+		dataType: string
+		lineageTag: b9b519a3-351c-40ea-9a19-f96a3c4c6a58
+		summarizeBy: none
+		sourceColumn: nav_search
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_funil = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"ae2b9a46-8047-4ca6-975e-24e511768e52" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="ae2b9a46-8047-4ca6-975e-24e511768e52"]}[Data],
+				    fDatalayer_funil_ = #"ae2b9a46-8047-4ca6-975e-24e511768e52"{[entity="fDatalayer_funil",version=""]}[Data]
+				in
+				    fDatalayer_funil_
+
+	annotation PBI_ResultType = Table
+

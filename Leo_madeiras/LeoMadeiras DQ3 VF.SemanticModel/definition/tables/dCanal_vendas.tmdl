@@ -1,0 +1,41 @@
+table dCanal_vendas
+	lineageTag: 5956e48e-2cef-4c1e-a31b-f2e4f3bc3745
+
+	column cd_canal_venda
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: c486d0bd-dc53-4b4d-ae7d-bcb26fbf447f
+		summarizeBy: none
+		sourceColumn: cd_canal_venda
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ds_canal_venda
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 4ab33c91-e7ef-48f9-b4f5-860f44379117
+		summarizeBy: none
+		sourceColumn: ds_canal_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCanal_vendas = m
+		mode: dual
+		queryGroup: Dim
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"56b0623f-8797-421d-af36-f100afed62ec" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="56b0623f-8797-421d-af36-f100afed62ec"]}[Data],
+				    dCanal_vendas_off_ = #"56b0623f-8797-421d-af36-f100afed62ec"{[entity="dCanal_vendas_off",version=""]}[Data]
+				in
+				    dCanal_vendas_off_
+
+	annotation PBI_ResultType = Table
+

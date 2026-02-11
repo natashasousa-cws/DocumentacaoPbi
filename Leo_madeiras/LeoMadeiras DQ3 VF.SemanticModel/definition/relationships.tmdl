@@ -1,0 +1,145 @@
+relationship 84b06923-f0a1-612e-504b-16d69b0e39ec
+	crossFilteringBehavior: bothDirections
+	fromColumn: dPeriodos.Data
+	toColumn: dCalendario.Data
+
+relationship e269fd96-4356-f651-2814-d08a609f7d21
+	fromColumn: fFaturas.dt_fatura
+	toColumn: dCalendario.Data
+
+relationship 54f6e81f-3c2f-d9fb-7d70-47345e0d1109
+	fromColumn: fFaturas.cd_cond_pgto
+	toColumn: dCondicao_pagamento.cd_cond_pagto
+
+relationship db9f3261-454b-2178-f70f-fb5d5f6127e4
+	fromColumn: fFaturas.cd_cliente
+	toColumn: dClientes.idcliente
+
+relationship 720dce23-9baf-e82b-cf99-dcb63e48a2d7
+	fromColumn: fFaturas.cd_canal_venda
+	toColumn: dCanal_vendas.cd_canal_venda
+
+relationship 117f0463-2302-e34a-b88d-3c1f091a66d5
+	fromColumn: dClientes.categoria
+	toColumn: dCategorias.cd_categoria
+
+relationship eed5070a-1d68-355c-6a6c-ab5eaad12661
+	fromColumn: fFaturas.cd_cabecalho_entrega
+	toColumn: dEntrega.cpe_cd_cabecalho
+
+relationship b6b14123-6824-3dae-51f0-ee782508b9bd
+	fromColumn: fFaturas.cd_frm_pgto
+	toColumn: dForma_pagamento.cd_frm_pgto
+
+relationship 710bf897-8102-2085-6348-2c84a6d0389d
+	fromColumn: fFaturas.cod_material
+	toColumn: dMaterial.mat_cd_material
+
+relationship c918a3bd-5bde-d915-1dc4-faf374936677
+	fromColumn: fFaturas.cd_vendedor
+	toColumn: dVendedores.ven_cd_vendedor
+
+relationship cc722f66-98c4-4c52-d72e-643a7a235319
+	fromColumn: fFaturas.cd_loja_venda
+	toColumn: dLojas_venda.cen_nu_centro
+
+relationship b9101e8b-e573-0e2d-5a0a-cd831463f5ca
+	fromColumn: dClientes.Ramo
+	toColumn: dRamo_atividade.cli_cd_ramo_atividade
+
+relationship 5bff7c7b-1380-c0e2-b089-dbdf5f8f0027
+	fromColumn: fFaturas.cd_tipo_doc_fat
+	toColumn: dTipo_faturamento.cd_tipo_doc_fat
+
+relationship 5776db4b-e45a-2f1e-c1bf-fbea86e5c586
+	fromColumn: fFaturas.cd_loja_expedicao
+	toColumn: dLojas_expedicao.cen_nu_centro
+
+relationship 756a6d0d-e259-b351-d148-7faf817a1a14
+	fromColumn: fPedidos.cen_nu_centro
+	toColumn: dLojas_venda.cen_nu_centro
+
+relationship e38d925a-7acf-6b5e-4df7-9c65f719537f
+	fromColumn: fPedidos.cli_cd_cliente
+	toColumn: dClientes.idcliente
+
+relationship e3250659-78dc-e925-e319-e3d3b7a4ca47
+	fromColumn: fPedidos.ven_cd_vendedor
+	toColumn: dVendedores.ven_cd_vendedor
+
+relationship 0b07b731-f4e8-6acf-f414-0ed7f4463c9f
+	fromColumn: fPedidos.mat_cd_material
+	toColumn: dMaterial.mat_cd_material
+
+relationship 27326b31-0a2d-0554-aa8f-13bc32743eca
+	fromColumn: fPedidos.ped_cd_doc_venda
+	toColumn: dTipo_faturamento.cd_tipo_doc_fat
+
+relationship fa1319b8-5556-fb40-5c00-f454b2e710db
+	fromColumn: fPedidos.per_dt_pedido
+	toColumn: dCalendario.Data
+
+relationship AutoDetected_8f05f100-253d-483e-a63d-788cbec2dc70
+	fromColumn: fFaturas.ped_nr_pedido
+	toColumn: aux_pedidos.ped_nr_pedido
+
+relationship AutoDetected_38519f71-2113-4275-9245-e7329d54af13
+	fromColumn: fPedidos.ped_nr_pedido
+	toColumn: aux_pedidos.ped_nr_pedido
+
+relationship 5438d9dc-07ec-1b93-d32e-82e96817439f
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Cabeçalho status dev'.cpe_cd_cabecalho
+	toColumn: dEntrega.cpe_cd_cabecalho
+
+relationship 5aabc28c-3b81-a881-0213-52315abf6444
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Pagamento status dev'.cpa_ds_cond_pagto
+	toColumn: dCondicao_pagamento.cpa_ds_cond_pagto
+
+relationship c6acef61-27bb-1bd3-0eab-2fd7f8ca0a52
+	fromColumn: 'Tabela Análise Desconto'.cd_canal_venda
+	toColumn: dCanal_vendas.cd_canal_venda
+
+relationship a7fa82d3-8102-7876-24e7-785d2955d015
+	fromColumn: 'Tabela Análise Desconto'.cd_cabecalho_entrega
+	toColumn: dEntrega.cpe_cd_cabecalho
+
+relationship 94959fb2-8fde-c863-0667-01e1c6286600
+	fromColumn: 'Tabela Análise Desconto'.cd_loja_venda
+	toColumn: dLojas_venda.cen_nu_centro
+
+relationship 2b0bca8c-6693-bbe7-3233-6c9eac7fec69
+	fromColumn: 'Tabela Análise Desconto'.dt_fatura
+	toColumn: dCalendario.Data
+
+relationship 741bd835-3c20-c477-fadd-a7011e08038c
+	fromColumn: 'Tabela Análise Desconto'.cd_tipo_doc_fat
+	toColumn: dTipo_faturamento.cd_tipo_doc_fat
+
+relationship 5b9a962a-f61e-f9ed-8681-cb9cb1c2eee5
+	fromColumn: 'Tabela Análise Desconto'.cd_cond_pgto
+	toColumn: dCondicao_pagamento.cd_cond_pagto
+
+relationship 3b51bd18-0312-3bac-7230-43802ccca278
+	fromColumn: 'Tabela Qtd. Saídas'.dt_fatura
+	toColumn: dCalendario.Data
+
+relationship c518e21b-d70a-d7a3-d7d8-3622eb9b399b
+	fromColumn: 'Tabela Qtd. Saídas'.cd_loja_venda
+	toColumn: dLojas_venda.cen_nu_centro
+
+relationship b561b4f7-2190-df58-271d-198378b64171
+	fromColumn: 'Tabela Qtd. Saídas'.cd_canal_venda
+	toColumn: dCanal_vendas.cd_canal_venda
+
+relationship 445f11c4-7859-617d-8ccd-9af1efb6619b
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'Tabela Qtd. Saídas'.cod_pedido
+	toColumn: 'Tabela Teste'.cod_pedido
+
+relationship d86b35a9-1fbe-750c-e25c-0ecf5e775ce0
+	fromColumn: 'Tabela Teste'.cd_cabecalho_entrega
+	toColumn: dEntrega.cpe_cd_cabecalho
+

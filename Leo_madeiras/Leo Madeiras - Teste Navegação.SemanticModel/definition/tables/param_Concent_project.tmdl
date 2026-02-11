@@ -1,0 +1,37 @@
+table param_Concent_project
+	isHidden
+	lineageTag: 5061f164-0eb8-495e-9c34-d7bb3246681f
+
+	measure 'param_Concent_project Valor' =
+			
+			SELECTEDVALUE ( 'param_Concent_project'[param_Concent_project], 1 )
+		formatString: 0
+		isHidden
+		lineageTag: 3274c81b-6719-471e-8a0a-d2e2f0a00f23
+
+	measure 'Titulo concentração' =
+			
+			"Top " & [param_Concent_project Valor] & " + Outros"
+		isHidden
+		lineageTag: 59fafe64-5bb8-4c5c-849d-96ecc783af43
+
+	column param_Concent_project
+		isHidden
+		formatString: 0
+		lineageTag: b31d79ca-7324-4fac-be18-ccefe59c8d63
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition param_Concent_project-4e91bb6a-592c-407f-ad75-3453e869f88d = calculated
+		mode: import
+		source = GENERATESERIES(1, 20, 1)
+
+	annotation PBI_Id = 896005369a734922b781a456d0e7bd9c
+

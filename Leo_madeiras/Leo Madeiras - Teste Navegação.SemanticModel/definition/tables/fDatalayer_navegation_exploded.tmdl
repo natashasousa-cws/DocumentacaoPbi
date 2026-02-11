@@ -1,0 +1,286 @@
+table fDatalayer_navegation_exploded
+	lineageTag: b75aa290-d676-4b8c-a5e4-ebb88c110640
+
+	measure Qtd_sessions_funil =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(
+			        fDatalayer_navegation_exploded[session]
+			    )
+			)
+		formatString: 0
+		lineageTag: 11d1c85c-609d-43a4-8778-982059fdd5b3
+
+	measure 'Med Cor' =
+			
+			SWITCH(
+			    TRUE(),
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[1]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[2]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[3]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[4]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[5]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[6]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[7]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[8]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[9]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[10]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[11]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[12]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[13]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[14]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[15]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[16]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[17]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[18]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[19]) = "End", "Red",
+			    SELECTEDVALUE(fDatalayer_navegation_exploded[20]) = "End", "Red",
+			    "Green")
+		lineageTag: 9d92abff-c8f4-4995-bd1c-a6c43f27b1bb
+
+	measure 'Paginas distintas' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(
+			        fDatalayer_navegation_exploded[1]
+			    )
+			)
+		formatString: 0
+		lineageTag: c866e764-53de-4a2f-a9f3-980d533e9062
+
+	column date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: cc1d4633-48c9-4002-93ec-f376eb32a389
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column store_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0bf1e8da-3a1a-4af4-9cb0-a971826116c5
+		summarizeBy: sum
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column session
+		dataType: string
+		lineageTag: d62f2c68-220e-4dbf-bb6e-0d4b58ff4639
+		summarizeBy: none
+		sourceColumn: session
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 1d1357e5-ee09-412c-95a0-db9d37253ddd
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1cdddcba-f612-4245-8f97-4ae6964a096d
+		summarizeBy: sum
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 000ef106-93e4-4bd8-a4a6-d3583c4c1275
+		summarizeBy: none
+		sourceColumn: salesperson_client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_type
+		dataType: string
+		lineageTag: 9b6069d3-5367-4def-b47b-5744e71055b1
+		summarizeBy: none
+		sourceColumn: session_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1
+		dataType: string
+		lineageTag: cce9da31-e5a4-49d3-911d-ca5fd7dd120e
+		summarizeBy: none
+		sourceColumn: 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2
+		dataType: string
+		lineageTag: f94b410b-ba88-4418-ab53-dbdb29473224
+		summarizeBy: none
+		sourceColumn: 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 3
+		dataType: string
+		lineageTag: d1ddfc2b-b2ed-46c0-8a18-ad0f2fffe980
+		summarizeBy: none
+		sourceColumn: 3
+
+		annotation SummarizationSetBy = Automatic
+
+	column 4
+		dataType: string
+		lineageTag: 6393164e-7d7f-4882-811e-2e6ca3cdf0d1
+		summarizeBy: none
+		sourceColumn: 4
+
+		annotation SummarizationSetBy = Automatic
+
+	column 5
+		dataType: string
+		lineageTag: 2a77a826-cff7-4e95-8cbc-c45199bf6942
+		summarizeBy: none
+		sourceColumn: 5
+
+		annotation SummarizationSetBy = Automatic
+
+	column 6
+		dataType: string
+		lineageTag: 540cbadb-5cf2-4b3d-aece-2ddef6232864
+		summarizeBy: none
+		sourceColumn: 6
+
+		annotation SummarizationSetBy = Automatic
+
+	column 7
+		dataType: string
+		lineageTag: 3a565e5d-f37b-459b-9664-d7e891b1672a
+		summarizeBy: none
+		sourceColumn: 7
+
+		annotation SummarizationSetBy = Automatic
+
+	column 8
+		dataType: string
+		lineageTag: 974b360d-d1b4-4dd0-8f98-bb8d1d099174
+		summarizeBy: none
+		sourceColumn: 8
+
+		annotation SummarizationSetBy = Automatic
+
+	column 9
+		dataType: string
+		lineageTag: 58fb1fb9-ed5c-4d07-849e-2780b2b4a531
+		summarizeBy: none
+		sourceColumn: 9
+
+		annotation SummarizationSetBy = Automatic
+
+	column 10
+		dataType: string
+		lineageTag: 85876bde-c45e-40e5-978c-b5ea9fcbb9f8
+		summarizeBy: none
+		sourceColumn: 10
+
+		annotation SummarizationSetBy = Automatic
+
+	column 11
+		dataType: string
+		lineageTag: 8aedbcf8-3a22-4487-b67b-2270b84857d3
+		summarizeBy: none
+		sourceColumn: 11
+
+		annotation SummarizationSetBy = Automatic
+
+	column 12
+		dataType: string
+		lineageTag: 0a588dee-d645-4d40-9ae3-21f0f2f536ba
+		summarizeBy: none
+		sourceColumn: 12
+
+		annotation SummarizationSetBy = Automatic
+
+	column 13
+		dataType: string
+		lineageTag: 6ebc5501-a5b1-4dc1-aca5-aee05b02ad0e
+		summarizeBy: none
+		sourceColumn: 13
+
+		annotation SummarizationSetBy = Automatic
+
+	column 14
+		dataType: string
+		lineageTag: 9b81e3b0-86b9-4b04-9e9b-3c6e88d375d0
+		summarizeBy: none
+		sourceColumn: 14
+
+		annotation SummarizationSetBy = Automatic
+
+	column 15
+		dataType: string
+		lineageTag: 01561709-4944-47f7-b024-180018276e55
+		summarizeBy: none
+		sourceColumn: 15
+
+		annotation SummarizationSetBy = Automatic
+
+	column 16
+		dataType: string
+		lineageTag: 3896d5d2-2df1-4d01-95f2-0d75b51977d4
+		summarizeBy: none
+		sourceColumn: 16
+
+		annotation SummarizationSetBy = Automatic
+
+	column 17
+		dataType: string
+		lineageTag: a49bd6d1-1da6-409f-afea-88056ea74b83
+		summarizeBy: none
+		sourceColumn: 17
+
+		annotation SummarizationSetBy = Automatic
+
+	column 18
+		dataType: string
+		lineageTag: ef482ae0-3a00-43dc-9425-fefed9c14495
+		summarizeBy: none
+		sourceColumn: 18
+
+		annotation SummarizationSetBy = Automatic
+
+	column 19
+		dataType: string
+		lineageTag: 7685aff6-8f4c-446e-8243-3492361bbadb
+		summarizeBy: none
+		sourceColumn: 19
+
+		annotation SummarizationSetBy = Automatic
+
+	column 20
+		dataType: string
+		lineageTag: b1240b13-60bf-4032-a473-97e1a567f6e9
+		summarizeBy: none
+		sourceColumn: 20
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_navegation_exploded = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"ae2b9a46-8047-4ca6-975e-24e511768e52" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="ae2b9a46-8047-4ca6-975e-24e511768e52"]}[Data],
+				    fDatalayer_navegation_exploded_ = #"ae2b9a46-8047-4ca6-975e-24e511768e52"{[entity="fDatalayer_navegation_exploded",version=""]}[Data]
+				in
+				    fDatalayer_navegation_exploded_
+
+	annotation PBI_ResultType = Table
+

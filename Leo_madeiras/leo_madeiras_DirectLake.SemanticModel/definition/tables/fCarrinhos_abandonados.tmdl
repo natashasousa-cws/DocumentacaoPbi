@@ -1,0 +1,213 @@
+table fCarrinhos_abandonados
+	lineageTag: 802719cb-c22a-4dab-99ad-cfbeca93b91e
+	sourceLineageTag: [leo_madeiras].[fCarrinhos_abandonados]
+
+	measure 'GMV Abandonado Real' = ```
+			
+			[Valor potencial do carrinho] - [GMV Resgatado]
+			
+			```
+		formatString: "R$"#,0.00;-"R$"#,0.00;"R$"#,0.00
+		lineageTag: f3bdec70-6ac9-43c0-82d2-dcbc9402d37d
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-BR"}
+
+	measure 'GMV Resgatado' = ```
+			
+			SUMX(
+			    FILTER(
+			        fCarrinhos_abandonados,
+			        fCarrinhos_abandonados[cart_type] = "Carrinho abandonado"
+			    ),
+			    VAR curClient = fCarrinhos_abandonados[client_account_id]
+			    VAR curSKU    = fCarrinhos_abandonados[sku_id]
+			    VAR curDate   = fCarrinhos_abandonados[datekey]
+			    VAR existeVendaPosterior =
+			        CALCULATE(
+			            COUNTROWS( fVendas ),
+			            FILTER(
+			                ALL( fVendas ),
+			                fVendas[client_account_id] = curClient &&
+			                fVendas[sku_id] = curSKU &&
+			                fVendas[datekey] >= curDate
+			            )
+			        ) > 0
+			    RETURN
+			        IF( existeVendaPosterior,
+			            fCarrinhos_abandonados[quantity] * fCarrinhos_abandonados[unit_price],
+			            0
+			        )
+			)
+			
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: a466899a-2fda-4dbc-b5a3-e6d869fa96fa
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '% Resgatado' =
+			
+			DIVIDE(
+			    [GMV Resgatado],
+			    [Valor potencial do carrinho],
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 20fdb041-7b0d-4a51-b9e4-bd2fa4a5d751
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	column session_id
+		dataType: string
+		lineageTag: b13e795e-04b6-4eea-b37f-074ec0c952a1
+		sourceLineageTag: session_id
+		summarizeBy: none
+		sourceColumn: session_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column device_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e0d6a41d-750b-4bc8-9367-aab25b5bc7c2
+		sourceLineageTag: device_id
+		summarizeBy: sum
+		sourceColumn: device_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 908b581e-3d24-449f-816e-9dc5a7d80704
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 542776f6-3923-4651-bed7-b3e7a5ccb258
+		sourceLineageTag: client_account_id
+		summarizeBy: sum
+		sourceColumn: client_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 684b8fb0-09ab-4613-b13a-8268b3d81dae
+		sourceLineageTag: data
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_created
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 45318d4c-d546-44e5-8113-dcdd1977b534
+		sourceLineageTag: date_created
+		summarizeBy: none
+		sourceColumn: date_created
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 37ea3673-76ff-44ee-a543-f0259458e453
+		sourceLineageTag: quantity
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 0ef4a135-f0fb-41ea-b1a9-e27deb4dd842
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column sku_name
+		dataType: string
+		lineageTag: f544c725-5e43-4097-a507-e1a543f4adbd
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0da1eacb-414f-44db-89b4-e9e2d8e740b9
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: 3e6c6c58-483a-453d-b33a-21651de05a06
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner
+		dataType: string
+		lineageTag: 7b86e1d6-eba7-4549-85e0-e7751bc6f284
+		sourceLineageTag: partner
+		summarizeBy: none
+		sourceColumn: partner
+
+		annotation SummarizationSetBy = Automatic
+
+	column cart_type
+		dataType: string
+		lineageTag: c6283e25-0fb0-4e95-b314-413bd7f96cea
+		sourceLineageTag: cart_type
+		summarizeBy: none
+		sourceColumn: cart_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 880f91e2-af78-48e6-a80e-c1c7bec6e771
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fCarrinhos_abandonados = entity
+		mode: directLake
+		source
+			entityName: fCarrinhos_abandonados
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

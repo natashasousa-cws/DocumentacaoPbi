@@ -1,0 +1,167 @@
+table fCarrinhos_abandonados
+	lineageTag: a9cbcf7a-ee4b-4eb8-9275-dffe18e40ed0
+
+	measure '% abandonment_rate' =
+			
+			VAR pedidos_geral =
+			    CALCULATE ( DISTINCTCOUNT ( fVendas[partner_order_id] ) )
+			VAR carrinhos_geral =
+			    CALCULATE (
+			        DISTINCTCOUNT ( fCarrinhos_abandonados[session_id] ),
+			        fCarrinhos_abandonados[cart_type] = "Carrinho abandonado"
+			    )
+			VAR carrinhos =
+			    CALCULATE ( DISTINCTCOUNT ( fCarrinhos_abandonados[session_id] ) )
+			VAR total = pedidos_geral + carrinhos_geral
+			VAR taxa =
+			    CALCULATE ( DIVIDE ( carrinhos, total, 0 ) )
+			RETURN
+			    taxa
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 59f7ccd6-b885-4ccf-913d-a28ba7199e5c
+
+	measure abandoned_carts =
+			
+			CALCULATE ( DISTINCTCOUNT ( fCarrinhos_abandonados[session_id] ) )
+		formatString: #,0
+		lineageTag: 441ab3b7-2670-4a71-bb61-dd6e753f4fc7
+
+	measure abandoned_carts_gmv =
+			
+			CALCULATE ( SUM ( fCarrinhos_abandonados[unit_price] ) )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 31f06a92-8e57-441f-b7cc-6e44f7ba7a11
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '% by item' =
+			
+			VAR carrinhos_total =
+			    CALCULATE (
+			        fCarrinhos_abandonados[abandoned_carts],
+			        ALL ( fCarrinhos_abandonados[sku_name] )
+			    )
+			VAR divs =
+			    CALCULATE (
+			        DIVIDE ( fCarrinhos_abandonados[abandoned_carts], carrinhos_total, 0 )
+			    )
+			RETURN
+			    divs
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6a1d6a19-642b-453d-be75-f6f1c86d7e56
+
+	column session_id
+		dataType: string
+		lineageTag: 6ce5b8dd-717a-416c-9c0a-8756cf2418c5
+		summarizeBy: none
+		sourceColumn: session_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_device
+		dataType: string
+		lineageTag: 1445d4da-68a0-4358-aaf9-c342fb621e54
+		summarizeBy: none
+		sourceColumn: order_device
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b5e6def5-30c2-404c-b8e8-92048ca9d365
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_account_id
+		dataType: double
+		lineageTag: 6028819e-44cc-414b-bdb5-33a089e1bea9
+		summarizeBy: none
+		sourceColumn: client_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0dcaf4ee-383e-49b5-90ac-46c5c0526ce2
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: d82f44f5-3bf6-45a5-8a23-da2106fb5e8a
+		summarizeBy: none
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = User
+
+	column unit_price
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 94b83f8a-4939-406d-8519-0846f6204f19
+		summarizeBy: none
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column sku_name
+		dataType: string
+		lineageTag: ad7a09f9-d820-4122-adcd-6483709c7d33
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: e4de3de5-68ef-4c42-9b2f-85ca73e82aaa
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner
+		dataType: string
+		lineageTag: 6915101a-cefb-4fa8-bd45-b438e4e30384
+		summarizeBy: none
+		sourceColumn: partner
+
+		annotation SummarizationSetBy = Automatic
+
+	column cart_type
+		dataType: string
+		lineageTag: 263f8155-645b-44ed-b8a6-032a7c06239b
+		summarizeBy: none
+		sourceColumn: cart_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fCarrinhos_abandonados = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"1aeabe4f-1a73-4fa2-bd3a-4564df3cdc5e" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="1aeabe4f-1a73-4fa2-bd3a-4564df3cdc5e"]}[Data],
+				    fCarrinhos_abandonados_ = #"1aeabe4f-1a73-4fa2-bd3a-4564df3cdc5e"{[entity="fCarrinhos_abandonados",version=""]}[Data]
+				in
+				    fCarrinhos_abandonados_
+
+	annotation PBI_ResultType = Table
+

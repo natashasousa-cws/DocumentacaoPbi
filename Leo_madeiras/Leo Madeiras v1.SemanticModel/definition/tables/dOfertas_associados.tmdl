@@ -1,0 +1,192 @@
+table dOfertas_associados
+	lineageTag: f8ce536b-2414-4b73-8e62-6348e585b3f5
+
+	column partner_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 32ac6d33-960a-40da-be62-7471b19d4b16
+		summarizeBy: none
+		sourceColumn: partner_id
+
+		annotation SummarizationSetBy = User
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6613ac2e-ce9e-451e-949f-1fd7e6e921b2
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = User
+
+	column company_name
+		dataType: string
+		lineageTag: fe4731c4-1856-45c9-a4ae-1c88700e0e8f
+		summarizeBy: none
+		sourceColumn: company_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: 007e023a-143c-4f1f-a4f7-da422ac360ac
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity_avaliable
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e3a4829-afcc-4da2-9541-6b42fe9ae808
+		summarizeBy: none
+		sourceColumn: quantity_avaliable
+
+		annotation SummarizationSetBy = User
+
+	column unit_price
+		dataType: double
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: dfcc1a27-176c-43ff-b515-a77febe4837a
+		summarizeBy: none
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column partner_part_code
+		dataType: string
+		lineageTag: 8e863570-93c4-455d-bd73-2235e3216658
+		summarizeBy: none
+		sourceColumn: partner_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_created_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8a28ece1-7911-4f6c-9041-ed5733f484bb
+		summarizeBy: none
+		sourceColumn: sku_created_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column sku_last_updated
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8964ebad-5b8f-4e84-a433-0a56b38d566d
+		summarizeBy: none
+		sourceColumn: sku_last_updated
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column by_request
+		dataType: int64
+		formatString: 0
+		lineageTag: 26212e6b-e205-459a-9205-e86d4168953c
+		summarizeBy: sum
+		sourceColumn: by_request
+
+		annotation SummarizationSetBy = Automatic
+
+	column restricao_fabricante
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 05e3a73d-377c-443a-bee8-170b720ebeb5
+		summarizeBy: none
+		sourceColumn: restricao_fabricante
+
+		annotation SummarizationSetBy = Automatic
+
+	column restricao_fabricante_mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8474954a-8a93-4c55-9d52-503d120b6c67
+		summarizeBy: none
+		sourceColumn: restricao_fabricante_mandatory
+
+		annotation SummarizationSetBy = Automatic
+
+	column restricao_sku
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c963d225-03ae-4e97-b04e-73251c5286ec
+		summarizeBy: none
+		sourceColumn: restricao_sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column restricao_sku_mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 99b1f527-ecd3-4175-9091-e0c12b24a5c9
+		summarizeBy: none
+		sourceColumn: restricao_sku_mandatory
+
+		annotation SummarizationSetBy = Automatic
+
+	column restricao_categoria
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 78971f4b-d44b-4cf9-860e-9f7d9f14d0d7
+		summarizeBy: none
+		sourceColumn: restricao_categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column restricao_categoria_mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9023f0d3-f24d-4161-8f4b-57f3ca124d39
+		summarizeBy: none
+		sourceColumn: restricao_categoria_mandatory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'cadastrado por'
+		dataType: double
+		lineageTag: 59782228-d595-4ba6-a46b-b8fc55ea9aeb
+		summarizeBy: sum
+		sourceColumn: cadastrado por
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column validacao
+		dataType: int64
+		formatString: 0
+		lineageTag: f9693942-fe55-44ef-af75-49f74034c50a
+		summarizeBy: sum
+		sourceColumn: validacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		lineageTag: 9d4dab07-59ec-49f0-94d7-b8b84475362b
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dOfertas_associados-7595629f-ac46-43bd-a432-4dc97b146621 = m
+		mode: import
+		queryGroup: Parceiros
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"fb99b340-78bd-4098-bb83-8617444004c5" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="fb99b340-78bd-4098-bb83-8617444004c5"]}[Data],
+				    dOfertas_ = #"fb99b340-78bd-4098-bb83-8617444004c5"{[entity="dOfertas",version=""]}[Data]
+				in
+				    dOfertas_
+
+	annotation PBI_ResultType = Table
+

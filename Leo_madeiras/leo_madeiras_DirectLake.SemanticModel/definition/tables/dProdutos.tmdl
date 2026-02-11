@@ -1,0 +1,84 @@
+table dProdutos
+	lineageTag: f6d8248d-22dd-428b-b7f0-fde28beabc38
+	sourceLineageTag: [leo_madeiras].[dProdutos]
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e458147a-bfec-4fa3-b8a1-18f985bc45cb
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		lineageTag: f5a2aebd-61ef-474d-a0e8-cc92da842af1
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column manufacturer
+		dataType: string
+		lineageTag: ed8f66e7-906e-4dd9-8bab-776a18c093e3
+		sourceLineageTag: manufacturer
+		summarizeBy: none
+		sourceColumn: manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: 2121a40c-a2e1-4843-9731-baa2a902dcda
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_1
+		dataType: string
+		lineageTag: 9024b435-7d66-4fe9-858e-713031b21115
+		sourceLineageTag: category_level_1
+		summarizeBy: none
+		sourceColumn: category_level_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_2
+		dataType: string
+		lineageTag: 7466abb3-164d-4b5a-ac3d-54a583c692ef
+		sourceLineageTag: category_level_2
+		summarizeBy: none
+		sourceColumn: category_level_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_3
+		dataType: string
+		lineageTag: 74a95836-fc23-4eab-9f2c-32401b027bad
+		sourceLineageTag: category_level_3
+		summarizeBy: none
+		sourceColumn: category_level_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel
+		dataType: string
+		lineageTag: 617ba703-713c-4cd3-8f5e-39fff4253bee
+		sourceLineageTag: nivel
+		summarizeBy: none
+		sourceColumn: nivel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProdutos = entity
+		mode: directLake
+		source
+			entityName: dProdutos
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

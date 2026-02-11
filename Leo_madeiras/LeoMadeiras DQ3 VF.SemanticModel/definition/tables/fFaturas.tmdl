@@ -1,0 +1,395 @@
+table fFaturas
+	lineageTag: 23e1e886-3b77-4582-8ab8-4560d84bed5f
+
+	measure 'TKM Liquido' =
+			
+			VAR valor = SUM(fFaturas[vlr_receita_liquida])
+			VAR ped = DISTINCTCOUNT(fFaturas[nr_nf])
+			RETURN
+			DIVIDE(
+			        valor,
+			        ped,
+			        0
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: b3f2ddb9-aa01-4f2f-ade2-cf494aa45bea
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column cod_material
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: 8bcf2326-7dc0-4cc6-8e82-f23e119a330f
+		summarizeBy: none
+		sourceColumn: cod_material
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cod_fatura
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: 27cfa20b-6146-429c-88df-d2a0f1fcd10c
+		summarizeBy: none
+		sourceColumn: cod_fatura
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column cod_pedido
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: 0c35842f-8288-41a1-9330-a48fba240f75
+		summarizeBy: none
+		sourceColumn: cod_pedido
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column nr_nf
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 456f1802-590c-4048-bb7b-3787f879503f
+		summarizeBy: none
+		sourceColumn: nr_nf
+
+		annotation SummarizationSetBy = User
+
+	column nr_serie
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5d9e82f9-c647-407f-b299-ead26d0bda15
+		summarizeBy: none
+		sourceColumn: nr_serie
+
+		annotation SummarizationSetBy = User
+
+	column cd_cliente
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: e83ceb4c-03bc-44ea-ab16-51898d32ded9
+		summarizeBy: none
+		sourceColumn: cd_cliente
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_fornecedor
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: 97fb08bc-dfb1-418a-a2a5-252755b74f44
+		summarizeBy: none
+		sourceColumn: cd_fornecedor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column cd_vendedor
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: af52f603-89e9-425f-8499-a212d06b08fc
+		summarizeBy: none
+		sourceColumn: cd_vendedor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_loja_venda
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: 83033f9d-7d38-4a13-b60e-81118f744c35
+		summarizeBy: none
+		sourceColumn: cd_loja_venda
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_loja_expedicao
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: b4927665-9326-47d5-a8a6-7780e2e2ba57
+		summarizeBy: none
+		sourceColumn: cd_loja_expedicao
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column cd_cond_pgto
+		dataType: string
+		isHidden
+		sourceProviderType: nvarchar(max)
+		displayFolder: FKey
+		lineageTag: 66e9da74-c179-4760-b363-a31a9d1eeeb9
+		summarizeBy: none
+		sourceColumn: cd_cond_pgto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_frm_pgto
+		dataType: string
+		isHidden
+		sourceProviderType: nvarchar(max)
+		displayFolder: FKey
+		lineageTag: 4917476d-ba56-4c13-aa05-372c25b337c7
+		summarizeBy: none
+		sourceColumn: cd_frm_pgto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_fatura
+		dataType: dateTime
+		formatString: Short Date
+		sourceProviderType: date
+		displayFolder: FKey
+		lineageTag: 1084012d-e170-40e8-a45f-ce4f8809950d
+		summarizeBy: none
+		sourceColumn: dt_fatura
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column dt_pedido
+		dataType: dateTime
+		isHidden
+		formatString: Short Date
+		sourceProviderType: date
+		displayFolder: FKey
+		lineageTag: 3142ba26-4482-4faa-a97d-2cb4e0c69130
+		summarizeBy: none
+		sourceColumn: dt_pedido
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column cd_cabecalho_entrega
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: 0567ff26-8e28-4db5-b457-0f0fc6040434
+		summarizeBy: none
+		sourceColumn: cd_cabecalho_entrega
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column vlr_bruto
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		sourceProviderType: double
+		lineageTag: 0f85e32a-f3de-44ab-9886-bdadee13cc64
+		summarizeBy: none
+		sourceColumn: vlr_bruto
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column qt_vendida
+		dataType: int64
+		formatString: #,0
+		sourceProviderType: bigint
+		lineageTag: d7623174-7b7e-4ef4-b1d9-314e687ff8f3
+		summarizeBy: none
+		sourceColumn: qt_vendida
+
+		annotation SummarizationSetBy = User
+
+	column vlr_frete
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		sourceProviderType: double
+		lineageTag: 0f11c4a2-ed8e-4ccd-8254-f047b62414f9
+		summarizeBy: none
+		sourceColumn: vlr_frete
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column vlr_desconto
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		sourceProviderType: double
+		lineageTag: 6e3ec0aa-97c0-455a-b9b1-0d96d6e26c56
+		summarizeBy: none
+		sourceColumn: vlr_desconto
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column cd_tipo_movimento
+		dataType: string
+		isHidden
+		sourceProviderType: nvarchar(max)
+		displayFolder: FKey
+		lineageTag: 93ef7f53-065c-4481-a9ad-343c16a5c19b
+		summarizeBy: none
+		sourceColumn: cd_tipo_movimento
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_canal_venda
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		displayFolder: FKey
+		lineageTag: ae2c55bc-edb3-4d6e-a0cf-0ea83b672c3e
+		summarizeBy: none
+		sourceColumn: cd_canal_venda
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column vlr_tot_impostos
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		sourceProviderType: double
+		lineageTag: 197c5096-f754-4406-98f3-a40475e8174a
+		summarizeBy: none
+		sourceColumn: vlr_tot_impostos
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column vlr_receita_liquida
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		sourceProviderType: double
+		lineageTag: 991ea0c6-09ad-48ec-bfd7-de89dc6061f9
+		summarizeBy: none
+		sourceColumn: vlr_receita_liquida
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column vlr_cmv
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		sourceProviderType: double
+		lineageTag: 2d35b4ec-ce35-4e07-b2ed-ded386d11323
+		summarizeBy: none
+		sourceColumn: vlr_cmv
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column vlr_margem
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		sourceProviderType: double
+		lineageTag: 3112cf02-b0e4-443a-a039-473ae6f289a8
+		summarizeBy: none
+		sourceColumn: vlr_margem
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column cd_tipo_doc_fat
+		dataType: string
+		isHidden
+		sourceProviderType: nvarchar(max)
+		displayFolder: FKey
+		lineageTag: bcc6da97-ecc9-4af5-955c-9ff6e4cffbfb
+		summarizeBy: none
+		sourceColumn: cd_tipo_doc_fat
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ped_nr_pedido
+		dataType: int64
+		formatString: 0
+		lineageTag: ec9a9bbb-7557-434e-8cfc-f1aae4127db9
+		summarizeBy: none
+		sourceColumn: ped_nr_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fFaturas = m
+		mode: import
+		queryGroup: Fact
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"5acfb7f3-133f-4b84-9e8f-15a4b16ff5b5" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="5acfb7f3-133f-4b84-9e8f-15a4b16ff5b5"]}[Data],
+				    Consulta_ = #"5acfb7f3-133f-4b84-9e8f-15a4b16ff5b5"{[entity="fFaturas_offline",version=""]}[Data],
+				    #"Merged Queries" = Table.NestedJoin(Consulta_, {"cod_pedido"}, aux_pedidos, {"ped_nr_pedido"}, "aux_pedidos", JoinKind.LeftOuter),
+				    #"Expanded aux_pedidos" = Table.ExpandTableColumn(#"Merged Queries", "aux_pedidos", {"ped_nr_pedido"}, {"ped_nr_pedido"})
+				in
+				    #"Expanded aux_pedidos"
+
+	annotation PBI_ResultType = Table
+

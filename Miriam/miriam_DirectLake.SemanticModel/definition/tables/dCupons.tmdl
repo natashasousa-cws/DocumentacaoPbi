@@ -1,0 +1,70 @@
+table dCupons
+	lineageTag: 406ee294-6971-4344-a058-2a1cc8c9a11d
+	sourceLineageTag: [miriam].[dCupons]
+
+	column coupon_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 93043a5f-c970-4258-8809-ac1a16745d2e
+		sourceLineageTag: coupon_id
+		summarizeBy: sum
+		sourceColumn: coupon_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 74bf0b51-8481-491e-b885-12baec9cf72b
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: int64
+		formatString: 0
+		lineageTag: 65275f0f-0001-48a1-87a4-106ae150d4d8
+		sourceLineageTag: code
+		summarizeBy: sum
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign
+		dataType: string
+		lineageTag: cc4efcf6-f89c-457f-9524-e9faff34a232
+		sourceLineageTag: campaign
+		summarizeBy: none
+		sourceColumn: campaign
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_begin
+		dataType: int64
+		formatString: 0
+		lineageTag: 57281ed8-15ab-40ec-b567-770ca5a20735
+		sourceLineageTag: datekey_begin
+		summarizeBy: sum
+		sourceColumn: datekey_begin
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_end
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b578227-f635-424b-8fb1-0b866e6a1b8a
+		sourceLineageTag: datekey_end
+		summarizeBy: sum
+		sourceColumn: datekey_end
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCupons = entity
+		mode: directLake
+		source
+			entityName: dCupons
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

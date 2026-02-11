@@ -1,0 +1,41 @@
+table dCarteirizacao
+	lineageTag: f0758b2c-bfd1-48eb-9302-fa189840ef5a
+	sourceLineageTag: [leo_madeiras].[dCarteirizacao]
+
+	column id_account_seller
+		dataType: int64
+		formatString: 0
+		lineageTag: 81a5e433-e40f-4a6e-8c86-69def9a641b3
+		sourceLineageTag: id_account_seller
+		summarizeBy: sum
+		sourceColumn: id_account_seller
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_account_customer
+		dataType: int64
+		formatString: 0
+		lineageTag: 4dc5deb0-3fb3-42b9-8db4-6fcf726246f8
+		sourceLineageTag: id_account_customer
+		summarizeBy: sum
+		sourceColumn: id_account_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_store
+		dataType: int64
+		formatString: 0
+		lineageTag: 66267be5-3c95-47da-8059-9c93743b0768
+		sourceLineageTag: id_store
+		summarizeBy: sum
+		sourceColumn: id_store
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCarteirizacao = entity
+		mode: directLake
+		source
+			entityName: dCarteirizacao
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

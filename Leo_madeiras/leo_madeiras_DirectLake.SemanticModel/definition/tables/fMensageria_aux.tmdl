@@ -1,0 +1,87 @@
+table fMensageria_aux
+	lineageTag: 15c62c90-24d8-488e-a6ed-0e3ffc0b3ea1
+	sourceLineageTag: [leo_madeiras].[fMensageria_aux]
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2799456b-e623-488b-819d-9ee9177a905d
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_id
+		dataType: string
+		lineageTag: cba85ec2-83aa-4c56-92cd-794efda87c45
+		sourceLineageTag: message_id
+		summarizeBy: none
+		sourceColumn: message_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: c175a6c8-d9b3-43f6-a6b3-bc3f69d8ab3e
+		sourceLineageTag: status
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c9bcaa60-bc0c-4a2a-b510-2e5593abb862
+		sourceLineageTag: action_id
+		summarizeBy: sum
+		sourceColumn: action_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column identificador
+		dataType: string
+		lineageTag: 04587f29-add3-40dc-8e28-172f4600fbe6
+		sourceLineageTag: identificador
+		summarizeBy: none
+		sourceColumn: identificador
+
+		annotation SummarizationSetBy = Automatic
+
+	column projeto
+		dataType: string
+		lineageTag: d73194aa-7c35-44f4-ae26-633e6aee2aea
+		sourceLineageTag: projeto
+		summarizeBy: none
+		sourceColumn: projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 493a613b-28c4-4dd4-877a-28b399643deb
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TTR
+		dataType: int64
+		formatString: 0
+		lineageTag: b694d74e-7428-43cb-a53e-d2f8061755c1
+		sourceLineageTag: TTR
+		summarizeBy: sum
+		sourceColumn: TTR
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMensageria_aux = entity
+		mode: directLake
+		source
+			entityName: fMensageria_aux
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

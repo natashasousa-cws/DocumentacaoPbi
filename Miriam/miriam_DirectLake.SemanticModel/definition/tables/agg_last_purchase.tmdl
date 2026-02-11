@@ -1,0 +1,50 @@
+table agg_last_purchase
+	lineageTag: b07963d8-4b34-4598-9b83-e42495ac6ecd
+	sourceLineageTag: [miriam].[agg_last_purchase]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c2b7c49b-e8a1-4cf3-939f-8b3e8976912a
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_purchase
+		dataType: int64
+		formatString: 0
+		lineageTag: c1152213-e750-4f67-befe-02dff50f8a3c
+		sourceLineageTag: days_since_last_purchase
+		summarizeBy: sum
+		sourceColumn: days_since_last_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataform_status
+		dataType: string
+		lineageTag: d2ffdf7a-3cb4-4eb0-a1b2-a39a7c9a8e66
+		sourceLineageTag: plataform_status
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: aaab6a66-feed-448b-b755-b803281d15eb
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_purchase = entity
+		mode: directLake
+		source
+			entityName: agg_last_purchase
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

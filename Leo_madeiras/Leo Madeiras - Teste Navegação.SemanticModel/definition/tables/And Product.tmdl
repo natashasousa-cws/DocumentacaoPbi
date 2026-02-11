@@ -1,0 +1,68 @@
+table 'And Product'
+	lineageTag: 0610cd62-cbe4-4aaf-a4ec-870bc26ac20a
+
+	column 'And L1_category'
+		lineageTag: 240a5355-f1a0-4a65-99bf-040d714a3791
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [And L1_category]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'And L2_category'
+		lineageTag: 77e0f4e0-a039-4d2c-840b-fa38cfb1e97c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [And L2_category]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'And L3_category'
+		lineageTag: a722adac-ba96-45fc-8917-8f2c2b5ff7f4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [And L3_category]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'And mfr_part_code'
+		lineageTag: 25a73dba-0470-436d-b832-80e5ffc7216c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [And mfr_part_code]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'And sku_name'
+		lineageTag: 2ea31b16-e29c-4686-9d60-e8b1fb1ba21d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [And sku_name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'And sku_id'
+		formatString: 0
+		lineageTag: 4481d285-6d99-440a-a0e4-ee2444c29fcf
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [And sku_id]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'And Product' = calculated
+		mode: import
+		source =
+				
+				SELECTCOLUMNS (
+				    'dProdutos',
+				    "And L1_category", 'dProdutos'[category_level_1],
+				    "And L2_category", 'dProdutos'[category_level_2],
+				    "And L3_category", 'dProdutos'[category_level_3],
+				    "And mfr_part_code", dProdutos[mfr_part_code],
+				    "And sku_name", 'dProdutos'[sku_name],
+				    "And sku_id", 'dProdutos'[sku_id]
+				)
+
+	annotation PBI_Id = 1cf85c30c9994affaecfd4023107f9f5
+

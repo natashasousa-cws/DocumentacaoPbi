@@ -1,0 +1,242 @@
+table dClientes
+	lineageTag: 262eef39-96a8-4752-a148-93d89947bff0
+
+	/// Identificador da conta
+	column account_id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: db06e71e-0948-4b28-9e4b-7f05cb12797b
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = User
+
+	column account_create_date
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 2b2736bb-af07-44e5-be57-9ab49b90aeb8
+		summarizeBy: none
+		sourceColumn: account_create_date
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	/// Identificador do cliente
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ad801ef-1b8e-4210-8c61-e18ca1ff1e10
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = User
+
+	column client_status
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 97df49c9-3081-4c6e-af24-94dca91611c1
+		summarizeBy: none
+		sourceColumn: client_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_create_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6c8e373c-e394-4eef-9275-5e9160c3fb7d
+		summarizeBy: none
+		sourceColumn: client_create_date
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column name
+		dataType: string
+		lineageTag: 92656ed6-482c-4bd8-896c-2f9dc8e83174
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: f0204661-659e-43ce-9db2-a5693d7e36a5
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: de66239a-7850-4d4a-8079-83c06c701f6f
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 4d185b87-1d59-42a6-af7d-29d71ae21f6a
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Classificação de Pessoa fisica ou juridica
+	column person_type
+		dataType: string
+		lineageTag: ef3871f2-c4f8-4c89-8ca1-1c05502844fb
+		summarizeBy: none
+		sourceColumn: person_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 52f02835-379e-4e22-8c67-fe4e14b37033
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		lineageTag: 5bf30068-f22a-4b61-8a72-f29fcb0e9f78
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone_number
+		dataType: string
+		lineageTag: 836bab2b-c344-4c28-8afd-94c0a69939d9
+		summarizeBy: none
+		sourceColumn: phone_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e3e9a96a-f978-4d2b-9e83-e4a959c7d16c
+		summarizeBy: none
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = User
+
+	/// Identificador do vendedor a qual o cliente é carteirizado
+	column salesperson_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d2d46b58-678c-450b-ab6d-e37685d26dff
+		summarizeBy: none
+		sourceColumn: salesperson_account_id
+
+		annotation SummarizationSetBy = User
+
+	column UF
+		dataType: string
+		lineageTag: 2f288a00-5baf-40ba-8042-f00d5c3f9e6b
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_origin
+		dataType: string
+		lineageTag: 53cfe075-787f-4729-8e61-bdbcd85b15f8
+		summarizeBy: none
+		sourceColumn: account_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column contact
+		dataType: string
+		lineageTag: 6bca9261-5a23-4ba2-94a6-10314e4b353f
+		summarizeBy: none
+		sourceColumn: contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column age
+		dataType: int64
+		formatString: 0
+		lineageTag: a5b021cf-43fc-4b4f-9d4a-1a068cd3b541
+		summarizeBy: sum
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column CNAE
+		dataType: string
+		lineageTag: d06b73ca-711b-48ab-b15c-199044b34a98
+		summarizeBy: none
+		sourceColumn: CNAE
+
+		annotation SummarizationSetBy = Automatic
+
+	column wpp_opt_in
+		dataType: int64
+		formatString: 0
+		lineageTag: d584192f-baa2-467a-a8b8-e1c91b3db1ef
+		summarizeBy: sum
+		sourceColumn: wpp_opt_in
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_document
+		dataType: string
+		lineageTag: 492c1e69-6d82-46f0-a351-96f9a8d8f0f8
+		summarizeBy: none
+		sourceColumn: salesperson_document
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_last_updated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4d5a38a5-6c86-4374-9636-46f914f4d63f
+		summarizeBy: none
+		sourceColumn: client_last_updated
+
+		annotation SummarizationSetBy = Automatic
+
+	column profile_picture
+		dataType: string
+		lineageTag: 2c5ab01b-7017-41d9-8063-97379e0cf8ae
+		summarizeBy: none
+		sourceColumn: profile_picture
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Endereço
+		lineageTag: 8c883513-d726-4eb6-94c3-cc9a170f9799
+
+		level state
+			lineageTag: 77d553cb-4655-4f7c-b63b-fa4d597a9225
+			column: state
+
+	partition dClientes-1bbe7c5a-1a30-4b76-b286-259d6c6c5b8c = m
+		mode: import
+		queryGroup: Contas
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"cc84e8f0-dc70-49b3-9ab6-db59566ab538" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="cc84e8f0-dc70-49b3-9ab6-db59566ab538"]}[Data],
+				    dClientes_ = #"cc84e8f0-dc70-49b3-9ab6-db59566ab538"{[entity="dClientes",version=""]}[Data]
+				in
+				    dClientes_
+
+	annotation PBI_ResultType = Table
+

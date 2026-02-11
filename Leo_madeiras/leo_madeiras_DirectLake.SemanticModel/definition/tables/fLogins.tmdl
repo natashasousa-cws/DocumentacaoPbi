@@ -1,0 +1,87 @@
+table fLogins
+	lineageTag: 21c829a9-41c8-421a-9427-f8832fe87c7d
+	sourceLineageTag: [leo_madeiras].[fLogins]
+
+	column login_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e4da566e-578d-4a8a-ab44-4bee13948362
+		sourceLineageTag: login_date
+		summarizeBy: none
+		sourceColumn: login_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: e19df152-fa10-48cf-ab13-dfce4a6deee4
+		sourceLineageTag: account_user
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 78010bc2-bc4b-4370-86c0-888890579d86
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column login_type
+		dataType: string
+		lineageTag: 9b62b389-8e82-4f99-9400-a36d6a16562f
+		sourceLineageTag: login_type
+		summarizeBy: none
+		sourceColumn: login_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 48d4c3dc-ceb1-412c-b20c-20aab9969fc6
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: a69efd69-26e3-409c-849f-de760b5ac782
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_type
+		dataType: string
+		lineageTag: b67bdd5b-a2e5-4d2e-a23d-71164bfc8dcb
+		sourceLineageTag: account_type
+		summarizeBy: none
+		sourceColumn: account_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 13997235-5b8b-4c1e-821e-fc6c7e2c4f6e
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fLogins = entity
+		mode: directLake
+		source
+			entityName: fLogins
+			schemaName: leo_madeiras
+			expressionSource: 'DirectLake - leo_madeiras_gold_lake'
+

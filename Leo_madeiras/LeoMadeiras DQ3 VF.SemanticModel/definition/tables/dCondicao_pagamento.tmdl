@@ -1,0 +1,68 @@
+table dCondicao_pagamento
+	lineageTag: c8331acb-4617-475d-97bc-20f333ae6195
+
+	column cd_cond_pagto
+		dataType: string
+		isHidden
+		isKey
+		sourceProviderType: nvarchar(max)
+		lineageTag: 98237ce6-893d-4b5f-a246-23db7a6979c5
+		summarizeBy: none
+		sourceColumn: cd_cond_pagto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpa_ds_cond_pagto
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: f7e65f46-e6f4-40e7-aa99-bb90b1ceae62
+		summarizeBy: none
+		sourceColumn: cpa_ds_cond_pagto
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpa_nr_prazo_medio
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: e6643f89-180e-44b9-a92e-efae5a6f55f5
+		summarizeBy: sum
+		sourceColumn: cpa_nr_prazo_medio
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpa_ds_risco
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: fd1af9f2-6aa6-4a10-871d-cb5379a6f82c
+		summarizeBy: none
+		sourceColumn: cpa_ds_risco
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpa_ds_tipo
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: f2290c22-46e9-47ed-8b13-9b78db4fbb83
+		summarizeBy: none
+		sourceColumn: cpa_ds_tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCondicao_pagamento = m
+		mode: dual
+		queryGroup: Dim
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"56b0623f-8797-421d-af36-f100afed62ec" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="56b0623f-8797-421d-af36-f100afed62ec"]}[Data],
+				    dCondicao_pagamento_off_ = #"56b0623f-8797-421d-af36-f100afed62ec"{[entity="dCondicao_pagamento_off",version=""]}[Data]
+				in
+				    dCondicao_pagamento_off_
+
+	annotation PBI_ResultType = Table
+

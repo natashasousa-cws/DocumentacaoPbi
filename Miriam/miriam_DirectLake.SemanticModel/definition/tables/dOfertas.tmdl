@@ -1,0 +1,139 @@
+table dOfertas
+	lineageTag: 979ddde1-9c4a-40c0-8ba4-c3d77951b282
+	sourceLineageTag: [miriam].[dOfertas]
+
+	column associate_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 32aaae64-58f2-43ce-89cc-9c7f12002052
+		sourceLineageTag: associate_id
+		summarizeBy: sum
+		sourceColumn: associate_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e592671-de76-47bc-b6e1-2379b96a64fc
+		sourceLineageTag: partner_id
+		summarizeBy: sum
+		sourceColumn: partner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: fc4dd075-5dc3-42b1-85cb-7b0c10e9dc08
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column company_name
+		dataType: string
+		lineageTag: fd254fc7-fdc3-4974-8bb5-99124746191c
+		sourceLineageTag: company_name
+		summarizeBy: none
+		sourceColumn: company_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: dca36b63-f106-40fc-931f-f954dd14199b
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		lineageTag: 4812abb0-e803-4bcf-b841-9a7f0dd08e29
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity_avaliable
+		dataType: int64
+		formatString: 0
+		lineageTag: 31fff620-91b5-4ec4-96cb-472125c5b523
+		sourceLineageTag: quantity_avaliable
+		summarizeBy: sum
+		sourceColumn: quantity_avaliable
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 4a0194eb-fb23-4b48-9014-0d6910256a67
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column partner_part_code
+		dataType: string
+		lineageTag: b0541bec-841c-49cd-a69c-f5e6393f252d
+		sourceLineageTag: partner_part_code
+		summarizeBy: none
+		sourceColumn: partner_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_created_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c31a80ee-192b-4075-8835-342d6677d30b
+		sourceLineageTag: sku_created_date
+		summarizeBy: none
+		sourceColumn: sku_created_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_last_updated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 05d8cc4d-3869-4496-894a-bd97b814279b
+		sourceLineageTag: sku_last_updated
+		summarizeBy: none
+		sourceColumn: sku_last_updated
+
+		annotation SummarizationSetBy = Automatic
+
+	column by_request
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e1f7712-3b31-4a03-b1a0-5344984bf426
+		sourceLineageTag: by_request
+		summarizeBy: sum
+		sourceColumn: by_request
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: aa2eb651-b19c-469f-9a3b-5a7aaa9d4a20
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dOfertas = entity
+		mode: directLake
+		source
+			entityName: dOfertas
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

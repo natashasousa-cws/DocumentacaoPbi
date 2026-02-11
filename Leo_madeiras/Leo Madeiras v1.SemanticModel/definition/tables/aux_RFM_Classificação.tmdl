@@ -1,0 +1,52 @@
+table aux_RFM_Classificação
+	isHidden
+	lineageTag: 0d5b6e66-07cd-4c46-8c81-f3f62b0a611a
+
+	column Segmentação
+		dataType: string
+		isHidden
+		lineageTag: 2d670c83-9d72-4407-b52f-7074431d7879
+		summarizeBy: none
+		sourceColumn: Segmentação
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Activity
+		dataType: string
+		isHidden
+		lineageTag: 0fade75d-6774-4670-8950-451bb759cae9
+		summarizeBy: none
+		sourceColumn: Activity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actionable Tip'
+		dataType: string
+		isHidden
+		lineageTag: 76803aae-5669-4536-841c-fb9fa63ddb34
+		summarizeBy: none
+		sourceColumn: Actionable Tip
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aux_RFM_Classificação-5b6330cc-2165-4b1f-9dbd-875d2515a2bf = m
+		mode: import
+		queryGroup: 'Analise RFM'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("hVXLbttIEPyVjk8bQFK+ITCcZA9JBF+DHNqcljQAOUP3DInAX+NgD4Fz30uQk/ljqZ4h9djFbi4CRXK6q6qri58+XV1z18v0t6Sr1dV17HqNA6k0ErJ09rOhcpepiR3tVO6H6XtoPG/ohvacMlM3+Bxf4Pit4J1eQpJ1TJvnx2100lESpZioV9+JV1wxsYuZlUIcy4PohlwO/KnTV/vfxRGHmNKA6qwNb64+rwC19YYo0c5PT94Avy0Aho7uAM75cLAOR8QF7YkI3t/OvcgJCvuoNHKLX96r7IHKQMv0jSn2PnhTBXduwhjbkY1TgbGNWUwBfwbkCG2WLm2oYFPuAI+Bj+l+4JBNuArPHnVWBFjslVEeDOLHnVgNNR32eIftOacU0XH6Nv0V6RXaOmm9YycraxjBz0HPOGQ9F/RStAXZf875PScK1uCfk8aJN1FDESYNfdQMRKCkLq7ITd/X7QH109AIYBJISuN7qElipdCDzD0hZR282rRUWm58DGyd46wqxu5xXk8IUUIvJD0i3C/aFu8ZwGv1UMDEgAkaXwqTm+2zorioijomBpTNdjTNvXEkoZxJjeEWnauhqwSrcz1Aq7gGZboYJE9f1Zut0ZVLy+nJQbXnxz9sASrgjNbNzKmCvhD/ZdGYi/OANIMnZMapro/U+s5nNq2XWRdd6Y6TEBas1k1FeCDRYtpb4exHOZlWK3Gmg78TDazo+PqO/Zd4wmxXZ5zf/I6zcfwIqKJObHXTzHYXbRQGALALN5sna/ZwirEYNEExVESRmM6JLeaFy1UQEOZ5rCHk6IeWrb9Rd5Iw6DxLEqTJsk5mM2llJnwDm3m8NacE3F5lX1KimrOsweL36eds+OdHc9oBjOqZMocy0GoUysoP5vuaJIiHzC8tAREVHjNZY6/bokuCyVv/ABnwF441iRbIrGe+PCe7MgHDfHvWavqRxc/UPpjGfbRlq9KbeeTBTA0J09EQ8q9NPhHjdo9FrMTKfML94OGQ9Rkl7ILyOD2VOxfTgGjHQZUMW3Z0VQ0QC/mGK+ey/U1UXYyFvwj4VPGdRvauOjM4G9prUG6zrVQzp3n0tBNvsC7Q0zYOTY0EG2q1dJh+dIIhm6PEeWdrMGdrWbLLpLRAkpFLTMrRXLhOvZSgLwvVKGYb5y+Gu/gybTEGa/J/mdGj5jBH+HGHuMpnoLlAvJURW4M23rYZgVpFggr4TnM41M9B23BoEP5+H7CTZJEdspalBKDPvwA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Customer Class" = _t, Activity = _t, #"Actionable Tip" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Customer Class", type text}, {"Activity", type text}, {"Actionable Tip", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Changed Type",{{"Customer Class", "Segmentação"}})
+				in
+				    #"Colunas Renomeadas"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

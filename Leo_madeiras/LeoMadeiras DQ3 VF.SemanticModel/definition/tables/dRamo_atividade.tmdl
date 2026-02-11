@@ -1,0 +1,54 @@
+table dRamo_atividade
+	lineageTag: 286041f3-9ca1-4194-9b3e-de2fa39f75cb
+
+	column cli_cd_ramo_atividade
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 1effe603-3492-40aa-9150-7ca4ed5b199f
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: cli_cd_ramo_atividade
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cli_ds_ramo_atividade
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 2826d75b-7f7c-4653-b18e-d7cf095edc1f
+		summarizeBy: none
+		sourceColumn: cli_ds_ramo_atividade
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cli_ds_programa_ramo
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: b81b2111-6185-4cf7-96db-282c286b2896
+		summarizeBy: none
+		sourceColumn: cli_ds_programa_ramo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dRamo_atividade = m
+		mode: dual
+		queryGroup: Dim
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"56b0623f-8797-421d-af36-f100afed62ec" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="56b0623f-8797-421d-af36-f100afed62ec"]}[Data],
+				    dRamo_atividade_off_ = #"56b0623f-8797-421d-af36-f100afed62ec"{[entity="dRamo_atividade_off",version=""]}[Data]
+				in
+				    dRamo_atividade_off_
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

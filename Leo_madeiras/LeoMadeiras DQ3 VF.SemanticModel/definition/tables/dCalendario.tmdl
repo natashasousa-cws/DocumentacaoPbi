@@ -1,0 +1,365 @@
+table dCalendario
+	lineageTag: 242be94e-b96d-418e-adfb-b4605088211b
+	dataCategory: Time
+
+	column Data
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: 7297075a-8cc2-4ae9-8581-b41dd5163828
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 629d5ec0-8b71-4927-9ced-c188e35618c3
+		summarizeBy: sum
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 51c5b86e-bf8e-4956-927e-979adfaebf4a
+		summarizeBy: sum
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNo
+		dataType: int64
+		formatString: 0
+		lineageTag: be90065a-04e8-45c7-a798-5d7653b7c662
+		summarizeBy: sum
+		sourceColumn: MesNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 6aee3c95-fe5f-4c39-b2b1-fd1a13869783
+		summarizeBy: sum
+		sourceColumn: Dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoMesDia
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c050345-4725-4bb0-8778-a29336485d3a
+		summarizeBy: sum
+		sourceColumn: AnoMesDia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês
+		dataType: string
+		lineageTag: cbc2e0e7-726b-4c49-89d7-a62752e83217
+		summarizeBy: none
+		sourceColumn: Mês
+		sortByColumn: MesNo
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês/Ano
+		dataType: string
+		lineageTag: f82f8202-7872-4d1f-ac3d-88ed981577c8
+		summarizeBy: none
+		sourceColumn: Mês/Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre/Ano
+		dataType: string
+		lineageTag: f0f6b2e3-5874-4f29-98f0-451e1faddaaf
+		summarizeBy: none
+		sourceColumn: Trimestre/Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia da Semana'
+		dataType: int64
+		formatString: 0
+		lineageTag: c6ce45eb-7756-47bb-8be1-6b4ca8abd520
+		summarizeBy: sum
+		sourceColumn: Dia da Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do Dia'
+		dataType: string
+		lineageTag: 7a461eb2-1315-4868-a0bd-a3f0794ca32e
+		summarizeBy: none
+		sourceColumn: Nome do Dia
+		sortByColumn: 'Dia da Semana'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do Dia abv'
+		dataType: string
+		lineageTag: 570802f9-c21e-42dc-8682-963a3a244e75
+		summarizeBy: none
+		sourceColumn: Nome do Dia abv
+		sortByColumn: 'Dia da Semana'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semana do Ano'
+		dataType: int64
+		formatString: 0
+		lineageTag: f656211a-7614-4fa3-89ad-5e88c4dd1fe1
+		summarizeBy: sum
+		sourceColumn: Semana do Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana/Ano
+		dataType: string
+		lineageTag: cfcb89a4-8000-4d34-8e63-7f7f38c1047e
+		summarizeBy: none
+		sourceColumn: Semana/Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoSemana
+		dataType: int64
+		formatString: 0
+		lineageTag: 72955015-456e-463f-bb01-09524e03e9c7
+		summarizeBy: sum
+		sourceColumn: AnoSemana
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoMes
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e11f2e1-e6d6-4fb7-b205-2a513741bf03
+		summarizeBy: sum
+		sourceColumn: AnoMes
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoTrimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: d72567a8-6301-4b0c-9049-135a8abf79ba
+		summarizeBy: sum
+		sourceColumn: AnoTrimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ano Fiscal'
+		dataType: string
+		lineageTag: 0df36403-f53b-4bcc-bd2f-df63c96e3235
+		summarizeBy: none
+		sourceColumn: Ano Fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Trimestre Fiscal'
+		dataType: string
+		lineageTag: 7b8f74eb-c89c-4c7d-97de-c7e1d4a4c28b
+		summarizeBy: none
+		sourceColumn: Trimestre Fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Fiscal'
+		dataType: int64
+		formatString: 0
+		lineageTag: f07997c6-bc7d-40ac-931b-9d78f74688b5
+		summarizeBy: sum
+		sourceColumn: Mês Fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Futuro
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 52159505-22a8-4692-8c8a-0a57f21220a8
+		summarizeBy: none
+		sourceColumn: Futuro
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Offset Dia'
+		dataType: int64
+		formatString: 0
+		lineageTag: 899605e1-e359-49cc-972c-0607a0c1b6b4
+		summarizeBy: sum
+		sourceColumn: Offset Dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Offset Semana'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1fac5705-f936-438d-afac-f1875eb142b6
+		summarizeBy: sum
+		sourceColumn: Offset Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Offset Mês'
+		dataType: int64
+		formatString: 0
+		lineageTag: 94f294e1-95ed-4343-8bfb-e0f52b979052
+		summarizeBy: sum
+		sourceColumn: Offset Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Offset Trimestre'
+		dataType: int64
+		formatString: 0
+		lineageTag: aa4b8af2-8f44-4e92-9de7-f5d5b4a8e81c
+		summarizeBy: sum
+		sourceColumn: Offset Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Offset Ano'
+		dataType: int64
+		formatString: 0
+		lineageTag: 85a4f8b2-3426-46ab-9f77-bbf570e27851
+		summarizeBy: sum
+		sourceColumn: Offset Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Offset Ano Fiscal'
+		dataType: int64
+		formatString: 0
+		lineageTag: e4da000e-d789-49fa-a548-dbb91bd241cb
+		summarizeBy: sum
+		sourceColumn: Offset Ano Fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semana Completa'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7a76382d-b7a4-407b-916b-2cb1855fe094
+		summarizeBy: none
+		sourceColumn: Semana Completa
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Completo'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3170a24b-cd9f-431b-a6cc-215046c8eadb
+		summarizeBy: none
+		sourceColumn: Mês Completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Trimestre Completo'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1a7391d5-5f19-45b0-8ae2-b97a391e740b
+		summarizeBy: none
+		sourceColumn: Trimestre Completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês/Ano Fechamento'
+		dataType: string
+		lineageTag: 3204f92d-a248-42b4-baa9-00a399eefb38
+		summarizeBy: none
+		sourceColumn: Mês/Ano Fechamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'AnoMes Fechamento'
+		dataType: int64
+		formatString: 0
+		lineageTag: a533ab22-8c10-4e32-b80a-7f53cb783c2b
+		summarizeBy: sum
+		sourceColumn: AnoMes Fechamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feriado
+		dataType: string
+		lineageTag: dc7ed5f3-8b4d-4e92-aa2c-ff6ef557f581
+		summarizeBy: none
+		sourceColumn: Feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaÚtil
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9284d777-b637-4657-be18-284d90fd8a52
+		summarizeBy: none
+		sourceColumn: DiaÚtil
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semana do Mês'
+		dataType: int64
+		formatString: 0
+		lineageTag: 064af22a-6760-4b16-93cc-4942ddd7a18f
+		summarizeBy: sum
+		sourceColumn: Semana do Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Atual?'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9063c24c-2f48-42ad-88cf-9fe61de25a13
+		summarizeBy: none
+		sourceColumn: Mês Atual?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semana Atual?'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 28249ab7-a1c4-43fa-8246-77807d45f16c
+		summarizeBy: none
+		sourceColumn: Semana Atual?
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hoje?
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9d255052-ba7c-4f0f-bd76-d9b566bff576
+		summarizeBy: none
+		sourceColumn: Hoje?
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendario = m
+		mode: import
+		queryGroup: Calendario
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"4ecf4510-897a-4317-b99c-52afa96130af" = Workspaces{[workspaceId="4ecf4510-897a-4317-b99c-52afa96130af"]}[Data],
+				    #"2182dd7d-00e0-4f05-9561-1391bfdb444d" = #"4ecf4510-897a-4317-b99c-52afa96130af"{[dataflowId="2182dd7d-00e0-4f05-9561-1391bfdb444d"]}[Data],
+				    dCalendario_ = #"2182dd7d-00e0-4f05-9561-1391bfdb444d"{[entity="dCalendario",version=""]}[Data]
+				in
+				    dCalendario_
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,715 @@
+table Medidas_RFM
+	lineageTag: 3466e735-dd55-4358-8356-b07dfa2deec3
+
+	measure '101.03 M - GMV Last X Months' =
+			
+			CALCULATE (
+			    [01.00 GMV],
+			    DATESINPERIOD (
+			        dCalendario[Data],
+			        MAX ( dCalendario[Data] ),
+			        - [param_RFV_period Valor],
+			        MONTH
+			    )
+			)
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		displayFolder: 101. Base
+		lineageTag: 8f7f4a0c-04a6-41f8-a0f6-d18c77a2bb09
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '101.01 R - Lastest_sale' =
+			
+			CALCULATE (
+			    MAX ( fVendas[order_date] ),
+			    NOT ( fVendas[order_status]
+			        IN { "Aguardando pagamento", "Cancelado", "Pré-encomenda", "Pagamento no caixa" } ),
+			    dCalendario[Data] <= MAX ( dCalendario[Data] )
+			)
+		formatString: dd/mm/yyyy
+		displayFolder: 101. Base
+		lineageTag: f71b4660-4aa9-4796-a03c-9a1243afbfeb
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	measure '101.02 F - Orders Last X Months' =
+			
+			CALCULATE (
+			    [05.00 Orders],
+			    DATESINPERIOD (
+			        dCalendario[Data],
+			        MAX ( dCalendario[Data] ),
+			        - [param_RFV_period Valor],
+			        MONTH
+			    )
+			)
+		formatString: 0
+		displayFolder: 101. Base
+		lineageTag: 24ac5d91-d923-4d58-9c8d-16ff732d1836
+
+	measure '104.01 %RFM_Champion' =
+			
+			DIVIDE ( [103.01 RFM_Champion], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: d364c371-738a-4a89-a07e-7e57b98fc774
+
+		changedProperty = FormatString
+
+	measure '102.00 RFM Clients' =
+			
+			CALCULATE (
+			    [02.00 Clients],
+			    FILTER (
+			        dClientes,
+			        DATEDIFF ( [101.01 R - Lastest_sale], MAX ( dCalendario[Data] ), DAY )
+			            > MIN ( aux_RFM_Recency[Min] )
+			            && DATEDIFF ( [101.01 R - Lastest_sale], MAX ( dCalendario[Data] ), DAY )
+			                <= MAX ( aux_RFM_Recency[Max] )
+			            && [101.02 F - Orders Last X Months] >= MIN ( aux_RFM_Frequency[Min] )
+			            && [101.02 F - Orders Last X Months] < MAX ( aux_RFM_Frequency[Max] )
+			            && [101.03 M - GMV Last X Months] >= MIN ( aux_RFM_Monetary[Min] )
+			            && [101.03 M - GMV Last X Months] < MAX ( aux_RFM_Monetary[Max] )
+			    )
+			)
+		formatString: 0
+		displayFolder: 102. Rank
+		lineageTag: 5a2e7271-df40-4dc7-8e2a-bfd410008359
+
+	measure '103.09 RFM_Cant_Lose' =
+			
+			CALCULATE (
+			    [02.00 Clients],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 0
+			            && [102.01 RFM_RX] <= 1
+			            && [102.04 RFM_(F+M)/2] > 4
+			            && [102.04 RFM_(F+M)/2] <= 5
+			    )
+			)
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: c6bd6058-df43-48dc-b498-222174fab921
+
+		changedProperty = FormatString
+
+	measure '102.04 RFM_(F+M)/2' =
+			
+			( [102.02 RFM_FX] + [102.03 RFM_MX] ) / 2
+		displayFolder: 102. Rank
+		lineageTag: bee3a305-c5fd-497f-9123-fd583dc61d46
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '103.07 RFM_Attention' =
+			
+			CALCULATE (
+			    [02.00 Clients],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 2
+			            && [102.01 RFM_RX] <= 3
+			            && [102.04 RFM_(F+M)/2] > 2
+			            && [102.04 RFM_(F+M)/2] <= 3
+			    )
+			)
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: 7bbf69c9-cd8d-4d2e-b108-2f290e8a1287
+
+		changedProperty = FormatString
+
+	measure '103.01 RFM_Champion' =
+			
+			CALCULATE (
+			    [02.00 Clients],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 4
+			            && [102.01 RFM_RX] <= 999
+			            && [102.04 RFM_(F+M)/2] > 4
+			            && [102.04 RFM_(F+M)/2] <= 5
+			    )
+			)
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: 986077a9-5723-41d2-81b5-42a889f2eeef
+
+		changedProperty = FormatString
+
+	measure '102.02 RFM_FX' =
+			
+			CALCULATE (
+			    SELECTEDVALUE ( aux_RFM_Frequency[ID] ),
+			    FILTER (
+			        aux_RFM_Frequency,
+			        [101.02 F - Orders Last X Months] >= aux_RFM_Frequency[Min]
+			            && [101.02 F - Orders Last X Months] < aux_RFM_Frequency[Max]
+			    )
+			)
+		formatString: 0
+		displayFolder: 102. Rank
+		lineageTag: dd43bf4c-c03a-4060-899b-1a72ea695ea4
+
+	measure '103.05 RFM_Hibernating' =
+			
+			CALCULATE (
+			    [02.00 Clients],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] = 2
+			            && [102.04 RFM_(F+M)/2] = 2
+			    )
+			)
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: d7d3bd03-d9bd-4e07-98fa-ede3eed2db66
+
+		changedProperty = FormatString
+
+	measure '103.11 RFM_Lost' =
+			
+			VAR Lost =
+			    CALCULATE (
+			        [02.00 Clients],
+			        FILTER (
+			            VALUES ( dClientes[account_id] ),
+			            [102.01 RFM_RX] <= 2
+			                && [102.04 RFM_(F+M)/2] <= 2
+			        )
+			    )
+			VAR Resultado = Lost - [103.05 RFM_Hibernating]
+			RETURN
+			    Resultado
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: 4ae2dbaa-7de4-438f-ba6a-08f0407f9553
+
+		changedProperty = FormatString
+
+	measure '103.02 RFM_Loyal' =
+			
+			VAR Loyal =
+			    CALCULATE (
+			        [02.00 Clients],
+			        FILTER (
+			            VALUES ( dClientes[account_id] ),
+			            [102.01 RFM_RX] > 2
+			                && [102.01 RFM_RX] <= 999
+			                && [102.04 RFM_(F+M)/2] > 3
+			                && [102.04 RFM_(F+M)/2] <= 5
+			        )
+			    )
+			VAR Resultado = Loyal - [103.01 RFM_Champion]
+			RETURN
+			    Resultado
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: 8ac6b433-f13f-4628-b4d3-095a94c8bf80
+
+		changedProperty = FormatString
+
+	measure '103.04 RFM_New_Client' =
+			
+			CALCULATE (
+			    [02.00 Clients],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 4
+			            && [102.01 RFM_RX] <= 999
+			            && [102.04 RFM_(F+M)/2] > 0
+			            && [102.04 RFM_(F+M)/2] <= 1
+			    )
+			)
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: e1000c72-971f-41aa-b116-06bd52ccdb6d
+
+		changedProperty = FormatString
+
+	measure '103.03 RFM_Potential' =
+			
+			CALCULATE (
+			    [02.00 Clients],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 3
+			            && [102.01 RFM_RX] <= 999
+			            && [102.04 RFM_(F+M)/2] > 1
+			            && [102.04 RFM_(F+M)/2] <= 3
+			    )
+			)
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: 439af519-3b4d-42d3-ad9c-f671c8a8095c
+
+		changedProperty = FormatString
+
+	measure '103.06 RFM_Promissing' =
+			
+			CALCULATE (
+			    [02.00 Clients],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 3
+			            && [102.01 RFM_RX] <= 4
+			            && [102.04 RFM_(F+M)/2] > 0
+			            && [102.04 RFM_(F+M)/2] <= 1
+			    )
+			)
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: 57d9904d-c152-491c-b3b5-ce64ba0f69a3
+
+		changedProperty = FormatString
+
+	measure '103.10 RFM_At_Risk' =
+			
+			VAR AtRisk =
+			    CALCULATE (
+			        [02.00 Clients],
+			        FILTER (
+			            VALUES ( dClientes[account_id] ),
+			            [102.01 RFM_RX] > 0
+			                && [102.01 RFM_RX] <= 2
+			                && [102.04 RFM_(F+M)/2] > 2
+			                && [102.04 RFM_(F+M)/2] <= 5
+			        )
+			    )
+			VAR Resultado = AtRisk - [103.09 RFM_Cant_Lose]
+			RETURN
+			    Resultado
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: f54a1248-5d24-43f4-ab1f-9cea1effae22
+
+		changedProperty = FormatString
+
+	measure '102.01 RFM_RX' =
+			
+			CALCULATE (
+			    SELECTEDVALUE ( aux_RFM_Recency[id] ),
+			    FILTER (
+			        aux_RFM_Recency,
+			        DATEDIFF ( [101.01 R - Lastest_sale], MAX ( dCalendario[Data] ), DAY ) > aux_RFM_Recency[Min]
+			            && DATEDIFF ( [101.01 R - Lastest_sale], MAX ( dCalendario[Data] ), DAY ) <= aux_RFM_Recency[Max]
+			    )
+			)
+		formatString: 0
+		displayFolder: 102. Rank
+		lineageTag: 180d59fd-a1c4-4081-b027-1fe53a45f730
+
+	measure '103.08 RFM_Sleep' =
+			
+			CALCULATE (
+			    [02.00 Clients],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 2
+			            && [102.01 RFM_RX] <= 3
+			            && [102.04 RFM_(F+M)/2] > 0
+			            && [102.04 RFM_(F+M)/2] <= 2
+			    )
+			)
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: 2db0a641-2c64-4aad-adc8-3d87d3c20867
+
+		changedProperty = FormatString
+
+	measure '102.03 RFM_MX' =
+			
+			CALCULATE (
+			    SELECTEDVALUE ( aux_RFM_Monetary[id] ),
+			    FILTER (
+			        aux_RFM_Monetary,
+			        [101.03 M - GMV Last X Months] >= aux_RFM_Monetary[Min]
+			            && [101.03 M - GMV Last X Months] < aux_RFM_Monetary[Max]
+			    )
+			)
+		formatString: 0
+		displayFolder: 102. Rank
+		lineageTag: dc797820-d104-4e5d-b2ee-d5f925ee64eb
+
+	measure 'Segmentacao selecionada' =
+			
+			"Clique aqui para detalhar "
+			    & SELECTEDVALUE ( 'aux_RFM_Classificação'[Segmentação] )
+		displayFolder: 101. Base
+		lineageTag: 57ba0c14-4098-43b7-9de4-986cfb09e671
+
+	measure '103.12 RFM_Classificação' =
+			
+			VAR SegRFM =
+			    SELECTEDVALUE ( 'aux_RFM_Classificação'[Segmentação] )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        SegRFM = "Campeões", [103.01 RFM_Champion],
+			        SegRFM = "Clientes fiéis", [103.02 RFM_Loyal],
+			        SegRFM = "Potenciais fiéis", [103.03 RFM_Potential],
+			        SegRFM = "Clientes recentes", [103.04 RFM_New_Client],
+			        SegRFM = "Hibernando", [103.05 RFM_Hibernating],
+			        SegRFM = "Promissores", [103.06 RFM_Promissing],
+			        SegRFM = "Precisam de atenção", [103.07 RFM_Attention],
+			        SegRFM = "Prestes a hibernar", [103.08 RFM_Sleep],
+			        SegRFM = "Não posso perder", [103.09 RFM_Cant_Lose],
+			        SegRFM = "Em risco", [103.10 RFM_At_Risk],
+			        SegRFM = "Perdidos", [103.11 RFM_Lost],
+			        BLANK ()
+			    )
+		formatString: #,0
+		displayFolder: 103. Classificação
+		lineageTag: e67fc091-1fec-48d8-8f50-064a39e363e1
+
+		changedProperty = FormatString
+
+	measure '104.02 %RFM_Loyal' =
+			
+			DIVIDE ( [103.02 RFM_Loyal], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: b9a5766f-8a93-4fa2-8e7e-e2bddd347c68
+
+		changedProperty = FormatString
+
+	measure '104.03 %RFM_Potential' =
+			
+			DIVIDE ( [103.03 RFM_Potential], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: 281665dd-9d79-47f2-9683-30b399fc9c04
+
+		changedProperty = FormatString
+
+	measure '104.04 %RFM_New_Client' =
+			
+			DIVIDE ( [103.04 RFM_New_Client], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: 6ebcf859-d2fc-43fb-8fa3-c4b85b9aa307
+
+		changedProperty = FormatString
+
+	measure '104.05 %RFM_Hibernating' =
+			
+			DIVIDE ( [103.05 RFM_Hibernating], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: 2b492a90-d894-4668-8aa6-b85c69f8f2ae
+
+		changedProperty = FormatString
+
+	measure '104.06 %RFM_Promissing' =
+			
+			DIVIDE ( [103.06 RFM_Promissing], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: fa7372db-d422-4bfb-bd0c-ac1d99693785
+
+		changedProperty = FormatString
+
+	measure '104.07 %RFM_Attention' =
+			
+			DIVIDE ( [103.07 RFM_Attention], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: 56c4a0cc-8ec9-4de1-85ef-d8616582e066
+
+		changedProperty = FormatString
+
+	measure '104.08 %RFM_Sleep' =
+			
+			DIVIDE ( [103.08 RFM_Sleep], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: f170178b-b6a6-4281-a624-484526ab40bb
+
+		changedProperty = FormatString
+
+	measure '104.09 %RFM_Cant_Lose' =
+			
+			DIVIDE ( [103.09 RFM_Cant_Lose], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: 5c739cc6-cc2b-4b3d-8703-e61e8cf1ec28
+
+		changedProperty = FormatString
+
+	measure '104.10 %RFM_At_Risk' =
+			
+			DIVIDE ( [103.10 RFM_At_Risk], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: be6b8cfa-0c90-4c48-902f-81b64d777151
+
+		changedProperty = FormatString
+
+	measure '104.11 %RFM_Lost' =
+			
+			DIVIDE ( [103.11 RFM_Lost], [02.00 Clients] )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: 104. GT
+		lineageTag: 723565e6-0d39-437d-886c-7c38c135a8cb
+
+		changedProperty = FormatString
+
+	measure '105.01 $RFM_Champion' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 4
+			            && [102.01 RFM_RX] <= 999
+			            && [102.04 RFM_(F+M)/2] > 4
+			            && [102.04 RFM_(F+M)/2] <= 5
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 525d53ce-af07-44a9-8df9-4ffd3aa72c75
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.02 $RFM_Loyal' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 2
+			            && [102.01 RFM_RX] <= 999
+			            && [102.04 RFM_(F+M)/2] > 3
+			            && [102.04 RFM_(F+M)/2] <= 5
+			    )
+			) - [105.01 $RFM_Champion]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 7e8fad3b-39bc-42a2-96c4-1bfd5fcbd7c2
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.03 $RFM_Potential' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 3
+			            && [102.01 RFM_RX] <= 999
+			            && [102.04 RFM_(F+M)/2] > 1
+			            && [102.04 RFM_(F+M)/2] <= 3
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 55683543-2f91-4c32-8d74-7883d6712184
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.04 $RFM_New_Client' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 4
+			            && [102.01 RFM_RX] <= 999
+			            && [102.04 RFM_(F+M)/2] > 0
+			            && [102.04 RFM_(F+M)/2] <= 1
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 9a09f130-18ac-4783-837e-54d772d8dc30
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.05 $RFM_Hibernating' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] = 2
+			            && [102.04 RFM_(F+M)/2] = 2
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 434459f9-9b40-46aa-8112-940c6f013d98
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.06 $RFM_Promising' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 3
+			            && [102.01 RFM_RX] <= 4
+			            && [102.04 RFM_(F+M)/2] > 0
+			            && [102.04 RFM_(F+M)/2] <= 1
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 5cbbaa30-e7ea-48e4-9194-5e6617e95e05
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.07 $RFM_Attention' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 2
+			            && [102.01 RFM_RX] <= 3
+			            && [102.04 RFM_(F+M)/2] > 2
+			            && [102.04 RFM_(F+M)/2] <= 3
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 94364d83-0a6f-4300-be78-b53606ea8ae7
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.08 $RFM_Sleep' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 2
+			            && [102.01 RFM_RX] <= 3
+			            && [102.04 RFM_(F+M)/2] > 0
+			            && [102.04 RFM_(F+M)/2] <= 2
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: bf23feed-463a-4eb2-964c-7f5463657b0f
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.09 $RFM_Cant_Lose' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 0
+			            && [102.01 RFM_RX] <= 1
+			            && [102.04 RFM_(F+M)/2] > 4
+			            && [102.04 RFM_(F+M)/2] <= 5
+			    )
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 0fd9589d-8fe1-4117-a94f-94a76284a952
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.10 $RFM_At_Risk' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] > 0
+			            && [102.01 RFM_RX] <= 2
+			            && [102.04 RFM_(F+M)/2] > 2
+			            && [102.04 RFM_(F+M)/2] <= 5
+			    )
+			) - [105.09 $RFM_Cant_Lose]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 0b2420fb-7de6-4228-8987-8ee1fb0379ce
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.11 $RFM_Lost' =
+			
+			CALCULATE (
+			    [101.03 M - GMV Last X Months],
+			    FILTER (
+			        VALUES ( dClientes[account_id] ),
+			        [102.01 RFM_RX] <= 2
+			            && [102.04 RFM_(F+M)/2] <= 2
+			    )
+			) - [105.05 $RFM_Hibernating]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 4fa4d84c-ae2a-41a0-b198-32b233b05ff8
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '105.12 RFM_Classificação' =
+			
+			VAR segRFM =
+			    SELECTEDVALUE ( 'aux_RFM_Classificação'[Segmentação] )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        segRFM = "Campeões", [105.01 $RFM_Champion],
+			        segRFM = "Clientes fiéis", [105.02 $RFM_Loyal],
+			        segRFM = "Potenciais fiéis", [105.03 $RFM_Potential],
+			        segRFM = "Clientes recentes", [105.04 $RFM_New_Client],
+			        segRFM = "Hibernando", [105.05 $RFM_Hibernating],
+			        segRFM = "Promissores", [105.06 $RFM_Promising],
+			        segRFM = "Precisam de atenção", [105.07 $RFM_Attention],
+			        segRFM = "Prestes a hibernar", [105.08 $RFM_Sleep],
+			        segRFM = "Não posso perder", [105.09 $RFM_Cant_Lose],
+			        segRFM = "Em risco", [105.10 $RFM_At_Risk],
+			        segRFM = "Perdidos", [105.11 $RFM_Lost],
+			        BLANK ()
+			    )
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		displayFolder: 105. GMV/Classificação
+		lineageTag: 45b898a2-e9dc-449a-bdb3-0c221bcaa629
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition Medidas_RFM-33586637-1f43-4617-b566-566fd08764a7 = m
+		mode: import
+		queryGroup: 'Analise RFM'
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Colunas Removidas" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

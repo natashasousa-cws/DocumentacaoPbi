@@ -1,0 +1,87 @@
+table fLogins
+	lineageTag: 7350ae6b-7ba2-47d5-95af-c50aff6581ff
+	sourceLineageTag: [miriam].[fLogins]
+
+	column login_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: eb362e01-8d3e-47f4-a685-446b41fc8686
+		sourceLineageTag: login_date
+		summarizeBy: none
+		sourceColumn: login_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: 6ca41e76-f0ba-4568-92b1-7eb976e749d4
+		sourceLineageTag: account_user
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 260eb2f4-6f5e-4177-8669-4e3fb905e22f
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column login_type
+		dataType: string
+		lineageTag: 4797f0ed-fdec-43f0-b883-06a735335abb
+		sourceLineageTag: login_type
+		summarizeBy: none
+		sourceColumn: login_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4684f967-ea22-4fe0-899a-3b795378cc26
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: c2165be6-3b58-4c65-8c20-af0d8fb3b442
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_type
+		dataType: string
+		lineageTag: faf04580-cb89-4220-a4f2-80a21ce16d2e
+		sourceLineageTag: account_type
+		summarizeBy: none
+		sourceColumn: account_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 70ae7660-1cbe-4b9f-8a74-13d1afad501f
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fLogins = entity
+		mode: directLake
+		source
+			entityName: fLogins
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

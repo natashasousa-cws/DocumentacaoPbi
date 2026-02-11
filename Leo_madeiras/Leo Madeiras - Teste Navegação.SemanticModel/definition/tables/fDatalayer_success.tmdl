@@ -1,0 +1,54 @@
+table fDatalayer_success
+	lineageTag: a817beaa-cdcd-4de3-b71d-0664a974a7d1
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: da421f3e-c787-49c1-a1d0-5d778da5d9a3
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column session
+		dataType: string
+		lineageTag: db3656bc-7667-4748-8e51-c750ded40022
+		summarizeBy: none
+		sourceColumn: session
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 77ebafde-cb86-46d1-bbd9-3c00626de25c
+		summarizeBy: sum
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8af0e21d-aa01-439b-8818-6c75fba7a17a
+		summarizeBy: sum
+		sourceColumn: partner_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_success = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"ae2b9a46-8047-4ca6-975e-24e511768e52" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="ae2b9a46-8047-4ca6-975e-24e511768e52"]}[Data],
+				    fDatalayer_success_ = #"ae2b9a46-8047-4ca6-975e-24e511768e52"{[entity="fDatalayer_success",version=""]}[Data]
+				in
+				    fDatalayer_success_
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,95 @@
+table fLogins
+	lineageTag: 9ba2b557-a5a7-4a3d-8f6d-e9aa24ec817a
+
+	column login_date
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: dd02f4db-620d-4c41-be3a-0f932a2fcff4
+		summarizeBy: none
+		sourceColumn: login_date
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: fd77fd0c-6c91-4b7b-bf18-d52865762ac8
+		summarizeBy: none
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = User
+
+	column login_type
+		dataType: string
+		lineageTag: 7ac58ab6-a8db-493f-902f-b10463df8b88
+		summarizeBy: none
+		sourceColumn: login_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5058994b-af52-4b70-abe9-026125daef3b
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendedor? =
+			
+			IF(
+			    LOOKUPVALUE(dVendedores[account_id],dVendedores[account_id],fLogins[account_id]) = BLANK(),
+			    FALSE(),
+			    TRUE()
+			)
+		lineageTag: 88bddc5e-df82-49f6-8b71-b1de6c05e120
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: a579778f-d5ed-4e7b-9857-718a7896001e
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: 841313be-1510-4f13-a22b-51461a7683f5
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_type
+		dataType: string
+		lineageTag: f339d40a-ed5f-419c-ad02-075f21a2ceff
+		summarizeBy: none
+		sourceColumn: account_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fLogins-e1311257-799d-4765-ab03-083d9886be61 = m
+		mode: import
+		queryGroup: Contas
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"cc84e8f0-dc70-49b3-9ab6-db59566ab538" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="cc84e8f0-dc70-49b3-9ab6-db59566ab538"]}[Data],
+				    fLogins_ = #"cc84e8f0-dc70-49b3-9ab6-db59566ab538"{[entity="fLogins",version=""]}[Data]
+				in
+				    fLogins_
+
+	annotation PBI_ResultType = Table
+

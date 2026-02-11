@@ -1,0 +1,77 @@
+table 'Pagamento status dev'
+	lineageTag: df361e10-ad97-413c-9a05-7ce14819f431
+
+	column cpa_ds_tipo
+		dataType: string
+		lineageTag: d02c4485-42d6-463a-a8a7-f12dfa71f1fa
+		summarizeBy: none
+		sourceColumn: cpa_ds_tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpa_ds_cond_pagto
+		dataType: string
+		lineageTag: f27de2c7-b604-4566-9982-8da0eb47bed4
+		summarizeBy: none
+		sourceColumn: cpa_ds_cond_pagto
+
+		annotation SummarizationSetBy = Automatic
+
+	column '%GT Pedidos totais'
+		dataType: double
+		lineageTag: 4ab6eef2-a346-451c-8b41-b5abf2b602b4
+		summarizeBy: sum
+		sourceColumn: %GT Pedidos totais
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '%GT Venda bruta'
+		dataType: double
+		lineageTag: 3e3ee01f-37cb-4047-8fca-d91cd9ea3f1f
+		summarizeBy: sum
+		sourceColumn: %GT Venda bruta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Status
+		dataType: string
+		lineageTag: 29fe4300-8d61-4d3a-86a6-214d1e61d7f9
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Backlog
+		dataType: string
+		lineageTag: 8ddda62a-879f-41b5-a2e8-98b179cdcfa9
+		summarizeBy: none
+		sourceColumn: Backlog
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column7
+		dataType: string
+		lineageTag: a2faea90-834a-4e35-9fef-2178a5fc9677
+		summarizeBy: none
+		sourceColumn: Column7
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Pagamento status dev' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\CWS\Desktop\Volumetria Leo BI.xlsx"), null, true),
+				    Pagamento_Sheet = Fonte{[Item="Pagamento",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Pagamento_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"cpa_ds_tipo", type text}, {"cpa_ds_cond_pagto", type text}, {"%GT Pedidos totais", type number}, {"%GT Venda bruta", type number}, {"Status", type text}, {"Backlog", type text}, {"Column7", type any}}),
+				    #"Linhas em Branco Removidas" = Table.SelectRows(#"Tipo Alterado", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Linhas em Branco Removidas"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,30 @@
+table aux_customer_type
+	lineageTag: edc57532-fed3-4c0a-9abf-0ddcd4a33e47
+
+	column Categoria
+		dataType: string
+		lineageTag: d5d1e54d-da18-43f5-96e4-47e3932c6a28
+		summarizeBy: none
+		sourceColumn: Categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID
+		dataType: string
+		lineageTag: 82ab9414-a8d6-40c5-b308-5ce3e0de9827
+		summarizeBy: none
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aux_customer_type = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcsrJLyxNzcxX0lEyVIrViVZyTixJTc8vykyMT8zNTM/PSQVJGUGkchKLi1OBXGMw1yUzsTg+LzmxoCixCqTIBCwalJgL4pgqxcYCAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Categoria = _t, ID = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Categoria", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

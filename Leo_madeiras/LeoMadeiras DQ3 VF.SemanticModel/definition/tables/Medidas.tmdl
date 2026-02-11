@@ -1,0 +1,159 @@
+table Medidas
+	lineageTag: 9af37dba-d2c2-4ac2-ab08-151716a15572
+
+	measure Minimo =
+			
+			MIN(fFaturas[dt_fatura])
+		formatString: General Date
+		lineageTag: a5546793-4479-48b5-a3d5-7e5f135f9ef9
+
+	measure Maximo =
+			
+			CALCULATE(
+			    MAX(fFaturas[dt_fatura])
+			)
+		formatString: General Date
+		lineageTag: 8d6c49f1-362d-418c-a799-4b8be2e034fb
+
+	measure 'Vendedores com pedidos' = DISTINCTCOUNT(fFaturas[cd_vendedor])
+		formatString: 0
+		displayFolder: .Fatura
+		lineageTag: 85eab242-a1e3-4248-9964-154dedcd18e8
+
+	measure 'Valor desconto' = ```
+			
+			VAR posi = 
+			CALCULATE(
+			    SUM(fFaturas[vlr_desconto]),
+			    fFaturas[cd_tipo_movimento] = "FAT"
+			)
+			VAR neg = 
+			CALCULATE(
+			    SUM(fFaturas[vlr_desconto]),
+			    fFaturas[cd_tipo_movimento] = "DEV",
+			    fFaturas[vlr_desconto] < 0
+			)
+			RETURN
+			posi+neg
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: .Fatura
+		lineageTag: 32e0bfdf-b641-421e-8a6b-cf151cae9345
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Receita bruta' =
+			CALCULATE(
+			    SUM(fFaturas[vlr_bruto]),
+			    fFaturas[cd_tipo_movimento]="FAT")
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		displayFolder: .Fatura
+		lineageTag: 4d42911b-0fb3-4e4a-952b-fc9e7fef39c5
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Pedidos totais' = DISTINCTCOUNT(fFaturas[cod_pedido])
+		formatString: #,0
+		displayFolder: .Fatura
+		lineageTag: 32729ed2-199a-43fa-a4e1-82a1fb864b88
+
+	measure 'TKM bruto' = DIVIDE([Venda bruta],[Pedidos totais],BLANK())
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: .Fatura
+		lineageTag: a4356941-7fd3-4091-b3d2-e389028ff712
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Itens distintos' = DISTINCTCOUNT(fFaturas[cod_material])
+		formatString: 0
+		displayFolder: .Fatura
+		lineageTag: 9ec37129-733b-4d36-bf41-cb88c31a50f4
+
+	measure 'Clientes totais c/ venda' = DISTINCTCOUNT(fFaturas[cd_cliente])
+		formatString: 0
+		displayFolder: .Fatura
+		lineageTag: bb363ccd-6c16-44ce-8912-be66c6d243b5
+
+	measure 'Desconto %' = DIVIDE([Desconto],[Venda bruta],BLANK())*(-1)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: .Fatura
+		lineageTag: bff345ba-6ee8-4b8e-88a5-9ebe14e82714
+
+	measure 'Dev bruta' =
+			CALCULATE(
+			    SUM(fFaturas[vlr_bruto]),
+			    fFaturas[vlr_bruto] < 0,
+			    fFaturas[cd_tipo_movimento]="DEV")
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		displayFolder: .Fatura
+		lineageTag: 95ea4648-f86d-4271-ba4d-f8f968768d43
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Venda bruta' = [Receita bruta]+[Dev bruta]
+		formatString: "R$"\ #,0.0;-"R$"\ #,0.0;"R$"\ #,0.0
+		displayFolder: .Fatura
+		lineageTag: 3af88604-560d-4a3a-be27-8ccec81fe6d4
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure Desconto =
+			
+			CALCULATE(
+			    SUM(fFaturas[vlr_desconto]),
+			    fFaturas[cd_tipo_movimento]="FAT")
+			    +
+			CALCULATE(
+			    SUM(fFaturas[vlr_desconto]),
+			    fFaturas[vlr_desconto] < 0,
+			    fFaturas[cd_tipo_movimento]="DEV")
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		displayFolder: .Fatura
+		lineageTag: 0cc5ea85-d409-4258-a235-e0c9e6890a9e
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Consumo por cliente' = DIVIDE([Venda bruta],[Clientes totais c/ venda],BLANK())
+		displayFolder: .Fatura
+		lineageTag: 1a8883fd-bcdb-44b5-a936-611cd12650c0
+
+	measure 'Range de desconto' =
+			
+			SWITCH(
+			    TRUE(),
+			    [Desconto %] > 0.2, "20+",
+			    [Desconto %] > 0.15 && [Desconto %] <= 0.2, "Ate 20",
+			    [Desconto %] > 0.10 && [Desconto %] <= 0.15, "Ate 15",
+			    [Desconto %] > 0.05 && [Desconto %] <= 0.1, "Ate 10",
+			    [Desconto %] > 0 && [Desconto %] <= 0.05, "Ate 5",
+			    "0% de desconto"
+			)
+		lineageTag: 7983cb43-35ea-40be-aae4-fbd8290101be
+
+	measure 'Range de desconto ordem' =
+			
+			SWITCH(
+			    TRUE(),
+			    [Desconto %] > 0.2, 6,
+			    [Desconto %] > 0.15 && [Desconto %] <= 0.2, 5,
+			    [Desconto %] > 0.10 && [Desconto %] <= 0.15, 4,
+			    [Desconto %] > 0.05 && [Desconto %] <= 0.1, 3,
+			    [Desconto %] > 0 && [Desconto %] <= 0.05, 2,
+			    1
+			)
+		lineageTag: 973d27e2-d82a-44a1-bc38-d5561bc0145c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

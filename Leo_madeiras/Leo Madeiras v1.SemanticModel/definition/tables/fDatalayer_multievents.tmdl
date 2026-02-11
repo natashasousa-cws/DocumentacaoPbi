@@ -1,0 +1,347 @@
+table fDatalayer_multievents
+	lineageTag: 5702ad7f-4871-4044-ae98-10806fa8d1b0
+
+	measure avg_session_time_multievents =
+			
+			VAR tempo =
+			    CALCULATE (
+			        AVERAGEX (
+			            VALUES ( fDatalayer_multievents[session]),
+			            AVERAGE ( fDatalayer_multievents[session_time_total] )
+			        )
+			    )
+			VAR hora =
+			    INT ( tempo / 3600 )
+			VAR modhora =
+			    MOD ( tempo, 3600 )
+			VAR minutos =
+			    INT ( modhora / 60 )
+			VAR segundos =
+			    INT ( MOD ( tempo, 60 ) )
+			RETURN
+			    hora * 10000 + minutos * 100 + segundos
+		formatString: 00:00:00
+		lineageTag: a1a30b7a-30a5-4d4f-bca7-be8ad2828fa6
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure multievents_session_distinctcount = ```
+			
+			CALCULATE( 
+			    DISTINCTCOUNT(fDatalayer_multievents[session])
+			)
+			```
+		formatString: #,0
+		lineageTag: 1b17ae77-758d-48ce-85a0-c3f658c69297
+
+	measure multievents_pagepath_distinctcount = ```
+			
+			CALCULATE( 
+			    DISTINCTCOUNT(fDatalayer_multievents[pagepath])
+			)
+			```
+		formatString: #,0
+		lineageTag: 75a51d59-e82e-4c0c-9ef4-4793ecc3e607
+
+	measure multievents_pagepath_count = ```
+			
+			CALCULATE( 
+			    COUNT(fDatalayer_multievents[pagepath])
+			)
+			```
+		formatString: #,0
+		lineageTag: 1ac55b4f-877e-430a-b04e-9349f458b76a
+
+	measure multievents_event_count = ```
+			
+			CALCULATE( 
+			    COUNT(fDatalayer_multievents[event])
+			)
+			```
+		formatString: #,0
+		lineageTag: 3c90ebe7-2821-4f9b-9c44-46bb3da4773b
+
+	measure multievents_eventsXsession_avg =
+			
+			DIVIDE(
+			    fDatalayer_multievents[multievents_event_count],
+			    fDatalayer_multievents[multievents_session_distinctcount]
+			)
+		formatString: #,0.0
+		lineageTag: eae09561-c6ce-4647-be51-cf679d39846a
+
+	measure total_conversion_rate_multevents =
+			
+			VAR soma =
+			    CALCULATE (
+			        [05.01 Orders AA] + [05.02 Orders VA],
+			        FILTER ( dClientes, [total_logged_session count] > 0 )
+			    )
+			VAR resultado =
+			    COALESCE ( CALCULATE ( DIVIDE ( soma, [multievents_session_distinctcount] ) ), 0 )
+			RETURN
+			    IF ( resultado > 1, 1, resultado )
+		lineageTag: ec884630-4472-4eb6-bbbb-6b1d630730cf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column session
+		dataType: string
+		lineageTag: c833938c-7d78-4b31-a779-53da849e245d
+		summarizeBy: none
+		sourceColumn: session
+
+		annotation SummarizationSetBy = Automatic
+
+	column datecreated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fbcf37eb-d687-4394-a7b7-2efd51b450dd
+		summarizeBy: none
+		sourceColumn: datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column origin_store_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 57ad8873-5198-4462-b3ae-eedc0feeaf87
+		summarizeBy: sum
+		sourceColumn: origin_store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column event
+		dataType: string
+		lineageTag: 396c7a35-ab98-4e94-b610-69e56166929b
+		summarizeBy: none
+		sourceColumn: event
+
+		annotation SummarizationSetBy = Automatic
+
+	column pagepath
+		dataType: string
+		lineageTag: 41fc6027-897c-4474-be71-ab285ee0d32f
+		summarizeBy: none
+		sourceColumn: pagepath
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_time_total
+		dataType: int64
+		formatString: 0
+		lineageTag: 9dd5a9a2-8fac-4544-a7d6-7419f0b3846e
+		summarizeBy: sum
+		sourceColumn: session_time_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9aaeb939-31aa-4605-9734-800aaa575395
+		summarizeBy: none
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2cb1b8ba-15e5-4bba-beb7-84ba0f56c3fe
+		summarizeBy: none
+		sourceColumn: visitor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 58889521-3fdc-49e7-86c7-730cf6f36364
+		summarizeBy: sum
+		sourceColumn: visitor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_email
+		dataType: string
+		lineageTag: a3144562-142e-4482-b2b8-134307226822
+		summarizeBy: none
+		sourceColumn: visitor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 40281526-e9c2-4dca-92ba-5b929eb5a6d2
+		summarizeBy: none
+		sourceColumn: vendor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c1e5239-b35e-4e19-bb3a-cebde7de5eb6
+		summarizeBy: sum
+		sourceColumn: vendor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_email
+		dataType: string
+		lineageTag: 4e07cdc8-dc84-48d1-a6cd-753d16e10547
+		summarizeBy: none
+		sourceColumn: vendor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column searchterm
+		dataType: string
+		lineageTag: 00dd07c9-b79b-403a-bc42-2d3397445360
+		summarizeBy: none
+		sourceColumn: searchterm
+
+		annotation SummarizationSetBy = Automatic
+
+	column pageparams
+		dataType: string
+		lineageTag: c7a0c964-fc40-460d-8416-85affedb5adb
+		summarizeBy: none
+		sourceColumn: pageparams
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c5228712-eb66-4101-bfd0-3892851f2c36
+		summarizeBy: sum
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: ba69994e-d4fa-48e5-996a-6c29eff7fefb
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column pagepath_summary
+		dataType: string
+		lineageTag: ea285f84-08bf-446d-a52a-b10787251070
+		summarizeBy: none
+		sourceColumn: pagepath_summary
+
+		annotation SummarizationSetBy = Automatic
+
+	column session2
+		dataType: string
+		lineageTag: b603e232-e6eb-4bf8-81b3-8b9c9dfd2375
+		summarizeBy: none
+		sourceColumn: session2
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_1
+		dataType: string
+		lineageTag: e2ef46a0-a6ad-427e-b49f-78c54ac036a0
+		summarizeBy: none
+		sourceColumn: event_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_2
+		dataType: string
+		lineageTag: 75d9be75-d962-4965-bfc0-2f19d43a6a98
+		summarizeBy: none
+		sourceColumn: event_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_3
+		dataType: string
+		lineageTag: d6679647-5234-47f5-befd-923cadfe61ea
+		summarizeBy: none
+		sourceColumn: event_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_4
+		dataType: string
+		lineageTag: b8028a87-7425-46e9-9650-5a89a3ca01c3
+		summarizeBy: none
+		sourceColumn: event_4
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_5
+		dataType: string
+		lineageTag: 50345501-7801-49cb-9e67-12e87e2933c2
+		summarizeBy: none
+		sourceColumn: event_5
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_6
+		dataType: string
+		lineageTag: 68fa84e8-034a-4373-b5f0-9e2aaa17effb
+		summarizeBy: none
+		sourceColumn: event_6
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_7
+		dataType: string
+		lineageTag: a8fc6aa3-44df-4098-ac6c-add03be276bc
+		summarizeBy: none
+		sourceColumn: event_7
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_8
+		dataType: string
+		lineageTag: eb220517-0ec2-414d-8f53-aa4ac6c047f8
+		summarizeBy: none
+		sourceColumn: event_8
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_9
+		dataType: string
+		lineageTag: 9ea7d1db-c5a7-4a30-85b9-cd07c3d66c68
+		summarizeBy: none
+		sourceColumn: event_9
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_10
+		dataType: string
+		lineageTag: ef2b9800-2deb-4e73-9724-d3f33142d560
+		summarizeBy: none
+		sourceColumn: event_10
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_multievents = m
+		mode: import
+		source =
+				let
+				    Fonte = PowerPlatform.Dataflows(null),
+				    Workspaces = Fonte{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"ae2b9a46-8047-4ca6-975e-24e511768e52" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="ae2b9a46-8047-4ca6-975e-24e511768e52"]}[Data],
+				    fDatalayer_multievents_ = #"ae2b9a46-8047-4ca6-975e-24e511768e52"{[entity="fDatalayer_multievents",version=""]}[Data]
+				in
+				    fDatalayer_multievents_
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,68 @@
+table aux_RFM_Frequency
+	isHidden
+	excludeFromModelRefresh
+	lineageTag: b4b39e9a-b0ff-44c1-9bf7-ee7d16cf7e2a
+
+	column Frequencia
+		dataType: string
+		isHidden
+		lineageTag: 1718f05b-a687-46c2-a3a6-be65b73785ba
+		summarizeBy: none
+		sourceColumn: Frequencia
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1076d282-861e-4c61-b55e-6f8640f86be5
+		summarizeBy: count
+		sourceColumn: ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Min
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 390a351c-ebc7-459d-b447-bc5b94523c4f
+		summarizeBy: sum
+		sourceColumn: Min
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Max
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ead86c3c-358f-4d74-bac8-02a67da65f8c
+		summarizeBy: sum
+		sourceColumn: Max
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aux_RFM_Frequency-5d406e57-7a6d-487b-b342-e021712b6848 = m
+		mode: import
+		queryGroup: 'Analise RFM'
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcjNU0lGCYVOlWB2gkBGQaQTmAoUNIGLGQLYxhA+UhCo0AbJNIHygaqhKU6hOU5BKSwhQio0FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Frequencia = _t, ID = _t, Min = _t, Max = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Frequencia", type text}, {"ID", Int64.Type}, {"Min", Int64.Type}, {"Max", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

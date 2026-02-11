@@ -1,0 +1,286 @@
+table dAssociados
+	lineageTag: 7a1e37b7-c44b-4b24-89a0-192bcd53a115
+	sourceLineageTag: [miriam].[dAssociados]
+
+	column copartner_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2bf96011-20cc-415a-b90b-c37f6b6a00b7
+		sourceLineageTag: copartner_id
+		summarizeBy: sum
+		sourceColumn: copartner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column trading_name
+		dataType: string
+		lineageTag: f356e6be-3c33-4890-9e32-bd6692db3c60
+		sourceLineageTag: trading_name
+		summarizeBy: none
+		sourceColumn: trading_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column trading_name_cut1
+		dataType: string
+		lineageTag: d72b4e92-ad25-4f4b-9ddf-9f2bee77a934
+		sourceLineageTag: trading_name_cut1
+		summarizeBy: none
+		sourceColumn: trading_name_cut1
+
+		annotation SummarizationSetBy = Automatic
+
+	column company_name
+		dataType: string
+		lineageTag: f5da4e19-10db-422e-94ed-4ae18a81e4d9
+		sourceLineageTag: company_name
+		summarizeBy: none
+		sourceColumn: company_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: 7ecf6808-7e0c-43b1-b2a6-fa30cfa289fe
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataform_status
+		dataType: string
+		lineageTag: b812ec4d-6516-4953-b1fa-870ba6928b5f
+		sourceLineageTag: plataform_status
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column partnership_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 664295a1-e554-429f-bc25-ae157e505140
+		sourceLineageTag: partnership_date
+		summarizeBy: none
+		sourceColumn: partnership_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_update_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 84b51d99-57bc-48ec-858f-64d33209eaf4
+		sourceLineageTag: last_update_date
+		summarizeBy: none
+		sourceColumn: last_update_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column street_address
+		dataType: string
+		lineageTag: f633a826-a351-4a52-8d55-f09d284743dd
+		sourceLineageTag: street_address
+		summarizeBy: none
+		sourceColumn: street_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 0385610c-d211-413c-af6d-c3f430903478
+		sourceLineageTag: city
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf
+		dataType: string
+		lineageTag: 7d48b2f6-97be-4cd6-9206-f487b098c9a8
+		sourceLineageTag: uf
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: ac9fcb5f-0cae-4fcc-8121-c30827b35703
+		sourceLineageTag: country
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		lineageTag: c294f6c7-5439-490e-adf2-90969051fea5
+		sourceLineageTag: zip_code
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_type
+		dataType: string
+		lineageTag: 9c3ef2b9-c08f-4384-959e-e4e02b0496b7
+		sourceLineageTag: partner_type
+		summarizeBy: none
+		sourceColumn: partner_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner
+		dataType: int64
+		formatString: 0
+		lineageTag: c1d4d78e-f176-4664-a0c2-c7e6c535c4d8
+		sourceLineageTag: partner
+		summarizeBy: sum
+		sourceColumn: partner
+
+		annotation SummarizationSetBy = Automatic
+
+	column loja_configurada
+		dataType: string
+		lineageTag: c457b071-80db-4c31-a88a-04b9dde0a095
+		sourceLineageTag: loja_configurada
+		summarizeBy: none
+		sourceColumn: loja_configurada
+
+		annotation SummarizationSetBy = Automatic
+
+	column ecommerce_habilitado
+		dataType: string
+		lineageTag: c7885fbc-cb2a-4f06-9b4e-fdf8f346b657
+		sourceLineageTag: ecommerce_habilitado
+		summarizeBy: none
+		sourceColumn: ecommerce_habilitado
+
+		annotation SummarizationSetBy = Automatic
+
+	column wirecard
+		dataType: string
+		lineageTag: 7a54f71b-f578-4594-8738-23dc19a584c1
+		sourceLineageTag: wirecard
+		summarizeBy: none
+		sourceColumn: wirecard
+
+		annotation SummarizationSetBy = Automatic
+
+	column retirada_loja
+		dataType: string
+		lineageTag: 89d50a1d-3ebc-478a-8d62-291de563b338
+		sourceLineageTag: retirada_loja
+		summarizeBy: none
+		sourceColumn: retirada_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column frota_propria
+		dataType: string
+		lineageTag: b39babe5-9e4d-4337-b5b5-7cef802dc162
+		sourceLineageTag: frota_propria
+		summarizeBy: none
+		sourceColumn: frota_propria
+
+		annotation SummarizationSetBy = Automatic
+
+	column correios
+		dataType: string
+		lineageTag: d87155ab-f33b-426a-9c15-8f8a49498a42
+		sourceLineageTag: correios
+		summarizeBy: none
+		sourceColumn: correios
+
+		annotation SummarizationSetBy = Automatic
+
+	column entrega_economica
+		dataType: string
+		lineageTag: 28c7e23a-39fe-423c-9aac-6a31dcde031a
+		sourceLineageTag: entrega_economica
+		summarizeBy: none
+		sourceColumn: entrega_economica
+
+		annotation SummarizationSetBy = Automatic
+
+	column loggi
+		dataType: string
+		lineageTag: 8f6ea66e-4aa4-43c4-a6ca-4e7e10fd6bc4
+		sourceLineageTag: loggi
+		summarizeBy: none
+		sourceColumn: loggi
+
+		annotation SummarizationSetBy = Automatic
+
+	column cupom_habilitado
+		dataType: string
+		lineageTag: 372cd17f-6846-4a3d-bd0c-a5ec7d0256ac
+		sourceLineageTag: cupom_habilitado
+		summarizeBy: none
+		sourceColumn: cupom_habilitado
+
+		annotation SummarizationSetBy = Automatic
+
+	column melhor_envio
+		dataType: string
+		lineageTag: 96a865fb-4e6b-4387-83f9-22ccbf76f5e5
+		sourceLineageTag: melhor_envio
+		summarizeBy: none
+		sourceColumn: melhor_envio
+
+		annotation SummarizationSetBy = Automatic
+
+	column estados_b2b
+		dataType: string
+		lineageTag: dede394a-6768-4d7e-88d6-8b259b88afa9
+		sourceLineageTag: estados_b2b
+		summarizeBy: none
+		sourceColumn: estados_b2b
+
+		annotation SummarizationSetBy = Automatic
+
+	column estados_b2c
+		dataType: string
+		lineageTag: 5b01f421-0e21-47d7-b6eb-200e596ed33e
+		sourceLineageTag: estados_b2c
+		summarizeBy: none
+		sourceColumn: estados_b2c
+
+		annotation SummarizationSetBy = Automatic
+
+	column transportadoras
+		dataType: string
+		lineageTag: 5cfd73f1-40e1-4d0d-a0aa-3e66a75c919b
+		sourceLineageTag: transportadoras
+		summarizeBy: none
+		sourceColumn: transportadoras
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: c5193ac4-e8a5-4f3b-af8a-bacf56e831f4
+		sourceLineageTag: state
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: a27d739e-cd52-4746-b052-44dda6d3e4dc
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dAssociados = entity
+		mode: directLake
+		source
+			entityName: dAssociados
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

@@ -1,0 +1,69 @@
+table aux_RFM_Monetary
+	isHidden
+	excludeFromModelRefresh
+	lineageTag: 6dd723d9-c860-484a-9d24-4f8eb6c1e038
+
+	column Valor
+		dataType: string
+		isHidden
+		lineageTag: 810d38db-fb01-402d-93bf-d786541354d4
+		summarizeBy: none
+		sourceColumn: Valor
+		sortByColumn: id
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 63796118-9f08-4854-8e51-803c5c35b423
+		summarizeBy: sum
+		sourceColumn: id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Min
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ec586481-c5e6-435d-81d0-cedc3afc308a
+		summarizeBy: sum
+		sourceColumn: Min
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Max
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ff938bc5-79c0-4344-a09d-1a82702f23a5
+		summarizeBy: sum
+		sourceColumn: Max
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aux_RFM_Monetary-cc71bbf7-d981-4429-9522-1d1d15675a90 = m
+		mode: import
+		queryGroup: 'Analise RFM'
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCjNU0lGCYVMDAwOlWB2gqBGQZwQTAUoawGWMgVxjuBCQRmgyAXJN4EJAAxC6TEFmwYV0lCzhQCk2FgA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Valor = _t, id = _t, Min = _t, Max = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Valor", type text}, {"id", Int64.Type}, {"Min", Int64.Type}, {"Max", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

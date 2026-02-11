@@ -1,0 +1,48 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DirectLake - leo_madeiras_gold_lake"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","RemoteModeling","WebModelingEdit"]
+
+annotation __TEdtr = 1
+
+ref table fVendas_datatime
+ref table dGrupo_Cliente
+ref table dTipo_envio
+ref table dTempo
+ref table dCalendario
+ref table fMensageria_resultado_geral
+ref table fVendas
+ref table dPeriodos
+ref table fMensageria_aux
+ref table dClientes
+ref table fMensageria_parametrized_send_union
+ref table dMetodo_pagamento
+ref table dStatus_pedido
+ref table dOfertas
+ref table agg_last_purchase
+ref table dCupons
+ref table fMensageria_resultado_navegacao
+ref table fDatalayer_session_summary
+ref table fCarrinhos_abandonados
+ref table dProdutos
+ref table fDatalayer_agg_pageviews
+ref table fLogins
+ref table dVendedores
+ref table dTipo_pedido
+ref table fDatalayer_product_pageviews
+ref table agg_last_login
+ref table dDispositivos
+ref table dAssociados
+ref table dCarteirizacao
+ref table dFeriados
+ref table Medidas
+

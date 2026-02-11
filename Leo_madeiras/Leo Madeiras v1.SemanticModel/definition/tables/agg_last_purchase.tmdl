@@ -1,0 +1,67 @@
+table agg_last_purchase
+	isHidden
+	lineageTag: de4e6b3a-6d66-4866-8594-5a6182d99674
+
+	column account_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4b7d5aa2-5022-4d7a-8ff3-c0088237f5ce
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_purchase
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 79052f37-50a7-4026-91d2-bce58c4ee2e5
+		summarizeBy: sum
+		sourceColumn: days_since_last_purchase
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataform_status
+		dataType: string
+		isHidden
+		lineageTag: 882c4423-5534-4bed-8949-073a157865b6
+		summarizeBy: none
+		sourceColumn: plataform_status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f7f4c9da-d865-44e4-9173-27aebbd9c64a
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_purchase = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e47e558-68be-4ef5-958e-e70f7152788e" = Workspaces{[workspaceId="2e47e558-68be-4ef5-958e-e70f7152788e"]}[Data],
+				    #"cc84e8f0-dc70-49b3-9ab6-db59566ab538" = #"2e47e558-68be-4ef5-958e-e70f7152788e"{[dataflowId="cc84e8f0-dc70-49b3-9ab6-db59566ab538"]}[Data],
+				    agg_last_purchase_ = #"cc84e8f0-dc70-49b3-9ab6-db59566ab538"{[entity="agg_last_purchase",version=""]}[Data]
+				in
+				    agg_last_purchase_
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

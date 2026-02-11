@@ -1,0 +1,501 @@
+table dMaterial
+	lineageTag: 342ad90d-1492-4db3-916a-a8d2eef129c8
+
+	column mat_id_material
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 35878fb3-3c2a-490d-8774-57dd2aff92f6
+		summarizeBy: sum
+		sourceColumn: mat_id_material
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_material
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: a67ec0b0-5680-4ec4-9f25-4ba28c915ab3
+		summarizeBy: none
+		sourceColumn: mat_cd_material
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_material
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 02208238-c631-4dcc-9afb-44da2cdc20c2
+		summarizeBy: none
+		sourceColumn: mat_ds_material
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_subsegmento
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: a00bf03f-06b2-48b2-9d22-7553662889e5
+		summarizeBy: none
+		sourceColumn: mat_cd_subsegmento
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_subsegmento
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3453e76f-a604-4aab-83bd-00aa7d428d5e
+		summarizeBy: none
+		sourceColumn: mat_ds_subsegmento
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_segmento
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 52513f7c-c47a-47e1-810b-7f3ff8ee832f
+		summarizeBy: none
+		sourceColumn: mat_cd_segmento
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_segmento
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: c55fb3bd-289d-4a0a-9050-417ce33ce03a
+		summarizeBy: none
+		sourceColumn: mat_ds_segmento
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_subcategoria
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 82791bcc-4ad1-4770-9877-504713bff4d1
+		summarizeBy: none
+		sourceColumn: mat_cd_subcategoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_subcategoria
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 75478db0-a65f-4566-82f0-a38adc5f79f1
+		summarizeBy: none
+		sourceColumn: mat_ds_subcategoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_categoria
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 21939d79-1bf9-4826-85b9-e30be9b13482
+		summarizeBy: none
+		sourceColumn: mat_cd_categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_categoria
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: df1e1fc6-6f63-4ba5-9a5f-17fa3ad97c58
+		summarizeBy: none
+		sourceColumn: mat_ds_categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_mundo
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: e7d28ee8-f3f0-4834-8bcf-2b63337e76b6
+		summarizeBy: none
+		sourceColumn: mat_cd_mundo
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_mundo
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 6103665e-d332-4565-b979-1cac6404ea16
+		summarizeBy: none
+		sourceColumn: mat_ds_mundo
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_mercado
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: b513e564-8f1b-4046-9138-a91466dc770f
+		summarizeBy: none
+		sourceColumn: mat_cd_mercado
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_mercado
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: b08125d9-8e8e-4c19-b273-e6c5a72029c2
+		summarizeBy: none
+		sourceColumn: mat_ds_mercado
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_empresa
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: da481488-24dd-4913-a351-1499696b9e92
+		summarizeBy: none
+		sourceColumn: mat_cd_empresa
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_empresa
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: eadb8af7-9e20-4c7a-ae9e-3a9b04ad4662
+		summarizeBy: none
+		sourceColumn: mat_ds_empresa
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_cat_compacta
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: a1c09b37-43c1-4b5d-8d8c-ca5a514a0099
+		summarizeBy: none
+		sourceColumn: mat_ds_cat_compacta
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_cat_foco
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 4854b9f2-b202-4fa0-aacf-7f9479033b1d
+		summarizeBy: none
+		sourceColumn: mat_ds_cat_foco
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_gp
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 96e0f2f7-34ac-498e-a611-cd339f39da28
+		summarizeBy: none
+		sourceColumn: mat_cd_gp
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_nm_gp
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: af86276f-291a-4f60-96c1-c5dc7657eff3
+		summarizeBy: none
+		sourceColumn: mat_nm_gp
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_tipo
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 06d1d3bb-7746-4bcb-bc05-4ac5cb5058da
+		summarizeBy: none
+		sourceColumn: mat_cd_tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_grp_mercadoria
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: abc78da2-1dbe-41ac-b855-7f91f11130e7
+		summarizeBy: none
+		sourceColumn: mat_cd_grp_mercadoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_sicv
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 51892c4b-29ed-49ea-87cb-cd2dfb210df9
+		summarizeBy: none
+		sourceColumn: mat_cd_sicv
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_un_med_basica
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: a2a9e150-5a1c-4b67-aec2-26a3856f0db6
+		summarizeBy: none
+		sourceColumn: mat_un_med_basica
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_kg_bruto
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 658d9f79-6dbc-47a7-b55e-69db85975f02
+		summarizeBy: none
+		sourceColumn: mat_kg_bruto
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_kg_liquido
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: b0172d9a-d182-4119-a2d2-3bbbd289469e
+		summarizeBy: none
+		sourceColumn: mat_kg_liquido
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_un_peso
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3b9421d6-8cfc-4c23-a645-4ae9ff260fff
+		summarizeBy: none
+		sourceColumn: mat_un_peso
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_m3_volume
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 4909a393-54df-43dc-8c31-dfcb128b7f81
+		summarizeBy: none
+		sourceColumn: mat_m3_volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_un_volume
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 0952502f-3280-4d22-b35c-8f511485a36a
+		summarizeBy: none
+		sourceColumn: mat_un_volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cm_comprimento
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8441b047-9289-4927-bdeb-385bd788ebfb
+		summarizeBy: none
+		sourceColumn: mat_cm_comprimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cm_largura
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8f4fc10c-d683-4592-a959-3cba2db688c0
+		summarizeBy: none
+		sourceColumn: mat_cm_largura
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cm_altura
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 801c4af6-50f5-4f1a-8dcb-23297834baa6
+		summarizeBy: none
+		sourceColumn: mat_cm_altura
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_grp_carregamento
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3d5a6aeb-bb85-4c00-a659-9f569ec339b4
+		summarizeBy: none
+		sourceColumn: mat_cd_grp_carregamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_dt_criacao
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: f9d24cd2-60d9-4876-9694-28f950b18b02
+		summarizeBy: none
+		sourceColumn: mat_dt_criacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_dt_atualizacao
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 914a9fe9-2300-402e-b3a9-c246682c3d2b
+		summarizeBy: none
+		sourceColumn: mat_dt_atualizacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_fl_proprio
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: cd2d4454-a84c-4dff-8158-fab2edcf5caf
+		summarizeBy: none
+		sourceColumn: mat_fl_proprio
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_campanha
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 0587e94d-bf7c-4f35-b8e6-3cf1d65362a7
+		summarizeBy: none
+		sourceColumn: mat_ds_campanha
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_cat_grupo
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: dd56044f-fd3f-46df-851b-22a89d76a904
+		summarizeBy: none
+		sourceColumn: mat_ds_cat_grupo
+
+		annotation SummarizationSetBy = Automatic
+
+	column for_cd_fornecedor
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 7c61f280-0753-47df-8c98-f689ea6b2726
+		summarizeBy: none
+		sourceColumn: for_cd_fornecedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column for_nm_fornecedor
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 411c6353-9aa2-4628-97d8-966b02c12871
+		summarizeBy: none
+		sourceColumn: for_nm_fornecedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_cat_gerente
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: a85aa3ae-a3fd-4573-a839-3a622a3df311
+		summarizeBy: none
+		sourceColumn: mat_ds_cat_gerente
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_fsc
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 26cfe494-e63d-4cff-92c9-b6dfffbe8ca2
+		summarizeBy: none
+		sourceColumn: mat_ds_fsc
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_pc_fsc
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 1aa4baff-dd00-436e-8f60-486e20ed8a8a
+		summarizeBy: none
+		sourceColumn: mat_pc_fsc
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_unidade
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 257831f4-6817-4b86-bce2-3bfa641bdb30
+		summarizeBy: none
+		sourceColumn: mat_cd_unidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_unidade
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 9b0c0ad3-93fa-4069-8cb1-095e190f6aa0
+		summarizeBy: none
+		sourceColumn: mat_ds_unidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_vl_unidade
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 26a68040-b910-4207-ba2b-4922e428521f
+		summarizeBy: none
+		sourceColumn: mat_vl_unidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_classificacao
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d0e4e1fd-b9d0-4da4-833e-88f91d044b8e
+		summarizeBy: none
+		sourceColumn: mat_ds_classificacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_cesta_basica
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: a79b91b6-53f9-48b7-aff8-c8e79250f8c6
+		summarizeBy: none
+		sourceColumn: mat_ds_cesta_basica
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_ean
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 283d13d6-c513-4d6a-9524-40a2f84de271
+		summarizeBy: none
+		sourceColumn: mat_cd_ean
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_material_base
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 885ac700-a1cb-410a-9b2e-08305c5fc812
+		summarizeBy: none
+		sourceColumn: mat_cd_material_base
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_importacao
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 5f6c7e65-e8d1-4817-83a6-bd17d11a99ab
+		summarizeBy: none
+		sourceColumn: mat_cd_importacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_ds_importacao
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d9307e83-b1aa-4058-a636-be750af07d87
+		summarizeBy: none
+		sourceColumn: mat_ds_importacao
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dMaterial = m
+		mode: dual
+		queryGroup: Dim
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"56b0623f-8797-421d-af36-f100afed62ec" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="56b0623f-8797-421d-af36-f100afed62ec"]}[Data],
+				    dMaterial_off_ = #"56b0623f-8797-421d-af36-f100afed62ec"{[entity="dMaterial_off",version=""]}[Data]
+				in
+				    dMaterial_off_
+
+	annotation PBI_ResultType = Table
+

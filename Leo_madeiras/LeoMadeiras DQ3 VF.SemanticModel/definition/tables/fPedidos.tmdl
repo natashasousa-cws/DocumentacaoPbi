@@ -1,0 +1,111 @@
+table fPedidos
+	lineageTag: 78f8595d-feaf-4559-9b2d-6578dd0b744c
+
+	column cen_nu_centro
+		dataType: int64
+		formatString: 0
+		lineageTag: 94deea47-464e-43ed-9120-f43d2101a1b6
+		summarizeBy: none
+		sourceColumn: cen_nu_centro
+
+		annotation SummarizationSetBy = Automatic
+
+	column ven_cd_vendedor
+		dataType: int64
+		formatString: 0
+		lineageTag: 42cccb2b-bdd3-46ad-a8b8-d72da414d14f
+		summarizeBy: none
+		sourceColumn: ven_cd_vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column cli_cd_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 57d06358-743f-4694-97d0-3aa0f8cdd4b7
+		summarizeBy: none
+		sourceColumn: cli_cd_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column mat_cd_material
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e273603-61b2-41d6-9b6c-d8761a015029
+		summarizeBy: none
+		sourceColumn: mat_cd_material
+
+		annotation SummarizationSetBy = Automatic
+
+	column per_dt_pedido
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ccac0e62-d753-40bc-8f7e-b5e01617380c
+		summarizeBy: none
+		sourceColumn: per_dt_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ped_nr_pedido
+		dataType: int64
+		formatString: 0
+		lineageTag: 35e5a954-177f-4322-b0ae-e6be3bb1f10b
+		summarizeBy: none
+		sourceColumn: ped_nr_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column ped_nr_item_pedido
+		dataType: int64
+		formatString: 0
+		lineageTag: 3493ce79-3f0a-42fa-afdf-03ce82511eca
+		summarizeBy: sum
+		sourceColumn: ped_nr_item_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column ped_cd_doc_venda
+		dataType: string
+		lineageTag: dab3e03a-53f1-4530-80bd-06a09d97fc4d
+		summarizeBy: none
+		sourceColumn: ped_cd_doc_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column ped_vl_venda_bruta
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 0877c3dc-60dd-4af0-9b28-16b6f79da7f5
+		summarizeBy: none
+		sourceColumn: ped_vl_venda_bruta
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column ped_qt_quantidade
+		dataType: int64
+		formatString: 0
+		lineageTag: a18f8bdc-bc8f-43a5-8ac4-bb3443158e91
+		summarizeBy: sum
+		sourceColumn: ped_qt_quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fPedidos = m
+		mode: import
+		queryGroup: Fact
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"703982af-9ccf-425c-9d6d-d22191c6e238" = Workspaces{[workspaceId="703982af-9ccf-425c-9d6d-d22191c6e238"]}[Data],
+				    #"0c160fe1-a9e5-4eff-8bed-a327772ee689" = #"703982af-9ccf-425c-9d6d-d22191c6e238"{[dataflowId="0c160fe1-a9e5-4eff-8bed-a327772ee689"]}[Data],
+				    fPedidos_offline_ = #"0c160fe1-a9e5-4eff-8bed-a327772ee689"{[entity="fPedidos_offline",version=""]}[Data]
+				in
+				    fPedidos_offline_
+
+	annotation PBI_ResultType = Table
+
