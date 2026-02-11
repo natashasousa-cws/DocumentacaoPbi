@@ -1,6 +1,21 @@
 table Medidas
 	lineageTag: 20cbf6ba-e592-4303-91c6-d31f4cd197d7
 
+	/// Coluna oculta padrão para tabelas de medidas
+	column _
+		isHidden
+		formatString: 0
+		lineageTag: 3ecc4be6-5ff5-4179-ae22-435e9aba9748
+		summarizeBy: none
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Definição da partição calculada
+	partition Medidas = calculated
+		mode: import
+		source = ROW ( "Column", BLANK () )
+
 	measure GMV =
 			CALCULATE(
 				SUMX(fVendas,
@@ -59,3 +74,5 @@ table Medidas
 		lineageTag: a53619d1-cbf6-42de-905d-8701902d0267
 		changedProperty = FormatString
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	annotation PBI_Id = 5e114c18271b4f2582bd09238c5643c8
