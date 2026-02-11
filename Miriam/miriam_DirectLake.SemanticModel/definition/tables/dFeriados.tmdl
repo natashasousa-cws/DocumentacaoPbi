@@ -1,0 +1,39 @@
+table dFeriados
+	lineageTag: 1afad80b-4a8a-4510-912f-10b0479a2e33
+	sourceLineageTag: [miriam].[dFeriados]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 01ce4692-8855-46a5-bf90-9ea7965bbc8e
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia_Semana
+		dataType: string
+		lineageTag: 81f103cc-2525-4e28-8206-4e13b755837e
+		sourceLineageTag: Dia_Semana
+		summarizeBy: none
+		sourceColumn: Dia_Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feriado
+		dataType: string
+		lineageTag: e09a2479-eb0d-4ce1-8a5d-0d88325aac02
+		sourceLineageTag: Feriado
+		summarizeBy: none
+		sourceColumn: Feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dFeriados = entity
+		mode: directLake
+		source
+			entityName: dFeriados
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

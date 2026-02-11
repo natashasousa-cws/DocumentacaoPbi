@@ -1,0 +1,84 @@
+table dProdutos
+	lineageTag: 8f180dd0-6fe0-436c-93d0-99a5eb672b04
+	sourceLineageTag: [miriam].[dProdutos]
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9024f689-132d-4c1a-b1dd-1f03a768ea2d
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_name
+		dataType: string
+		lineageTag: fbf0550c-4b10-4e7d-8edc-c62ea6d88401
+		sourceLineageTag: sku_name
+		summarizeBy: none
+		sourceColumn: sku_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column manufacturer
+		dataType: string
+		lineageTag: 58a4071c-86a2-4261-8c16-3baa689f858d
+		sourceLineageTag: manufacturer
+		summarizeBy: none
+		sourceColumn: manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column mfr_part_code
+		dataType: string
+		lineageTag: ecff26e3-1c72-4508-982a-faa5060c3e56
+		sourceLineageTag: mfr_part_code
+		summarizeBy: none
+		sourceColumn: mfr_part_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_1
+		dataType: string
+		lineageTag: c260e7db-8118-4031-bf8f-4b5289e1bf69
+		sourceLineageTag: category_level_1
+		summarizeBy: none
+		sourceColumn: category_level_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_2
+		dataType: string
+		lineageTag: f3c52a1c-8895-4a29-b3dd-9b521244dfb8
+		sourceLineageTag: category_level_2
+		summarizeBy: none
+		sourceColumn: category_level_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_level_3
+		dataType: string
+		lineageTag: ffb44b50-48e6-4e76-b824-301709e355b4
+		sourceLineageTag: category_level_3
+		summarizeBy: none
+		sourceColumn: category_level_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel
+		dataType: string
+		lineageTag: 0c0e716a-550e-4e3c-8af5-fb7366f7cc30
+		sourceLineageTag: nivel
+		summarizeBy: none
+		sourceColumn: nivel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProdutos = entity
+		mode: directLake
+		source
+			entityName: dProdutos
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

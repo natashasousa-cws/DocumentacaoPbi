@@ -1,0 +1,78 @@
+table dGrupo_Cliente
+	lineageTag: 34ff42cb-7dad-4c45-8178-9fa8df6b515b
+	sourceLineageTag: [miriam].[dGrupo_Cliente]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c2272927-3e59-4d9f-9e6d-b28f5641e2c3
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: 7a62b5bb-70f1-45fc-926c-bd58ec1d81e7
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: f4c87bbf-6521-44b7-89b8-93787d1e5b11
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_type
+		dataType: string
+		lineageTag: bcb4227c-29cd-44aa-af5f-fee666813a5e
+		sourceLineageTag: customer_type
+		summarizeBy: none
+		sourceColumn: customer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 78149a41-772d-4e03-a817-bc6ccfce71c6
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column enable_group_display_in_registration
+		dataType: double
+		lineageTag: 8becba12-8ce5-48c5-9ec1-106322f3765e
+		sourceLineageTag: enable_group_display_in_registration
+		summarizeBy: sum
+		sourceColumn: enable_group_display_in_registration
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column customer_group_type
+		dataType: string
+		lineageTag: 530b82d7-adcf-49f2-b6bf-bf481b8df806
+		sourceLineageTag: customer_group_type
+		summarizeBy: none
+		sourceColumn: customer_group_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dGrupo_Cliente = entity
+		mode: directLake
+		source
+			entityName: dGrupo_Cliente
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

@@ -1,0 +1,157 @@
+table fDatalayer_product_pageviews
+	lineageTag: c590ede5-3088-4a45-94c4-7412a1540bf3
+	sourceLineageTag: [miriam].[fDatalayer_product_pageviews]
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 071c26b8-c938-48f8-bb85-cafce8c72f7d
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: edf192db-db91-4781-8d71-472ff8290385
+		sourceLineageTag: visitor_id
+		summarizeBy: sum
+		sourceColumn: visitor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_email
+		dataType: string
+		lineageTag: db32f381-42a8-40bd-b9ee-f998a3eded0d
+		sourceLineageTag: visitor_email
+		summarizeBy: none
+		sourceColumn: visitor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 33380784-2ee5-447a-81db-09b9a3b174ab
+		sourceLineageTag: visitor_isloggedin
+		summarizeBy: none
+		sourceColumn: visitor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ddf70ef1-9ad2-42c1-b466-d84c7461c4e2
+		sourceLineageTag: vendor_id
+		summarizeBy: sum
+		sourceColumn: vendor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_email
+		dataType: string
+		lineageTag: 3abf5a44-12b1-4504-89aa-0b0ac59e59c9
+		sourceLineageTag: vendor_email
+		summarizeBy: none
+		sourceColumn: vendor_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1074bd6e-dc41-4fda-b89b-f50e4cbaafe7
+		sourceLineageTag: vendor_isloggedin
+		summarizeBy: none
+		sourceColumn: vendor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b49f6d18-23f8-44ee-be39-13031b776467
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column distinct_count_session
+		dataType: int64
+		formatString: 0
+		lineageTag: 28bb2ec9-4481-409f-b58e-d4410a1c48fc
+		sourceLineageTag: distinct_count_session
+		summarizeBy: sum
+		sourceColumn: distinct_count_session
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_max_datecreated
+		dataType: int64
+		formatString: 0
+		lineageTag: 4dde3f11-1ddd-4b19-995d-76cb22dc22e5
+		sourceLineageTag: datekey_max_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_max_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_datecreated_time
+		dataType: string
+		lineageTag: fbc055d2-aa26-4c3e-8dea-4c0849c7e534
+		sourceLineageTag: max_datecreated_time
+		summarizeBy: none
+		sourceColumn: max_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_min_datecreated
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d7374ac-4e52-4287-83d3-28e0e2e3619f
+		sourceLineageTag: datekey_min_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_min_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_datecreated_time
+		dataType: string
+		lineageTag: 5d5b95f7-b257-451f-916f-ec0da761ce2e
+		sourceLineageTag: min_datecreated_time
+		summarizeBy: none
+		sourceColumn: min_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 751ecda0-971c-401f-998b-c06bea84ab08
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 977a703e-3118-4862-99bb-1787aaf6d928
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_product_pageviews = entity
+		mode: directLake
+		source
+			entityName: fDatalayer_product_pageviews
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

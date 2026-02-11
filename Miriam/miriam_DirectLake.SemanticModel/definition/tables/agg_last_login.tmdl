@@ -1,0 +1,50 @@
+table agg_last_login
+	lineageTag: bc6159cd-0d59-4c5a-9b0a-2eec7d195b93
+	sourceLineageTag: [miriam].[agg_last_login]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8052bd03-84c6-4479-a06d-54821d2337e8
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_login
+		dataType: int64
+		formatString: 0
+		lineageTag: 06834272-a197-411a-967e-6914271754a3
+		sourceLineageTag: days_since_last_login
+		summarizeBy: sum
+		sourceColumn: days_since_last_login
+
+		annotation SummarizationSetBy = Automatic
+
+	column login_status
+		dataType: string
+		lineageTag: 87584887-a8c7-4332-85dd-a43688a62332
+		sourceLineageTag: login_status
+		summarizeBy: none
+		sourceColumn: login_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c6e7c11-86d5-4ea0-a591-719a7e73851d
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_last_login = entity
+		mode: directLake
+		source
+			entityName: agg_last_login
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

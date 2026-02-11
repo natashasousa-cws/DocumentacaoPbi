@@ -1,0 +1,30 @@
+table dMetodo_pagamento
+	lineageTag: e5886810-e431-43f0-ae0b-11da5a6e03aa
+	sourceLineageTag: [miriam].[dMetodo_pagamento]
+
+	column payment_method
+		dataType: string
+		lineageTag: 0190298e-746b-48ba-a73e-32310e752d78
+		sourceLineageTag: payment_method
+		summarizeBy: none
+		sourceColumn: payment_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_method_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4055af1b-f07b-461c-baec-a17f737a594d
+		sourceLineageTag: payment_method_id
+		summarizeBy: sum
+		sourceColumn: payment_method_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dMetodo_pagamento = entity
+		mode: directLake
+		source
+			entityName: dMetodo_pagamento
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

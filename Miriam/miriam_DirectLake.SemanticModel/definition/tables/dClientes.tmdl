@@ -1,0 +1,327 @@
+table dClientes
+	lineageTag: b49dae69-7b51-48d3-9441-f09667a46b73
+	sourceLineageTag: [miriam].[dClientes]
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ada5c0b-f83d-4a75-98d2-a8aa808db14a
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_create_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0e6045e9-e634-4145-85d3-84afcb300304
+		sourceLineageTag: account_create_date
+		summarizeBy: none
+		sourceColumn: account_create_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ed9f6e24-1f83-4a98-8154-2fbb9969e735
+		sourceLineageTag: client_id
+		summarizeBy: sum
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_status
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ff1e29cb-da81-49bb-a539-14e7f3c6cf00
+		sourceLineageTag: client_status
+		summarizeBy: none
+		sourceColumn: client_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_origin
+		dataType: string
+		lineageTag: 7ef5bb8a-449e-4954-a54a-3ffafb10b754
+		sourceLineageTag: account_origin
+		summarizeBy: none
+		sourceColumn: account_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_create_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d8ed637d-62a9-4c1f-93ba-7f39fe636283
+		sourceLineageTag: client_create_date
+		summarizeBy: none
+		sourceColumn: client_create_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 6a65bc2a-3f14-4482-b6f1-f7e9bc47029f
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column contact
+		dataType: string
+		lineageTag: 97d4d54c-adf9-40fa-bdc1-8d3e71d10fa0
+		sourceLineageTag: contact
+		summarizeBy: none
+		sourceColumn: contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_user
+		dataType: string
+		lineageTag: efb9c90b-50f7-46c2-9f9a-54a108f3a280
+		sourceLineageTag: account_user
+		summarizeBy: none
+		sourceColumn: account_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_age_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 18ab960e-8d1e-4f68-b76a-fdc8a43e05c1
+		sourceLineageTag: account_age_days
+		summarizeBy: sum
+		sourceColumn: account_age_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column document
+		dataType: string
+		lineageTag: 69bb400c-0d91-42c6-ba68-b91161e25c56
+		sourceLineageTag: document
+		summarizeBy: none
+		sourceColumn: document
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 9251a381-e802-4339-9826-c0dc45fa3344
+		sourceLineageTag: gender
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column person_type
+		dataType: string
+		lineageTag: 0ea545d0-aeab-460a-a33e-5542f3b7fb09
+		sourceLineageTag: person_type
+		summarizeBy: none
+		sourceColumn: person_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column age
+		dataType: int64
+		formatString: 0
+		lineageTag: c2720e02-636e-41e6-8833-7ccadf701071
+		sourceLineageTag: age
+		summarizeBy: sum
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: cdc8fe95-0ad0-4e68-940a-5952ee7f1336
+		sourceLineageTag: country
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF
+		dataType: string
+		lineageTag: 7e3528a1-1537-49bb-8554-a128f17b120a
+		sourceLineageTag: UF
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 33060487-1b06-48ed-937c-1bc1b4dddc03
+		sourceLineageTag: state
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 8909819c-6287-4965-967e-1318994e443b
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 15626eda-cf19-4cb5-9244-2259a397efc0
+		sourceLineageTag: city
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		lineageTag: 8efa0872-16c7-4d29-b46e-5d7e6db1dafc
+		sourceLineageTag: zip_code
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone_number
+		dataType: string
+		lineageTag: e6cc919f-51a8-4252-9ee3-0d248f6e9f0f
+		sourceLineageTag: phone_number
+		summarizeBy: none
+		sourceColumn: phone_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column CNAE
+		dataType: string
+		lineageTag: e01b9c57-60e1-42a9-8670-831a15665a75
+		sourceLineageTag: CNAE
+		summarizeBy: none
+		sourceColumn: CNAE
+
+		annotation SummarizationSetBy = Automatic
+
+	column wpp_phone
+		dataType: string
+		lineageTag: f2bdca46-ecf2-4ffb-9d7b-5d8d0fb1753f
+		sourceLineageTag: wpp_phone
+		summarizeBy: none
+		sourceColumn: wpp_phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column wpp_opt_in
+		dataType: int64
+		formatString: 0
+		lineageTag: fc1ff251-bc0d-44bd-9180-39b4a9ebdc64
+		sourceLineageTag: wpp_opt_in
+		summarizeBy: sum
+		sourceColumn: wpp_opt_in
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f9f5d79-5aca-4efb-8335-ebb879f741dd
+		sourceLineageTag: salesperson_account_id
+		summarizeBy: sum
+		sourceColumn: salesperson_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column salesperson_document
+		dataType: string
+		lineageTag: a89a910b-3f68-48a1-8963-36779841f970
+		sourceLineageTag: salesperson_document
+		summarizeBy: none
+		sourceColumn: salesperson_document
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: aa4775ef-f247-4940-935d-53a828c9f091
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_last_updated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f5345432-375e-47b7-9662-680ec3289b3d
+		sourceLineageTag: client_last_updated
+		summarizeBy: none
+		sourceColumn: client_last_updated
+
+		annotation SummarizationSetBy = Automatic
+
+	column profile_picture
+		dataType: string
+		lineageTag: 333f9c1d-3b2e-4dc5-9a48-4a540c31c01e
+		sourceLineageTag: profile_picture
+		summarizeBy: none
+		sourceColumn: profile_picture
+
+		annotation SummarizationSetBy = Automatic
+
+	column line
+		dataType: int64
+		formatString: 0
+		lineageTag: c4cd8f7c-b26b-40a6-ad43-a39be34e0865
+		sourceLineageTag: line
+		summarizeBy: sum
+		sourceColumn: line
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_credit_limit
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 39715654-a60a-4727-8dee-ac6e8ba9d4c2
+		sourceLineageTag: total_credit_limit
+		summarizeBy: sum
+		sourceColumn: total_credit_limit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column credit_balance
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 561420d5-d551-4e57-9165-f9cc1e4ea8ae
+		sourceLineageTag: credit_balance
+		summarizeBy: sum
+		sourceColumn: credit_balance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: a1493675-d7ff-45a7-86eb-321487b62207
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dClientes = entity
+		mode: directLake
+		source
+			entityName: dClientes
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

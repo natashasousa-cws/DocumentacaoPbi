@@ -1,0 +1,40 @@
+table dPeriodos
+	lineageTag: e0b3066f-40ba-486a-b220-88e7f40783c7
+	sourceLineageTag: [miriam].[dPeriodos]
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d14cf112-0ad5-4d23-9fe0-094ca5cfd657
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo
+		dataType: string
+		lineageTag: e7a24d75-9c4b-4001-a8c3-312081f536a2
+		sourceLineageTag: Periodo
+		summarizeBy: none
+		sourceColumn: Periodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c0ffbd6-ca73-47a4-b838-c42f8e6ea32e
+		sourceLineageTag: Ordem
+		summarizeBy: sum
+		sourceColumn: Ordem
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dPeriodos = entity
+		mode: directLake
+		source
+			entityName: dPeriodos
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

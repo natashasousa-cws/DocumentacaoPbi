@@ -1,0 +1,87 @@
+table fMensageria_aux
+	lineageTag: 8a3eb3e3-202f-4c23-9e02-c96c687aee89
+	sourceLineageTag: [miriam].[fMensageria_aux]
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b944473c-2583-44d6-b4d5-90700881a24d
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column message_id
+		dataType: string
+		lineageTag: 393194c6-2069-4216-8dc7-5ba1696de35a
+		sourceLineageTag: message_id
+		summarizeBy: none
+		sourceColumn: message_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 5591abb0-66d8-4de2-b621-d1dc7797c002
+		sourceLineageTag: status
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a486d73-e6ca-4147-a9f6-5e10e03ac275
+		sourceLineageTag: action_id
+		summarizeBy: sum
+		sourceColumn: action_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column identificador
+		dataType: string
+		lineageTag: d9122c84-a253-4e1a-8a45-9fcf474802d7
+		sourceLineageTag: identificador
+		summarizeBy: none
+		sourceColumn: identificador
+
+		annotation SummarizationSetBy = Automatic
+
+	column projeto
+		dataType: string
+		lineageTag: 87b65ce6-6406-4c69-8962-7eadaced6c21
+		sourceLineageTag: projeto
+		summarizeBy: none
+		sourceColumn: projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 90318d4c-2e20-4412-97a9-deb02baa8bbc
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TTR
+		dataType: int64
+		formatString: 0
+		lineageTag: eaf9de25-00bd-4190-9de6-92dab7db4cca
+		sourceLineageTag: TTR
+		summarizeBy: sum
+		sourceColumn: TTR
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMensageria_aux = entity
+		mode: directLake
+		source
+			entityName: fMensageria_aux
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

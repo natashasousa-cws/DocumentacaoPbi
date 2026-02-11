@@ -1,0 +1,109 @@
+table fDatalayer_session_summary
+	lineageTag: 8b921ac5-2fef-44f7-85ea-b994dd720fd3
+	sourceLineageTag: [miriam].[fDatalayer_session_summary]
+
+	column session
+		dataType: string
+		lineageTag: f29e4857-f399-4629-896d-a4337224443a
+		sourceLineageTag: session
+		summarizeBy: none
+		sourceColumn: session
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_time_in_seconds
+		dataType: int64
+		formatString: 0
+		lineageTag: 2208842b-13f4-4c7d-943d-0abe6520a539
+		sourceLineageTag: session_time_in_seconds
+		summarizeBy: sum
+		sourceColumn: session_time_in_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_type
+		dataType: string
+		lineageTag: 8bbc7095-ab2c-4b6d-8ab2-4ca59d982938
+		sourceLineageTag: user_type
+		summarizeBy: none
+		sourceColumn: user_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 11253e8c-5838-4a33-a0bf-469e6fcd71a8
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 19b3abd6-374a-4778-ad94-a63be056ab77
+		sourceLineageTag: visitor_isloggedin
+		summarizeBy: none
+		sourceColumn: visitor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 933aadd3-5b39-49d6-bf1c-3c39794a6442
+		sourceLineageTag: visitor_id
+		summarizeBy: sum
+		sourceColumn: visitor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 42acec4d-89a5-4001-8534-5eeeeaff9ebe
+		sourceLineageTag: vendor_isloggedin
+		summarizeBy: none
+		sourceColumn: vendor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a5fca3d1-25b6-47dd-8a24-63328384ff08
+		sourceLineageTag: vendor_id
+		summarizeBy: sum
+		sourceColumn: vendor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c1c9f35-e81f-4b31-9008-34b62555fa59
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e30c764d-7526-4f78-9e5a-91c7580be327
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_session_summary = entity
+		mode: directLake
+		source
+			entityName: fDatalayer_session_summary
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+

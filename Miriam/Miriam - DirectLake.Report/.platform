@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Miriam - DirectLake"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "34fb729e-4d75-aa78-4828-7ed25ce3c072"
+  }
+}

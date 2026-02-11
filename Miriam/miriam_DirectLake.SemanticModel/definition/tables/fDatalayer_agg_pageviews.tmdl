@@ -1,0 +1,186 @@
+table fDatalayer_agg_pageviews
+	lineageTag: 42c11464-a411-4774-8113-64519824c302
+	sourceLineageTag: [miriam].[fDatalayer_agg_pageviews]
+
+	column site_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a9833f86-9c55-4bce-806a-7d2bbd643ec7
+		sourceLineageTag: site_id
+		summarizeBy: sum
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2bf1cd92-6c13-43e5-b1a6-3591dc1ad11f
+		sourceLineageTag: account_id
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: faf19a0c-66b5-4ad1-84d6-96eaba567a93
+		sourceLineageTag: visitor_id
+		summarizeBy: sum
+		sourceColumn: visitor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column visitor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: baaf2d06-0643-49ec-bad2-64a1e6a85344
+		sourceLineageTag: visitor_isloggedin
+		summarizeBy: none
+		sourceColumn: visitor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a73f5f0-61b0-4d49-9ac1-7a7042937fe1
+		sourceLineageTag: vendor_id
+		summarizeBy: sum
+		sourceColumn: vendor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column vendor_isloggedin
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c61df2d7-f3ba-40cb-8b71-80a7ae42c03f
+		sourceLineageTag: vendor_isloggedin
+		summarizeBy: none
+		sourceColumn: vendor_isloggedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_type
+		dataType: string
+		lineageTag: 1adc7ec7-26a2-43b3-a800-245aeed37538
+		sourceLineageTag: user_type
+		summarizeBy: none
+		sourceColumn: user_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column pagepath
+		dataType: string
+		lineageTag: 3e9f0edb-e6b2-4823-92b0-aa319af09448
+		sourceLineageTag: pagepath
+		summarizeBy: none
+		sourceColumn: pagepath
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 4807e45e-9062-4cb3-b13b-022f2626154d
+		sourceLineageTag: year
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: b75222b7-04cf-4d0e-95c1-5c4e08766cf3
+		sourceLineageTag: month
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column sessoes_distintas
+		dataType: int64
+		formatString: 0
+		lineageTag: dc9aae06-031d-4421-b368-ed79c1344a96
+		sourceLineageTag: sessoes_distintas
+		summarizeBy: sum
+		sourceColumn: sessoes_distintas
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_max_datecreated
+		dataType: int64
+		formatString: 0
+		lineageTag: 73f92feb-1268-4eae-88f1-8779cbdebad2
+		sourceLineageTag: datekey_max_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_max_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_datecreated_time
+		dataType: string
+		lineageTag: f7b127f5-bc7d-4af9-a48d-ef2a63da75c9
+		sourceLineageTag: max_datecreated_time
+		summarizeBy: none
+		sourceColumn: max_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey_min_datecreated
+		dataType: int64
+		formatString: 0
+		lineageTag: cc4b7669-a826-4dde-9f8f-1c7e54041c1d
+		sourceLineageTag: datekey_min_datecreated
+		summarizeBy: sum
+		sourceColumn: datekey_min_datecreated
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_datecreated_time
+		dataType: string
+		lineageTag: f029ccbd-ce4d-4468-8f16-72aa89ab9661
+		sourceLineageTag: min_datecreated_time
+		summarizeBy: none
+		sourceColumn: min_datecreated_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column datekey
+		dataType: int64
+		formatString: 0
+		lineageTag: 72336bba-17ea-4360-aaac-6d16dd963eb2
+		sourceLineageTag: datekey
+		summarizeBy: sum
+		sourceColumn: datekey
+
+		annotation SummarizationSetBy = Automatic
+
+	column funil
+		dataType: string
+		lineageTag: 157d00cd-5017-4ffa-aa93-37d545c9a2b4
+		sourceLineageTag: funil
+		summarizeBy: none
+		sourceColumn: funil
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6980bac4-28c8-45a9-b383-7a7c73b76d6f
+		sourceLineageTag: sku_id
+		summarizeBy: sum
+		sourceColumn: sku_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDatalayer_agg_pageviews = entity
+		mode: directLake
+		source
+			entityName: fDatalayer_agg_pageviews
+			schemaName: miriam
+			expressionSource: 'DirectLake - miriam_gold_lake'
+
