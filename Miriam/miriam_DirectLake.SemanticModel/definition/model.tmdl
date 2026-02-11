@@ -10,7 +10,7 @@ annotation PBI_QueryOrder = ["DirectLake - miriam_gold_lake"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","RemoteModeling"]
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","RemoteModeling","WebModelingEdit"]
 
 annotation __TEdtr = 1
 
