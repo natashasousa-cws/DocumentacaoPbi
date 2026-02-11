@@ -1,0 +1,184 @@
+relationship 17b41455-84b2-6765-5bc6-a29df019e787
+	isActive: false
+	fromColumn: dClientes.salesperson_document
+	toColumn: dVendedores.document
+
+relationship 67c4f32d-57d4-5563-e040-0b62a39efcc6
+	fromColumn: fVendas.client_account_id
+	toColumn: dClientes.account_id
+
+relationship 6e7b9ad0-77ba-8162-f7c4-21c4cb4089f0
+	fromColumn: fLogins.document
+	toColumn: dClientes.document
+
+relationship 51712ab2-cd58-12a3-f7a4-d761c1cd6939
+	fromColumn: fLogins.datekey
+	toColumn: dCalendario.datekey
+
+relationship 484e08e5-af88-1151-f7aa-37808bfb17bc
+	toCardinality: many
+	fromColumn: fVendas.partner_id
+	toColumn: dAssociados.copartner_id
+
+relationship d6137ec5-ecd9-a344-9816-f4e208cd3db1
+	fromColumn: fCarrinhos_abandonados.datekey
+	toColumn: dCalendario.datekey
+
+relationship c8ecf001-aa6e-d213-c18f-68bd8af92a27
+	fromColumn: fCarrinhos_abandonados.client_account_id
+	toColumn: dClientes.account_id
+
+relationship 1049eaaa-bf09-273c-ff66-ffff75c8b993
+	fromColumn: fLogins.account_id
+	toColumn: dVendedores.account_id
+
+relationship cfef15ce-c574-2bd5-9c8d-02947966eda8
+	fromColumn: fDatalayer_product_pageviews.account_id
+	toColumn: dClientes.account_id
+
+relationship 4d6d9c1b-60d4-c499-5aa3-c97a9a27c913
+	fromColumn: fDatalayer_session_summary.account_id
+	toColumn: dClientes.account_id
+
+relationship 7607a710-217a-19d5-4b95-7f9e1316936a
+	fromColumn: fDatalayer_product_pageviews.datekey
+	toColumn: dCalendario.datekey
+
+relationship fdf680fd-4df4-bc27-c046-0c0217755913
+	fromColumn: fDatalayer_session_summary.datekey
+	toColumn: dCalendario.datekey
+
+relationship 52e821b0-7eca-7b39-cd72-ed2e08540181
+	fromColumn: fDatalayer_agg_pageviews.account_id
+	toColumn: dClientes.account_id
+
+relationship 882601bb-af22-c5ca-e62e-2dc8ac837789
+	isActive: false
+	fromColumn: dClientes.datekey
+	toColumn: dCalendario.datekey
+
+relationship 08abd26d-35c9-0b9d-5e55-1acd7a91daea
+	fromColumn: fVendas.shipping_type_id
+	toColumn: dTipo_envio.shipping_type_id
+
+relationship 843ebe00-9058-6e88-1734-f2ea798572e5
+	fromColumn: fVendas.order_type_id
+	toColumn: dTipo_pedido.order_type_id
+
+relationship 42db6623-3428-e37b-072d-2ecc1d4266b4
+	fromColumn: fVendas.order_status_id
+	toColumn: dStatus_pedido.order_status_id
+
+relationship bc24766c-a5fb-71e8-b37d-aa9c73a24aaf
+	fromColumn: fVendas.payment_method_id
+	toColumn: dMetodo_pagamento.payment_method_id
+
+relationship 13ed5cfc-43ca-71a1-6b6d-7a400fbb6f4b
+	fromColumn: fVendas.device_id
+	toColumn: dDispositivos.device_id
+
+relationship c023ce1e-f6d2-c1b2-2ee0-f15306fb80ab
+	fromColumn: fVendas.sku_id
+	toColumn: dProdutos.sku_id
+
+relationship b2f9181a-abac-8ecb-2a13-a7d20f9b4798
+	fromColumn: fDatalayer_product_pageviews.sku_id
+	toColumn: dProdutos.sku_id
+
+relationship 31a658b4-2ac4-1386-737f-7436d40af29e
+	fromColumn: fDatalayer_agg_pageviews.sku_id
+	toColumn: dProdutos.sku_id
+
+relationship 5de9a99d-b23c-5e3d-3fea-d479d7e1378c
+	isActive: false
+	fromColumn: dAssociados.datekey
+	toColumn: dCalendario.datekey
+
+relationship 7cb21244-b759-097a-00ce-0d9468804d24
+	toCardinality: many
+	fromColumn: dOfertas.associate_id
+	toColumn: dAssociados.copartner_id
+
+relationship ed6461e5-b43b-77c7-935c-f7f60f8610d2
+	fromColumn: dOfertas.sku_id
+	toColumn: dProdutos.sku_id
+
+relationship d4e13599-dcdf-25ea-47a4-e41bd2040230
+	fromColumn: fDatalayer_agg_pageviews.datekey_max_datecreated
+	toColumn: dCalendario.datekey
+
+relationship 26abde0e-defc-72ca-881f-e243238de1c1
+	fromColumn: fVendas.coupon_id
+	toColumn: dCupons.coupon_id
+
+relationship 4c4c6a68-8222-e07c-67c0-7c96b0640e6e
+	isActive: false
+	fromColumn: fVendas.salesperson_account_id
+	toColumn: dClientes.salesperson_account_id
+
+relationship 8da56d60-0395-cf8d-c507-0fc7654040fd
+	isActive: false
+	fromColumn: dClientes.salesperson_account_id
+	toColumn: dVendedores.account_id
+
+relationship da9b4da6-6edf-ed48-b1bc-c5d84b26ce88
+	isActive: false
+	fromColumn: dCalendario.Data
+	toColumn: dVendedores.account_create_date
+
+relationship cedb3548-10c4-4e86-1f7e-4d87962fc3d5
+	isActive: false
+	fromColumn: dOfertas.partner_id
+	toColumn: dAssociados.copartner_id
+
+relationship 84b89d35-eeca-cd37-912e-6b5d3a3b99c3
+	fromColumn: fVendas.partner_order_id
+	toColumn: fVendas_datatime.partener_order_id
+
+relationship 3dcf8824-b3c8-ca4a-a2b9-e0c587158fad
+	fromColumn: fMensageria_parametrized_send_union.message_id
+	toColumn: fMensageria_aux.message_id
+
+relationship fd8bcca4-23a4-faaa-516e-ccab2ef8849a
+	fromColumn: fMensageria_resultado_geral.client_account_id
+	toColumn: dClientes.account_id
+
+relationship 4cf1c955-a87b-bddb-7b1e-a028c1eca4fb
+	fromColumn: fMensageria_resultado_navegacao.client_account_id
+	toColumn: dClientes.account_id
+
+relationship 78a229ff-7971-9746-8067-2f27bc358f4d
+	fromColumn: fMensageria_parametrized_send_union.account_id
+	toColumn: dClientes.account_id
+
+relationship a0b7ea62-9704-36e3-fca6-de8da1a07dff
+	fromColumn: fVendas.salesperson_account_id
+	toColumn: dVendedores.account_id
+
+relationship 05c67169-7743-d61f-26be-011818f21fd4
+	fromColumn: fVendas.datekey
+	toColumn: dCalendario.datekey
+
+relationship 6fba6c93-459a-1386-aab1-9bd070b9c06b
+	fromColumn: fMensageria_resultado_navegacao.datekey
+	toColumn: dCalendario.datekey
+
+relationship 8608f13a-f946-c5f9-2bab-1618627549ef
+	fromColumn: fMensageria_resultado_geral.datekey
+	toColumn: dCalendario.datekey
+
+relationship d47b362a-c72c-dbe4-7015-98337b3239ab
+	fromColumn: fMensageria_parametrized_send_union.datekey
+	toColumn: dCalendario.datekey
+
+relationship 7267e362-e148-ad43-50e7-765fb03b7899
+	isActive: false
+	toCardinality: many
+	fromColumn: fMensageria_resultado_geral.id_campanha
+	toColumn: fMensageria_parametrized_send_union.id_campanha
+
+relationship ed1ef834-fabe-1d7d-3e6e-fe3e86c91783
+	toCardinality: many
+	fromColumn: fMensageria_resultado_navegacao.id_campanha
+	toColumn: fMensageria_parametrized_send_union.id_campanha
+
