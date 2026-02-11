@@ -4006,7 +4006,7 @@ table Medidas
 		displayFolder: Vendedores
 		lineageTag: 5dc82a24-a3c4-4d1c-bcf3-9ff0cb2ff736
 
-	measure 'Meta git teste' = 1.1
+	measure 'Meta git teste' = 1.5
 		lineageTag: f0be0bae-c27d-4521-a315-885bb2d09413
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
