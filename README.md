@@ -10,9 +10,6 @@ A branch `principal` (main) representa o ambiente de **Produção**. Todo o cód
 ---
 
 ## 📂 Estrutura do Repositório
-* **Miriam/**: Definições do modelo semântico e medidas de Direct Lake.
-* **tabelas/**: Metadados das tabelas de Dimensão e Fato.
-* **Model_imdepa.bim**: Arquivo de definição do modelo de dados.
 * **README.md**: Guia geral de arquitetura (este arquivo).
 
 ---
@@ -38,13 +35,13 @@ Se você faz parte do time de Estratégia ou BI e precisa realizar uma alteraç�
 ---
 
 ## 👥 Mantenedores
-* **Administração**: [Seu Nome/Time de BI]
+* **Administração**: [Natasha, Bryan , Gerson]
 * **Colaboradores**: Time de Estratégia (Artur, Estevão, Rafa)
 
 ---
 *Última atualização: Fevereiro de 2026*
 **Versão:** 1.0  
-**Última Atualização:** Novembro 2025
+**Última Atualização:** Fev 2026
 **Ambientes:** Produção, Homologação, Desenvolvimento  
 
 ---
