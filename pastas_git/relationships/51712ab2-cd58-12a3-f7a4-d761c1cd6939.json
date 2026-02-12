@@ -1,7 +1,0 @@
-{
-  "name": "51712ab2-cd58-12a3-f7a4-d761c1cd6939",
-  "fromTable": "fLogins",
-  "fromColumn": "datekey",
-  "toTable": "dCalendario",
-  "toColumn": "datekey"
-}
