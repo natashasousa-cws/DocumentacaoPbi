@@ -31,4 +31,4 @@ Para manter a organização, seguimos este processo simples:
 * **Recuperação:** Se algo quebrar no Power BI, use o histórico de commits desta branch para reverter o item ao estado anterior.
 
 ---
-*Mantido por: [Seu Nome/Time de BI]*
+*Mantido por: [Natasha Sousa]*
